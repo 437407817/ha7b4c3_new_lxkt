@@ -22,6 +22,20 @@
 #include "./pro_com/usart485verify.h"
 
 
+extern void Usart_SendDMA_SaveFun(char *buf, uint16_t num);
+extern void Usart_SendFUN_ALL(void);
+// 全局实例，可以切换赋值
+U485UsartSend_Callback_t g_U485UsartSendCb;
+
+U485UsartSend_Callback_t cbCfg = {
+    .U485SendDmaSaveDataFunc  = Usart_SendDMA_SaveFun,
+    .U485SendAllFunc  = Usart_SendFUN_ALL,
+
+};
+
+
+
+
 
 // 声明全局执行指针
 UsartSendPtr this_com485_Usart_Send = NULL;
@@ -175,7 +189,9 @@ void USART_COM485_232_ComDrvInit(void)
 USART_COM485_GpioInit();
 
 	Usart_COM485_send_Config_Init();
-
+	
+U485Usart_SetSendCallback(&cbCfg);
+	
 }
 
 
@@ -317,8 +333,15 @@ void Usart_COM485_SendArray_DMA(UART_HandleTypeDef *huart, uint8_t *array, uint1
 //    }
 		
 		if(huart==&huart_COM_DW_Handle){
-			Usart_SendDMA_SaveFun((char*)array,num);
-			Usart_SendFUN_ALL();
+			
+//			Usart_SendDMA_SaveFun((char*)array,num);
+//			
+//			Usart_SendFUN_ALL();
+			
+			g_U485UsartSendCb.U485SendDmaSaveDataFunc((char*)array,num);
+			g_U485UsartSendCb.U485SendAllFunc();
+			
+			
 			SYSTEM_INFO("485 dma save !");
 		}
 	
@@ -362,6 +385,20 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 
 
 
+
+/**
+ * @brief  设置回调函数，相当于注册函数
+*/
+void U485Usart_SetSendCallback(U485UsartSend_Callback_t *pCb)
+{
+    if(pCb == NULL)
+    {
+        g_U485UsartSendCb.U485SendDmaSaveDataFunc = NULL;
+        g_U485UsartSendCb.U485SendAllFunc = NULL;
+        return;
+    }
+    g_U485UsartSendCb = *pCb;
+}
 
 
 

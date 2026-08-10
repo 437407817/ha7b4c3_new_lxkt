@@ -114,6 +114,26 @@
 // 定义串口发送函数指针类型
 typedef void (*UsartSendPtr)(UART_HandleTypeDef *, uint8_t *, uint16_t);
 
+
+
+typedef struct
+{
+    // 带参数发送函数指针
+    void (*U485SendDmaSaveDataFunc)(char *buf, uint16_t num);
+    // 无参数发送函数指针
+    void (*U485SendAllFunc)(void);
+
+    // 保存传入的参数，调用的时候用
+//    char *pBuf;
+//    uint16_t bufLen;
+}U485UsartSend_Callback_t;
+
+
+
+
+
+
+
 #define _485_A_TX_EN()  while(0){}
 #define _485_A_RX_EN() while(0){}
 
@@ -161,6 +181,11 @@ void Usart_COM485_SendArray_DMA(UART_HandleTypeDef *huart, uint8_t *array, uint1
 
 void Usart_COM485_send_Config_Init(void);
 void reg485ComCb(void (*pFunc)(uint8_t data));
+
+void U485Usart_SetSendCallback(U485UsartSend_Callback_t *pCb);
+
+
+
 
 
 #endif /* __BSP_USART_A_H */
