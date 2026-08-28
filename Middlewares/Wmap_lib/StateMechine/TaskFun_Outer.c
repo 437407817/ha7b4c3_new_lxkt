@@ -63,14 +63,14 @@ TaskComps_t g_taskComps[] =
 		#endif
 		 
 		 #if USE_LETTER_SHELL&&(!USE_OS)
-//		 {0, 10,   10,  Disable,10,Handle_letter_Shell_NoOsWhile},	
+		 {0, 10,   10,  Disable,10,Handle_letter_Shell_NoOsWhile},	
 		 #endif
 		 
 		 #if (!USE_OS)&&USE_TOUCH_IIC
 		  {0, 200,   500,  Disable,10,Handle_IIC_TOUCH},	
 		#endif
 		 #if TEST_SHELL_UART
-//		 {0, 1000,   1000, Disable,0 , Test_USART_SHELL_while},
+		 {0, 1000,   1000, Disable,0 , Test_USART_SHELL_while},
 		 #endif
 //		 	{0, 5000,   10000,  Disable,10,PrintHeapUsageRate},	
 //		 	{0, 5000,   10000,  Disable,10,stack_check_usage},	

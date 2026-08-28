@@ -126,7 +126,7 @@ extern UART_HandleTypeDef huart_shell_Handle;
 //#define  huart_shell  huart_shell_Handle
 
 //#define USE_UART 1
-#define TEST_SHELL_UART 1
+#define TEST_SHELL_UART 0
 #define USE_IT_1 0
 
 
