@@ -28,6 +28,8 @@
 
 #ifndef _ELOG_CFG_H_
 #define _ELOG_CFG_H_
+
+#include "./user_config.h"
 /*---------------------------------------------------------------------------*/
 /* enable log output. */
 #define ELOG_OUTPUT_ENABLE
@@ -64,8 +66,10 @@
 #define ELOG_FMT_USING_DIR
 #define ELOG_FMT_USING_LINE
 /*---------------------------------------------------------------------------*/
-/* enable asynchronous output mode */
+/* enable asynchronous output mode *///This feature cannot be enabled for bare-metal projects without an operating system. Asynchronous output relies on operating-system threads.
+#if USE_OS
 #define ELOG_ASYNC_OUTPUT_ENABLE
+#endif
 /* the highest output level for async mode, other level will sync output */
 #define ELOG_ASYNC_OUTPUT_LVL                    ELOG_LVL_ASSERT
 /* buffer size for asynchronous output mode */

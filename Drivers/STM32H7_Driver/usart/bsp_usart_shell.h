@@ -10,7 +10,7 @@
 #define USE_BSP_COM_FEATURE                 1U
 
 
-#define EXCHINGE_UASRT_SHELL_485  1
+#define EXCHINGE_UASRT_SHELL_485  0
 //串口波特率
 #define USART_SHELL_BAUDRATE                    115200
 
@@ -37,6 +37,7 @@
 #define USART_SHELL_IRQ                         USART1_IRQn             // 中断向量号
 
 #define USART_SHELL_RCC_PERIPHCLK     					RCC_PERIPHCLK_USART1
+#define USART_SHELL_RCC_CLKSOURCE     					RCC_USART16CLKSOURCE_D2PCLK2
 
 #else
 #define USART_SHELL                             UART4                  // 外设名称改为USART1

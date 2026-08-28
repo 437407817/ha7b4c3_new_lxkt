@@ -152,12 +152,12 @@ void HAL_UART_Shell_RxCpltCallback(UART_HandleTypeDef *huart){
        RingBuffer_WriteByte(&shellRingBuffer.shell_rx_ring,my_uartshell_redata);
 
         // 3. 释放信号量，通知任务有数据可读
-       #if USE_OS
+
 			if(NowUse_rtos==1){
         xSemaphoreGiveFromISR(shellBinarySem, &xHigherPriorityTaskWoken);
 //				osSemaphoreRelease(shellBinarySem);
 			}
-			#endif
+
         // 4. 重新开启串口接收中断（关键：持续接收下一个字节）
 //        HAL_UART_Receive_IT_UNLOCK(&huart_shell_Handle, (uint8_t *)&my_uartshell_redata, 1);
 					   while((RIT_Status=HAL_UART_Receive_IT(&huart_shell_Handle, (uint8_t *)&my_uartshell_redata, 1))!= HAL_OK){
@@ -174,13 +174,13 @@ void HAL_UART_Shell_RxCpltCallback(UART_HandleTypeDef *huart){
 //							huart_shell_Handle.RxState = HAL_UART_STATE_READY;
 //      __HAL_UNLOCK(&huart_shell_Handle);
     }
-						  #if USE_OS
+	
 			if(NowUse_rtos==1){
         // 5. 退出临界区，并触发任务调度（如果需要）
 //        taskEXIT_CRITICAL_FROM_ISR(ulReturn);
         portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 			}
-		#endif
+
 
     }
 	

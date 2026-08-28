@@ -130,7 +130,7 @@ void USART_Shell_GpioInit(void)
 		#if !EXCHINGE_UASRT_SHELL_485
     /* USART1 clock source */
 
-    RCC_PeriphClkInit.Usart16ClockSelection = RCC_USART16CLKSOURCE_D2PCLK2;
+    RCC_PeriphClkInit.Usart16ClockSelection = USART_SHELL_RCC_CLKSOURCE;
 		#else
 
     RCC_PeriphClkInit.Usart234578ClockSelection = USART_SHELL_RCC_CLKSOURCE;
@@ -171,7 +171,7 @@ USART_Shell_GpioInit();
 //	printf("+++");
 //uint8_t test[] = "+++\r\n";
 //HAL_UART_Transmit(&huart_shell_Handle, test, sizeof(test)-1, 100);
-	HAL_UART_Transmit(&huart_shell_Handle, (uint8_t*)"+++",3,100);
+//	HAL_UART_Transmit(&huart_shell_Handle, (uint8_t*)"+++",3,100);
 }
 
 

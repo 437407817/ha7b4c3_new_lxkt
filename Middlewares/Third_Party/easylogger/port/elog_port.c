@@ -37,11 +37,12 @@
 //#include "cmsis_os2.h"
 #include "log.h" 
 #include "./usart/bsp_usart_shell.h"
-//! 日志互斥信号量句柄
-static SemaphoreHandle_t LogMutexSemaphore = NULL; //freertos
+
 //static osSemaphoreId elog_lockHandle;	//cmsis_os
 //static osSemaphoreId_t elog_lockHandle;	//cmsis_os
 #ifdef ELOG_ASYNC_OUTPUT_ENABLE
+//! 日志互斥信号量句柄
+static SemaphoreHandle_t LogMutexSemaphore = NULL; //freertos
 static osSemaphoreId elog_asyncHandle= NULL;;
 #endif
 /**
