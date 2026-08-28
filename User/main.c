@@ -24,7 +24,7 @@
 #include "freerotspro.h"  
 #include "./sys/sysio.h"
 #include "./DataCache/data_stack.h"
-
+#include "./sys/bsp_systime.h"  
 
 #define NVIC_VTOR_MASK       0x3FFFFF80
 #define APP_START_ADDR        0x08004000
@@ -85,8 +85,8 @@ int main(void)
 		
 	
 NeedToRepeatOperate_Pro();
-
-		//Delay(1000);  
+//SYSTEM_INFO("AP+++:   ++++ MHz\r\n");
+//		Delay_Ms(100);  
 
   }
 }

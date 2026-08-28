@@ -24,6 +24,7 @@
 
 extern void Usart_SendDMA_SaveFun(char *buf, uint16_t num);
 extern void Usart_SendFUN_ALL(void);
+
 // 全局实例，可以切换赋值
 U485UsartSend_Callback_t g_U485UsartSendCb;
 
@@ -53,7 +54,7 @@ static volatile uint8_t index = 0;
 static volatile uint8_t indexsize = 0;
 
 //uint16_t rx_len = 0;              // 接收长度计数
-uint8_t uart_rx_byte;  // 单次接收 1 字节
+//uint8_t uart_rx_byte;  // 单次接收 1 字节
 #endif
 
 
@@ -395,6 +396,7 @@ void U485Usart_SetSendCallback(U485UsartSend_Callback_t *pCb)
     {
         g_U485UsartSendCb.U485SendDmaSaveDataFunc = NULL;
         g_U485UsartSendCb.U485SendAllFunc = NULL;
+			SYSTEM_ERROR("485 callback NOT register !");
         return;
     }
     g_U485UsartSendCb = *pCb;
