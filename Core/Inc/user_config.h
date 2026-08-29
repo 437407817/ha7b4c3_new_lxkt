@@ -60,7 +60,7 @@
 #if USE_OS
 #define USE_LETTER_SHELL 1
 #else
-#define USE_LETTER_SHELL 1
+#define USE_LETTER_SHELL 0
 #endif
 
 

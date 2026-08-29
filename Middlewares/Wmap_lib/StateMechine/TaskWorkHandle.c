@@ -100,7 +100,7 @@ void Handle_DMA_USART_Save(void){//success
 //	SYSTEM_I_PRINT("***********Handle_DMA_USART_Save********************\r\n");
 // UartSendDataDMAtest01();
 //	IWDG_Feed();
-	SYSTEM_DEBUG("xxxxxx 3dd\n");
+//	SYSTEM_DEBUG("xxxxxx 3dd\n");
 	
 }
 void Handle_DMA_USART_Send(void){//success

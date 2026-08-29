@@ -282,17 +282,15 @@ uint8_t Senbuff[q_QUEUE_NODE_DATA_LEN_UsartDMAsend] ;
 //	SYSTEM_DEBUG("ddd =  %d  %d\n",sizeof(Senbuff),strlen((char *)Senbuff));
 for(uint16_t i=0;i<q_QUEUE_NODE_NUM_UsartDMAsend;i++){
 	
-fill_data_False_random((char *)Senbuff,40);
+fill_data_False_random((char *)Senbuff,QSENDMAXBUFFSIZE);
 //SYSTEM_DEBUG("string = %s\n",Senbuff);
-	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(0,Senbuff,40,"send string = %s\n",Senbuff);
+	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(0,Senbuff,QSENDMAXBUFFSIZE,"send string = %s\n",Senbuff);
 //	int ret = p_push_data_to_queue2(&q_tx_rx_queue_UsartDMAsend, (char *)Senbuff, sizeof(Senbuff)); // 不含'\0'
 	Usart_SendDMA_SaveFun((char *)Senbuff,sizeof(Senbuff));
-SYSTEM_DEBUG("xxxxxx f %d\n",i);
+
 }
 
-delay_ms(100);
 
-SYSTEM_DEBUG("xxxxxx dd\n");
 }
 #endif
 
@@ -563,7 +561,7 @@ void USART1_IRQHandler(void)
 /**
   * @brief This function handles DMA2 stream2 global interrupt.
   */
-void DMA1_Stream1_IRQHandler(void)
+void DMA2_Stream1_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
 
@@ -577,7 +575,7 @@ void DMA1_Stream1_IRQHandler(void)
 /**
   * @brief This function handles DMA2 stream7 global interrupt.
   */
-void DMA2_Stream1_IRQHandler(void)
+void DMA1_Stream1_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream7_IRQn 0 */
 
