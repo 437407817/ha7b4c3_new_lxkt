@@ -67,13 +67,13 @@ extern "C" {
 #define USARTx_DMA_IRQ                 		    USART_COM485_IRQ
 
 
-#define USE_UARTx_DMA 1
+//#define USE_UARTx_DMA 1
 //#define USE_UART_DMA_RX 1
 //#define USE_UART_DMA_TX 1
 
 
 #define TEST_RingBuffer_SAVEANDREAD 0
-#define TESTUsartDMASendSaveAndSend 0
+#define TESTUsartDMASendSaveAndSend 1
 #define TEST_DMA_RB_READ	0			//测试接收功能
 //#define huart_DMA_Handle huart_shell_Handle 
 

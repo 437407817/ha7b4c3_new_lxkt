@@ -94,6 +94,9 @@ SYSTEM_INFO("HardFault!\r\n");
   }
 }
 
+
+
+
 /**
   * @brief This function handles Memory management fault.
   */

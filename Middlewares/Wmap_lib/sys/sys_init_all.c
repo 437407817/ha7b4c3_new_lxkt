@@ -123,7 +123,7 @@ DWT_Init();
 	SEGGER_SYSVIEW_Conf();
 #endif
 	USART_Shell_ComDrvInit();SYSTEM_DEBUG("USART_Shell_ComDrvInit over\n");
-//	USART_COM485_232_ComDrvInit();
+	USART_COM485_232_ComDrvInit();
 #if	1
 	#if USE_UART_DMA
 	

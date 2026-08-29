@@ -146,8 +146,13 @@ EM_EASYLOG_PRINT=0x04,
                                           }while(0)		
 
 																					
-#define SYSTEM_BIGNUM_HEX(EV_MOD,big,fmt,arg...)      if(EV_MOD==1){SEGGER_RTT_printf(0,RTT_CTRL_BG_BLACK RTT_CTRL_TEXT_BRIGHT_BLACK" "fmt" " ,##arg);}\
-																					SEGGER_RTT_printf(0, "0x%08X_%08X\n", (uint32_t)(big >> 32), (uint32_t)big)																			
+// 修复：do while(0)完整包裹，big打印放进if内部，去掉多余空格，续行符末尾无空格
+#define SYSTEM_BIGNUM_HEX(EV_MOD,big,fmt,arg...)  do{ \
+    if((EV_MOD)==1){ \
+        SEGGER_RTT_printf(0,RTT_CTRL_BG_BLACK RTT_CTRL_TEXT_BRIGHT_BLACK"" fmt,##arg); \
+        SEGGER_RTT_printf(0, " 0x%08X_%08X\n", (uint32_t)(((uint64_t)(big)) >> 32U), (uint32_t)(uint64_t)(big)); \
+    } \
+}while(0)																		
 #define SYSTEM_BIGNUM_DEC(EV_MOD,big,fmt,arg...)         if(EV_MOD==1){SEGGER_RTT_printf(0,RTT_CTRL_BG_BLACK RTT_CTRL_TEXT_BRIGHT_BLACK" "fmt" ",##arg);}\
 																					SEGGER_RTT_printf(0, "%u%09u\n",(uint32_t)(big / 1000000000ULL),(uint32_t)(big % 1000000000ULL))
 

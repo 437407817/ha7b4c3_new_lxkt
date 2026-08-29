@@ -66,7 +66,7 @@ void USARTx_DMA_Init(void)
 
   /* DMA controller clock enable */
   __HAL_RCC_DMA1_CLK_ENABLE();
-
+	__HAL_RCC_DMA2_CLK_ENABLE();
   /* DMA interrupt init */
   /* DMA2_Stream2_IRQn interrupt configuration */
 //  HAL_NVIC_SetPriority(DMA2_Stream2_IRQn, 2, 0);
@@ -84,7 +84,7 @@ void USART_TX_DMA_Config(UART_HandleTypeDef* uartHandle){
   if(uartHandle->Instance==DMA_USARTx)
   {
     /* USART1_TX Init */
-    hdma_usartx_tx.Instance = DMA1_Stream0;
+    hdma_usartx_tx.Instance = DMA1_Stream1;
     hdma_usartx_tx.Init.Request = DMA_REQUEST_USART1_TX;
     hdma_usartx_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
     hdma_usartx_tx.Init.PeriphInc = DMA_PINC_DISABLE;
@@ -106,8 +106,8 @@ void USART_TX_DMA_Config(UART_HandleTypeDef* uartHandle){
 //  __HAL_DMA_ENABLE_IT(&hdma_usartx_tx, DMA_IT_HT | DMA_IT_TC | DMA_IT_TE);
 		__HAL_DMA_ENABLE_IT(&hdma_usartx_tx,  DMA_IT_TC | DMA_IT_TE);//与发送相关
 		
-		  HAL_NVIC_SetPriority(DMA1_Stream0_IRQn, 2, 0);
-			HAL_NVIC_EnableIRQ(DMA1_Stream0_IRQn);
+		  HAL_NVIC_SetPriority(DMA1_Stream1_IRQn, 2, 0);
+			HAL_NVIC_EnableIRQ(DMA1_Stream1_IRQn);
 	}
 
 }
@@ -118,7 +118,7 @@ void USART_RX_DMA_Config(UART_HandleTypeDef* uartHandle){
   if(uartHandle->Instance==DMA_USARTx)
   {
     /* USART1_RX Init */
-    hdma_usartx_rx.Instance = DMA1_Stream1;
+    hdma_usartx_rx.Instance = DMA2_Stream1;
     hdma_usartx_rx.Init.Request = DMA_REQUEST_USART1_RX;
     hdma_usartx_rx.Init.Direction = DMA_PERIPH_TO_MEMORY;
     hdma_usartx_rx.Init.PeriphInc = DMA_PINC_DISABLE;
@@ -136,8 +136,8 @@ void USART_RX_DMA_Config(UART_HandleTypeDef* uartHandle){
 
     __HAL_LINKDMA(uartHandle,hdmarx,hdma_usartx_rx);
   /* DMA2_Stream2_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Stream1_IRQn, 2, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Stream1_IRQn);
+  HAL_NVIC_SetPriority(DMA2_Stream1_IRQn, 2, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
 	}
 
 }
@@ -268,7 +268,7 @@ void HAL_USARTx_DMA_ErrorCallback(void) {
 
 
 
-
+#include "./sys/bsp_systime.h"  
 #include "./DataConvert/data_random.h"
 
 #if TESTUsartDMASendSaveAndSend
@@ -287,8 +287,12 @@ fill_data_False_random((char *)Senbuff,40);
 	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(0,Senbuff,40,"send string = %s\n",Senbuff);
 //	int ret = p_push_data_to_queue2(&q_tx_rx_queue_UsartDMAsend, (char *)Senbuff, sizeof(Senbuff)); // 不含'\0'
 	Usart_SendDMA_SaveFun((char *)Senbuff,sizeof(Senbuff));
-
+SYSTEM_DEBUG("xxxxxx f %d\n",i);
 }
+
+delay_ms(100);
+
+SYSTEM_DEBUG("xxxxxx dd\n");
 }
 #endif
 
@@ -479,7 +483,7 @@ TEST_USART_RX_DMA_ALL();
 ///--------------------------
 //weak void HAL_USARTx_DMA_RxCpltCallback(void){}
 
-#if (USE_UARTx_DMA)
+#if (USE_UART_DMA)
 #if (USE_UART_DMA_RX)
 void HAL_USARTx_DMA_RxCpltCallback(void){
 #if 1
@@ -573,7 +577,7 @@ void DMA1_Stream1_IRQHandler(void)
 /**
   * @brief This function handles DMA2 stream7 global interrupt.
   */
-void DMA1_Stream0_IRQHandler(void)
+void DMA2_Stream1_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream7_IRQn 0 */
 

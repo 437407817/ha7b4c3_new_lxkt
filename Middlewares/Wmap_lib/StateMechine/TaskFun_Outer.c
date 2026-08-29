@@ -45,9 +45,9 @@ TaskComps_t g_taskComps[] =
 	{0, 1000,   1000,   Handle_FeedIWatchDog},	
 #endif	
 //	 {0, 1000,   5000, Disable,0 , Handle_DWT},
-   {0, 1000,   3000, Disable,0 , Handle_usart},
-	 {0, 20000,   20000,  Enable,2,Handle_test },	
-	 {0, 2000,   2000,  Disable,10,Handle_test2},	
+//   {0, 1000,   3000, Disable,0 , Handle_usart},
+//	 {0, 20000,   20000,  Enable,2,Handle_test },	
+//	 {0, 2000,   2000,  Disable,10,Handle_test2},	
 //	 	 {0, 1000,   1000,  Disable,10,Handle_led},	
 //		 {0, 2000,   2000,  Disable,10,Handle_DMA_USART_Save},	
 //		  {0, 2000,   200,  Disable,10,Handle_DMA_USART_Send},
@@ -59,7 +59,7 @@ TaskComps_t g_taskComps[] =
 	/* 添加业务功能模块 */
 		 #if TESTUsartDMASendSaveAndSend
 		 {0, 2000,   2000,  Disable,10,Handle_DMA_USART_Save},	//多任务测试效果最佳
-		  {0, 2000,   200,  Disable,10,Handle_DMA_USART_Send},  //多任务测试效果最佳
+//		  {0, 2000,   200,  Disable,10,Handle_DMA_USART_Send},  //多任务测试效果最佳
 		#endif
 		 
 		 #if USE_LETTER_SHELL&&(!USE_OS)
