@@ -133,7 +133,7 @@ void p_camera_queue_free(NODE_DATA_BUFF *ndb, int node_num) {
 
 
 // 缓冲队列初始化函数（针对第一种情况）
-void p_tx_rx_queue_init(Q_QueueBuffer *qdf, NODE_DATA_BUFF *ndb, int qnn_size,int qnd_length,Q_QUEUE_DATA_TYPE *elems,Q_QUEUE_DATA_TYPE *node_data,char (*node_buff)[qnd_length]) {
+void p_tx_rx_groupedqueue_init(Q_QueueBuffer *qdf, NODE_DATA_BUFF *ndb, int qnn_size,int qnd_length,Q_QUEUE_DATA_TYPE *elems,Q_QUEUE_DATA_TYPE *node_data,char (*node_buff)[qnd_length]) {
     uint32_t i = 0;
 	ndb->node_data=node_data;
 

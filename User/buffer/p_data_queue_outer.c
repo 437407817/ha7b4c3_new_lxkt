@@ -42,189 +42,35 @@ NODE_DATA_BUFF GV_ndb_1;
 //Q_QueueBuffer q_rx_queue_2;
 //NODE_DATA_BUFF GV_ndb_2;
 
-CREAT_p_queue(2,q_QUEUE_NODE_NUM_2,q_QUEUE_NODE_DATA_LEN_2);
+CREAT_Group_queue(2,q_QUEUE_NODE_NUM_2,q_QUEUE_NODE_DATA_LEN_2);
 
-CREAT_p_queue(UsartDMAsend,q_QUEUE_NODE_NUM_UsartDMAsend,q_QUEUE_NODE_DATA_LEN_UsartDMAsend);
+CREAT_Group_queue(UsartDMAsend,q_QUEUE_NODE_NUM_UsartDMAsend,q_QUEUE_NODE_DATA_LEN_UsartDMAsend);
+
+
+CREAT_Group_queue(GROUP_1,q_QUEUE_NODE_NUM_GROUP_1,q_QUEUE_NODE_DATA_LEN_GROUP_1);
+CREAT_Group_queue(GROUP_2,q_QUEUE_NODE_NUM_GROUP_2,q_QUEUE_NODE_DATA_LEN_GROUP_2);
+
 //extern Q_QueueBuffer q_rx_queue_1;
+//CREAT_GROUP_QUEUE_NEW(GROUP_3,q_QUEUE_NODE_NUM_GROUP_3,q_QUEUE_NODE_DATA_LEN_GROUP_3);
 
 
 
-//
-
-//
-
-
-
-//Q_QUEUE_DATA_TYPE *data_p; 
-//extern char global_node_buff_2[q_QUEUE_NODE_NUM_2][q_QUEUE_NODE_DATA_LEN_2];
-
-
-
-#if !USE_SHELL 
-//extern QUEUE_DATA_BUFF   GV_qdf_1;
-//extern QUEUE_DATA_BUFF   GV_qdf_2;
-
-
-#if 0
-#define usart_GV_qqb_x   q_tx_rx_queue_2
-#define usart_QUEUE_NODE_DATA_LEN_x   q_QUEUE_NODE_DATA_LEN_2
-
-
-void USART_A_IRQHandler(void)
-{
-
-	
-#if defined (USART_A_RX_DMA_ENABLE)
-	
-	
-	
-	
-		uint16_t t;
-	if(USART_GetITStatus(USARTx_A,USART_IT_IDLE) == SET)          //检查中断是否发生
-	{	
-		
-		#if 0
-		DMA_Cmd(USART_RX_DMA_CHANNEL,DISABLE);                         //关闭DMA传输
-
-		t = DMA_GetCurrDataCounter(USART_RX_DMA_CHANNEL);              //获取剩余的数据数量
-		
-        Usart_SendArray(USARTx_A,ReceiveBuff,RECEIVEBUFF_SIZE-t);       //向电脑返回数据（接收数据数量 = SENDBUFF_SIZE - 剩余未传输的数据数量）
-		//Usart_SendString( USARTx_A,"XXXXXX\n");     
-		DMA_SetCurrDataCounter(USART_RX_DMA_CHANNEL,RECEIVEBUFF_SIZE);    //重新设置传输的数据数量
-
-		DMA_Cmd(USART_RX_DMA_CHANNEL,ENABLE);                          //开启DMA传输
-		
-		USART_ReceiveData(USARTx_A);                              //读取一次数据，不然会一直进中断
-		USART_ClearFlag(USARTx_A,USART_FLAG_IDLE);                //清除串口空闲中断标志位
-		
-		#endif
-		
-	
-		
-		//USART_ClearITPendingBit(USARTx_A, USART_IT_IDLE);
-		
-		
-		
-		DMA_Cmd(USART_RX_DMA_CHANNEL,DISABLE); 
-		
-		Usart_SendString( USARTx_A,"XXXXXX\n");  
-		DMA_SetCurrDataCounter(USART_RX_DMA_CHANNEL,usart_QUEUE_NODE_DATA_LEN_x);
-		
-		DMA_Cmd(USART_RX_DMA_CHANNEL,ENABLE); 
-		
-		USART_ReceiveData(USARTx_A);
-		p_cbWriteFinish(&usart_GV_qqb_x);
-		USART_ClearFlag(USARTx_A,USART_FLAG_IDLE);
-	}
-		#else
-	uint8_t ucCh;
-	Q_QUEUE_DATA_TYPE *data_p; 
-	
-	if (__HAL_UART_GET_FLAG(&huart_a, UART_FLAG_RXNE) != RESET)
-	{	
-//		ucCh  = USART_ReceiveData( USARTx_A );
-		if (HAL_UART_Receive(&huart_a, &ucCh, 1, 100) == HAL_OK) {
-    // 数据接收成功，可以对 ucCh 进行处理
-} else {
-    // 处理接收失败的情况，例如超时等
-}
-		
-						/*获取写缓冲区指针，准备写入新数据*/
-		data_p = p_cbWrite(&usart_GV_qqb_x); 
-//		SYSTEM_DEBUG("\n data_p  %c\n",ucCh);
-		if (data_p != NULL)	//若缓冲队列未满，开始传输
-		{		
-			//往缓冲区写入数据，如使用串口接收、dma写入等方式
-			*(data_p->q_head + data_p->q_len) = ucCh;
-				
-			if( ++data_p->q_len >= usart_QUEUE_NODE_DATA_LEN_x)
-			{
-				p_cbWriteFinish(&usart_GV_qqb_x);
-			}
-		}else return;	
-	}
-	
-	if (__HAL_UART_GET_FLAG(&huart_a, UART_FLAG_IDLE) != RESET)                                        //数据帧接收完毕
-	{
-			/*写入缓冲区完毕*/
-			p_cbWriteFinish(&usart_GV_qqb_x);
-
-//		ucCh = USART_ReceiveData( USARTx_A );                                                              //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)
-//		HAL_UART_Receive(&huart_a, &ucCh, 1, 100);
-    // 数据接收成功，可以对 ucCh 进行处理
-
-__HAL_UART_CLEAR_IDLEFLAG(&huart_a);
-
-	}	
-
-
-	#endif /* USARTx_A_RX_DMA_ENABLE */
-	
-	
-}	
-
-#endif
-#endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void p_tx_rx_queue_init_all(UART_HandleTypeDef* uartHandle){
+void p_tx_rx_groupedqueue_init_all(UART_HandleTypeDef* uartHandle){
 	#if 0
 if(uartHandle->Instance == USART_A)
 {
 	//SYSTEM_DEBUG(" ==xxxxx====1");
-	p_tx_rx_queue_init(&q_rx_queue_1,&GV_ndb_1,q_QUEUE_NODE_NUM_1,q_QUEUE_NODE_DATA_LEN_1,global_elems_1,node_data_1,global_node_buff_1);
+	p_tx_rx_groupedqueue_init(&q_rx_queue_1,&GV_ndb_1,q_QUEUE_NODE_NUM_1,q_QUEUE_NODE_DATA_LEN_1,global_elems_1,node_data_1,global_node_buff_1);
 
-	//p_tx_rx_queue_init(QUEUE_DATA_BUFF *qdf, NODE_DATA_BUFF *ndb, int qnn_size,int qnd_length);
+	//p_tx_rx_groupedqueue_init(QUEUE_DATA_BUFF *qdf, NODE_DATA_BUFF *ndb, int qnn_size,int qnd_length);
 }
 #else
 if(uartHandle->Instance == USART_A)
 {
 	//SYSTEM_DEBUG(" ==xxxxx====1");
-	p_tx_rx_queue_init(&q_tx_rx_queue_2,&GV_ndb_2,q_QUEUE_NODE_NUM_2,q_QUEUE_NODE_DATA_LEN_2,global_elems_2,node_data_2,global_node_buff_2);
+	p_tx_rx_groupedqueue_init(&q_tx_rx_queue_2,&GV_ndb_2,q_QUEUE_NODE_NUM_2,q_QUEUE_NODE_DATA_LEN_2,global_elems_2,node_data_2,global_node_buff_2);
 
-	//p_tx_rx_queue_init(QUEUE_DATA_BUFF *qdf, NODE_DATA_BUFF *ndb, int qnn_size,int qnd_length);
+	//p_tx_rx_groupedqueue_init(QUEUE_DATA_BUFF *qdf, NODE_DATA_BUFF *ndb, int qnn_size,int qnd_length);
 }
 
 #endif
@@ -234,15 +80,47 @@ if(uartHandle->Instance == USART_A)
 
 }
 
+//CREAT_Group_queue(UsartDMAsend,q_QUEUE_NODE_NUM_UsartDMAsend,q_QUEUE_NODE_DATA_LEN_UsartDMAsend);
 
 
 
-void p_tx_rx_queue_init_dma(void){
+void p_tx_rx_groupedqueue_init_dma(void){
 
-p_tx_rx_queue_init(&q_tx_rx_queue_UsartDMAsend,&GV_ndb_UsartDMAsend,q_QUEUE_NODE_NUM_UsartDMAsend,
+p_tx_rx_groupedqueue_init(&q_tx_rx_queue_UsartDMAsend,&GV_ndb_UsartDMAsend,q_QUEUE_NODE_NUM_UsartDMAsend,
 	q_QUEUE_NODE_DATA_LEN_UsartDMAsend,global_elems_UsartDMAsend,node_data_UsartDMAsend,global_node_buff_UsartDMAsend);
 
 }
+//#define CREAT_GROUP_QUEUE_NEW(que_name, node_num,node_len)	\
+//Q_QUEUE_DATA_TYPE global_elems__##que_name[node_num];	\
+//char global_node_buff__##que_name[node_num][node_len];	\
+//Q_QUEUE_DATA_TYPE  node_data__##que_name[node_num];	\
+//Q_QueueBuffer q_tx_rx_queue__##que_name;	\
+//NODE_DATA_BUFF GV_ndb__##que__name;	
+
+//CREAT_Group_queue(GROUP_1,q_QUEUE_NODE_NUM_GROUP_1,q_QUEUE_NODE_DATA_LEN_GROUP_1);
+//CREAT_Group_queue(GROUP_2,q_QUEUE_NODE_NUM_GROUP_2,q_QUEUE_NODE_DATA_LEN_GROUP_2);
+
+
+
+void P_queue_init_COMMON_TX_GROUPED_BUFF_dma(void){
+
+p_tx_rx_groupedqueue_init(&q_GROUPqueue_1_UsartDMAsend,&GV_ndb_GROUP_1,q_QUEUE_NODE_NUM_GROUP_1,
+	q_QUEUE_NODE_DATA_LEN_GROUP_1,global_elems_GROUP_1,node_data_GROUP_1,global_node_buff_GROUP_1);
+	
+	
+p_tx_rx_groupedqueue_init(&q_GROUPqueue_2_UsartDMAsend,&GV_ndb_GROUP_2,q_QUEUE_NODE_NUM_GROUP_2,
+	q_QUEUE_NODE_DATA_LEN_GROUP_2,global_elems_GROUP_2,node_data_GROUP_2,global_node_buff_GROUP_2);
+	
+	
+//p_tx_rx_groupedqueue_init(&q_GROUPqueue_3_UsartDMAsend,&GV_ndb__GROUP_3,q_QUEUE_NODE_NUM__GROUP_3,
+//	q_QUEUE_NODE_DATA_LEN_GROUP_2,global_elems_GROUP_2,node_data_GROUP_2,global_node_buff_GROUP_2);	
+	
+	
+	
+	
+}
+
+
 
 
 

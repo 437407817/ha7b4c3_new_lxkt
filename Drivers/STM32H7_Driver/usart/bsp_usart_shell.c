@@ -85,7 +85,7 @@ void USART_Shell_UartInit(void)
 
 
 		
-		#if TEST_SHELL_UART
+		#if TEST_SHELL_UART&&!USE_UART_DMA_RX
 		#if USE_IT_1
 		__HAL_UART_ENABLE_IT(&huart_shell_Handle,UART_IT_IDLE);
 		__HAL_UART_ENABLE_IT(&huart_shell_Handle, UART_IT_RXNE);		
@@ -126,8 +126,18 @@ void USART_Shell_GpioInit(void)
     USART_SHELL_TX_GPIO_CLK_ENABLE();
     USART_SHELL_RX_GPIO_CLK_ENABLE();
 
+//		#if !EXCHINGE_UASRT_SHELL_485
+//    /* USART1 clock source */
+//    RCC_PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART1;
+//    RCC_PeriphClkInit.Usart16ClockSelection = RCC_USART16CLKSOURCE_D2PCLK2;
+//		#else
+//		RCC_PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART2;
+//    RCC_PeriphClkInit.Usart234578ClockSelection = RCC_USART234578CLKSOURCE_D2PCLK1;
+//		#endif
+		
+		
 		RCC_PeriphClkInit.PeriphClockSelection = USART_SHELL_RCC_PERIPHCLK;
-		#if !EXCHINGE_UASRT_SHELL_485
+		#if !EXCHINGE_UASRT_SHELL_WORKBOARD
     /* USART1 clock source */
 
     RCC_PeriphClkInit.Usart16ClockSelection = USART_SHELL_RCC_CLKSOURCE;
@@ -135,7 +145,6 @@ void USART_Shell_GpioInit(void)
 
     RCC_PeriphClkInit.Usart234578ClockSelection = USART_SHELL_RCC_CLKSOURCE;
 		#endif
-		
 		
     HAL_RCCEx_PeriphCLKConfig(&RCC_PeriphClkInit);
 
@@ -168,10 +177,8 @@ void USART_Shell_ComDrvInit(void)
 	USART_Shell_UartInit();
 USART_Shell_GpioInit();
 	
-//	printf("+++");
-//uint8_t test[] = "+++\r\n";
-//HAL_UART_Transmit(&huart_shell_Handle, test, sizeof(test)-1, 100);
-//	HAL_UART_Transmit(&huart_shell_Handle, (uint8_t*)"+++",3,100);
+	
+
 }
 
 
@@ -197,7 +204,7 @@ HAL_UART_Receive_IT(&huart_shell_Handle, &uart_rx_byte, 1);
 * @return 
 ***********************************************************
 */
-
+#if !USE_UART_DMA
 #if USE_IT_1
 void USART_SHELL_IRQHandler(void)
 {
@@ -245,7 +252,7 @@ void USART_SHELL_IRQHandler(void){
 
 
 #endif
-
+#endif
 
 
 #endif

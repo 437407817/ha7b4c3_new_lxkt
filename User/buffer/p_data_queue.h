@@ -53,17 +53,36 @@ typedef struct str_nood_data_buff {
 #define q_QUEUE_NODE_DATA_LEN_UsartDMAsend   (1 * QSENDMAXBUFFSIZE) //每组多少个数
 
 
+
+#define q_QUEUE_NODE_NUM_GROUP_1        (1*4) //缓冲队列的个数需要为2的幂,否则出错
+#define q_QUEUE_NODE_DATA_LEN_GROUP_1   (1 * 50)
+
+#define q_QUEUE_NODE_NUM_GROUP_2        (1*4) //缓冲队列的个数需要为2的幂,否则出错
+#define q_QUEUE_NODE_DATA_LEN_GROUP_2   (1 * 50)
+
+#define q_QUEUE_NODE_NUM_GROUP_3        (1*4) //缓冲队列的个数需要为2的幂,否则出错
+#define q_QUEUE_NODE_DATA_LEN_GROUP_3   (1 * 50)
+
+
 //#define creat_que(que_name, len)	\
 //    unsigned char que_buf_##que_name[len] = {0}; \
 //    que_t que_##que_name = {que_buf_##que_name, len, 0, 0}; \
 //    static que_t* que_name = &que_##que_name
 //定义创建队列的方法
-#define CREAT_p_queue(que_name, node_num,node_len)	\
+#define CREAT_Group_queue(que_name, node_num,node_len)	\
 Q_QUEUE_DATA_TYPE global_elems_##que_name[node_num];	\
 char global_node_buff_##que_name[node_num][node_len];	\
 Q_QUEUE_DATA_TYPE  node_data_##que_name[node_num];	\
 Q_QueueBuffer q_tx_rx_queue_##que_name;	\
 NODE_DATA_BUFF GV_ndb_##que_name;	
+
+
+//#define CREAT_GROUP_QUEUE_NEW(que_name, node_num,node_len)	\
+//Q_QUEUE_DATA_TYPE global_elems__##que_name[node_num];	\
+//char global_node_buff__##que_name[node_num][node_len];	\
+//Q_QUEUE_DATA_TYPE  node_data__##que_name[node_num];	\
+//Q_QueueBuffer q_tx_rx_queue__##que_name;	\
+//NODE_DATA_BUFF GV_ndb__##que__name;	
 
 
 
@@ -93,8 +112,8 @@ Q_QUEUE_DATA_TYPE* p_cbRead(Q_QueueBuffer *cb);
 void p_cbReadFinish(Q_QueueBuffer *cb);
 void p_camera_queue_free(NODE_DATA_BUFF *ndb, int node_num);
 
-//void p_tx_rx_queue_init(QUEUE_DATA_BUFF *qdf, NODE_DATA_BUFF *ndb, int qnn_size,int qnd_length,Q_QUEUE_DATA_TYPE *elems);
-void p_tx_rx_queue_init(Q_QueueBuffer *qdf, NODE_DATA_BUFF *ndb, int qnn_size,int qnd_length,Q_QUEUE_DATA_TYPE *elems,Q_QUEUE_DATA_TYPE *node_data,char (*node_buff)[qnd_length]);
+//void p_tx_rx_groupedqueue_init(QUEUE_DATA_BUFF *qdf, NODE_DATA_BUFF *ndb, int qnn_size,int qnd_length,Q_QUEUE_DATA_TYPE *elems);
+void p_tx_rx_groupedqueue_init(Q_QueueBuffer *qdf, NODE_DATA_BUFF *ndb, int qnn_size,int qnd_length,Q_QUEUE_DATA_TYPE *elems,Q_QUEUE_DATA_TYPE *node_data,char (*node_buff)[qnd_length]);
 
 
 void p_push_data_to_queue(Q_QueueBuffer *qdf, char *src_dat, uint16_t src_len);

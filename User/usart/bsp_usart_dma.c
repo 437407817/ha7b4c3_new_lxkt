@@ -55,7 +55,7 @@ str_DMA_usart_send GV_usartdmaSend = {
 };
 
 
-//static uint8_t g_rcvDataBuf[MAX_BUF_SIZE];
+//static uint8_t g_rcvDataBuf[MAX_BUF_R_SIZE];
 //static uint8_t received_data_len = 0;
 
 // 定义环形缓冲区大小（根据需求调整，此处设为128字节）
@@ -66,7 +66,7 @@ void USARTx_DMA_Init(void)
 
   /* DMA controller clock enable */
   __HAL_RCC_DMA1_CLK_ENABLE();
-	__HAL_RCC_DMA2_CLK_ENABLE();
+
   /* DMA interrupt init */
   /* DMA2_Stream2_IRQn interrupt configuration */
 //  HAL_NVIC_SetPriority(DMA2_Stream2_IRQn, 2, 0);
@@ -84,7 +84,7 @@ void USART_TX_DMA_Config(UART_HandleTypeDef* uartHandle){
   if(uartHandle->Instance==DMA_USARTx)
   {
     /* USART1_TX Init */
-    hdma_usartx_tx.Instance = DMA1_Stream1;
+    hdma_usartx_tx.Instance = DMA1_Stream0;
     hdma_usartx_tx.Init.Request = DMA_REQUEST_USART1_TX;
     hdma_usartx_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
     hdma_usartx_tx.Init.PeriphInc = DMA_PINC_DISABLE;
@@ -100,14 +100,14 @@ void USART_TX_DMA_Config(UART_HandleTypeDef* uartHandle){
     {
       Error_Handler();
     }
-    __HAL_LINKDMA(&huart_DMA_Handle,hdmatx,hdma_usartx_tx);
+    __HAL_LINKDMA(uartHandle,hdmatx,hdma_usartx_tx);
 
 		  // 3. 使能 DMA 中断（半传输 + 传输完成 + 传输错误）
 //  __HAL_DMA_ENABLE_IT(&hdma_usartx_tx, DMA_IT_HT | DMA_IT_TC | DMA_IT_TE);
 		__HAL_DMA_ENABLE_IT(&hdma_usartx_tx,  DMA_IT_TC | DMA_IT_TE);//与发送相关
 		
-		  HAL_NVIC_SetPriority(DMA1_Stream1_IRQn, 2, 0);
-			HAL_NVIC_EnableIRQ(DMA1_Stream1_IRQn);
+		  HAL_NVIC_SetPriority(DMA1_Stream0_IRQn, 2, 0);
+			HAL_NVIC_EnableIRQ(DMA1_Stream0_IRQn);
 	}
 
 }
@@ -118,7 +118,7 @@ void USART_RX_DMA_Config(UART_HandleTypeDef* uartHandle){
   if(uartHandle->Instance==DMA_USARTx)
   {
     /* USART1_RX Init */
-    hdma_usartx_rx.Instance = DMA2_Stream1;
+    hdma_usartx_rx.Instance = DMA1_Stream1;
     hdma_usartx_rx.Init.Request = DMA_REQUEST_USART1_RX;
     hdma_usartx_rx.Init.Direction = DMA_PERIPH_TO_MEMORY;
     hdma_usartx_rx.Init.PeriphInc = DMA_PINC_DISABLE;
@@ -136,8 +136,8 @@ void USART_RX_DMA_Config(UART_HandleTypeDef* uartHandle){
 
     __HAL_LINKDMA(uartHandle,hdmarx,hdma_usartx_rx);
   /* DMA2_Stream2_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA2_Stream1_IRQn, 2, 0);
-  HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
+  HAL_NVIC_SetPriority(DMA1_Stream1_IRQn, 2, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream1_IRQn);
 	}
 
 }
@@ -204,7 +204,7 @@ USART_TX_DMA_Config(uartHandle);
  QueueInit(&RcvDmaQueData.g_uartRingBuf, RcvDmaQueData.g_ringBufData, MAX_RING_BUFF_SIZE);//接收用环形缓冲区,
 		
 
-//	SCB_CleanInvalidateDCache_by_Addr((uint32_t *)RcvDmaQueData.g_rcvDataBuf, MAX_BUF_SIZE);	
+	SCB_CleanInvalidateDCache_by_Addr((uint32_t *)RcvDmaQueData.g_rcvDataBuf, MAX_BUF_R_SIZE);	
 HAL_UART_Receive_DMA(uartHandle, RcvDmaQueData.g_rcvDataBuf, MAX_BUF_R_SIZE);             // 开启DMA接收
 
 		memset(RcvDmaQueData.g_rcvDataBuf, 0, MAX_BUF_R_SIZE); // 清空内存，在__HAL_UART_CLEAR_IDLEFLAG前Received:为0，在他之后，Received:为1
@@ -250,25 +250,21 @@ void USART_TX_RX_DMA_ConfigALL(void){
 	USARTx_DMA_Init();
 USART_TX_RX_DMA_Config(&huart_DMA_Handle);
 	
-p_tx_rx_queue_init_dma();
+//p_tx_rx_groupedqueue_init_dma();
 }
 
 
-void HAL_USARTx_DMA_ErrorCallback(void) {
+//void HAL_USARTx_DMA_ErrorCallback(void) {
 
-    uint32_t error_code = HAL_UART_GetError(&huart_DMA_Handle);  // 获取错误码
-    SYSTEM_DEBUG("UART Error: 0x%lx\n", error_code);  // 打印错误（需重定向printf）
-    // 常见错误：0x04（溢出错误，数据未及时读取导致覆盖）
-  
-}
-
-
+//    uint32_t error_code = HAL_UART_GetError(&huart_DMA_Handle);  // 获取错误码
+//    SYSTEM_DEBUG("UART Error: 0x%lx\n", error_code);  // 打印错误（需重定向printf）
+//    // 常见错误：0x04（溢出错误，数据未及时读取导致覆盖）
+//  
+//}
 
 
 
 
-
-#include "./sys/bsp_systime.h"  
 #include "./DataConvert/data_random.h"
 
 #if TESTUsartDMASendSaveAndSend
@@ -289,8 +285,6 @@ fill_data_False_random((char *)Senbuff,QSENDMAXBUFFSIZE);
 	Usart_SendDMA_SaveFun((char *)Senbuff,sizeof(Senbuff));
 
 }
-
-
 }
 #endif
 
@@ -519,18 +513,18 @@ void USARTx_DMA_IRQHandler(void)
 		__HAL_UART_CLEAR_IDLEFLAG(&huart_DMA_Handle); 
 		HAL_UART_DMAStop(&huart_DMA_Handle);
 //		// 必须无效化 Cache 才能读到真实数据
-//        SCB_InvalidateDCache_by_Addr((uint32_t *)RcvDmaQueData.g_rcvDataBuf, MAX_BUF_SIZE);
+        SCB_InvalidateDCache_by_Addr((uint32_t *)RcvDmaQueData.g_rcvDataBuf, MAX_BUF_R_SIZE);
 		
 		                                             // 停止DMA传输，防止干扰
-		RcvDmaQueData.received_data_len = MAX_BUF_SIZE - __HAL_DMA_GET_COUNTER(&hdma_usartx_rx);
+		RcvDmaQueData.received_data_len = MAX_BUF_R_SIZE - __HAL_DMA_GET_COUNTER(&hdma_usartx_rx);
 //SYSTEM_DEBUG("RcvDmaQueData.received_data_len %d",RcvDmaQueData.received_data_len);
-//		SCB_InvalidateDCache_by_Addr((uint32_t *)RcvDmaQueData.g_rcvDataBuf, MAX_BUF_SIZE);
+		SCB_InvalidateDCache_by_Addr((uint32_t *)RcvDmaQueData.g_rcvDataBuf, MAX_BUF_R_SIZE);
 		        if (RcvDmaQueData.received_data_len > 0) {
             QueuePushArray(&RcvDmaQueData.g_uartRingBuf, RcvDmaQueData.g_rcvDataBuf, RcvDmaQueData.received_data_len);
 							
         }
-						SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(0,RcvDmaQueData.g_rcvDataBuf,5,"rec=== %d",RcvDmaQueData.received_data_len);
-		HAL_UART_Receive_DMA(&huart_DMA_Handle, RcvDmaQueData.g_rcvDataBuf, MAX_BUF_SIZE);             // 重新开启DMA传输
+//						SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(0,RcvDmaQueData.g_rcvDataBuf,5,"rec=== %d",RcvDmaQueData.received_data_len);
+		HAL_UART_Receive_DMA(&huart_DMA_Handle, RcvDmaQueData.g_rcvDataBuf, MAX_BUF_R_SIZE);             // 重新开启DMA传输
 	}
 #endif	
 	HAL_UART_IRQHandler(&huart_DMA_Handle);//发送DMA必须有
@@ -561,7 +555,7 @@ void USART1_IRQHandler(void)
 /**
   * @brief This function handles DMA2 stream2 global interrupt.
   */
-void DMA2_Stream1_IRQHandler(void)
+void DMA1_Stream1_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
 
@@ -575,7 +569,7 @@ void DMA2_Stream1_IRQHandler(void)
 /**
   * @brief This function handles DMA2 stream7 global interrupt.
   */
-void DMA1_Stream1_IRQHandler(void)
+void DMA1_Stream0_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream7_IRQn 0 */
 

@@ -15,8 +15,8 @@
 
 
 
-void p_tx_rx_queue_init_all(UART_HandleTypeDef* uartHandle);
-void p_tx_rx_queue_init_dma(void);
+void p_tx_rx_groupedqueue_init_all(UART_HandleTypeDef* uartHandle);
+void p_tx_rx_groupedqueue_init_dma(void);
 
 void Test_get_all_data_from_queue(UART_HandleTypeDef* uartHandle);
 void Test_all_queue(void);
@@ -26,7 +26,10 @@ void Test_all_queue(void);
 
 extern Q_QueueBuffer q_tx_rx_queue_2;
 extern Q_QueueBuffer q_tx_rx_queue_UsartDMAsend;
+extern Q_QueueBuffer q_GROUPqueue_1_UsartDMAsend;
+extern Q_QueueBuffer q_GROUPqueue_2_UsartDMAsend;
 
+extern Q_QueueBuffer q_GROUPqueue_3_UsartDMAsend;
 
 #endif
 

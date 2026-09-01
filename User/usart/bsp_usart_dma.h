@@ -50,22 +50,23 @@ extern "C" {
 
 #define TX_WAITTING_TIMEOUT 1  
 
-
-#define MAX_BUF_R_SIZE        PACKET_DATA_LEN_MAX * 3 //防止2帧重叠
+//#define MAX_BUF_R_SIZE        5
+////#define MAX_BUF_R_SIZE        PACKET_DATA_LEN_MAX * 3 //防止2帧重叠
 //#define MAX_RING_BUFF_SIZE MAX_BUF_R_SIZE*8
-#define MAX_RING_BUFF_SIZE    MAX_BUF_SIZE
+////#define MAX_RING_BUFF_SIZE    MAX_BUF_SIZE
 
-
+#define MAX_BUF_R_SIZE 					5  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
+#define MAX_RING_BUFF_SIZE 			MAX_BUF_R_SIZE*10
 
 #define DMA_USARTx 														USART_SHELL
 #define USARTx_DMA_IRQHandler                 USART_SHELL_IRQHandler
 #define USARTx_DMA_IRQ                 		    USART_SHELL_IRQ
-#define huart_DMA_Handle 												huart_shell_Handle 
+#define huart_DMA_Handle                      huart_shell_Handle 
 #include "./usart/bsp_usart_COM485.h"
 //#define DMA_USARTx 														USART_COM485
 //#define USARTx_DMA_IRQHandler                 USART_COM485_IRQHandler
 //#define USARTx_DMA_IRQ                 		    USART_COM485_IRQ
-//#define huart_DMA_Handle 									huart_COM485_Handle
+//#define huart_DMA_Handle 												huart_COM485_Handle
 
 //#define USE_UARTx_DMA 1
 //#define USE_UART_DMA_RX 1
@@ -73,8 +74,10 @@ extern "C" {
 
 
 #define TEST_RingBuffer_SAVEANDREAD 0
-#define TESTUsartDMASendSaveAndSend 1
+#define TESTUsartDMASendSaveAndSend 0
 #define TEST_DMA_RB_READ	0			//测试接收功能
+
+
 
 
 

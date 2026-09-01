@@ -1689,6 +1689,11 @@
               <FilePath>..\..\User\usart\bsp_usart_dma.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_usart_common_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\usart\bsp_usart_common_dma.c</FilePath>
+            </File>
+            <File>
               <FileName>bsp_dma.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\dma\bsp_dma.c</FilePath>

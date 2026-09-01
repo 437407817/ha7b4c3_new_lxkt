@@ -47,8 +47,8 @@ TaskComps_t g_taskComps[] =
 //	 {0, 1000,   5000, Disable,0 , Handle_DWT},
    {0, 1000,   3000, Disable,0 , Handle_usart},
 	 {0, 20000,   20000,  Enable,2,Handle_test },	
-	 {0, 2000,   2000,  Disable,10,Handle_test2},	
-//	 	 {0, 1000,   1000,  Disable,10,Handle_led},	
+	 {0, 2000,   8000,  Disable,10,Handle_test2},	
+	 	 {0, 1000,   1000,  Disable,10,Handle_led},	
 //		 {0, 2000,   2000,  Disable,10,Handle_DMA_USART_Save},	
 //		  {0, 2000,   200,  Disable,10,Handle_DMA_USART_Send},
 #if !(USE_LVGL_OS)&&(USE_LVGL)

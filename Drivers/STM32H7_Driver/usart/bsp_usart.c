@@ -59,7 +59,7 @@ void USART_A_Config(void)
     }
 		#if !(USE_LETTER_SHELL)
 		#if USE_SERIAL_IT
-	p_tx_rx_queue_init_all(&huart_a);
+	p_tx_rx_groupedqueue_init_all(&huart_a);
 	
 	//  /*配置串口接收、空闲中断 */
   __HAL_UART_ENABLE_IT(&huart_a,UART_IT_RXNE);
