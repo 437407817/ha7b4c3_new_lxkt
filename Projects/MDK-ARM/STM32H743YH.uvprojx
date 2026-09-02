@@ -6631,6 +6631,11 @@
               <FilePath>..\..\User_pro\usart\bsp_usart_com485.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_usart_common_com485.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User_pro\usart\bsp_usart_common_com485.c</FilePath>
+            </File>
+            <File>
               <FileName>usart_485_232_send.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User_pro\pro_com\usart_485_232_send.c</FilePath>

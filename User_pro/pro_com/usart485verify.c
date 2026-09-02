@@ -226,7 +226,7 @@ void Usart485ComTask(void)
 */
 void Usart485ComAppInit(void)
 {
-	reg485ComCb(ProcUartData);
+	reg485ComCb(ProcUartData);//injectUARTIDLEcptCP
 	reg_SlaveComCb(pull_data_from_485);
 	#if !USE_UART_DMA_RX
 QueueInit(&g_rcvQueue, g_rcvDataBuf, MAX_BUF_SIZE);

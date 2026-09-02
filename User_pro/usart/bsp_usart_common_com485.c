@@ -28,14 +28,16 @@ extern void Usart_SendFUN_ALL(void);
 // 全局实例，可以切换赋值
 U485UsartSend_Callback_t g_U485UsartSendCb;
 
-U485UsartSend_Callback_t cbCfg = {
+U485UsartSend_Callback_t com01_485_cbCfg = {
     .U485SendDmaSaveDataFunc  = Usart_SendDMA_SaveFun,
     .U485SendAllFunc  = Usart_SendFUN_ALL,
 
 };
 
 
-
+UartInstance com01_com485Inst = {
+    .huart = &huart_COM_DW_Handle,
+};
 
 
 // 声明全局执行指针
@@ -60,116 +62,273 @@ static volatile uint8_t indexsize = 0;
 
 
 
- /**
-  * @brief  DEBUG_USART GPIO 配置,工作模式配置。115200 8-N-1
-  * @param  无
-  * @retval 无
-  */  
-void USART_COM485_UartInit(void)
-{ 
-  
-    USART_COM485_CLK_ENABLE();
+/**
+ * @brief UART通用初始化函数，485串口初始化逻辑通用版
+ * @param huart              UART句柄指针
+ * @param Instance           外设实例，如 USART1
+ * @param baudrate           波特率
+ * @param irq_n              中断号，如 USART1_IRQn
+ * @param preempt_prio       抢占优先级
+ * @param sub_prio           子优先级
+ * @param enableIdleIt       1:开启IDLE中断
+ * @param enableRxneIt       1:开启RXNE中断
+ * @param pfnClockEnable     回调：开启外设时钟，传入NULL则不执行时钟使能
+ * @retval HAL status
+ */
+typedef void (*UartClockEnableCb)(void);
 
-    huart_COM485_Handle.Instance = USART_COM485;
-    huart_COM485_Handle.Init.BaudRate = USART_COM485_BAUDRATE;
-    huart_COM485_Handle.Init.WordLength = UART_WORDLENGTH_8B;
-    huart_COM485_Handle.Init.StopBits = UART_STOPBITS_1;
-    huart_COM485_Handle.Init.Parity = UART_PARITY_NONE;
-    huart_COM485_Handle.Init.Mode = UART_MODE_TX_RX;
-    huart_COM485_Handle.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-    huart_COM485_Handle.Init.OverSampling = UART_OVERSAMPLING_16;
-    huart_COM485_Handle.Init.OneBitSampling = UART_ONEBIT_SAMPLING_DISABLED;
-    huart_COM485_Handle.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
-//huart_COM485_Handle.Init.FIFOMode = UART_FIFOMODE_DISABLE;
-    if (HAL_UART_Init(&huart_COM485_Handle) != HAL_OK)
+HAL_StatusTypeDef UART_Common_Init(UART_HandleTypeDef *huart,
+                                   USART_TypeDef *Instance,
+                                   uint32_t baudrate,
+                                   IRQn_Type irq_n,
+                                   uint32_t preempt_prio,
+                                   uint32_t sub_prio,
+                                   uint8_t enableIdleIt,
+                                   uint8_t enableRxneIt,
+                                   UartClockEnableCb pfnClockEnable)
+{
+    if(huart == NULL)
+    {
+        return HAL_ERROR;
+    }
+
+    //开启外设时钟
+    if(pfnClockEnable != NULL)
+    {
+        pfnClockEnable();
+    }
+
+    huart->Instance = Instance;
+    huart->Init.BaudRate = baudrate;
+    huart->Init.WordLength = UART_WORDLENGTH_8B;
+    huart->Init.StopBits = UART_STOPBITS_1;
+    huart->Init.Parity = UART_PARITY_NONE;
+    huart->Init.Mode = UART_MODE_TX_RX;
+    huart->Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    huart->Init.OverSampling = UART_OVERSAMPLING_16;
+    huart->Init.OneBitSampling = UART_ONEBIT_SAMPLING_DISABLED;
+    huart->AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+
+    if (HAL_UART_Init(huart) != HAL_OK)
+    {
+        return HAL_ERROR;
+    }
+
+    if (HAL_UARTEx_SetTxFifoThreshold(huart, UART_TXFIFO_THRESHOLD_1_2) != HAL_OK)
+    {
+        return HAL_ERROR;
+    }
+    if (HAL_UARTEx_SetRxFifoThreshold(huart, UART_RXFIFO_THRESHOLD_1_2) != HAL_OK)
+    {
+        return HAL_ERROR;
+    }
+    if (HAL_UARTEx_DisableFifoMode(huart) != HAL_OK)
+    {
+        return HAL_ERROR;
+    }
+
+#if !USE_UART_COMMON_DMA_RX
+    if(enableIdleIt)
+    {
+        __HAL_UART_ENABLE_IT(huart, UART_IT_IDLE);
+    }
+    if(enableRxneIt)
+    {
+        __HAL_UART_ENABLE_IT(huart, UART_IT_RXNE);
+    }
+//    if(enableReceiveIt)
+//    {
+//				HAL_UART_Receive_IT(&huart_COM485_Handle, &uart485_rx_byte, 1);
+//    }		
+		
+		
+#endif
+
+    //配置NVIC中断
+    HAL_NVIC_SetPriority(irq_n, preempt_prio, sub_prio);
+    HAL_NVIC_EnableIRQ(irq_n);
+
+    return HAL_OK;
+}
+
+
+
+
+static void USART1_ClockEnable(void)
+{
+    __HAL_RCC_USART1_CLK_ENABLE();
+}
+
+
+
+
+
+void USART_common_COM485_UartInit(void)
+{
+    if(UART_Common_Init(&huart_COM485_Handle,
+                        USART_COM485,
+                        USART_COM485_BAUDRATE,
+                        USART_COM485_IRQ,
+                        10,        //抢占优先级
+                        0,         //子优先级
+                        1,         //enableIdleIt
+                        1,          //enableRxneIt
+                        USART1_ClockEnable) != HAL_OK)
     {
         Error_Handler();
     }
-  if (HAL_UARTEx_SetTxFifoThreshold(&huart_COM485_Handle, UART_TXFIFO_THRESHOLD_1_2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_UARTEx_SetRxFifoThreshold(&huart_COM485_Handle, UART_RXFIFO_THRESHOLD_1_2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-	  if (HAL_UARTEx_DisableFifoMode(&huart_COM485_Handle) != HAL_OK)
-//  if (HAL_UARTEx_EnableFifoMode(&huart_COM485_Handle) != HAL_OK)//如果不使能fifo，有的情况命令行按键报错，看情况选择
-  {
-    Error_Handler();
-  }
-    /* 使能 RXNE + IDLE 中断 */
-//// 2. 强行关闭 RX 和 TX 的硬件 FIFO
-//HAL_UARTEx_DisableFifoMode(&huart_COM485_Handle);
-		// 将其清零即可彻底关闭 FIFO
-//huart_COM485_Handle.Instance->CR1 &= ~(1U << 29);
-
 
 		
-	#if !USE_UART_COMMON_DMA_RX
-		#if USE_COM485_IT_1
-		__HAL_UART_ENABLE_IT(&huart_COM485_Handle,UART_IT_IDLE);
-		__HAL_UART_ENABLE_IT(&huart_COM485_Handle, UART_IT_RXNE);		
-		#else
-		__HAL_UART_ENABLE_IT(&huart_COM485_Handle,UART_IT_IDLE);
-		HAL_UART_Receive_IT(&huart_COM485_Handle, &uart485_rx_byte, 1);
-		#endif
-	#endif
 		
 		
 		
-    /* H743：中断优先级必须低 */
-    HAL_NVIC_SetPriority(USART_COM485_IRQ, 10, 0);// 7 位于 5~15 之间，安全
-    HAL_NVIC_EnableIRQ(USART_COM485_IRQ);
-		
-		 
+
 }
 
 
-void USART_COM485_UartDeInit(void)
-{ 
 
-HAL_UART_DeInit(&huart_COM485_Handle);
-	HAL_NVIC_DisableIRQ(USART_COM485_IRQ);
-}
+
+
+
 
 /**
-  * @brief UART MSP 初始化 
-  * @param huart: UART handle
-  * @retval 无
-  */
-void USART_COM485_GpioInit(void)
-{  
+ * @brief UART GPIO与外设时钟源通用初始化
+ * @param tx_port         TX GPIO端口
+ * @param tx_pin          TX引脚
+ * @param tx_af           TX复用功能AF编号
+ * @param rx_port         RX GPIO端口
+ * @param rx_pin          RX引脚
+ * @param rx_af           RX复用功能AF编号
+ * @param pfnGpioClkEnable 回调函数：开启TX/RX GPIO时钟
+ * @param periph_clk_sel  RCC_PeriphCLKInitTypeDef.PeriphClockSelection
+ * @param uart_clk_sel1   Usart234578ClockSelection / Usart16ClockSelection 选项
+ * @param is_usart16      true=USART1/6组(Usart16ClockSelection), false=USART2/3/4/5/7/8组(Usart234578ClockSelection)
+ * @retval HAL status
+ */
+typedef void (*UartGpioClockEnableCb)(void);
+
+HAL_StatusTypeDef UART_Common_GpioInit(GPIO_TypeDef *tx_port,
+                                       uint16_t tx_pin,
+                                       uint8_t tx_af,
+                                       GPIO_TypeDef *rx_port,
+                                       uint16_t rx_pin,
+                                       uint8_t rx_af,
+                                       UartGpioClockEnableCb pfnGpioClkEnable,
+                                       uint32_t periph_clk_sel,
+                                       uint32_t uart_clk_sel1,
+                                       uint8_t is_usart16)
+{
+    if(tx_port == NULL || rx_port == NULL || pfnGpioClkEnable == NULL)
+    {
+        return HAL_ERROR;
+    }
 
     GPIO_InitTypeDef GPIO_InitStruct = {0};
     RCC_PeriphCLKInitTypeDef RCC_PeriphClkInit = {0};
 
-    USART_COM485_TX_GPIO_CLK_ENABLE();
-    USART_COM485_RX_GPIO_CLK_ENABLE();
+    // 开启GPIO时钟
+    pfnGpioClkEnable();
 
-		#if !EXCHINGE_UASRT_SHELL_485
-    /* USART1 clock source */
-    RCC_PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART2;
-    RCC_PeriphClkInit.Usart234578ClockSelection = RCC_USART234578CLKSOURCE_D2PCLK1;
-		#else
-		RCC_PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART1;
-    RCC_PeriphClkInit.Usart16ClockSelection = RCC_USART16CLKSOURCE_D2PCLK2;
-		#endif
-    HAL_RCCEx_PeriphCLKConfig(&RCC_PeriphClkInit);
+    // 配置UART外设时钟源
+    RCC_PeriphClkInit.PeriphClockSelection = periph_clk_sel;
+    if(is_usart16)
+    {
+        RCC_PeriphClkInit.Usart16ClockSelection = uart_clk_sel1;
+    }
+    else
+    {
+        RCC_PeriphClkInit.Usart234578ClockSelection = uart_clk_sel1;
+    }
+    if(HAL_RCCEx_PeriphCLKConfig(&RCC_PeriphClkInit) != HAL_OK)
+    {
+        return HAL_ERROR;
+    }
 
-    GPIO_InitStruct.Pin = USART_COM485_TX_PIN;
+    // TX引脚配置 AF‑PP 上拉 高速
+    GPIO_InitStruct.Pin = tx_pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_PULLUP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-    GPIO_InitStruct.Alternate = USART_COM485_TX_AF;
-    HAL_GPIO_Init(USART_COM485_TX_GPIO_PORT, &GPIO_InitStruct);
+    GPIO_InitStruct.Alternate = tx_af;
+    HAL_GPIO_Init(tx_port, &GPIO_InitStruct);
 
-    GPIO_InitStruct.Pin = USART_COM485_RX_PIN;
-    GPIO_InitStruct.Alternate = USART_COM485_RX_AF;
-    HAL_GPIO_Init(USART_COM485_RX_GPIO_PORT, &GPIO_InitStruct);
-	
+    // RX引脚配置，复用其余配置
+    GPIO_InitStruct.Pin = rx_pin;
+    GPIO_InitStruct.Alternate = rx_af;
+    HAL_GPIO_Init(rx_port, &GPIO_InitStruct);
 
+    return HAL_OK;
 }
+
+
+
+
+static void COM485_GpioClockEnable(void)
+{
+    USART_COM485_TX_GPIO_CLK_ENABLE();
+    USART_COM485_RX_GPIO_CLK_ENABLE();
+}
+
+
+//#define USART_COM01_COM485                             USART2
+//#define USART_COM01_COM485_CLK_ENABLE()                __USART2_CLK_ENABLE();
+//			  
+//#define USART_COM01_COM485_RX_GPIO_PORT                GPIOD
+//#define USART_COM01_COM485_RX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+//#define USART_COM01_COM485_RX_PIN                      GPIO_PIN_6
+//#define USART_COM01_COM485_RX_AF                       GPIO_AF7_USART2
+//			  
+//#define USART_COM01_COM485_TX_GPIO_PORT                GPIOD
+//#define USART_COM01_COM485_TX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+//#define USART_COM01_COM485_TX_PIN                      GPIO_PIN_5
+//#define USART_COM01_COM485_TX_AF                       GPIO_AF7_USART2
+//			  
+//#define USART_COM01_COM485_IRQHandler                  USART2_IRQHandler
+//#define USART_COM01_COM485_IRQ                 		    USART2_IRQn
+
+
+
+void USART_COMMON_COM485_GpioInit(void)
+{
+#if !EXCHINGE_UASRT_SHELL_485
+    // USART2‑5‑7‑8组
+    if(UART_Common_GpioInit(USART_COM01_COM485_TX_GPIO_PORT,
+                            USART_COM01_COM485_TX_PIN,
+                            USART_COM01_COM485_TX_AF,
+		
+                            USART_COM01_COM485_RX_GPIO_PORT,
+                            USART_COM01_COM485_RX_PIN,
+                            USART_COM01_COM485_RX_AF,
+		
+                            COM485_GpioClockEnable,
+                            USART_COM01_COM485_RCC_PERIPHCLK,
+                            USART_COM01_COM485_RCC_CLKSOURCE,
+                            0) != HAL_OK)
+#else
+    // USART1/6组
+    if(UART_Common_GpioInit(USART_COM485_TX_GPIO_PORT,
+                            USART_COM485_TX_PIN,
+                            USART_COM485_TX_AF,
+                            USART_COM485_RX_GPIO_PORT,
+                            USART_COM485_RX_PIN,
+                            USART_COM485_RX_AF,
+                            COM485_GpioClockEnable,
+                            RCC_PERIPHCLK_USART1,
+                            RCC_USART16CLKSOURCE_D2PCLK2,
+                            1) != HAL_OK)
+#endif
+    {
+        Error_Handler();
+    }
+}
+
+
+
+
+
+
+
+
 
 
 /**
@@ -179,36 +338,58 @@ void USART_COM485_GpioInit(void)
 * @return 
 ***********************************************************
 */
-void USART_COM485_232_ComDrvInit(void)
+void USART_COMMON_COM485_232_ComDrvInit(void)
 {
 	
 		Usart485ComAppInit();//如果无此，pProcUartDataFunc(recv_byte);会报错
 	
 	
-	USART_COM485_UartInit();
+	USART_common_COM485_UartInit();
 
-USART_COM485_GpioInit();
+USART_COMMON_COM485_GpioInit();
 
-	Usart_COM485_send_Config_Init();
 	
-U485Usart_SetSendCallback(&cbCfg);
+	Usart_COMMON_COM485_send_Config_Init();
 	
+//U485Usart_SetSendCallback(&com01_485_cbCfg);
+	UART_COMMON_Instance_SetSendCallback(&com01_com485Inst, &com01_485_cbCfg);
 }
 
 
-static void (*pProcUartDataFunc)(uint8_t data);   //函数指针变量，保存应用层回调函数地址
 /**
-***********************************************************
-* @brief 注册回调函数
-* @param pFunc，函数指针变量，接收传入的回调函数地址
-* @return 
-***********************************************************
-*/
-void reg485ComCb(void (*pFunc)(uint8_t data))
-{
-	pProcUartDataFunc = pFunc;
-}
+ * @brief UART RXNE+IDLE中断模式通用处理逻辑（非DMA，单字节中断接收）
+ * @param huart          UART句柄
+ * @param pByteCb        单字节接收回调；NULL则不回调
+ *                       回调原型 void cb(uint8_t byte)
+ */
+typedef void (*UartRxByteCallback)(uint8_t byte);
 
+void UART_Common_IT_Process(UART_HandleTypeDef *huart, UartRxByteCallback pByteCb)
+{
+    if(huart == NULL)
+    {
+        return;
+    }
+
+    // RXNE 接收数据寄存器非空中断
+    if (__HAL_UART_GET_FLAG(huart, UART_FLAG_RXNE) != RESET)
+    {
+        __HAL_UART_CLEAR_FLAG(huart, UART_FLAG_RXNE);
+        uint8_t recv_byte = (uint8_t)(huart->Instance->RDR);
+
+        if(pByteCb != NULL)
+        {
+            pByteCb(recv_byte);
+        }
+    }
+
+    // IDLE 空闲帧中断
+    if (__HAL_UART_GET_FLAG(huart, UART_FLAG_IDLE) != RESET)
+    {
+        __HAL_UART_CLEAR_IDLEFLAG(huart);
+        // 用户可在这里增加空闲帧回调，原逻辑无业务，仅清标志
+    }
+}
 
 
 
@@ -222,8 +403,25 @@ void reg485ComCb(void (*pFunc)(uint8_t data))
 //		
 //}
 
+//#if USE_COM485_IT_1 && !USE_UART_DMA_RX
+//extern void pProcUartDataFunc(uint8_t byte);
 
+//void USART_COM485_IRQHandler(void)
+//{
+//    UART_Common_IT_Process(&huart_COM485_Handle, pProcUartDataFunc);
+//    HAL_UART_IRQHandler(&huart_COM485_Handle);
+//}
+//#endif
+//// 声明你自己的字节处理函数
+//extern void Usart1_RxByteHandler(uint8_t byte);
 
+//void USART1_IRQHandler(void)
+//{
+//    UART_Common_IT_Process(&huart1, Usart1_RxByteHandler);
+//    HAL_UART_IRQHandler(&huart1);
+//}
+//typedef void (*UartRxByteCallback)(uint8_t byte);
+//void UART_Common_IT_Process(UART_HandleTypeDef *huart, UartRxByteCallback pByteCb);
 
 /**
 ***********************************************************
@@ -233,66 +431,33 @@ void reg485ComCb(void (*pFunc)(uint8_t data))
 ***********************************************************
 */
 
+
 #if USE_COM485_IT_1 && !USE_UART_DMA_RX
+
+extern void pProcUartDataFunc(uint8_t byte);
+
+
 void USART_COM485_IRQHandler(void)
 {
-
-	 uint8_t recv_byte = 0;
-
-		if (__HAL_UART_GET_FLAG(&huart_COM485_Handle, UART_FLAG_RXNE) != RESET)
-	{		
-    // 清除RXNE标志（必须！否则中断反复触发）2
-    __HAL_UART_CLEAR_FLAG(&huart_COM485_Handle, UART_FLAG_RXNE);
-		    /* 读取接收到的1个字节 */
-    recv_byte = (uint8_t)(huart_COM485_Handle.Instance->RDR);
-//		SYSTEM_INFO(" %02x",recv_byte);
-		pProcUartDataFunc(recv_byte);
-//				if (index < RX_BUF_LEN)
-//     {
-////			 uart_rx_buf[index++] = uData;
-//			 
-//		 }
-		
-		
-	}
-			if (__HAL_UART_GET_FLAG(&huart_COM485_Handle, UART_FLAG_IDLE) != RESET)
-	{		
-//SYSTEM_INFO(" \r\n");
-        // 关键：清除 IDLE 标志（必须手动清除，否则会持续触发中断）
-        __HAL_UART_CLEAR_IDLEFLAG(&huart_COM485_Handle);
-//				indexsize=index;
-//				index=0;
-//		SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(0,uart_rx_buf,indexsize,"--%d",indexsize);
-	}
-	
+    UART_Common_IT_Process(&huart_COM485_Handle, pProcUartDataFunc);
+    HAL_UART_IRQHandler(&huart_COM485_Handle);
 }
 
-//void USART_COM485_IRQHandler(void){
 
-//			if (__HAL_UART_GET_FLAG(&huart_COM485_Handle, UART_FLAG_IDLE) != RESET)
-//	{		
-
-//        // 关键：清除 IDLE 标志（必须手动清除，否则会持续触发中断）
-//        __HAL_UART_CLEAR_IDLEFLAG(&huart_COM485_Handle);
-//				indexsize=index;
-//				index=0;
-////		SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(0,uart_rx_buf,indexsize,"--%d",indexsize);
-//	}
-
-//	HAL_UART_IRQHandler(&huart_COM485_Handle);	
-//}
 #endif
 
 
 
 
+//void UART_COMMON_Instance_SendArray(UART_HandleTypeDef *huart, uint8_t *array, uint16_t num);
 
-void Usart_COM485_send_Config_Init(void)
+
+void Usart_COMMON_COM485_send_Config_Init(void)
 {
-#if USE_COM485_DMA_SEND
-    this_com485_Usart_Send = Usart_COM485_SendArray_DMA;
+#if USE_COMMON_COM485_DMA_SEND
+    this_com485_Usart_Send = UART_COMMON_Instance_SendArray_DMA;
 #else
-    this_com485_Usart_Send = Usart_COM485_SendArray;
+    this_com485_Usart_Send = UART_COMMON_Instance_SendArray;
 #endif
 }
 
@@ -302,111 +467,101 @@ void Usart_COM485_send_Config_Init(void)
 
 
 
-void Usart_COM485_SendArray(UART_HandleTypeDef *huart, uint8_t *array, uint16_t num)
-{
-    // 直接发送整个数组（阻塞式）
-    HAL_UART_Transmit(huart, array, num, HAL_MAX_DELAY);
+//void Usart_COMMON_COM485_SendArray(UART_HandleTypeDef *huart, uint8_t *array, uint16_t num)
+//{
+//    // 直接发送整个数组（阻塞式）
+//    HAL_UART_Transmit(huart, array, num, HAL_MAX_DELAY);
 
-    // 等待发送完成（可选，HAL_UART_Transmit 已等发送为空，再加更保险）
-    while(__HAL_UART_GET_FLAG(huart, UART_FLAG_TC) == RESET);
-}
-#include "./usart/bsp_usart_dma.h"
+//    // 等待发送完成（可选，HAL_UART_Transmit 已等发送为空，再加更保险）
+//    while(__HAL_UART_GET_FLAG(huart, UART_FLAG_TC) == RESET);
+//}
+
 /**
- * @brief  使用 DMA 异步发送串口数组
- * @note   注意：在 H7 系列上，如果开启了 D-Cache，需处理 Cache 一致性
+ * @brief UART 阻塞发送数组（实例版本）
+ * @param pInst 串口实例指针
+ * @param array 发送数据缓冲区
+ * @param num   发送字节数
+ * @return 无
  */
-void Usart_COM485_SendArray_DMA(UART_HandleTypeDef *huart, uint8_t *array, uint16_t num)
+void UART_COMMON_Instance_SendArray(UartInstance *pInst, uint8_t *array, uint16_t num)
 {
-    // 1. 确保上一次 DMA 发送已经完成
-    // 如果不检查状态直接调用，可能会返回 HAL_BUSY
-//    while (huart->gState != HAL_UART_STATE_READY);
-
-//    /* 2. 对于 STM32H7 系列（Cortex-M7 内核）：
-//       如果 array 位于可缓存的内存区域（如 AXI SRAM），必须先清理缓存，
-//       确保 DMA 读取的是内存中最新的数据，而不是 Cache 里的旧数据。*/
-//    // SCB_CleanDCache_by_Addr((uint32_t*)array, num); 
-
-//    // 3. 开启 DMA 发送
-//    if (HAL_UART_Transmit_DMA(huart, array, num) != HAL_OK)
-//    {
-//        // 错误处理逻辑
-//        Error_Handler();
-//    }
-		
-		if(huart==&huart_COM_DW_Handle){
-			
-//			Usart_SendDMA_SaveFun((char*)array,num);
-//			
-//			Usart_SendFUN_ALL();
-			
-			g_U485UsartSendCb.U485SendDmaSaveDataFunc((char*)array,num);
-			g_U485UsartSendCb.U485SendAllFunc();
-			
-			
-			SYSTEM_INFO("485 dma save !");
-		}
-	
-		
-		
-}
-
-#if 0
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
-{
-    if(huart->Instance == USART1) // 假设是串口1
+    if (pInst == NULL || pInst->huart == NULL || array == NULL || num == 0U)
     {
-        // DMA 发送完成后的逻辑
-    }
-}
-
-#endif
-
-
-//static void Test_USART_COM485_print(void){
-//if(indexsize!=0){
-//	#if USE_IT_1
-//	//这种方式是有问题的，发送是阻塞的，接收，会导丢失数据，因为运行完后indexsize=0;所以发送过程中接收数据出错，要用环形队列
-//	HAL_UART_Transmit(&huart_COM485_Handle,uart_rx_buf,indexsize,1000);
-//	#else
-//	HAL_UART_Transmit(&huart_COM485_Handle,uart_rx_buf,indexsize,1000);
-//	#endif
-//	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,uart_rx_buf,indexsize,"-+%d",indexsize);
-//	indexsize=0;
-//	
-//}
-//}
-
-//void Test_USART_COM485_while(void){
-////	while(1){
-//	Test_USART_COM485_print();
-////		HAL_Delay(1000);
-////		printf("*");
-////	}
-//}
-
-
-
-
-/**
- * @brief  设置回调函数，相当于注册函数
-*/
-void U485Usart_SetSendCallback(U485UsartSend_Callback_t *pCb)
-{
-    if(pCb == NULL)
-    {
-        g_U485UsartSendCb.U485SendDmaSaveDataFunc = NULL;
-        g_U485UsartSendCb.U485SendAllFunc = NULL;
-			SYSTEM_ERROR("485 callback NOT register !");
         return;
     }
-    g_U485UsartSendCb = *pCb;
+
+    UART_HandleTypeDef *huart = pInst->huart;
+
+    // 阻塞式发送整个数组
+    HAL_UART_Transmit(huart, array, num, HAL_MAX_DELAY);
+
+    // 等待发送完成标志TC置位
+    while (__HAL_UART_GET_FLAG(huart, UART_FLAG_TC) == RESET);
+}
+
+
+#include "./usart/bsp_usart_dma.h"
+
+/**
+ * @brief DMA发送，直接传入实例指针，内部取实例里已经注册好的回调
+ */
+void UART_COMMON_Instance_SendArray_DMA(UartInstance *pInst, uint8_t *array, uint16_t num)
+{
+    if(pInst == NULL || pInst->huart == NULL || array == NULL || num == 0)
+        return;
+
+    U485UsartSend_Callback_t *pCb = &pInst->sendCbStore;
+    if(pCb->U485SendDmaSaveDataFunc != NULL)
+    {
+        pCb->U485SendDmaSaveDataFunc((char *)array, num);
+    }
+    if(pCb->U485SendAllFunc != NULL)
+    {
+        pCb->U485SendAllFunc();
+    }
 }
 
 
 
+/**
+ * @brief 向该串口实例注册发送回调，只传源pSrcCb
+ * @param pInst 串口实例
+ * @param pSrcCb 源回调配置；NULL清空
+ */
+void UART_COMMON_Instance_SetSendCallback(UartInstance *pInst, const U485UsartSend_Callback_t *pSrcCb)
+{
+    if(pInst == NULL)
+        return;
+    if(pSrcCb == NULL)
+    {
+        pInst->sendCbStore.U485SendDmaSaveDataFunc = NULL;
+        pInst->sendCbStore.U485SendAllFunc = NULL;
+        SYSTEM_ERROR("callback NOT register !");
+        return;
+    }
+    pInst->sendCbStore = *pSrcCb;
+}
 
 
 
+////定义485实例
+//UartInstance com485Inst = {
+//    .huart = &huart_COM_DW_Handle,
+//};
+
+//const U485UsartSend_Callback_t com01_485_cbCfg = {
+//    .U485SendDmaSaveDataFunc  = Usart_SendDMA_SaveFun,
+//    .U485SendAllFunc  = Usart_SendFUN_ALL,
+//};
+
+////注册：只传实例 + 源pSrcCb
+//UART_Instance_SetSendCallback(&com485Inst, &com01_485_cbCfg);
+
+////发送：只传实例
+//UART_Instance_SendArray_DMA(&com485Inst, buf, len);
+
+////清空注册
+//UART_Instance_SetSendCallback(&com485Inst, NULL);
 
 
 

@@ -1,5 +1,5 @@
-#ifndef __BSP_USART_COM485_H
-#define	__BSP_USART_COM485_H
+#ifndef __BSP_USART_COMMON_COM485_H
+#define	__BSP_USART_COMMON_COM485_H
 
 #include "./stm32_FH_xxx_hal.h"
 #include <stdio.h>
@@ -13,44 +13,26 @@
 #define USART_COM485_BAUDRATE                    9600
 
 
-#if !EXCHINGE_UASRT_SHELL_485
 /************************ USART1 配置（替换原USART6） ************************/
-#define USART_COM485                             USART2
-#define USART_COM485_CLK_ENABLE()                __USART2_CLK_ENABLE();
+#define USART_COM01_COM485                             USART2
+#define USART_COM01_COM485_CLK_ENABLE()                __USART2_CLK_ENABLE();
 			  
-#define USART_COM485_RX_GPIO_PORT                GPIOD
-#define USART_COM485_RX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
-#define USART_COM485_RX_PIN                      GPIO_PIN_6
-#define USART_COM485_RX_AF                       GPIO_AF7_USART2
+#define USART_COM01_COM485_RX_GPIO_PORT                GPIOD
+#define USART_COM01_COM485_RX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+#define USART_COM01_COM485_RX_PIN                      GPIO_PIN_6
+#define USART_COM01_COM485_RX_AF                       GPIO_AF7_USART2
 			  
-#define USART_COM485_TX_GPIO_PORT                GPIOD
-#define USART_COM485_TX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
-#define USART_COM485_TX_PIN                      GPIO_PIN_5
-#define USART_COM485_TX_AF                       GPIO_AF7_USART2
+#define USART_COM01_COM485_TX_GPIO_PORT                GPIOD
+#define USART_COM01_COM485_TX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+#define USART_COM01_COM485_TX_PIN                      GPIO_PIN_5
+#define USART_COM01_COM485_TX_AF                       GPIO_AF7_USART2
 			  
-#define USART_COM485_IRQHandler                  USART2_IRQHandler
-#define USART_COM485_IRQ                 		    USART2_IRQn
+#define USART_COM01_COM485_IRQHandler                  USART2_IRQHandler
+#define USART_COM01_COM485_IRQ                 		    USART2_IRQn
 
 
-#else
-#define USART_COM485                             USART1
-#define USART_COM485_CLK_ENABLE()                __USART1_CLK_ENABLE();
-			  
-#define USART_COM485_RX_GPIO_PORT                GPIOA
-#define USART_COM485_RX_GPIO_CLK_ENABLE()        __HAL_RCC_GPIOA_CLK_ENABLE()
-#define USART_COM485_RX_PIN                      GPIO_PIN_10
-#define USART_COM485_RX_AF                       GPIO_AF7_USART1
-			  
-#define USART_COM485_TX_GPIO_PORT                GPIOA
-#define USART_COM485_TX_GPIO_CLK_ENABLE()        __HAL_RCC_GPIOA_CLK_ENABLE()
-#define USART_COM485_TX_PIN                      GPIO_PIN_9
-#define USART_COM485_TX_AF                       GPIO_AF7_USART1
-			  
-#define USART_COM485_IRQHandler                  USART1_IRQHandler
-#define USART_COM485_IRQ                 		    USART1_IRQn
-
-
-#endif
+#define USART_COM01_COM485_RCC_PERIPHCLK                       RCC_PERIPHCLK_USART2
+#define USART_COM01_COM485_RCC_CLKSOURCE                       RCC_USART234578CLKSOURCE_D2PCLK1
 
 
 
@@ -110,12 +92,6 @@
 //#define DEBUG_USART_COM485_DMA_CHANNEL           		DMA_CHANNEL_4
 //#define DEBUG_USART_COM485_DMA_STREAM            		DMA2_Stream7
 
-
-// 定义串口发送函数指针类型
-typedef void (*UsartSendPtr)(UART_HandleTypeDef *, uint8_t *, uint16_t);
-
-
-
 typedef struct
 {
     // 带参数发送函数指针
@@ -127,6 +103,23 @@ typedef struct
 //    char *pBuf;
 //    uint16_t bufLen;
 }U485UsartSend_Callback_t;
+
+
+struct tag_UartInstance
+{
+    UART_HandleTypeDef *huart;
+    U485UsartSend_Callback_t sendCbStore;   //每个实例自带存储
+};
+
+//前向声明
+typedef struct tag_UartInstance UartInstance;
+
+
+// 定义串口发送函数指针类型
+typedef void (*UsartSendPtr)(UartInstance *, uint8_t *, uint16_t);
+
+//(UartInstance *pInst, uint8_t *array, uint16_t num)
+
 
 
 
@@ -155,36 +148,14 @@ extern 	UsartSendPtr this_com485_Usart_Send;
 	
 	
 	
-//void USART_COM485_Config(void);
+	
+void Usart_COMMON_COM485_send_Config_Init(void);
+	
+	void UART_COMMON_Instance_SetSendCallback(UartInstance *pInst, const U485UsartSend_Callback_t *pSrcCb);
+	
+void UART_COMMON_Instance_SendArray_DMA(UartInstance *pInst, uint8_t *array, uint16_t num);
 
-//void USART_Config_COM485(void);
-void USART_COM485_232_ComDrvInit(void);
-
-#if TEST_COM485_UART
- #if !(USE_LETTER_COM485)
-void HAL_UART_COM485_RxCpltCallback(UART_HandleTypeDef *huart);
-#endif
-#endif
-
-void USART_COM485_SendChar(uint8_t ch);
-uint8_t USART_COM485_ReceiveChar(void);
-void USART_COM485_UartDeInit(void);
-
-void Usart_SendString(uint8_t *str);
-
-void Test_USART_COM485_while(void);
-void Usart_SendArray(UART_HandleTypeDef *huart, uint8_t *array, uint16_t num);
-
-
-void Usart_COM485_SendArray(UART_HandleTypeDef *huart, uint8_t *array, uint16_t num);
-void Usart_COM485_SendArray_DMA(UART_HandleTypeDef *huart, uint8_t *array, uint16_t num);
-
-void Usart_COM485_send_Config_Init(void);
-void reg485ComCb(void (*pFunc)(uint8_t data));
-
-void U485Usart_SetSendCallback(U485UsartSend_Callback_t *pCb);
-
-
+void UART_COMMON_Instance_SendArray(UartInstance *pInst, uint8_t *array, uint16_t num);
 
 
 

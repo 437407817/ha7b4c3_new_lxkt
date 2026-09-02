@@ -7690,6 +7690,18 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
+      <PathWithFileName>..\..\User_pro\usart\bsp_usart_common_com485.c</PathWithFileName>
+      <FilenameWithoutPath>bsp_usart_common_com485.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>38</GroupNumber>
+      <FileNumber>602</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
       <PathWithFileName>..\..\User_pro\pro_com\usart_485_232_send.c</PathWithFileName>
       <FilenameWithoutPath>usart_485_232_send.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -7697,7 +7709,7 @@
     </File>
     <File>
       <GroupNumber>38</GroupNumber>
-      <FileNumber>602</FileNumber>
+      <FileNumber>603</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -7709,7 +7721,7 @@
     </File>
     <File>
       <GroupNumber>38</GroupNumber>
-      <FileNumber>603</FileNumber>
+      <FileNumber>604</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -7721,7 +7733,7 @@
     </File>
     <File>
       <GroupNumber>38</GroupNumber>
-      <FileNumber>604</FileNumber>
+      <FileNumber>605</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -7733,7 +7745,7 @@
     </File>
     <File>
       <GroupNumber>38</GroupNumber>
-      <FileNumber>605</FileNumber>
+      <FileNumber>606</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -7745,7 +7757,7 @@
     </File>
     <File>
       <GroupNumber>38</GroupNumber>
-      <FileNumber>606</FileNumber>
+      <FileNumber>607</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -7757,7 +7769,7 @@
     </File>
     <File>
       <GroupNumber>38</GroupNumber>
-      <FileNumber>607</FileNumber>
+      <FileNumber>608</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -7769,7 +7781,7 @@
     </File>
     <File>
       <GroupNumber>38</GroupNumber>
-      <FileNumber>608</FileNumber>
+      <FileNumber>609</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
