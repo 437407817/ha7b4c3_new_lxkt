@@ -26,8 +26,8 @@ void Test_all_queue(void);
 
 extern Q_QueueBuffer q_tx_rx_queue_2;
 extern Q_QueueBuffer q_tx_rx_queue_UsartDMAsend;
-extern Q_QueueBuffer q_GROUPqueue_1_UsartDMAsend;
-extern Q_QueueBuffer q_GROUPqueue_2_UsartDMAsend;
+extern Q_QueueBuffer q_tx_rx_queue_GROUP_1;
+extern Q_QueueBuffer q_tx_rx_queue_GROUP_2;
 
 extern Q_QueueBuffer q_GROUPqueue_3_UsartDMAsend;
 

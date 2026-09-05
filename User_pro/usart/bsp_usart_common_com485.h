@@ -10,7 +10,7 @@
 
 
 //串口波特率
-#define USART_COM485_BAUDRATE                    9600
+#define USART_COM01_COM485_BAUDRATE                    115200
 
 
 /************************ USART1 配置（替换原USART6） ************************/
@@ -35,11 +35,11 @@
 #define USART_COM01_COM485_RCC_CLKSOURCE                       RCC_USART234578CLKSOURCE_D2PCLK1
 
 
+#define USE_UART_RX_COMMON_DMA 			0
+#define USE_COM01_COM485_IT_1				1
 
 
-
-
-
+//#define USE_LVGL 0
 
 
 #if 0
@@ -91,48 +91,57 @@
 //#define DEBUG_USART_COM485_DMA_CLK_ENABLE()      		__DMA2_CLK_ENABLE()	
 //#define DEBUG_USART_COM485_DMA_CHANNEL           		DMA_CHANNEL_4
 //#define DEBUG_USART_COM485_DMA_STREAM            		DMA2_Stream7
+//前向声明
+typedef struct tag_UartComInstance UartComInstance;
+// 定义串口发送函数指针类型
+typedef void (*UsartComSendPtr)(UartComInstance *, uint8_t *, uint16_t);
 
 typedef struct
 {
     // 带参数发送函数指针
-    void (*U485SendDmaSaveDataFunc)(char *buf, uint16_t num);
+    void (*U485ComSendDmaSaveDataFunc)(char *buf, uint16_t num);
     // 无参数发送函数指针
-    void (*U485SendAllFunc)(void);
+    void (*U485ComSendAllFunc)(UartComInstance *pInst, uint8_t *array, uint16_t num);;
 
     // 保存传入的参数，调用的时候用
 //    char *pBuf;
 //    uint16_t bufLen;
-}U485UsartSend_Callback_t;
+}U485ComUsartSend_Callback_t;
 
 
-struct tag_UartInstance
+struct tag_UartComInstance
 {
-    UART_HandleTypeDef *huart;
-    U485UsartSend_Callback_t sendCbStore;   //每个实例自带存储
+    UART_HandleTypeDef *huart_handle;
+    U485ComUsartSend_Callback_t sendCbStore;   //每个实例自带存储
 };
 
-//前向声明
-typedef struct tag_UartInstance UartInstance;
 
+//extern UART_HandleTypeDef huart_COM01_COM485_Handle;
 
-// 定义串口发送函数指针类型
-typedef void (*UsartSendPtr)(UartInstance *, uint8_t *, uint16_t);
-
-//(UartInstance *pInst, uint8_t *array, uint16_t num)
+extern UartComInstance com01_com485Inst;
 
 
 
+//(UartComInstance *pInst, uint8_t *array, uint16_t num)
 
 
+
+
+
+#define DISENABLE_IDLE_IT_STATUS (0)
+#define ENABLE_IDLE_IT_STATUS (1)
+
+#define DISENABLE_RXNE_IT_STATUS (0)
+#define ENABLE_RXNE_IT_STATUS (1)
 
 
 
 #define _485_A_TX_EN()  while(0){}
 #define _485_A_RX_EN() while(0){}
 
-extern UART_HandleTypeDef huart_COM485_Handle;
-extern 	UsartSendPtr this_com485_Usart_Send;
-//#define  huart_COM485  huart_COM485_Handle
+//extern UART_HandleTypeDef huart_COM485_Handle;
+//extern 	UsartSendPtr this_com485_Usart_Send;
+////#define  huart_COM485  huart_COM485_Handle
 
 //#define USE_UART 1
 #define TEST_COM485_UART 1
@@ -146,17 +155,18 @@ extern 	UsartSendPtr this_com485_Usart_Send;
 	
 	
 	
+//	void UART_COMMON_Instance_SendArray(UartComInstance *pInst, uint8_t *array, uint16_t num);
+//void UART_COMMON_Instance_SendArray_DMA(UartComInstance *pInst, uint8_t *array, uint16_t num);
+	void USART_COMMON_COM485_232_ComDrvInit(void);
 	
+//void Usart_COMMON_COM485_send_Config_Init(void);
 	
+	void UART_COMMON_Instance_SetSendCallback(UartComInstance *pInst, const U485ComUsartSend_Callback_t *pSrcCb);
 	
-void Usart_COMMON_COM485_send_Config_Init(void);
-	
-	void UART_COMMON_Instance_SetSendCallback(UartInstance *pInst, const U485UsartSend_Callback_t *pSrcCb);
-	
-void UART_COMMON_Instance_SendArray_DMA(UartInstance *pInst, uint8_t *array, uint16_t num);
+void UART_COMMON_Instance_SendArray_DMA(UartComInstance *pInst, uint8_t *array, uint16_t num);
 
-void UART_COMMON_Instance_SendArray(UartInstance *pInst, uint8_t *array, uint16_t num);
+void UART_COMMON_Instance_SendArray(UartComInstance *pInst, uint8_t *array, uint16_t num);
 
-
+void UART_COMMON_SendAllFunc(void);
 
 #endif /* __BSP_USART_A_H */

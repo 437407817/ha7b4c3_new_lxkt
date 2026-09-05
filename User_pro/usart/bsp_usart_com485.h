@@ -28,8 +28,8 @@
 #define USART_COM485_TX_PIN                      GPIO_PIN_5
 #define USART_COM485_TX_AF                       GPIO_AF7_USART2
 			  
-#define USART_COM485_IRQHandler                  USART2_IRQHandler
-#define USART_COM485_IRQ                 		    USART2_IRQn
+#define USART_COM485_IRQHandler                  USART3_IRQHandler
+#define USART_COM485_IRQ                 		    USART3_IRQn
 
 
 #else

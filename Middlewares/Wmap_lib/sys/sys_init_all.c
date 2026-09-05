@@ -93,6 +93,8 @@
 #include "./buffer/user_buffers.h"
 #include "./usart/bsp_usart_COM485.h"
 #include "SEGGER_SYSVIEW_Int.h"
+#include "./usart/bsp_usart_common_com485.h"
+#include "./usart/bsp_usart_common_dma.h"
 
 
 extern void WIFI_PDN_INIT(void);
@@ -124,6 +126,13 @@ DWT_Init();
 #endif
 	USART_Shell_ComDrvInit();SYSTEM_DEBUG("USART_Shell_ComDrvInit over\n");
 //	USART_COM485_232_ComDrvInit();
+USART_COMMON_COM485_232_ComDrvInit();
+
+
+//USART_COMMON_TX_RX_DMA_ConfigALL();
+
+
+
 #if	1
 	#if USE_UART_DMA
 	

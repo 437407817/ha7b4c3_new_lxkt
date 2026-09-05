@@ -23,27 +23,36 @@
 
 
 extern void Usart_SendDMA_SaveFun(char *buf, uint16_t num);
-extern void Usart_SendFUN_ALL(void);
+//extern void Usart_SendFUN_ALL(void);
+
+UART_HandleTypeDef huart_COM01_COM485_Handle;
 
 // 全局实例，可以切换赋值
-U485UsartSend_Callback_t g_U485UsartSendCb;
+//U485UsartSend_Callback_t g_U485UsartSendCb;
 
-U485UsartSend_Callback_t com01_485_cbCfg = {
-    .U485SendDmaSaveDataFunc  = Usart_SendDMA_SaveFun,
-    .U485SendAllFunc  = Usart_SendFUN_ALL,
+U485ComUsartSend_Callback_t com01_485_cbCfg = {
+    .U485ComSendDmaSaveDataFunc  = Usart_SendDMA_SaveFun,
+    .U485ComSendAllFunc  = UART_COMMON_Instance_SendArray,
 
 };
 
-
-UartInstance com01_com485Inst = {
-    .huart = &huart_COM_DW_Handle,
+UartComInstance com01_com485Inst = {
+    .huart_handle = &huart_COM01_COM485_Handle,
 };
+
+
+
+
+
+
+
+
 
 
 // 声明全局执行指针
-UsartSendPtr this_com485_Usart_Send = NULL;
+UsartComSendPtr this_com_com485_Usart_Send = NULL;
 
-UART_HandleTypeDef huart_COM485_Handle;
+//UART_HandleTypeDef huart_COM485_Handle;
 
 
 
@@ -154,26 +163,40 @@ HAL_StatusTypeDef UART_Common_Init(UART_HandleTypeDef *huart,
 
 
 
-static void USART1_ClockEnable(void)
+static void USART_common_com1_ClockEnable(void)
 {
-    __HAL_RCC_USART1_CLK_ENABLE();
+    __HAL_RCC_USART2_CLK_ENABLE();
 }
 
 
 
-
+//#define USART_COM01_COM485                             USART2
+//#define USART_COM01_COM485_CLK_ENABLE()                __USART2_CLK_ENABLE();
+//			  
+//#define USART_COM01_COM485_RX_GPIO_PORT                GPIOD
+//#define USART_COM01_COM485_RX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+//#define USART_COM01_COM485_RX_PIN                      GPIO_PIN_6
+//#define USART_COM01_COM485_RX_AF                       GPIO_AF7_USART2
+//			  
+//#define USART_COM01_COM485_TX_GPIO_PORT                GPIOD
+//#define USART_COM01_COM485_TX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+//#define USART_COM01_COM485_TX_PIN                      GPIO_PIN_5
+//#define USART_COM01_COM485_TX_AF                       GPIO_AF7_USART2
+//			  
+//#define USART_COM01_COM485_IRQHandler                  USART2_IRQHandler
+//#define USART_COM01_COM485_IRQ                 		    USART2_IRQn
 
 void USART_common_COM485_UartInit(void)
 {
-    if(UART_Common_Init(&huart_COM485_Handle,
-                        USART_COM485,
-                        USART_COM485_BAUDRATE,
-                        USART_COM485_IRQ,
+    if(UART_Common_Init(com01_com485Inst.huart_handle,
+                        USART_COM01_COM485,
+                        USART_COM01_COM485_BAUDRATE,
+                        USART_COM01_COM485_IRQ,
                         10,        //抢占优先级
                         0,         //子优先级
-                        1,         //enableIdleIt
-                        1,          //enableRxneIt
-                        USART1_ClockEnable) != HAL_OK)
+                        ENABLE_IDLE_IT_STATUS,         //enableIdleIt
+                        ENABLE_RXNE_IT_STATUS,          //enableRxneIt
+                        USART_common_com1_ClockEnable) != HAL_OK)
     {
         Error_Handler();
     }
@@ -263,10 +286,10 @@ HAL_StatusTypeDef UART_Common_GpioInit(GPIO_TypeDef *tx_port,
 
 
 
-static void COM485_GpioClockEnable(void)
+static void COM485_COM01_GpioClockEnable(void)
 {
-    USART_COM485_TX_GPIO_CLK_ENABLE();
-    USART_COM485_RX_GPIO_CLK_ENABLE();
+    USART_COM01_COM485_TX_GPIO_CLK_ENABLE();
+    USART_COM01_COM485_RX_GPIO_CLK_ENABLE();
 }
 
 
@@ -300,7 +323,7 @@ void USART_COMMON_COM485_GpioInit(void)
                             USART_COM01_COM485_RX_PIN,
                             USART_COM01_COM485_RX_AF,
 		
-                            COM485_GpioClockEnable,
+                            COM485_COM01_GpioClockEnable,
                             USART_COM01_COM485_RCC_PERIPHCLK,
                             USART_COM01_COM485_RCC_CLKSOURCE,
                             0) != HAL_OK)
@@ -341,7 +364,7 @@ void USART_COMMON_COM485_GpioInit(void)
 void USART_COMMON_COM485_232_ComDrvInit(void)
 {
 	
-		Usart485ComAppInit();//如果无此，pProcUartDataFunc(recv_byte);会报错
+//		Usart485ComAppInit();//如果无此，pProcUartDataFunc(recv_byte);会报错
 	
 	
 	USART_common_COM485_UartInit();
@@ -349,7 +372,7 @@ void USART_COMMON_COM485_232_ComDrvInit(void)
 USART_COMMON_COM485_GpioInit();
 
 	
-	Usart_COMMON_COM485_send_Config_Init();
+//	Usart_COMMON_COM485_send_Config_Init();
 	
 //U485Usart_SetSendCallback(&com01_485_cbCfg);
 	UART_COMMON_Instance_SetSendCallback(&com01_com485Inst, &com01_485_cbCfg);
@@ -430,17 +453,29 @@ void UART_Common_IT_Process(UART_HandleTypeDef *huart, UartRxByteCallback pByteC
 * @return 
 ***********************************************************
 */
-
-
-#if USE_COM485_IT_1 && !USE_UART_DMA_RX
-
-extern void pProcUartDataFunc(uint8_t byte);
-
-
-void USART_COM485_IRQHandler(void)
+static void (*p_com01_UartDataFun)(uint8_t data);   //函数指针变量，保存应用层回调函数地址
+/**
+***********************************************************
+* @brief 注册回调函数
+* @param pFunc，函数指针变量，接收传入的回调函数地址
+* @return 
+***********************************************************
+*/
+void Register_com01_processUartDataFunc(void (*pFunc)(uint8_t data))
 {
-    UART_Common_IT_Process(&huart_COM485_Handle, pProcUartDataFunc);
-    HAL_UART_IRQHandler(&huart_COM485_Handle);
+	p_com01_UartDataFun = pFunc;
+}
+
+//#if (USE_UART_RX_COMMON_DMA)
+#if USE_COM01_COM485_IT_1 && !USE_UART_RX_COMMON_DMA 
+
+//extern void pProcUartDataFunc(uint8_t byte);
+
+
+void USART_COM01_COM485_IRQHandler(void)
+{
+    UART_Common_IT_Process(&huart_COM01_COM485_Handle, p_com01_UartDataFun);
+    HAL_UART_IRQHandler(&huart_COM01_COM485_Handle);
 }
 
 
@@ -455,9 +490,9 @@ void USART_COM485_IRQHandler(void)
 void Usart_COMMON_COM485_send_Config_Init(void)
 {
 #if USE_COMMON_COM485_DMA_SEND
-    this_com485_Usart_Send = UART_COMMON_Instance_SendArray_DMA;
+    this_com_com485_Usart_Send = UART_COMMON_Instance_SendArray_DMA;
 #else
-    this_com485_Usart_Send = UART_COMMON_Instance_SendArray;
+    this_com_com485_Usart_Send = UART_COMMON_Instance_SendArray;
 #endif
 }
 
@@ -483,14 +518,14 @@ void Usart_COMMON_COM485_send_Config_Init(void)
  * @param num   发送字节数
  * @return 无
  */
-void UART_COMMON_Instance_SendArray(UartInstance *pInst, uint8_t *array, uint16_t num)
+void UART_COMMON_Instance_SendArray(UartComInstance *pInst, uint8_t *array, uint16_t num)
 {
-    if (pInst == NULL || pInst->huart == NULL || array == NULL || num == 0U)
+    if (pInst == NULL || pInst->huart_handle == NULL || array == NULL || num == 0U)
     {
         return;
     }
 
-    UART_HandleTypeDef *huart = pInst->huart;
+    UART_HandleTypeDef *huart = pInst->huart_handle;
 
     // 阻塞式发送整个数组
     HAL_UART_Transmit(huart, array, num, HAL_MAX_DELAY);
@@ -505,19 +540,21 @@ void UART_COMMON_Instance_SendArray(UartInstance *pInst, uint8_t *array, uint16_
 /**
  * @brief DMA发送，直接传入实例指针，内部取实例里已经注册好的回调
  */
-void UART_COMMON_Instance_SendArray_DMA(UartInstance *pInst, uint8_t *array, uint16_t num)
+void UART_COMMON_Instance_SendArray_DMA(UartComInstance *pInst, uint8_t *array, uint16_t num)
 {
-    if(pInst == NULL || pInst->huart == NULL || array == NULL || num == 0)
+    if(pInst == NULL || pInst->huart_handle == NULL || array == NULL || num == 0)
         return;
 
-    U485UsartSend_Callback_t *pCb = &pInst->sendCbStore;
-    if(pCb->U485SendDmaSaveDataFunc != NULL)
+    U485ComUsartSend_Callback_t *pCb = &pInst->sendCbStore;
+#if SAVEDMADATA		
+    if(pCb->U485ComSendDmaSaveDataFunc != NULL)
     {
-        pCb->U485SendDmaSaveDataFunc((char *)array, num);
+        pCb->U485ComSendDmaSaveDataFunc((char *)array, num);
     }
-    if(pCb->U485SendAllFunc != NULL)
+#endif		
+    if(pCb->U485ComSendAllFunc != NULL)
     {
-        pCb->U485SendAllFunc();
+        pCb->U485ComSendAllFunc(pInst,array,num);
     }
 }
 
@@ -528,14 +565,14 @@ void UART_COMMON_Instance_SendArray_DMA(UartInstance *pInst, uint8_t *array, uin
  * @param pInst 串口实例
  * @param pSrcCb 源回调配置；NULL清空
  */
-void UART_COMMON_Instance_SetSendCallback(UartInstance *pInst, const U485UsartSend_Callback_t *pSrcCb)
+void UART_COMMON_Instance_SetSendCallback(UartComInstance *pInst, const U485ComUsartSend_Callback_t *pSrcCb)
 {
     if(pInst == NULL)
         return;
     if(pSrcCb == NULL)
     {
-        pInst->sendCbStore.U485SendDmaSaveDataFunc = NULL;
-        pInst->sendCbStore.U485SendAllFunc = NULL;
+        pInst->sendCbStore.U485ComSendDmaSaveDataFunc = NULL;
+        pInst->sendCbStore.U485ComSendAllFunc = NULL;
         SYSTEM_ERROR("callback NOT register !");
         return;
     }
@@ -545,7 +582,7 @@ void UART_COMMON_Instance_SetSendCallback(UartInstance *pInst, const U485UsartSe
 
 
 ////定义485实例
-//UartInstance com485Inst = {
+//UartComInstance com485Inst = {
 //    .huart = &huart_COM_DW_Handle,
 //};
 
@@ -566,10 +603,48 @@ void UART_COMMON_Instance_SetSendCallback(UartInstance *pInst, const U485UsartSe
 
 
 
+void UART_COMMON_SendAllFunc2(void){
+//uint8_t tx_buf[] = "test1";
+//UART_COMMON_Instance_SendArray(&com01_com485Inst, tx_buf, 5);
+	
+	
+	
+//com01_com485Inst.sendCbStore.U485ComSendAllFunc(&com01_com485Inst,tx_buf, 5);
+}
 
 
+void UART_COMMON_SendAllFunc(void)
+{
+    uint8_t tx_buf[] = "test1";
 
+    if(com01_com485Inst.huart_handle == NULL)
+    {
+        SYSTEM_DEBUG("ERR:huart_handle is NULL\n");
+        return;
+    }
 
+    UART_HandleTypeDef *huart = com01_com485Inst.huart_handle;
+
+    //打印关键状态
+    SYSTEM_DEBUG("huart->gState:%d\n", huart->gState);
+    SYSTEM_DEBUG("huart->ErrorCode:0x%08lX\n", huart->ErrorCode);
+    SYSTEM_DEBUG("Instance:%p\n", huart->Instance);
+
+    if(huart->gState != HAL_UART_STATE_READY)
+    {
+        SYSTEM_DEBUG("ERR:uart not READY!\n");
+        return;
+    }
+
+    HAL_StatusTypeDef hal_ret = HAL_UART_Transmit(huart, tx_buf, 5, 100); //不要HAL_MAX_DELAY，给100ms超时
+    SYSTEM_DEBUG("HAL_UART_Transmit ret=%d\n", hal_ret);
+
+    if(hal_ret == HAL_OK)
+    {
+        while(__HAL_UART_GET_FLAG(huart, UART_FLAG_TC) == RESET);
+        SYSTEM_DEBUG("send finish TC ok\n");
+    }
+}
 
 
 

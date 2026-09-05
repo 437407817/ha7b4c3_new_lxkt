@@ -50,6 +50,8 @@ CREAT_Group_queue(UsartDMAsend,q_QUEUE_NODE_NUM_UsartDMAsend,q_QUEUE_NODE_DATA_L
 CREAT_Group_queue(GROUP_1,q_QUEUE_NODE_NUM_GROUP_1,q_QUEUE_NODE_DATA_LEN_GROUP_1);
 CREAT_Group_queue(GROUP_2,q_QUEUE_NODE_NUM_GROUP_2,q_QUEUE_NODE_DATA_LEN_GROUP_2);
 
+
+
 //extern Q_QueueBuffer q_rx_queue_1;
 //CREAT_GROUP_QUEUE_NEW(GROUP_3,q_QUEUE_NODE_NUM_GROUP_3,q_QUEUE_NODE_DATA_LEN_GROUP_3);
 
@@ -104,11 +106,11 @@ p_tx_rx_groupedqueue_init(&q_tx_rx_queue_UsartDMAsend,&GV_ndb_UsartDMAsend,q_QUE
 
 void P_queue_init_COMMON_TX_GROUPED_BUFF_dma(void){
 
-p_tx_rx_groupedqueue_init(&q_GROUPqueue_1_UsartDMAsend,&GV_ndb_GROUP_1,q_QUEUE_NODE_NUM_GROUP_1,
+p_tx_rx_groupedqueue_init(&q_tx_rx_queue_GROUP_1,&GV_ndb_GROUP_1,q_QUEUE_NODE_NUM_GROUP_1,
 	q_QUEUE_NODE_DATA_LEN_GROUP_1,global_elems_GROUP_1,node_data_GROUP_1,global_node_buff_GROUP_1);
 	
 	
-p_tx_rx_groupedqueue_init(&q_GROUPqueue_2_UsartDMAsend,&GV_ndb_GROUP_2,q_QUEUE_NODE_NUM_GROUP_2,
+p_tx_rx_groupedqueue_init(&q_tx_rx_queue_GROUP_2,&GV_ndb_GROUP_2,q_QUEUE_NODE_NUM_GROUP_2,
 	q_QUEUE_NODE_DATA_LEN_GROUP_2,global_elems_GROUP_2,node_data_GROUP_2,global_node_buff_GROUP_2);
 	
 	

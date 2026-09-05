@@ -84,7 +84,7 @@ void Handle_led(void){
 
 
 //LED00_Toggle;
-	SYSTEM_I_PRINT("*******************************\r\n");
+	SYSTEM_I_PRINT("******SYSTEM_I_PRINT**************\r\n");
 //	test_heap_change();
 }
 
@@ -97,6 +97,10 @@ void Handle_DMA_USART_Save(void){//success
 	Test_Usart_DMA_SendSaveFun();
 	
 #endif	
+	
+	
+	
+	
 //	SYSTEM_I_PRINT("***********Handle_DMA_USART_Save********************\r\n");
 // UartSendDataDMAtest01();
 //	IWDG_Feed();
@@ -113,6 +117,30 @@ void Handle_DMA_USART_Send(void){//success
 // UartSendDataDMAtest01();
 //	IWDG_Feed();
 }
+
+#include "./usart/bsp_usart_common_dma.h"
+
+
+void Handle_COMMON_DMA_USART_Send(void){
+
+
+//Usart_COMMON_SendFUN_ALL();
+UART_COMMON_SendAllFunc();
+
+SYSTEM_DEBUG("UART_COMMON_SendAllFunc --00-");
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #include "./test/bsp_usart_test.h"

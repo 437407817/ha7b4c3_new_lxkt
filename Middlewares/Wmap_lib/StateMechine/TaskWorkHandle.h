@@ -31,6 +31,9 @@ void Handle_DMA_USART(void);
 void Handle_DMA_USART_Save(void);
 
 void Handle_DMA_USART_Send(void);
+void Handle_COMMON_DMA_USART_Send(void);
+
+
 
 void Handle_letter_Shell_NoOsWhile(void);
 

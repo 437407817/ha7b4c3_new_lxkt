@@ -10,7 +10,7 @@
 #define USE_BSP_COM_FEATURE                 1U
 
 
-#define EXCHINGE_UASRT_SHELL_WORKBOARD  1
+#define EXCHINGE_UASRT_SHELL_WORKBOARD  0
 //串口波特率
 #define USART_SHELL_BAUDRATE                    115200
 
@@ -40,6 +40,7 @@
 #define USART_SHELL_RCC_CLKSOURCE     					RCC_USART16CLKSOURCE_D2PCLK2
 
 #else
+#if 0
 #define USART_SHELL                             UART4                  // 外设名称改为USART1
 #define USART_SHELL_CLK_ENABLE()                __UART4_CLK_ENABLE();  // USART1 外设时钟使能
 
@@ -62,8 +63,43 @@
 #define USART_SHELL_RCC_PERIPHCLK     					RCC_PERIPHCLK_UART4
 #define USART_SHELL_RCC_CLKSOURCE     					RCC_USART234578CLKSOURCE_D2PCLK1
 
-#endif
+#else 
 
+
+
+
+#define USART_SHELL                             USART2                  // 外设名称改为USART1
+#define USART_SHELL_CLK_ENABLE()                __USART2_CLK_ENABLE();  // USART1 外设时钟使能
+
+// USART1 RX引脚：PA10（复用AF7）
+#define USART_SHELL_RX_GPIO_PORT                GPIOD                   // RX引脚端口：GPIOA
+#define USART_SHELL_RX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()    // GPIOA 时钟使能
+#define USART_SHELL_RX_PIN                      GPIO_PIN_6             // RX引脚：PA10
+#define USART_SHELL_RX_AF                       GPIO_AF7_USART2         // RX引脚复用功能：AF7（F429 USART1固定AF7）
+
+// USART1 TX引脚：PA9（复用AF7）
+#define USART_SHELL_TX_GPIO_PORT                GPIOD                  // TX引脚端口：GPIOA
+#define USART_SHELL_TX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()    // GPIOA 时钟使能
+#define USART_SHELL_TX_PIN                      GPIO_PIN_5              // TX引脚：PA9
+#define USART_SHELL_TX_AF                       GPIO_AF7_USART2         // TX引脚复用功能：AF7
+
+// USART1 中断配置
+#define USART_SHELL_IRQHandler                  USART2_IRQHandler       // 中断服务函数名
+#define USART_SHELL_IRQ                         USART2_IRQn             // 中断向量号
+
+
+
+
+
+
+
+#define USART_SHELL_RCC_PERIPHCLK     					RCC_PERIPHCLK_USART2
+#define USART_SHELL_RCC_CLKSOURCE     					RCC_USART234578CLKSOURCE_D2PCLK1
+
+
+
+#endif
+#endif
 
 
 

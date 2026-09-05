@@ -16,6 +16,9 @@
  #include "./DataCache/data_heap.h"
  #include "./DataCache/data_stack.h"
  #include "./Sys/systick.h"
+ #include "./usart/bsp_usart_common_dma.h"
+ 
+ 
  
  
 static void Handle_test(void);
@@ -48,7 +51,7 @@ TaskComps_t g_taskComps[] =
    {0, 1000,   3000, Disable,0 , Handle_usart},
 	 {0, 20000,   20000,  Enable,2,Handle_test },	
 	 {0, 2000,   8000,  Disable,10,Handle_test2},	
-	 	 {0, 1000,   1000,  Disable,10,Handle_led},	
+//	 	 {0, 1000,   1000,  Disable,10,Handle_led},	
 //		 {0, 2000,   2000,  Disable,10,Handle_DMA_USART_Save},	
 //		  {0, 2000,   200,  Disable,10,Handle_DMA_USART_Send},
 #if !(USE_LVGL_OS)&&(USE_LVGL)
@@ -61,6 +64,14 @@ TaskComps_t g_taskComps[] =
 		 {0, 2000,   2000,  Disable,10,Handle_DMA_USART_Save},	//多任务测试效果最佳
 		  {0, 2000,   200,  Disable,10,Handle_DMA_USART_Send},  //多任务测试效果最佳
 		#endif
+		 
+		 
+		 	#if TESTUsartCOMMONDMASendSaveAndSend
+//		 {0, 2000,   2000,  Disable,10,Handle_DMA_USART_Save},	//多任务测试效果最佳
+		  {0, 2000,   2000,  Disable,10,Handle_COMMON_DMA_USART_Send},  //多任务测试效果最佳
+		#endif
+		 
+		 
 		 
 		 #if USE_LETTER_SHELL&&(!USE_OS)
 		 {0, 10,   10,  Disable,10,Handle_letter_Shell_NoOsWhile},	

@@ -38,7 +38,7 @@ extern "C" {
  #include "./pro_com/usart485verify.h"
  
  #include "./usart/bsp_usart_dma.h"
- 
+ #include "./usart/bsp_usart_common_com485.h"
 //#include "./usart/p_data_queue.h"
 /* USER CODE END Includes */
 
@@ -60,10 +60,10 @@ extern "C" {
 
 
 
-#define DMA_COM01_USARTx 														USART8
-#define USARTx_DMA_COM01_IRQHandler                 USART1_IRQHandler
-#define USARTx_DMA_COM01_IRQ                 		    USART1_IRQn
-#define huart_DMA_COM01_Handle                      huart_shell_Handle 
+#define DMA_COM01_USARTx 														USART_COM01_COM485
+#define USARTx_DMA_COM01_IRQHandler                 USART_COM01_COM485_IRQHandler
+#define USARTx_DMA_COM01_IRQ                 		    USART_COM01_COM485_IRQ
+#define huart_DMA_COM01_Handle                      huart_COM01_COM485_Handle 
 
 #define DMA_COM01_STREAMx_TX 														DMA1_Stream0
 #define DMA_COM01_STREAM_IRQ_TX 												DMA1_Stream0_IRQn
@@ -72,8 +72,6 @@ extern "C" {
 #define DMA_COM01_STREAMx_RX 														DMA1_Stream1
 #define DMA_COM01_STREAM_IRQ_RX 												DMA1_Stream1_IRQn
 #define DMA_COM01_REQUEST_USART_RX 											DMA_REQUEST_USART1_RX
-
-
 
 
 
@@ -133,7 +131,7 @@ extern "C" {
 #define USE_UART_COMMON_DMA_RX 1
 //#define USE_UART_DMA_TX 1
 
-
+#define TESTUsartCOMMONDMASendSaveAndSend 1
 
 /* USER CODE END Private defines */
 
@@ -183,6 +181,12 @@ extern STR_RCV_DMA_que_data RcvDmaQueData;
 //#if TEST_RingBuffer_SAVEANDREAD
 //void Test_Usart_QueueSaveFun(void);
 //#endif
+
+
+void USART_COMMON_TX_RX_DMA_ConfigALL(void);
+void Usart_COMMON_SendFUN_ALL(void);
+
+
 
 
 
