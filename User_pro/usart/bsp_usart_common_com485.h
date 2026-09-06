@@ -7,7 +7,7 @@
 
 #include "./usart/bsp_usart_shell.h"
 
-
+#include "./buffer/queue3.h"
 
 //串口波特率
 #define USART_COM01_COM485_BAUDRATE                    115200
@@ -109,18 +109,54 @@ typedef struct
 }U485ComUsartSend_Callback_t;
 
 
+/**
+ * @brief 单字节接收回调原型，携带用户上下文
+ * @param data 收到字节
+ * @param pCtx 用户上下文(本处传入UartComInstance指针)
+ */
+typedef void (*UartRxByteCallback)(uint8_t byte, void *pInst);
+
+/**
+ * @brief 协议解析完成后从机业务回调原型
+ * @param pRcvQueue 当前串口接收环形队列
+ */
+typedef void (*UartSlaveProcCallback)(QueueType_t *pRcvQueue);
+
+
 struct tag_UartComInstance
 {
     UART_HandleTypeDef *huart_handle;
-    U485ComUsartSend_Callback_t sendCbStore;   //每个实例自带存储
+    U485ComUsartSend_Callback_t sendCbStore;
+
+    /*====接收相关，每路实例独立====*/
+    QueueType_t               *pRcvQueue;       //环形接收队列
+    uint8_t                   *parseBuf;        //协议解析缓冲区
+    uint16_t                   parseBufLen;     //解析缓冲区大小
+
+    UartRxByteCallback     pRxByteCb;       //单字节接收回调(带上下文)
+    UartSlaveProcCallback      pSlaveProcCb;    //协议帧解析完成业务回调
 };
+
+
+
+#include "./pro_com/usart485verify.h"
+
+#define COM01_PARSE_BUF_SIZE    (PACKET_DATA_LEN_MAX + 4U)
+
+
+//struct tag_UartComInstance
+//{
+//    UART_HandleTypeDef *huart_handle;
+//    U485ComUsartSend_Callback_t sendCbStore;   //每个实例自带存储
+//};
 
 
 //extern UART_HandleTypeDef huart_COM01_COM485_Handle;
 
 extern UartComInstance com01_com485Inst;
 
-
+// .h
+extern uint8_t com01_parseBuf[COM01_PARSE_BUF_SIZE];
 
 //(UartComInstance *pInst, uint8_t *array, uint16_t num)
 
@@ -152,6 +188,41 @@ extern UartComInstance com01_com485Inst;
 #else
 #define USE_COM485_DMA_SEND 0  // 配置开关：1为DMA模式，0为阻塞模式
 #endif
+	
+	
+	
+	
+	//----------------函数声明----------------
+void UART_COMMON_Instance_SetSendCallback(UartComInstance *pInst, const U485ComUsartSend_Callback_t *pSrcCb);
+
+/**
+ * @brief 设置实例的单字节接收回调
+ */
+void UART_INST_SetRxByteCb(UartComInstance *pInst, UartRxByteCallback  pFunc);
+
+/**
+ * @brief 设置实例的从机协议业务回调
+ */
+void UART_INST_SetSlaveCb(UartComInstance *pInst, UartSlaveProcCallback pFunc);
+
+
+
+void UART_COMMON_Instance_SendArray(UartComInstance *pInst, uint8_t *array, uint16_t num);
+void UART_COMMON_Instance_SendArray_DMA(UartComInstance *pInst, uint8_t *array, uint16_t num);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

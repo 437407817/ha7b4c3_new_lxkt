@@ -42,7 +42,7 @@ STR_RCV_DMA_que_data RcvDmaQue_COM1_Data={0};
 
 STR_RCV_DMA_que_data RcvDmaQue_COM2_Data={0};
 
-
+//STR_RCV_DMA_que_data Rcv_Common_DmaQueData_Com1;
 
 
 // 修改缓冲区定义，增加对齐属性

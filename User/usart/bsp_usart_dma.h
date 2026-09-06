@@ -110,14 +110,17 @@ typedef struct
 /* USER CODE BEGIN Prototypes */
 
 
-
+typedef struct
+{
+    QueueType_t *pRcvQueue;   //指向本串口的环形队列
+}UartRxCtx_t;
 
 
 extern STR_RCV_DMA_que_data RcvDmaQueData;
 
 
 
-
+extern STR_RCV_DMA_que_data RcvDmaQue_COM1_Data;
 
 
 

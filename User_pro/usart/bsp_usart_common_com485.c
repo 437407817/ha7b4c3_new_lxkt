@@ -20,12 +20,18 @@
 #include "./buffer/que.h"
 #include "./sys/sysio.h"
 #include "./pro_com/usart485verify.h"
-
+#include "./usart/bsp_usart_dma.h"
 
 extern void Usart_SendDMA_SaveFun(char *buf, uint16_t num);
 //extern void Usart_SendFUN_ALL(void);
 
 UART_HandleTypeDef huart_COM01_COM485_Handle;
+
+
+// .c文件
+uint8_t com01_parseBuf[COM01_PARSE_BUF_SIZE];
+
+
 
 // 全局实例，可以切换赋值
 //U485UsartSend_Callback_t g_U485UsartSendCb;
@@ -36,11 +42,25 @@ U485ComUsartSend_Callback_t com01_485_cbCfg = {
 
 };
 
+//UartComInstance com01_com485Inst = {
+//    .huart_handle = &huart_COM01_COM485_Handle,
+//};
+
+//外部解析缓冲区、队列，在别的文件定义
+//extern STR_RCV_DMA_que_data Rcv_Common_DmaQueData_Com1;
+//extern uint8_t com01_parseBuf[];
+
 UartComInstance com01_com485Inst = {
     .huart_handle = &huart_COM01_COM485_Handle,
+    .sendCbStore = {0},
+
+    .pRcvQueue      = &RcvDmaQue_COM1_Data.g_uartRingBuf,
+    .parseBuf       = com01_parseBuf,
+    .parseBufLen    = COM01_PARSE_BUF_SIZE,
+
+    .pRxByteCb      = NULL,
+    .pSlaveProcCb   = NULL,
 };
-
-
 
 
 
@@ -348,6 +368,14 @@ void USART_COMMON_COM485_GpioInit(void)
 
 
 
+/**
+ * @brief 设置实例单字节接收回调
+ */
+void UART_INST_SetRxByteCb(UartComInstance *pInst, UartRxByteCallback  pFunc)
+{
+//    if(pInst == NULL) return;
+    pInst->pRxByteCb = pFunc;
+}
 
 
 
@@ -361,7 +389,7 @@ void USART_COMMON_COM485_GpioInit(void)
 * @return 
 ***********************************************************
 */
-void USART_COMMON_COM485_232_ComDrvInit(void)
+void USART_COMMON_COM485_232_ComDrvInit2222222(void)
 {
 	
 //		Usart485ComAppInit();//如果无此，pProcUartDataFunc(recv_byte);会报错
@@ -379,15 +407,57 @@ USART_COMMON_COM485_GpioInit();
 }
 
 
+
+
+
+/**
+ * @brief 通用：收到单字节，压入本实例的环形队列
+ * @param data 收到字节
+ * @param pCtx 上下文 = UartComInstance*
+ */
+static void UartRxPushToQueueCb(uint8_t data, void *pCtx)
+{
+    UartComInstance *pInst = (UartComInstance *)pCtx;
+    if(pInst == NULL || pInst->pRcvQueue == NULL)
+    {
+        return;
+    }
+    QueuePush(pInst->pRcvQueue, data);
+}
+
+
+
+
+void USART_COMMON_COM485_232_ComDrvInit(void)
+{
+	USART_common_COM485_UartInit();
+    USART_COMMON_COM485_GpioInit();
+
+	UART_COMMON_Instance_SetSendCallback(&com01_com485Inst, &com01_485_cbCfg);
+
+    //绑定接收回调：收到字节直接压入实例内部的pRcvQueue
+    UART_INST_SetRxByteCb(&com01_com485Inst, UartRxPushToQueueCb);
+}
+
+
+
+
+
 /**
  * @brief UART RXNE+IDLE中断模式通用处理逻辑（非DMA，单字节中断接收）
  * @param huart          UART句柄
  * @param pByteCb        单字节接收回调；NULL则不回调
  *                       回调原型 void cb(uint8_t byte)
  */
-typedef void (*UartRxByteCallback)(uint8_t byte);
+//typedef void (*UartRxByteCallback )(uint8_t byte);
 
-void UART_Common_IT_Process(UART_HandleTypeDef *huart, UartRxByteCallback pByteCb)
+/**
+ * @brief UART RXNE+IDLE中断模式通用处理逻辑（非DMA，单字节中断接收，带上下文）
+ * @param huart          UART句柄
+ * @param pByteCb        带上下文单字节接收回调；NULL则不回调
+ * @param pUserCtx       用户上下文，这里传入UartComInstance*
+ */
+void UART_Common_IT_Process(UART_HandleTypeDef *huart, UartRxByteCallback  pByteCb, void *pUserCtx)
 {
     if(huart == NULL)
     {
@@ -402,7 +472,7 @@ void UART_Common_IT_Process(UART_HandleTypeDef *huart, UartRxByteCallback pByteC
 
         if(pByteCb != NULL)
         {
-            pByteCb(recv_byte);
+            pByteCb(recv_byte, pUserCtx);
         }
     }
 
@@ -410,7 +480,6 @@ void UART_Common_IT_Process(UART_HandleTypeDef *huart, UartRxByteCallback pByteC
     if (__HAL_UART_GET_FLAG(huart, UART_FLAG_IDLE) != RESET)
     {
         __HAL_UART_CLEAR_IDLEFLAG(huart);
-        // 用户可在这里增加空闲帧回调，原逻辑无业务，仅清标志
     }
 }
 
@@ -472,10 +541,16 @@ void Register_com01_processUartDataFunc(void (*pFunc)(uint8_t data))
 //extern void pProcUartDataFunc(uint8_t byte);
 
 
+extern UartComInstance com01_com485Inst;
+
 void USART_COM01_COM485_IRQHandler(void)
 {
-    UART_Common_IT_Process(&huart_COM01_COM485_Handle, p_com01_UartDataFun);
-    HAL_UART_IRQHandler(&huart_COM01_COM485_Handle);
+    //把实例指针作为上下文传入
+    UART_Common_IT_Process(com01_com485Inst.huart_handle,
+                           com01_com485Inst.pRxByteCb,
+                           &com01_com485Inst);
+
+    HAL_UART_IRQHandler(com01_com485Inst.huart_handle);
 }
 
 
