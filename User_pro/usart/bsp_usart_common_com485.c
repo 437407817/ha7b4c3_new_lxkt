@@ -389,22 +389,22 @@ void UART_INST_SetRxByteCb(UartComInstance *pInst, UartRxByteCallback  pFunc)
 * @return 
 ***********************************************************
 */
-void USART_COMMON_COM485_232_ComDrvInit2222222(void)
-{
-	
-//		Usart485ComAppInit();//如果无此，pProcUartDataFunc(recv_byte);会报错
-	
-	
-	USART_common_COM485_UartInit();
+//void USART_COMMON_COM485_232_ComDrvInit2222222(void)
+//{
+//	
+////		Usart485ComAppInit();//如果无此，pProcUartDataFunc(recv_byte);会报错
+//	
+//	
+//	USART_common_COM485_UartInit();
 
-USART_COMMON_COM485_GpioInit();
+//USART_COMMON_COM485_GpioInit();
 
-	
-//	Usart_COMMON_COM485_send_Config_Init();
-	
-//U485Usart_SetSendCallback(&com01_485_cbCfg);
-	UART_COMMON_Instance_SetSendCallback(&com01_com485Inst, &com01_485_cbCfg);
-}
+//	
+////	Usart_COMMON_COM485_send_Config_Init();
+//	
+////U485Usart_SetSendCallback(&com01_485_cbCfg);
+//	UART_COMMON_Instance_SetSendCallback(&com01_com485Inst, &com01_485_cbCfg);
+//}
 
 
 
@@ -423,6 +423,7 @@ static void UartRxPushToQueueCb(uint8_t data, void *pCtx)
         return;
     }
     QueuePush(pInst->pRcvQueue, data);
+		SYSTEM_INFO("%c",data);
 }
 
 
