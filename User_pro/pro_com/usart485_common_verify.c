@@ -84,15 +84,15 @@ void reg_SlaveCommonComCb(void (*pFunc)(uint8_t *readBuf, uint16_t frameLen))
 //}
 
 //业务处理函数
-static void ProcUartData_Common(uint8_t data, void *pUserCtx)
-{
-    UartRxCtx_t *pCtx = (UartRxCtx_t *)pUserCtx;
-    if(pCtx == NULL || pCtx->pRcvQueue == NULL)
-    {
-        return;
-    }
-    QueuePush(pCtx->pRcvQueue, data);
-}
+//static void ProcUartData_Common(uint8_t data, void *pUserCtx)
+//{
+//    UartRxCtx_t *pCtx = (UartRxCtx_t *)pUserCtx;
+//    if(pCtx == NULL || pCtx->pRcvQueue == NULL)
+//    {
+//        return;
+//    }
+//    QueuePush(pCtx->pRcvQueue, data);
+//}
 
 
 
@@ -195,19 +195,46 @@ void UART_INST_SetSlaveCb(UartComInstance *pInst, UartSlaveProcCallback pFunc)
 
 
 
-void Usart485CommonComTask(UartComInstance *pInst)
+/**
+ * @brief 485帧解析任务
+ * @param pInst        串口实例
+ * @param extReadBuf   外部解析缓冲区；传NULL，则使用实例内部parseBuf
+ * @param extReadBufMaxLen 外部缓冲区大小；extReadBuf为NULL时该参数无效
+ */
+void Usart485CommonComTask(UartComInstance *pInst,
+                           uint8_t *extReadBuf,
+                           uint16_t extReadBufMaxLen)
 {
-    if(pInst == NULL || pInst->pRcvQueue == NULL || pInst->parseBuf == NULL)
+    uint8_t *readBuf = NULL;
+    uint16_t readBufMaxLen = 0U;
+
+    if(pInst == NULL || pInst->pRcvQueue == NULL)
+    {
+        return;
+    }
+
+    //选择缓冲区：外部优先，外部为NULL则使用实例自带
+    if(extReadBuf != NULL)
+    {
+        readBuf = extReadBuf;
+        readBufMaxLen = extReadBufMaxLen;
+    }
+    else
+    {
+        readBuf = pInst->parseBuf;
+        readBufMaxLen = pInst->parseBufLen;
+    }
+
+    //有效性校验
+    if(readBuf == NULL || readBufMaxLen == 0U)
     {
         return;
     }
 
     QueueType_t *pRcvQueue = pInst->pRcvQueue;
-    uint8_t *readBuf = pInst->parseBuf;
-    uint16_t readBufMaxLen = pInst->parseBufLen;
+    uint32_t qcp = 0U;
 
-    static uint32_t qcp = 0;
-
+#if 0
     while ((QueueCount(pRcvQueue) >= PACKET_DATA_LEN_MIN) && (QueuePop(pRcvQueue, &readBuf[0]) == QUEUE_OK))
     {
         if (readBuf[0] != FRAME_REC_HEAD_0)
@@ -252,12 +279,121 @@ void Usart485CommonComTask(UartComInstance *pInst)
         {
             if(pInst->pSlaveProcCb != NULL)
             {
-                pInst->pSlaveProcCb(pRcvQueue);
+                pInst->pSlaveProcCb(readBuf, readBuf[2] + 3U);
             }
         }
     }
+#else
+    while ((QueueCount(pRcvQueue) > 0U) && (QueuePop(pRcvQueue, &readBuf[0]) == QUEUE_OK))
+    {
+        SYSTEM_INFO("RAW_RX:0x%02X\n", readBuf[0]);
+			pInst->pSlaveProcCb(readBuf, extReadBufMaxLen);
+    }
+#endif
 }
 
+
+//void Usart485CommonComTask(UartComInstance *pInst)
+//{
+//    if(pInst == NULL || pInst->pRcvQueue == NULL || pInst->parseBuf == NULL)
+//    {
+//        return;
+//    }
+
+//    QueueType_t *pRcvQueue = pInst->pRcvQueue;
+//    uint8_t *readBuf = pInst->parseBuf;
+//    uint16_t readBufMaxLen = pInst->parseBufLen;
+
+//    static uint32_t qcp = 0;
+//#if 1
+//    while ((QueueCount(pRcvQueue) >= PACKET_DATA_LEN_MIN) && (QueuePop(pRcvQueue, &readBuf[0]) == QUEUE_OK))
+//    {
+//        if (readBuf[0] != FRAME_REC_HEAD_0)
+//        {
+//            continue;
+//        }
+
+//        if ((QueuePop(pRcvQueue, &readBuf[1]) == QUEUE_EMPTY) || (readBuf[1] != FRAME_REC_HEAD_1))
+//        {
+//            SYSTEM_ERROR("XX A5 data is not right 0X%x\n",readBuf[1]);
+//            continue;
+//        }
+
+//        if ((QueuePop(pRcvQueue, &readBuf[2]) == QUEUE_EMPTY) || (readBuf[2] > PACKET_DATA_LEN_MAX))
+//        {
+//            SYSTEM_ERROR("num count data is not right1,%d \n",readBuf[2]);
+//            continue;
+//        }
+
+//        if((readBuf[2] + 3U) > readBufMaxLen)
+//        {
+//            SYSTEM_ERROR("parse frame buf overflow!\n");
+//            continue;
+//        }
+
+//        qcp = QueuePopArray(pRcvQueue, &readBuf[3], readBuf[2]);
+//        if (qcp!= readBuf[2])
+//        {
+//            SYSTEM_ERROR("num count data is not right2,%d ,%d \n",qcp,readBuf[2]);
+//            continue;
+//        }
+
+//#if c485_232_CRC16
+//        if (CalCRC16(readBuf, readBuf[2] + 3) != 0)
+//        {
+//            SYSTEM_ERROR("CalCRC16 ERROR\n");
+//            continue;
+//        }
+//#endif
+
+//        if (readBuf[FUNC_DATA_IDX] == SLAVE_CTRL_CODE)
+//        {
+//            if(pInst->pSlaveProcCb != NULL)
+//            {
+//                pInst->pSlaveProcCb(pRcvQueue);
+//            }
+//        }
+//    }
+//		
+//#else
+//		    while ((QueueCount(pRcvQueue) > 0U) && (QueuePop(pRcvQueue, &readBuf[0]) == QUEUE_OK))
+//    {
+//        /* 每读出一个字节，立刻打印原始接收字节 */
+//        SYSTEM_INFO("RAW_RX:0x%02X\n", readBuf[0]);
+//		}
+//#endif
+//		
+//		
+//}
+/**
+ * @brief 帧解析完成回调
+ * @param frameBuf  帧缓冲区（可能是实例自带parseBuf，也可能是外部传入的extReadBuf）
+ * @param frameLen  整帧总长度(帧头+长度+数据+校验)
+ */
+static void com01_frame_process(uint8_t *frameBuf, uint16_t frameLen)
+{
+	#if 0
+    if(frameBuf == NULL || frameLen < 3U)
+    {
+        return;
+    }
+
+    // frameBuf[0] = FRAME_REC_HEAD_0
+    // frameBuf[1] = FRAME_REC_HEAD_1
+    // frameBuf[2] = 数据域长度
+    // frameBuf[3] = FUNC_DATA_IDX 功能码
+
+    // ⚠️重要：frameBuf是临时工作缓冲区，下次Usart485CommonComTask执行会被覆盖
+    // 如果需要保存这帧数据，必须memcpy拷贝出来，不要直接保存frameBuf指针
+
+    /* 示例业务逻辑 */
+    SYSTEM_INFO("recv frame len:%d func:%02X\n", frameLen, frameBuf[3]);
+	#else
+	SYSTEM_INFO("-%c\n",  frameBuf[0]);
+	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"com01_frame_process=\r\n");
+	
+	#endif
+}
 /**
 ***********************************************************
 * @brief USB转串口应用初始化函数
@@ -265,12 +401,12 @@ void Usart485CommonComTask(UartComInstance *pInst)
 * @return 
 ***********************************************************
 */
-void Usart485ComAppInit2(void)
+void Usart485CommonComAppInit(void)
 {
 	
 	    // 传入函数地址，不要加()
-    UART_INST_SetRxByteCb(&com01_com485Inst, ProcUartData_Common);
-	
+//    UART_INST_SetRxByteCb(&com01_com485Inst, ProcUartData_Common);
+	UART_INST_SetSlaveCb(&com01_com485Inst, com01_frame_process);
 	
 	
 	

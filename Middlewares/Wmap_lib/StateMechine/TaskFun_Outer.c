@@ -69,9 +69,11 @@ TaskComps_t g_taskComps[] =
 		 	#if TESTUsartCOMMONDMASendSaveAndSend
 //		 {0, 2000,   2000,  Disable,10,Handle_DMA_USART_Save},	//多任务测试效果最佳
 		  {0, 2000,   2000,  Disable,10,Handle_COMMON_DMA_USART_Send},  //多任务测试效果最佳
+			{0, 2000,   2000,  Disable,10,Handle_QUEUE_USART_COMMON_GETBUFF_PRINT}, 
 		#endif
 		 
 		 
+			
 		 
 		 #if USE_LETTER_SHELL&&(!USE_OS)
 		 {0, 10,   10,  Disable,10,Handle_letter_Shell_NoOsWhile},	

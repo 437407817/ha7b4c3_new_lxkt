@@ -120,8 +120,9 @@ typedef void (*UartRxByteCallback)(uint8_t byte, void *pInst);
  * @brief 协议解析完成后从机业务回调原型
  * @param pRcvQueue 当前串口接收环形队列
  */
-typedef void (*UartSlaveProcCallback)(QueueType_t *pRcvQueue);
-
+//typedef void (*UartSlaveProcCallback)(QueueType_t *pRcvQueue);
+//原来：typedef void (*UartSlaveProcCallback)(QueueType_t *pRcvQueue);
+typedef void (*UartSlaveProcCallback)(uint8_t *frameBuf, uint16_t frameLen);
 
 struct tag_UartComInstance
 {

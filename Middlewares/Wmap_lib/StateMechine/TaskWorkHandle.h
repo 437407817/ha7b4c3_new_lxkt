@@ -33,7 +33,7 @@ void Handle_DMA_USART_Save(void);
 void Handle_DMA_USART_Send(void);
 void Handle_COMMON_DMA_USART_Send(void);
 
-
+void Handle_QUEUE_USART_COMMON_GETBUFF_PRINT(void);
 
 void Handle_letter_Shell_NoOsWhile(void);
 

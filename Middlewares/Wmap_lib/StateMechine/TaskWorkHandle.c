@@ -118,6 +118,27 @@ void Handle_DMA_USART_Send(void){//success
 //	IWDG_Feed();
 }
 
+
+#include "./pro_com/usart485_common_verify.h"
+
+
+void Handle_QUEUE_USART_COMMON_GETBUFF_PRINT(void){//success
+//#if TESTUsartDMASendSaveAndSend	
+//	Usart_SendFUN_ALL();
+//#endif
+	
+	
+	
+
+	Usart485CommonComTask(&com01_com485Inst, NULL, 0);
+	
+	
+}
+
+
+
+
+
 #include "./usart/bsp_usart_common_dma.h"
 
 

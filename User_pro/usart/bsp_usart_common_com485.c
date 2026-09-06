@@ -427,7 +427,7 @@ static void UartRxPushToQueueCb(uint8_t data, void *pCtx)
 }
 
 
-
+#include "./pro_com/usart485_common_verify.h"
 
 void USART_COMMON_COM485_232_ComDrvInit(void)
 {
@@ -438,6 +438,10 @@ void USART_COMMON_COM485_232_ComDrvInit(void)
 
     //绑定接收回调：收到字节直接压入实例内部的pRcvQueue
     UART_INST_SetRxByteCb(&com01_com485Inst, UartRxPushToQueueCb);
+	
+	
+	
+	Usart485CommonComAppInit();
 }
 
 
@@ -700,26 +704,26 @@ void UART_COMMON_SendAllFunc(void)
     }
 
     UART_HandleTypeDef *huart = com01_com485Inst.huart_handle;
+//SYSTEM_INFO("\r\n");
+//    //打印关键状态
+//    SYSTEM_DEBUG("huart->gState:%d\n", huart->gState);
+//    SYSTEM_DEBUG("huart->ErrorCode:0x%08lX\n", huart->ErrorCode);
+//    SYSTEM_DEBUG("Instance:%p\n", huart->Instance);
 
-    //打印关键状态
-    SYSTEM_DEBUG("huart->gState:%d\n", huart->gState);
-    SYSTEM_DEBUG("huart->ErrorCode:0x%08lX\n", huart->ErrorCode);
-    SYSTEM_DEBUG("Instance:%p\n", huart->Instance);
-
-    if(huart->gState != HAL_UART_STATE_READY)
-    {
-        SYSTEM_DEBUG("ERR:uart not READY!\n");
-        return;
-    }
+//    if(huart->gState != HAL_UART_STATE_READY)
+//    {
+//        SYSTEM_DEBUG("ERR:uart not READY!\n");
+//        return;
+//    }
 
     HAL_StatusTypeDef hal_ret = HAL_UART_Transmit(huart, tx_buf, 5, 100); //不要HAL_MAX_DELAY，给100ms超时
-    SYSTEM_DEBUG("HAL_UART_Transmit ret=%d\n", hal_ret);
+//    SYSTEM_DEBUG("HAL_UART_Transmit ret=%d\n", hal_ret);
 
-    if(hal_ret == HAL_OK)
-    {
-        while(__HAL_UART_GET_FLAG(huart, UART_FLAG_TC) == RESET);
-        SYSTEM_DEBUG("send finish TC ok\n");
-    }
+//    if(hal_ret == HAL_OK)
+//    {
+//        while(__HAL_UART_GET_FLAG(huart, UART_FLAG_TC) == RESET);
+//        SYSTEM_DEBUG("send finish TC ok\n");
+//    }
 }
 
 

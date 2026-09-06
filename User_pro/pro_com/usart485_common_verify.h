@@ -16,17 +16,17 @@
 /**
  * @brief 485协议解析任务，传入实例指针
  */
-void Usart485CommonComTask(UartComInstance *pInst);
+//void Usart485CommonComTask(UartComInstance *pInst);
 
 
 
 
+void Usart485CommonComTask(UartComInstance *pInst,uint8_t *readBuf,uint16_t readBufMaxLen);
 
 
 
 
-
-
+void Usart485CommonComAppInit(void);
 
 
 
