@@ -21,6 +21,9 @@
 #include "./sys/sysio.h"
 #include "./pro_com/usart485verify.h"
 #include "./usart/bsp_usart_dma.h"
+#include "./usart/bsp_usart_common_dma.h"
+
+
 
 extern void Usart_SendDMA_SaveFun(char *buf, uint16_t num);
 //extern void Usart_SendFUN_ALL(void);
@@ -37,8 +40,8 @@ uint8_t com01_parseBuf[COM01_PARSE_BUF_SIZE];
 //U485UsartSend_Callback_t g_U485UsartSendCb;
 
 U485ComUsartSend_Callback_t com01_485_cbCfg = {
-    .U485ComSendDmaSaveDataFunc  = Usart_SendDMA_SaveFun,
-    .U485ComSendAllFunc  = UART_COMMON_Instance_SendArray,
+    .U485ComSendDmaSaveDataFunc  = Wrapper_U485ComSendDmaSaveDataFunc,
+    .U485ComSendAllFunc  = Wrapper_U485ComSendAllFunc,
 
 };
 
@@ -60,6 +63,9 @@ UartComInstance com01_com485Inst = {
 
     .pRxByteCb      = NULL,
     .pSlaveProcCb   = NULL,
+		    /* DMA发送成员 */
+    .pDmaSendCtrl   = &GV_usartdmaCOMMON_COM1_Send,
+    .pTxQueue       = &q_tx_rx_queue_GROUP_1,
 };
 
 
@@ -156,7 +162,7 @@ HAL_StatusTypeDef UART_Common_Init(UART_HandleTypeDef *huart,
         return HAL_ERROR;
     }
 
-#if !USE_UART_COMMON_DMA_RX
+#if !USE_UART_COMMON_COM01_DMA_RX
     if(enableIdleIt)
     {
         __HAL_UART_ENABLE_IT(huart, UART_IT_IDLE);
@@ -541,7 +547,7 @@ void Register_com01_processUartDataFunc(void (*pFunc)(uint8_t data))
 }
 
 //#if (USE_UART_RX_COMMON_DMA)
-#if USE_COM01_COM485_IT_1 && !USE_UART_RX_COMMON_DMA 
+#if USE_COM01_COM485_IT_1 && !USE_UART_COMMON_COM01_DMA_RX 
 
 //extern void pProcUartDataFunc(uint8_t byte);
 
@@ -620,16 +626,19 @@ void UART_COMMON_Instance_SendArray(UartComInstance *pInst, uint8_t *array, uint
 /**
  * @brief DMA发送，直接传入实例指针，内部取实例里已经注册好的回调
  */
+
+
 void UART_COMMON_Instance_SendArray_DMA(UartComInstance *pInst, uint8_t *array, uint16_t num)
 {
     if(pInst == NULL || pInst->huart_handle == NULL || array == NULL || num == 0)
         return;
 
     U485ComUsartSend_Callback_t *pCb = &pInst->sendCbStore;
-#if SAVEDMADATA		
+#if 1		
     if(pCb->U485ComSendDmaSaveDataFunc != NULL)
     {
-        pCb->U485ComSendDmaSaveDataFunc((char *)array, num);
+        //❗❗这里增加pInst入参
+        pCb->U485ComSendDmaSaveDataFunc(pInst, (char *)array, num);
     }
 #endif		
     if(pCb->U485ComSendAllFunc != NULL)
@@ -637,8 +646,6 @@ void UART_COMMON_Instance_SendArray_DMA(UartComInstance *pInst, uint8_t *array, 
         pCb->U485ComSendAllFunc(pInst,array,num);
     }
 }
-
-
 
 /**
  * @brief 向该串口实例注册发送回调，只传源pSrcCb

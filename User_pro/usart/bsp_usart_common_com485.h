@@ -8,7 +8,9 @@
 #include "./usart/bsp_usart_shell.h"
 
 #include "./buffer/queue3.h"
-
+//需要头文件引入
+#include "./buffer/p_data_queue_outer.h"
+#include "./usart/bsp_usart_dma.h"
 //串口波特率
 #define USART_COM01_COM485_BAUDRATE                    115200
 
@@ -35,7 +37,13 @@
 #define USART_COM01_COM485_RCC_CLKSOURCE                       RCC_USART234578CLKSOURCE_D2PCLK1
 
 
-#define USE_UART_RX_COMMON_DMA 			0
+
+#define USART_COM01_DMA_REQUEST_USART_TX							DMA_REQUEST_USART2_TX
+#define USART_COM01_DMA_REQUEST_USART_RX							DMA_REQUEST_USART2_RX
+
+
+
+//#define USE_UART_RX_COMMON_DMA 			0
 #define USE_COM01_COM485_IT_1				1
 
 
@@ -99,9 +107,8 @@ typedef void (*UsartComSendPtr)(UartComInstance *, uint8_t *, uint16_t);
 typedef struct
 {
     // 带参数发送函数指针
-    void (*U485ComSendDmaSaveDataFunc)(char *buf, uint16_t num);
-    // 无参数发送函数指针
-    void (*U485ComSendAllFunc)(UartComInstance *pInst, uint8_t *array, uint16_t num);;
+    void (*U485ComSendDmaSaveDataFunc)(UartComInstance *pInst, char *buf, uint16_t num);
+    void (*U485ComSendAllFunc)(UartComInstance *pInst, uint8_t *array, uint16_t num);
 
     // 保存传入的参数，调用的时候用
 //    char *pBuf;
@@ -136,6 +143,10 @@ struct tag_UartComInstance
 
     UartRxByteCallback     pRxByteCb;       //单字节接收回调(带上下文)
     UartSlaveProcCallback      pSlaveProcCb;    //协议帧解析完成业务回调
+	
+		    /*====新增：DMA发送，每路实例独立====*/
+    str_DMA_usart_send        *pDmaSendCtrl;
+    Q_QueueBuffer             *pTxQueue;
 };
 
 
@@ -159,6 +170,11 @@ extern UartComInstance com01_com485Inst;
 // .h
 extern uint8_t com01_parseBuf[COM01_PARSE_BUF_SIZE];
 
+
+
+
+
+extern U485ComUsartSend_Callback_t com01_485_cbCfg;
 //(UartComInstance *pInst, uint8_t *array, uint16_t num)
 
 
@@ -179,15 +195,18 @@ extern uint8_t com01_parseBuf[COM01_PARSE_BUF_SIZE];
 //extern UART_HandleTypeDef huart_COM485_Handle;
 //extern 	UsartSendPtr this_com485_Usart_Send;
 ////#define  huart_COM485  huart_COM485_Handle
-
+	
+	
+	
+#include "./usart/bsp_usart_common_dma.h"
 //#define USE_UART 1
-#define TEST_COM485_UART 1
-#define USE_COM485_IT_1 1
+//#define TEST_COM485_UART 1
+//#define USE_COM485_IT_1 1
 
-#if USE_UART_COMMON_DMA_TX	
-#define USE_COM485_DMA_SEND 1 
+#if USE_UART_COMMON_COM01_DMA_TX	
+#define USE_COMMON_COM485_DMA_SEND 1 
 #else
-#define USE_COM485_DMA_SEND 0  // 配置开关：1为DMA模式，0为阻塞模式
+#define USE_COMMON_COM485_DMA_SEND 0  // 配置开关：1为DMA模式，0为阻塞模式
 #endif
 	
 	
@@ -213,8 +232,8 @@ void UART_COMMON_Instance_SendArray_DMA(UartComInstance *pInst, uint8_t *array, 
 	
 	
 	
-	
-	
+	void Wrapper_U485ComSendDmaSaveDataFunc(UartComInstance *pInst, char *buf, uint16_t num);
+	void Wrapper_U485ComSendAllFunc(UartComInstance *pInst, uint8_t *array, uint16_t num);
 	
 	
 	

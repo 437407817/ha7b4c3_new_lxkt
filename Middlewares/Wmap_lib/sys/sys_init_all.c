@@ -126,10 +126,13 @@ DWT_Init();
 #endif
 	USART_Shell_ComDrvInit();SYSTEM_DEBUG("USART_Shell_ComDrvInit over\n");
 //	USART_COM485_232_ComDrvInit();
+
+
+
 USART_COMMON_COM485_232_ComDrvInit();
 
+USART_COMMON_TX_RX_DMA_ConfigALL();
 
-//USART_COMMON_TX_RX_DMA_ConfigALL();
 
 
 

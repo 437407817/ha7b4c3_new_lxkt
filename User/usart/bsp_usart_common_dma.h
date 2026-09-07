@@ -67,11 +67,11 @@ extern "C" {
 
 #define DMA_COM01_STREAMx_TX 														DMA1_Stream0
 #define DMA_COM01_STREAM_IRQ_TX 												DMA1_Stream0_IRQn
-#define DMA_COM01_REQUEST_USART_TX 											DMA_REQUEST_USART1_TX
+#define DMA_COM01_REQUEST_USART_TX 											USART_COM01_DMA_REQUEST_USART_TX
 
 #define DMA_COM01_STREAMx_RX 														DMA1_Stream1
 #define DMA_COM01_STREAM_IRQ_RX 												DMA1_Stream1_IRQn
-#define DMA_COM01_REQUEST_USART_RX 											DMA_REQUEST_USART1_RX
+#define DMA_COM01_REQUEST_USART_RX 											USART_COM01_DMA_REQUEST_USART_RX
 
 
 
@@ -127,9 +127,9 @@ extern "C" {
 //#define USARTx_DMA_IRQ                 		    USART_COM485_IRQ
 //#define huart_DMA_Handle 												huart_COM485_Handle
 
-#define USE_UART_COMMON_DMA 1
-#define USE_UART_COMMON_DMA_RX 1
-//#define USE_UART_DMA_TX 1
+#define USE_UART_COMMON_COM01_DMA 1
+#define USE_UART_COMMON_COM01_DMA_RX 1
+#define USE_UART_COMMON_COM01_DMA_TX 1
 
 #define TESTUsartCOMMONDMASendSaveAndSend 1
 
@@ -144,7 +144,7 @@ extern "C" {
 
 extern STR_RCV_DMA_que_data RcvDmaQueData;
 
-
+extern str_DMA_usart_send GV_usartdmaCOMMON_COM1_Send;
 
 
 
@@ -184,10 +184,10 @@ extern STR_RCV_DMA_que_data RcvDmaQueData;
 
 
 void USART_COMMON_TX_RX_DMA_ConfigALL(void);
-void Usart_COMMON_SendFUN_ALL(void);
+void Usart_COMMON_DMA_SendFUN_ALL(void);
 
 
-
+void HAL_UART_COMMON_TxCpltCallback(UART_HandleTypeDef *huart);
 
 
 

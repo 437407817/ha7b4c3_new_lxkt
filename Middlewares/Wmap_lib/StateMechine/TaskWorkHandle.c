@@ -145,8 +145,8 @@ void Handle_QUEUE_USART_COMMON_GETBUFF_PRINT(void){//success
 void Handle_COMMON_DMA_USART_Send(void){
 
 
-//Usart_COMMON_SendFUN_ALL();
-UART_COMMON_SendAllFunc();
+Usart_COMMON_DMA_SendFUN_ALL();
+//UART_COMMON_SendAllFunc();
 
 SYSTEM_DEBUG("UART_COMMON_SendAllFunc --00-");
 }

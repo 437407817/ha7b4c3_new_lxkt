@@ -20,7 +20,7 @@ void p_tx_rx_groupedqueue_init_dma(void);
 
 void Test_get_all_data_from_queue(UART_HandleTypeDef* uartHandle);
 void Test_all_queue(void);
-
+void P_queue_init_COMMON_TX_GROUPED_BUFF_dma(void);
 
 
 

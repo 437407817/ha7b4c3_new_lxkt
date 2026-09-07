@@ -89,7 +89,7 @@ void USARTx_COMMON_DMA_Init(void)
 
   /* DMA controller clock enable */
   __HAL_RCC_DMA1_CLK_ENABLE();
-
+  __HAL_RCC_DMA2_CLK_ENABLE();
   /* DMA interrupt init */
   /* DMA2_Stream2_IRQn interrupt configuration */
 //  HAL_NVIC_SetPriority(DMA2_Stream2_IRQn, 2, 0);
@@ -227,7 +227,7 @@ void UART_COMMON_DmaTxCpltProcess(str_DMA_usart_send *pDmaSendCtrl)
     }
 
     pDmaSendCtrl->uart_tx_thisdatas_sendover  = 1;  // 当前帧发送完成
-//	SYSTEM_DEBUG("TX Callback \n");
+	SYSTEM_DEBUG("TX Callback \n");
 
 }
 
@@ -236,24 +236,25 @@ void UART_COMMON_DmaTxCpltProcess(str_DMA_usart_send *pDmaSendCtrl)
  * HAL库原生回调，固定原型，不能修改参数；
  * 根据huart实例，分发到上面通用处理函数，传入对应串口的发送控制结构体与信号量
  */
-/**
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+
+void HAL_UART_COMMON_TxCpltCallback(UART_HandleTypeDef *huart)
 {
 #if USE_OS
     // 如果每个串口独立信号量，这里替换为对应串口信号量；共用就继续 uart_send_res_sem
 #endif
 
-    if(huart->Instance == USART1)
+    if(huart->Instance == DMA_COM01_USARTx)
     {
-        UART_COMMON_DmaTxCpltProcess(&g_usart1_dmaSendCtrl);
+        UART_COMMON_DmaTxCpltProcess(&GV_usartdmaCOMMON_COM1_Send);
+//			SYSTEM_INFO("8*");
     }
-    else if(huart->Instance == UART4)
-    {
-        UART_COMMON_DmaTxCpltProcess(&g_uart4_dmaSendCtrl);
-    }
+//    else if(huart->Instance == UART4)
+//    {
+//        UART_COMMON_DmaTxCpltProcess(&g_uart4_dmaSendCtrl);
+//    }
 }
 
-**/
+
 
 
 
@@ -301,9 +302,14 @@ void USART_TX_RX_DMA_COMMON_Config(UART_HandleTypeDef* uartHandle,
                                    uint32_t dmaRcvBufSize)
 {
     // 调用通用TX、RX DMA配置函数
+#if USE_UART_COMMON_COM01_DMA_TX	
     USART_TX_DMA_COMMON_Config(uartHandle, dmaTxInstance, dmaTxIrq, dmaTxRequest, hdmaTx);
+#endif	
+#if USE_UART_COMMON_COM01_DMA_RX	
     USART_RX_DMA_COMMON_Config(uartHandle, dmaRxInstance, dmaRxIrq, dmaRxRequest, hdmaRx);
-
+#endif
+	
+	
 #if USE_UART_DMA_RX||1
     // 接收用环形缓冲区初始化（入参传入，不再依赖全局RcvDmaQueData）
     QueueInit(queue, ringBuf, ringBufSize);
@@ -393,7 +399,7 @@ USART_TX_RX_DMA_COMMON_Config(com01_com485Inst.huart_handle,
 	
 	
 	
-//p_tx_rx_groupedqueue_init_dma();
+P_queue_init_COMMON_TX_GROUPED_BUFF_dma();
 }
 
 
@@ -502,6 +508,16 @@ void Usart_SendDMA_COMMON_SaveFun(str_DMA_usart_send *pDmaSendCtrl,
 #endif
 }
 
+
+
+
+
+
+
+
+
+
+
 /**
  * @brief DMA发送：从队列取出数据调用HAL_UART_Transmit_DMA发送
  * @param huart_x: 串口句柄
@@ -569,6 +585,39 @@ void Usart_SendDMA_COMMON_SendFun(str_DMA_usart_send *pDmaSendCtrl,
     }
 }
 
+
+
+
+/**
+ * @brief 修复版，携带实例指针，支持多路串口
+ */
+void Wrapper_U485ComSendDmaSaveDataFunc(UartComInstance *pInst, char *buf, uint16_t num)
+{
+    if(pInst == NULL || pInst->pDmaSendCtrl == NULL || pInst->pTxQueue == NULL)
+    {
+        return;
+    }
+    Usart_SendDMA_COMMON_SaveFun(pInst->pDmaSendCtrl, pInst->pTxQueue, buf, num);
+		
+}
+
+void Wrapper_U485ComSendAllFunc(UartComInstance *pInst, uint8_t *array, uint16_t num)
+{
+    if(pInst == NULL || pInst->pDmaSendCtrl == NULL || pInst->pTxQueue == NULL || pInst->huart_handle == NULL)
+    {
+        return;
+    }
+    Usart_SendDMA_COMMON_SendFun(pInst->pDmaSendCtrl, pInst->pTxQueue, pInst->huart_handle);
+}
+
+
+
+
+
+
+
+
+
 /****
 // USART1
 str_DMA_usart_send g_usart1_dmaSendCtrl = {
@@ -617,10 +666,18 @@ Usart_SendDMA_COMMON_SendFun(&huart4, &g_uart4_dmaSendCtrl, &q_tx_buf_uart4);
 //	q_QUEUE_NODE_DATA_LEN_GROUP_1,global_elems_GROUP_1,node_data_GROUP_1,global_node_buff_GROUP_1);
 
 //DMA发送数据(发送)
-void Usart_COMMON_SendFUN_ALL(void){
+void Usart_COMMON_DMA_SendFUN_ALL(void){
 	
-Usart_SendDMA_COMMON_SaveFun(&GV_usartdmaCOMMON_COM1_Send, &q_tx_rx_queue_GROUP_1, "test1", 5);
-Usart_SendDMA_COMMON_SendFun(&GV_usartdmaCOMMON_COM1_Send, &q_tx_rx_queue_GROUP_1,	com01_com485Inst.huart_handle);
+//Usart_SendDMA_COMMON_SaveFun(&GV_usartdmaCOMMON_COM1_Send, &q_tx_rx_queue_GROUP_1, "test2", 5);
+//Usart_SendDMA_COMMON_SendFun(&GV_usartdmaCOMMON_COM1_Send, &q_tx_rx_queue_GROUP_1,	com01_com485Inst.huart_handle);
+	
+//	uint8_t test_buf[] = "test2";
+//UART_COMMON_Instance_SendArray_DMA(&com01_com485Inst, test_buf, 5U);
+	UART_COMMON_Instance_SendArray_DMA(&com01_com485Inst,(uint8_t *)"test2", 5U);
+	
+//	HAL_UART_Transmit_DMA(com01_com485Inst.huart_handle,(uint8_t *)"test3", 5U);
+//	com01_485_cbCfg.U485ComSendAllFunc(&com01_com485Inst,NULL, 0U);
+	
 	
 //Usart_SendDMA_SendFun(&huart_DMA_Handle);
 
@@ -725,8 +782,8 @@ TEST_USART_RX_DMA_ALL();
 ///--------------------------
 //weak void HAL_USARTx_DMA_RxCpltCallback(void){}
 
-#if (USE_UART_COMMON_DMA)
-#if (USE_UART_COMMON_DMA_RX)
+#if (USE_UART_COMMON_COM01_DMA)
+#if (USE_UART_COMMON_COM01_DMA_RX)
 
 /**
  * @brief DMA接收完成回调业务处理
@@ -794,7 +851,7 @@ void UART_COMMON_DmaIdleProcess(UART_HandleTypeDef *huart,
 #endif
 #endif
 
-#if (USE_UART_RX_COMMON_DMA)
+#if (USE_UART_COMMON_COM01_DMA_RX)
 void USARTx_DMA_COM01_IRQHandler(void)
 {
     UART_COMMON_DmaIdleProcess(com01_com485Inst.huart_handle, &hdma_usartx_COM1_rx, &RcvDmaQue_COM1_Data);

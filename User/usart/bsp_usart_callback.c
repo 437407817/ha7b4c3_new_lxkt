@@ -22,7 +22,7 @@
 #include "./usart/bsp_usart.h"
  #include "./shell_port.h"
 #include "./user_config.h"
-
+#include "./usart/bsp_usart_common_dma.h"
 
 // DMA 接收完成回调（循环模式下，缓冲区满后触发）
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
@@ -54,6 +54,10 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
 HAL_USARTx_DMA_TxCpltCallback();
   }
 #endif
+	
+#if USE_UART_COMMON_COM01_DMA&&USE_UART_COMMON_COM01_DMA_TX	
+	HAL_UART_COMMON_TxCpltCallback(huart);
+#endif	
 	
 }
 
