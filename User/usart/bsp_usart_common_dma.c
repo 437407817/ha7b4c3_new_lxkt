@@ -273,7 +273,7 @@ void UART_COMMON_DmaTxCpltProcess(str_DMA_usart_send *pDmaSendCtrl)
     }
 
     pDmaSendCtrl->uart_tx_thisdatas_sendover  = 1;  // 当前帧发送完成
-	SYSTEM_DEBUG("TX Callback \n");
+//	SYSTEM_DEBUG("TX Callback \n");
 
 }
 
@@ -1007,6 +1007,7 @@ void USARTx_DMA_COM02_IRQHandler(void)
 {
     UART_COMMON_DmaIdleProcess(com02_com485Inst.huart_handle, &hdma_usartx_COM2_rx, &RcvDmaQue_COM2_Data);
     HAL_UART_IRQHandler(com02_com485Inst.huart_handle);
+//	SYSTEM_INFO("PPPP");
 }
 #endif
 
@@ -1065,7 +1066,7 @@ void USARTx_DMA_COM04_IRQHandler(void)
 //}
 
 
-#if (USE_UART_COMMON_COM01_DMA_RX)
+#if (USE_UART_COMMON_COM01_DMA_RX && USE_COM01_COM485_FUN)
 
 void DMA_com1_rx_Streamx_IRQHandler(void)
 {
@@ -1082,7 +1083,7 @@ void DMA_com1_rx_Streamx_IRQHandler(void)
 
 
 
-#if (USE_UART_COMMON_COM01_DMA_TX)
+#if (USE_UART_COMMON_COM01_DMA_TX && USE_COM01_COM485_FUN)
 void DMA_com1_tx_Streamx_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
@@ -1096,7 +1097,7 @@ void DMA_com1_tx_Streamx_IRQHandler(void)
 #endif
 
 
-#if (USE_UART_COMMON_COM02_DMA_RX)
+#if (USE_UART_COMMON_COM02_DMA_RX && USE_COM02_COM485_FUN)
 
 void DMA_com2_rx_Streamx_IRQHandler(void)
 {
@@ -1113,7 +1114,7 @@ void DMA_com2_rx_Streamx_IRQHandler(void)
 
 
 
-#if (USE_UART_COMMON_COM02_DMA_TX)
+#if (USE_UART_COMMON_COM02_DMA_TX && USE_COM02_COM485_FUN)
 void DMA_com2_tx_Streamx_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
@@ -1126,7 +1127,7 @@ void DMA_com2_tx_Streamx_IRQHandler(void)
 }
 #endif
 
-#if (USE_UART_COMMON_COM03_DMA_RX)
+#if (USE_UART_COMMON_COM03_DMA_RX && USE_COM03_COM485_FUN)
 
 void DMA_com3_rx_Streamx_IRQHandler(void)
 {
@@ -1143,7 +1144,7 @@ void DMA_com3_rx_Streamx_IRQHandler(void)
 
 
 
-#if (USE_UART_COMMON_COM03_DMA_TX)
+#if (USE_UART_COMMON_COM03_DMA_TX && USE_COM03_COM485_FUN)
 void DMA_com3_tx_Streamx_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
@@ -1157,7 +1158,7 @@ void DMA_com3_tx_Streamx_IRQHandler(void)
 #endif
 
 
-#if (USE_UART_COMMON_COM04_DMA_RX)
+#if (USE_UART_COMMON_COM04_DMA_RX && USE_COM04_COM485_FUN)
 
 void DMA_com4_rx_Streamx_IRQHandler(void)
 {
@@ -1174,7 +1175,7 @@ void DMA_com4_rx_Streamx_IRQHandler(void)
 
 
 
-#if (USE_UART_COMMON_COM04_DMA_TX)
+#if (USE_UART_COMMON_COM04_DMA_TX && USE_COM04_COM485_FUN)
 void DMA_com4_tx_Streamx_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */

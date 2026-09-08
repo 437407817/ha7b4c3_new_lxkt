@@ -115,7 +115,7 @@ extern "C" {
 
 
 #define USE_UART_COMMON_COM02_DMA 1
-#define USE_UART_COMMON_COM02_DMA_RX 0
+#define USE_UART_COMMON_COM02_DMA_RX 1
 #define USE_UART_COMMON_COM02_DMA_TX 1
 
 
@@ -148,7 +148,7 @@ extern "C" {
 
 
 #define USE_UART_COMMON_COM03_DMA 1
-#define USE_UART_COMMON_COM03_DMA_RX 1
+#define USE_UART_COMMON_COM03_DMA_RX 0
 #define USE_UART_COMMON_COM03_DMA_TX 1
 
 
@@ -216,36 +216,6 @@ extern str_DMA_usart_send GV_usartdmaCOMMON_COM4_Send;
 
 
 
-//void HAL_USARTx_DMA_RxCpltCallback(void);
-//void HAL_USARTx_DMA_TxCpltCallback(void);
-//void HAL_USARTx_DMA_ErrorCallback(void);
-
-//void USART_RX_DMA_Config(UART_HandleTypeDef* uartHandle);
-//void USART_RX_DMA_Config(UART_HandleTypeDef* uartHandle);
-//void Usart_SendFUN_ALL(void);
-
-
-//void TEST_USART_RX_DMA_SEGGERprint(void);
-
-//void Usart_SendDMA_SaveFun(char *Sendbuff,uint16_t buff_len);
-
-//void USART_TX_RX_DMA_Config(UART_HandleTypeDef* uartHandle);
-//void USART_TX_RX_DMA_ConfigALL(void);
-
-
-//#if TESTUsartDMASendSaveAndSend
-//void Test_Usart_DMA_SendSaveFun(void);
-//void TEST_Usart_SendFUN_ALL(void);
-//#endif
-
-//#if TEST_DMA_RB_READ
-//void TEST_USART_RX_DMA_ALL(void);
-//void TEST_USART_RX_DMA_ALL_while(void);
-//#endif
-
-//#if TEST_RingBuffer_SAVEANDREAD
-//void Test_Usart_QueueSaveFun(void);
-//#endif
 
 
 void USART_COMMON_TX_RX_DMA_ConfigALL(void);
