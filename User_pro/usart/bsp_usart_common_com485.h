@@ -11,11 +11,17 @@
 //需要头文件引入
 #include "./buffer/p_data_queue_outer.h"
 #include "./usart/bsp_usart_dma.h"
+#include "./usart/bsp_usart_common_dma.h"
+
+#define DISENABLE_IDLE_IT_STATUS (0)
+#define ENABLE_IDLE_IT_STATUS (1)
+
+#define DISENABLE_RXNE_IT_STATUS (0)
+#define ENABLE_RXNE_IT_STATUS (1)
+/************************ COM01 配置（替换原USART6） ************************/
+
 //串口波特率
 #define USART_COM01_COM485_BAUDRATE                    115200
-
-
-/************************ USART1 配置（替换原USART6） ************************/
 #define USART_COM01_COM485                             USART2
 #define USART_COM01_COM485_CLK_ENABLE()                __USART2_CLK_ENABLE();
 			  
@@ -41,10 +47,152 @@
 #define USART_COM01_DMA_REQUEST_USART_TX							DMA_REQUEST_USART2_TX
 #define USART_COM01_DMA_REQUEST_USART_RX							DMA_REQUEST_USART2_RX
 
+#if USE_UART_COMMON_COM01_DMA_RX
+#define USART_COM01_IDLE_IT_STATUS										DISENABLE_IDLE_IT_STATUS	
+#define USART_COM01_RXNE_IT_STATUS										DISENABLE_RXNE_IT_STATUS	
+#else
+#define USART_COM01_IDLE_IT_STATUS										ENABLE_IDLE_IT_STATUS	
+#define USART_COM01_RXNE_IT_STATUS										ENABLE_RXNE_IT_STATUS
+#endif
 
-
-//#define USE_UART_RX_COMMON_DMA 			0
 #define USE_COM01_COM485_IT_1				1
+
+#define USE_COM01_COM485_FUN        1   
+
+
+
+/************************ COM02 配置（替换原USART6） ************************/
+
+//串口波特率
+#define USART_COM02_COM485_BAUDRATE                    115200
+#define USART_COM02_COM485                             USART2
+#define USART_COM02_COM485_CLK_ENABLE()                __USART2_CLK_ENABLE();
+			  
+#define USART_COM02_COM485_RX_GPIO_PORT                GPIOD
+#define USART_COM02_COM485_RX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+#define USART_COM02_COM485_RX_PIN                      GPIO_PIN_6
+#define USART_COM02_COM485_RX_AF                       GPIO_AF7_USART2
+			  
+#define USART_COM02_COM485_TX_GPIO_PORT                GPIOD
+#define USART_COM02_COM485_TX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+#define USART_COM02_COM485_TX_PIN                      GPIO_PIN_5
+#define USART_COM02_COM485_TX_AF                       GPIO_AF7_USART2
+			  
+#define USART_COM02_COM485_IRQHandler                  USART2_IRQHandler
+#define USART_COM02_COM485_IRQ                 		    USART2_IRQn
+
+
+#define USART_COM02_COM485_RCC_PERIPHCLK                       RCC_PERIPHCLK_USART2
+#define USART_COM02_COM485_RCC_CLKSOURCE                       RCC_USART234578CLKSOURCE_D2PCLK1
+
+
+
+#define USART_COM02_DMA_REQUEST_USART_TX							DMA_REQUEST_USART2_TX
+#define USART_COM02_DMA_REQUEST_USART_RX							DMA_REQUEST_USART2_RX
+
+#if USE_UART_COMMON_COM02_DMA_RX
+#define USART_COM02_IDLE_IT_STATUS										DISENABLE_IDLE_IT_STATUS	
+#define USART_COM02_RXNE_IT_STATUS										DISENABLE_RXNE_IT_STATUS	
+#else
+#define USART_COM02_IDLE_IT_STATUS										ENABLE_IDLE_IT_STATUS	
+#define USART_COM02_RXNE_IT_STATUS										ENABLE_RXNE_IT_STATUS
+#endif
+
+#define USE_COM02_COM485_IT_1				1
+
+#define USE_COM02_COM485_FUN        0   
+
+
+
+/************************ COM03 配置（替换原USART6） ************************/
+
+//串口波特率
+#define USART_COM03_COM485_BAUDRATE                    115200
+#define USART_COM03_COM485                             USART2
+#define USART_COM03_COM485_CLK_ENABLE()                __USART2_CLK_ENABLE();
+			  
+#define USART_COM03_COM485_RX_GPIO_PORT                GPIOD
+#define USART_COM03_COM485_RX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+#define USART_COM03_COM485_RX_PIN                      GPIO_PIN_6
+#define USART_COM03_COM485_RX_AF                       GPIO_AF7_USART2
+			  
+#define USART_COM03_COM485_TX_GPIO_PORT                GPIOD
+#define USART_COM03_COM485_TX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+#define USART_COM03_COM485_TX_PIN                      GPIO_PIN_5
+#define USART_COM03_COM485_TX_AF                       GPIO_AF7_USART2
+			  
+#define USART_COM03_COM485_IRQHandler                  USART2_IRQHandler
+#define USART_COM03_COM485_IRQ                 		    USART2_IRQn
+
+
+#define USART_COM03_COM485_RCC_PERIPHCLK                       RCC_PERIPHCLK_USART2
+#define USART_COM03_COM485_RCC_CLKSOURCE                       RCC_USART234578CLKSOURCE_D2PCLK1
+
+
+
+#define USART_COM03_DMA_REQUEST_USART_TX							DMA_REQUEST_USART2_TX
+#define USART_COM03_DMA_REQUEST_USART_RX							DMA_REQUEST_USART2_RX
+
+#if USE_UART_COMMON_COM03_DMA_RX
+#define USART_COM03_IDLE_IT_STATUS										DISENABLE_IDLE_IT_STATUS	
+#define USART_COM03_RXNE_IT_STATUS										DISENABLE_RXNE_IT_STATUS	
+#else
+#define USART_COM03_IDLE_IT_STATUS										ENABLE_IDLE_IT_STATUS	
+#define USART_COM03_RXNE_IT_STATUS										ENABLE_RXNE_IT_STATUS
+#endif
+
+
+#define USE_COM03_COM485_IT_1				1
+
+#define USE_COM03_COM485_FUN        0   
+/************************ COM04 配置（替换原USART6） ************************/
+
+//串口波特率
+#define USART_COM04_COM485_BAUDRATE                    115200
+#define USART_COM04_COM485                             USART2
+#define USART_COM04_COM485_CLK_ENABLE()                __USART2_CLK_ENABLE();
+			  
+#define USART_COM04_COM485_RX_GPIO_PORT                GPIOD
+#define USART_COM04_COM485_RX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+#define USART_COM04_COM485_RX_PIN                      GPIO_PIN_6
+#define USART_COM04_COM485_RX_AF                       GPIO_AF7_USART2
+			  
+#define USART_COM04_COM485_TX_GPIO_PORT                GPIOD
+#define USART_COM04_COM485_TX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+#define USART_COM04_COM485_TX_PIN                      GPIO_PIN_5
+#define USART_COM04_COM485_TX_AF                       GPIO_AF7_USART2
+			  
+#define USART_COM04_COM485_IRQHandler                  USART2_IRQHandler
+#define USART_COM04_COM485_IRQ                 		    USART2_IRQn
+
+
+#define USART_COM04_COM485_RCC_PERIPHCLK                       RCC_PERIPHCLK_USART2
+#define USART_COM04_COM485_RCC_CLKSOURCE                       RCC_USART234578CLKSOURCE_D2PCLK1
+
+
+
+#define USART_COM04_DMA_REQUEST_USART_TX							DMA_REQUEST_USART2_TX
+#define USART_COM04_DMA_REQUEST_USART_RX							DMA_REQUEST_USART2_RX
+
+#if USE_UART_COMMON_COM04_DMA_RX
+#define USART_COM04_IDLE_IT_STATUS										DISENABLE_IDLE_IT_STATUS	
+#define USART_COM04_RXNE_IT_STATUS										DISENABLE_RXNE_IT_STATUS	
+#else
+#define USART_COM04_IDLE_IT_STATUS										ENABLE_IDLE_IT_STATUS	
+#define USART_COM04_RXNE_IT_STATUS										ENABLE_RXNE_IT_STATUS
+#endif
+
+
+#define USE_COM04_COM485_IT_1				1
+
+#define USE_COM04_COM485_FUN        0   
+
+
+
+
+
+
+
 
 
 //#define USE_LVGL 0
@@ -155,37 +303,38 @@ struct tag_UartComInstance
 
 #define COM01_PARSE_BUF_SIZE    (PACKET_DATA_LEN_MAX + 4U)
 
-
-//struct tag_UartComInstance
-//{
-//    UART_HandleTypeDef *huart_handle;
-//    U485ComUsartSend_Callback_t sendCbStore;   //每个实例自带存储
-//};
-
-
-//extern UART_HandleTypeDef huart_COM01_COM485_Handle;
-
 extern UartComInstance com01_com485Inst;
-
-// .h
 extern uint8_t com01_parseBuf[COM01_PARSE_BUF_SIZE];
-
-
-
-
-
 extern U485ComUsartSend_Callback_t com01_485_cbCfg;
-//(UartComInstance *pInst, uint8_t *array, uint16_t num)
+
+
+#define COM02_PARSE_BUF_SIZE    (PACKET_DATA_LEN_MAX + 4U)
+
+extern UartComInstance com02_com485Inst;
+extern uint8_t com02_parseBuf[COM02_PARSE_BUF_SIZE];
+extern U485ComUsartSend_Callback_t com02_485_cbCfg;
+
+
+#define COM03_PARSE_BUF_SIZE    (PACKET_DATA_LEN_MAX + 4U)
+
+extern UartComInstance com03_com485Inst;
+extern uint8_t com03_parseBuf[COM03_PARSE_BUF_SIZE];
+extern U485ComUsartSend_Callback_t com03_485_cbCfg;
+
+#define COM04_PARSE_BUF_SIZE    (PACKET_DATA_LEN_MAX + 4U)
+
+extern UartComInstance com04_com485Inst;
+extern uint8_t com04_parseBuf[COM04_PARSE_BUF_SIZE];
+extern U485ComUsartSend_Callback_t com04_485_cbCfg;
 
 
 
 
 
-#define DISENABLE_IDLE_IT_STATUS (0)
-#define ENABLE_IDLE_IT_STATUS (1)
 
-#define DISENABLE_RXNE_IT_STATUS (0)
-#define ENABLE_RXNE_IT_STATUS (1)
+
+
+
 
 
 
@@ -202,8 +351,12 @@ extern U485ComUsartSend_Callback_t com01_485_cbCfg;
 //#define USE_UART 1
 //#define TEST_COM485_UART 1
 //#define USE_COM485_IT_1 1
+	
+	
+	
+#define USE_UART_COMMON_DMA_TX 1
 
-#if USE_UART_COMMON_COM01_DMA_TX	
+#if USE_UART_COMMON_DMA_TX	
 #define USE_COMMON_COM485_DMA_SEND 1 
 #else
 #define USE_COMMON_COM485_DMA_SEND 0  // 配置开关：1为DMA模式，0为阻塞模式
@@ -229,7 +382,7 @@ void UART_INST_SetSlaveCb(UartComInstance *pInst, UartSlaveProcCallback pFunc);
 
 void UART_COMMON_Instance_SendArray(UartComInstance *pInst, uint8_t *array, uint16_t num);
 void UART_COMMON_Instance_SendArray_DMA(UartComInstance *pInst, uint8_t *array, uint16_t num);
-	
+	                                                                    
 	
 	
 	void Wrapper_U485ComSendDmaSaveDataFunc(UartComInstance *pInst, char *buf, uint16_t num);

@@ -65,58 +65,125 @@ extern "C" {
 #define USARTx_DMA_COM01_IRQ                 		    USART_COM01_COM485_IRQ
 #define huart_DMA_COM01_Handle                      huart_COM01_COM485_Handle 
 
-#define DMA_COM01_STREAMx_TX 														DMA1_Stream0
-#define DMA_COM01_STREAM_IRQ_TX 												DMA1_Stream0_IRQn
+#define DMA_COM01_STREAMx_TX 														DMA1_Stream1
+#define DMA_COM01_STREAM_IRQ_TX 												DMA1_Stream1_IRQn
 #define DMA_COM01_REQUEST_USART_TX 											USART_COM01_DMA_REQUEST_USART_TX
 
-#define DMA_COM01_STREAMx_RX 														DMA1_Stream1
-#define DMA_COM01_STREAM_IRQ_RX 												DMA1_Stream1_IRQn
+#define DMA_com1_tx_Streamx_IRQHandler							DMA1_Stream1_IRQHandler
+
+
+#define DMA_COM01_STREAMx_RX 														DMA2_Stream1
+#define DMA_COM01_STREAM_IRQ_RX 												DMA2_Stream1_IRQn
 #define DMA_COM01_REQUEST_USART_RX 											USART_COM01_DMA_REQUEST_USART_RX
 
+#define DMA_com1_rx_Streamx_IRQHandler							DMA2_Stream1_IRQHandler
 
 
 
-#define DMA_COM02_USARTx 														USART5
-#define USARTx_DMA_COM02_IRQHandler                 USART1_IRQHandler
-#define USARTx_DMA_COM02_IRQ                 		    USART1_IRQn
-#define huart_DMA_COM02_Handle                      huart_shell_Handle 
+#define USE_UART_COMMON_COM01_DMA 1
+#define USE_UART_COMMON_COM01_DMA_RX 1
+#define USE_UART_COMMON_COM01_DMA_TX 1
 
-#define DMA_COM02_STREAMx_TX 														DMA1_Stream0
-#define DMA_COM02_STREAM_IRQ_TX 												DMA1_Stream0_IRQn
-#define DMA_COM02_REQUEST_USART_TX 											DMA_REQUEST_USART1_TX
 
-#define DMA_COM02_STREAMx_RX 														DMA1_Stream1
-#define DMA_COM02_STREAM_IRQ_RX 												DMA1_Stream1_IRQn
-#define DMA_COM02_REQUEST_USART_RX 											DMA_REQUEST_USART1_RX
+//*********************************
 
 
 
-#define DMA_COM03_USARTx 														USART5
-#define USARTx_DMA_COM03_IRQHandler                 USART1_IRQHandler
-#define USARTx_DMA_COM03_IRQ                 		    USART1_IRQn
-#define huart_DMA_COM03_Handle                      huart_shell_Handle 
-
-#define DMA_COM03_STREAMx_TX 														DMA1_Stream0
-#define DMA_COM03_STREAM_IRQ_TX 												DMA1_Stream0_IRQn
-#define DMA_COM03_REQUEST_USART_TX 											DMA_REQUEST_USART1_TX
-
-#define DMA_COM03_STREAMx_RX 														DMA1_Stream1
-#define DMA_COM03_STREAM_IRQ_RX 												DMA1_Stream1_IRQn
-#define DMA_COM03_REQUEST_USART_RX 											DMA_REQUEST_USART1_RX
 
 
-#define DMA_COM04_USARTx 														USART5
-#define USARTx_DMA_COM04_IRQHandler                 USART1_IRQHandler
-#define USARTx_DMA_COM04_IRQ                 		    USART1_IRQn
-#define huart_DMA_COM04_Handle                      huart_shell_Handle 
+#define MAX_BUF_COM02_R_SIZE 					5  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
+#define MAX_RING_BUFF_COM02_SIZE 			MAX_BUF_COM02_R_SIZE*10
 
-#define DMA_COM04_STREAMx_TX 														DMA1_Stream0
-#define DMA_COM04_STREAM_IRQ_TX 												DMA1_Stream0_IRQn
-#define DMA_COM04_REQUEST_USART_TX 											DMA_REQUEST_USART1_TX
 
-#define DMA_COM04_STREAMx_RX 														DMA1_Stream1
-#define DMA_COM04_STREAM_IRQ_RX 												DMA1_Stream1_IRQn
-#define DMA_COM04_REQUEST_USART_RX 											DMA_REQUEST_USART1_RX
+#define DMA_COM02_USARTx 														USART_COM02_COM485
+#define USARTx_DMA_COM02_IRQHandler                 USART_COM02_COM485_IRQHandler
+#define USARTx_DMA_COM02_IRQ                 		    USART_COM02_COM485_IRQ
+#define huart_DMA_COM02_Handle                      huart_COM02_COM485_Handle 
+
+#define DMA_COM02_STREAMx_TX 														DMA1_Stream2
+#define DMA_COM02_STREAM_IRQ_TX 												DMA1_Stream2_IRQn
+#define DMA_COM02_REQUEST_USART_TX 											USART_COM02_DMA_REQUEST_USART_TX
+
+#define DMA_com2_tx_Streamx_IRQHandler							DMA1_Stream2_IRQHandler
+
+
+#define DMA_COM02_STREAMx_RX 														DMA2_Stream2
+#define DMA_COM02_STREAM_IRQ_RX 												DMA2_Stream2_IRQn
+#define DMA_COM02_REQUEST_USART_RX 											USART_COM02_DMA_REQUEST_USART_RX
+
+#define DMA_com2_rx_Streamx_IRQHandler							DMA2_Stream2_IRQHandler
+
+
+#define USE_UART_COMMON_COM02_DMA 1
+#define USE_UART_COMMON_COM02_DMA_RX 1
+#define USE_UART_COMMON_COM02_DMA_TX 1
+
+
+//*********************************
+
+
+#define MAX_BUF_COM03_R_SIZE 					5  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
+#define MAX_RING_BUFF_COM03_SIZE 			MAX_BUF_COM03_R_SIZE*10
+
+
+
+#define DMA_COM03_USARTx 														USART_COM03_COM485
+#define USARTx_DMA_COM03_IRQHandler                 USART_COM03_COM485_IRQHandler
+#define USARTx_DMA_COM03_IRQ                 		    USART_COM03_COM485_IRQ
+#define huart_DMA_COM03_Handle                      huart_COM03_COM485_Handle 
+
+#define DMA_COM03_STREAMx_TX 														DMA1_Stream3
+#define DMA_COM03_STREAM_IRQ_TX 												DMA1_Stream3_IRQn
+#define DMA_COM03_REQUEST_USART_TX 											USART_COM03_DMA_REQUEST_USART_TX
+
+#define DMA_com3_tx_Streamx_IRQHandler							DMA1_Stream3_IRQHandler
+
+
+#define DMA_COM03_STREAMx_RX 														DMA2_Stream3
+#define DMA_COM03_STREAM_IRQ_RX 												DMA2_Stream3_IRQn
+#define DMA_COM03_REQUEST_USART_RX 											USART_COM03_DMA_REQUEST_USART_RX
+
+#define DMA_com3_rx_Streamx_IRQHandler							DMA2_Stream3_IRQHandler
+
+
+
+#define USE_UART_COMMON_COM03_DMA 1
+#define USE_UART_COMMON_COM03_DMA_RX 1
+#define USE_UART_COMMON_COM03_DMA_TX 1
+
+
+
+
+
+
+#define MAX_BUF_COM04_R_SIZE 					5  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
+#define MAX_RING_BUFF_COM04_SIZE 			MAX_BUF_COM04_R_SIZE*10
+
+
+
+#define DMA_COM04_USARTx 														USART_COM04_COM485
+#define USARTx_DMA_COM04_IRQHandler                 USART_COM04_COM485_IRQHandler
+#define USARTx_DMA_COM04_IRQ                 		    USART_COM04_COM485_IRQ
+#define huart_DMA_COM04_Handle                      huart_COM04_COM485_Handle 
+
+#define DMA_COM04_STREAMx_TX 														DMA1_Stream4
+#define DMA_COM04_STREAM_IRQ_TX 												DMA1_Stream4_IRQn
+#define DMA_COM04_REQUEST_USART_TX 											USART_COM04_DMA_REQUEST_USART_TX
+
+#define DMA_com4_tx_Streamx_IRQHandler							DMA1_Stream4_IRQHandler
+
+
+#define DMA_COM04_STREAMx_RX 														DMA2_Stream4
+#define DMA_COM04_STREAM_IRQ_RX 												DMA2_Stream4_IRQn
+#define DMA_COM04_REQUEST_USART_RX 											USART_COM04_DMA_REQUEST_USART_RX
+
+#define DMA_com4_rx_Streamx_IRQHandler							DMA2_Stream4_IRQHandler
+
+
+
+#define USE_UART_COMMON_COM04_DMA 1
+#define USE_UART_COMMON_COM04_DMA_RX 1
+#define USE_UART_COMMON_COM04_DMA_TX 1
 
 
 
@@ -127,9 +194,7 @@ extern "C" {
 //#define USARTx_DMA_IRQ                 		    USART_COM485_IRQ
 //#define huart_DMA_Handle 												huart_COM485_Handle
 
-#define USE_UART_COMMON_COM01_DMA 1
-#define USE_UART_COMMON_COM01_DMA_RX 1
-#define USE_UART_COMMON_COM01_DMA_TX 1
+
 
 #define TESTUsartCOMMONDMASendSaveAndSend 1
 
@@ -145,9 +210,9 @@ extern "C" {
 extern STR_RCV_DMA_que_data RcvDmaQueData;
 
 extern str_DMA_usart_send GV_usartdmaCOMMON_COM1_Send;
-
-
-
+extern str_DMA_usart_send GV_usartdmaCOMMON_COM2_Send;
+extern str_DMA_usart_send GV_usartdmaCOMMON_COM3_Send;
+extern str_DMA_usart_send GV_usartdmaCOMMON_COM4_Send;
 
 
 

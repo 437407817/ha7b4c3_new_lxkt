@@ -47,6 +47,10 @@ typedef struct str_nood_data_buff {
 #define q_QUEUE_NODE_NUM_2        (1*4) //缓冲队列的个数需要为2的幂,否则出错
 #define q_QUEUE_NODE_DATA_LEN_2   (1 * 50)
 
+
+
+
+
 #define q_QUEUE_NODE_NUM_UsartDMAsend        (1*4) //缓冲队列的个数需要为2的幂,否则出错//最大多少组
 #define QSENDMAXBUFFSIZE	50
 
@@ -63,6 +67,8 @@ typedef struct str_nood_data_buff {
 #define q_QUEUE_NODE_NUM_GROUP_3        (1*4) //缓冲队列的个数需要为2的幂,否则出错
 #define q_QUEUE_NODE_DATA_LEN_GROUP_3   (1 * 50)
 
+#define q_QUEUE_NODE_NUM_GROUP_4        (1*4) //缓冲队列的个数需要为2的幂,否则出错
+#define q_QUEUE_NODE_DATA_LEN_GROUP_4   (1 * 50)
 
 //#define creat_que(que_name, len)	\
 //    unsigned char que_buf_##que_name[len] = {0}; \

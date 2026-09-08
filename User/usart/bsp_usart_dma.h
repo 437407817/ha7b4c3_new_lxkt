@@ -121,6 +121,9 @@ extern STR_RCV_DMA_que_data RcvDmaQueData;
 
 
 extern STR_RCV_DMA_que_data RcvDmaQue_COM1_Data;
+extern STR_RCV_DMA_que_data RcvDmaQue_COM2_Data;
+extern STR_RCV_DMA_que_data RcvDmaQue_COM3_Data;
+extern STR_RCV_DMA_que_data RcvDmaQue_COM4_Data;
 
 
 

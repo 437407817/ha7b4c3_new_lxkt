@@ -26,10 +26,17 @@ void P_queue_init_COMMON_TX_GROUPED_BUFF_dma(void);
 
 extern Q_QueueBuffer q_tx_rx_queue_2;
 extern Q_QueueBuffer q_tx_rx_queue_UsartDMAsend;
+
+
+
 extern Q_QueueBuffer q_tx_rx_queue_GROUP_1;
 extern Q_QueueBuffer q_tx_rx_queue_GROUP_2;
+extern Q_QueueBuffer q_tx_rx_queue_GROUP_3;
+extern Q_QueueBuffer q_tx_rx_queue_GROUP_4;
 
-extern Q_QueueBuffer q_GROUPqueue_3_UsartDMAsend;
+
+
+
 
 #endif
 

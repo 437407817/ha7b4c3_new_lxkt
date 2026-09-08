@@ -37,13 +37,24 @@
 //static QueueType_t g_rcvQueue;
 
 extern STR_RCV_DMA_que_data RcvDmaQue_COM1_Data;
+
+extern STR_RCV_DMA_que_data RcvDmaQue_COM2_Data;
+
+extern STR_RCV_DMA_que_data RcvDmaQue_COM3_Data;
+
+extern STR_RCV_DMA_que_data RcvDmaQue_COM4_Data;
 //extern STR_RCV_DMA_que_data Rcv_Common_DmaQueData_Com1;
 #define g_com01_rcvDataBuf RcvDmaQue_COM1_Data.g_ringBufData
 #define g_com01_rcvQueue RcvDmaQue_COM1_Data.g_uartRingBuf
 
+#define g_com02_rcvDataBuf RcvDmaQue_COM2_Data.g_ringBufData
+#define g_com02_rcvQueue RcvDmaQue_COM2_Data.g_uartRingBuf
 
+#define g_com03_rcvDataBuf RcvDmaQue_COM3_Data.g_ringBufData
+#define g_com03_rcvQueue RcvDmaQue_COM3_Data.g_uartRingBuf
 
-
+#define g_com04_rcvDataBuf RcvDmaQue_COM4_Data.g_ringBufData
+#define g_com04_rcvQueue RcvDmaQue_COM4_Data.g_uartRingBuf
 
 typedef struct
 {
@@ -394,6 +405,82 @@ static void com01_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 	
 	#endif
 }
+
+static void com02_frame_process(uint8_t *frameBuf, uint16_t frameLen)
+{
+	#if 0
+    if(frameBuf == NULL || frameLen < 3U)
+    {
+        return;
+    }
+
+    // frameBuf[0] = FRAME_REC_HEAD_0
+    // frameBuf[1] = FRAME_REC_HEAD_1
+    // frameBuf[2] = 数据域长度
+    // frameBuf[3] = FUNC_DATA_IDX 功能码
+
+    // ⚠️重要：frameBuf是临时工作缓冲区，下次Usart485CommonComTask执行会被覆盖
+    // 如果需要保存这帧数据，必须memcpy拷贝出来，不要直接保存frameBuf指针
+
+    /* 示例业务逻辑 */
+    SYSTEM_INFO("recv frame len:%d func:%02X\n", frameLen, frameBuf[3]);
+	#else
+	SYSTEM_INFO("-%c\n",  frameBuf[0]);
+	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"com02_frame_process=\r\n");
+	
+	#endif
+}
+
+static void com03_frame_process(uint8_t *frameBuf, uint16_t frameLen)
+{
+	#if 0
+    if(frameBuf == NULL || frameLen < 3U)
+    {
+        return;
+    }
+
+    // frameBuf[0] = FRAME_REC_HEAD_0
+    // frameBuf[1] = FRAME_REC_HEAD_1
+    // frameBuf[2] = 数据域长度
+    // frameBuf[3] = FUNC_DATA_IDX 功能码
+
+    // ⚠️重要：frameBuf是临时工作缓冲区，下次Usart485CommonComTask执行会被覆盖
+    // 如果需要保存这帧数据，必须memcpy拷贝出来，不要直接保存frameBuf指针
+
+    /* 示例业务逻辑 */
+    SYSTEM_INFO("recv frame len:%d func:%02X\n", frameLen, frameBuf[3]);
+	#else
+	SYSTEM_INFO("-%c\n",  frameBuf[0]);
+	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"com03_frame_process=\r\n");
+	
+	#endif
+}
+
+static void com04_frame_process(uint8_t *frameBuf, uint16_t frameLen)
+{
+	#if 0
+    if(frameBuf == NULL || frameLen < 3U)
+    {
+        return;
+    }
+
+    // frameBuf[0] = FRAME_REC_HEAD_0
+    // frameBuf[1] = FRAME_REC_HEAD_1
+    // frameBuf[2] = 数据域长度
+    // frameBuf[3] = FUNC_DATA_IDX 功能码
+
+    // ⚠️重要：frameBuf是临时工作缓冲区，下次Usart485CommonComTask执行会被覆盖
+    // 如果需要保存这帧数据，必须memcpy拷贝出来，不要直接保存frameBuf指针
+
+    /* 示例业务逻辑 */
+    SYSTEM_INFO("recv frame len:%d func:%02X\n", frameLen, frameBuf[3]);
+	#else
+	SYSTEM_INFO("-%c\n",  frameBuf[0]);
+	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"com04_frame_process=\r\n");
+	
+	#endif
+}
+
 /**
 ***********************************************************
 * @brief USB转串口应用初始化函数
@@ -406,10 +493,18 @@ void Usart485CommonComAppInit(void)
 	
 	    // 传入函数地址，不要加()
 //    UART_INST_SetRxByteCb(&com01_com485Inst, ProcUartData_Common);
+	#if USE_COM01_COM485_FUN
 	UART_INST_SetSlaveCb(&com01_com485Inst, com01_frame_process);
-	
-	
-	
+	#endif
+	#if USE_COM02_COM485_FUN
+	UART_INST_SetSlaveCb(&com02_com485Inst, com02_frame_process);
+	#endif
+	#if USE_COM03_COM485_FUN
+	UART_INST_SetSlaveCb(&com03_com485Inst, com03_frame_process);
+	#endif
+	#if USE_COM04_COM485_FUN
+	UART_INST_SetSlaveCb(&com04_com485Inst, com04_frame_process);	
+	#endif
 //	reg485ComCb(ProcUartData);//injectUARTIDLEcptCP
 //	reg_SlaveComCb(pull_data_from_485);
 //	#if !USE_UART_DMA_RX
