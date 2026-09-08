@@ -643,6 +643,7 @@ void USART_COMMON_COM485_232_ComDrvInit(void)
 {
 	USART_common_COM485_UartInit();
     USART_COMMON_COM485_GpioInit();
+	
 #if USE_COM01_COM485_FUN
 		UART_COMMON_Instance_SetSendCallback(&com01_com485Inst, &com01_485_cbCfg);
     //绑定接收回调：收到字节直接压入实例内部的pRcvQueue

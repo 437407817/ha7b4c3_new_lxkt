@@ -295,24 +295,26 @@ void HAL_UART_COMMON_TxCpltCallback(UART_HandleTypeDef *huart)
         UART_COMMON_DmaTxCpltProcess(&GV_usartdmaCOMMON_COM1_Send);
 //			SYSTEM_INFO("8*");
     }
+		
 		#endif
+	
 		#if USE_COM02_COM485_FUN
-		else
-		    if(huart->Instance == DMA_COM02_USARTx)
+		 
+		if(huart->Instance == DMA_COM02_USARTx)
     {
         UART_COMMON_DmaTxCpltProcess(&GV_usartdmaCOMMON_COM2_Send);
 //			SYSTEM_INFO("8*");
     }
 		#endif
 		#if USE_COM03_COM485_FUN
-		else if(huart->Instance == DMA_COM03_USARTx)
+		 if(huart->Instance == DMA_COM03_USARTx)
     {
         UART_COMMON_DmaTxCpltProcess(&GV_usartdmaCOMMON_COM3_Send);
 //			SYSTEM_INFO("8*");
     }
 		#endif
 		#if USE_COM04_COM485_FUN
-		else
+		
 		if(huart->Instance == DMA_COM04_USARTx)
     {
         UART_COMMON_DmaTxCpltProcess(&GV_usartdmaCOMMON_COM4_Send);
