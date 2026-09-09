@@ -15,7 +15,7 @@ Section Cross References
     startup_stm32h743xx.o(RESET) refers to stm32h7xx_it.o(i.DebugMon_Handler) for DebugMon_Handler
     startup_stm32h743xx.o(RESET) refers to systick.o(i.SysTick_Handler) for SysTick_Handler
     startup_stm32h743xx.o(RESET) refers to gt9xx.o(i.EXTI3_IRQHandler) for EXTI3_IRQHandler
-    startup_stm32h743xx.o(RESET) refers to bsp_usart_common_dma.o(i.DMA1_Stream3_IRQHandler) for DMA1_Stream3_IRQHandler
+    startup_stm32h743xx.o(RESET) refers to bsp_usart_common_dma.o(i.DMA1_Stream4_IRQHandler) for DMA1_Stream4_IRQHandler
     startup_stm32h743xx.o(RESET) refers to shell_port.o(i.USART1_IRQHandler) for USART1_IRQHandler
     startup_stm32h743xx.o(RESET) refers to bsp_usart_common_com485.o(i.USART2_IRQHandler) for USART2_IRQHandler
     startup_stm32h743xx.o(RESET) refers to bsp_usart_com485.o(i.USART3_IRQHandler) for USART3_IRQHandler
@@ -2234,8 +2234,8 @@ Section Cross References
     bsp_usart_dma.o(i.Usart_SendDMA_SendFun) refers to p_data_queue_outer.o(.bss) for q_tx_rx_queue_UsartDMAsend
     bsp_usart_dma.o(i.Usart_SendFUN_ALL) refers to bsp_usart_dma.o(i.Usart_SendDMA_SendFun) for Usart_SendDMA_SendFun
     bsp_usart_dma.o(i.Usart_SendFUN_ALL) refers to bsp_usart_shell.o(.bss) for huart_shell_Handle
-    bsp_usart_common_dma.o(i.DMA1_Stream3_IRQHandler) refers to stm32h7xx_hal_dma.o(i.HAL_DMA_IRQHandler) for HAL_DMA_IRQHandler
-    bsp_usart_common_dma.o(i.DMA1_Stream3_IRQHandler) refers to bsp_usart_common_dma.o(.bss) for .bss
+    bsp_usart_common_dma.o(i.DMA1_Stream4_IRQHandler) refers to stm32h7xx_hal_dma.o(i.HAL_DMA_IRQHandler) for HAL_DMA_IRQHandler
+    bsp_usart_common_dma.o(i.DMA1_Stream4_IRQHandler) refers to bsp_usart_common_dma.o(.bss) for .bss
     bsp_usart_common_dma.o(i.HAL_UART_COMMON_TxCpltCallback) refers to bsp_usart_common_dma.o(i.UART_COMMON_DmaTxCpltProcess) for UART_COMMON_DmaTxCpltProcess
     bsp_usart_common_dma.o(i.HAL_UART_COMMON_TxCpltCallback) refers to bsp_usart_common_dma.o(.data) for .data
     bsp_usart_common_dma.o(i.UART_COMMON_DmaErrorProcess) refers to stm32h7xx_hal_uart.o(i.HAL_UART_GetError) for HAL_UART_GetError
@@ -2251,7 +2251,7 @@ Section Cross References
     bsp_usart_common_dma.o(i.USART_COMMON_TX_RX_DMA_ConfigALL) refers to bsp_usart_common_dma.o(i.USART_TX_RX_DMA_COMMON_Config) for USART_TX_RX_DMA_COMMON_Config
     bsp_usart_common_dma.o(i.USART_COMMON_TX_RX_DMA_ConfigALL) refers to p_data_queue_outer.o(i.P_queue_init_COMMON_TX_GROUPED_BUFF_dma) for P_queue_init_COMMON_TX_GROUPED_BUFF_dma
     bsp_usart_common_dma.o(i.USART_COMMON_TX_RX_DMA_ConfigALL) refers to bsp_usart_common_dma.o(.bss) for .bss
-    bsp_usart_common_dma.o(i.USART_COMMON_TX_RX_DMA_ConfigALL) refers to bsp_usart_common_com485.o(.data) for com03_com485Inst
+    bsp_usart_common_dma.o(i.USART_COMMON_TX_RX_DMA_ConfigALL) refers to bsp_usart_common_com485.o(.data) for com04_com485Inst
     bsp_usart_common_dma.o(i.USART_RX_DMA_COMMON_Config) refers to stm32h7xx_hal_dma.o(i.HAL_DMA_Init) for HAL_DMA_Init
     bsp_usart_common_dma.o(i.USART_RX_DMA_COMMON_Config) refers to segger_rtt.o(i.SEGGER_RTT_SetTerminal) for SEGGER_RTT_SetTerminal
     bsp_usart_common_dma.o(i.USART_RX_DMA_COMMON_Config) refers to segger_rtt_printf.o(i.SEGGER_RTT_printf) for SEGGER_RTT_printf
@@ -2278,7 +2278,7 @@ Section Cross References
     bsp_usart_common_dma.o(i.USART_TX_RX_DMA_COMMON_Config) refers to stm32h7xx_hal_cortex.o(i.HAL_NVIC_EnableIRQ) for HAL_NVIC_EnableIRQ
     bsp_usart_common_dma.o(i.USART_TX_RX_DMA_COMMON_Config) refers to stm32h7xx_hal.o(i.HAL_Delay) for HAL_Delay
     bsp_usart_common_dma.o(i.Usart_COMMON_DMA_SendFUN_ALL) refers to bsp_usart_common_com485.o(i.UART_COMMON_Instance_SendArray_DMA) for UART_COMMON_Instance_SendArray_DMA
-    bsp_usart_common_dma.o(i.Usart_COMMON_DMA_SendFUN_ALL) refers to bsp_usart_common_com485.o(.data) for com03_com485Inst
+    bsp_usart_common_dma.o(i.Usart_COMMON_DMA_SendFUN_ALL) refers to bsp_usart_common_com485.o(.data) for com04_com485Inst
     bsp_usart_common_dma.o(i.Usart_SendDMA_COMMON_SaveFun) refers to p_data_queue.o(i.p_push_data_to_queue2) for p_push_data_to_queue2
     bsp_usart_common_dma.o(i.Usart_SendDMA_COMMON_SendFun) refers to bsp_systime.o(i.HAL_GetTick) for HAL_GetTick
     bsp_usart_common_dma.o(i.Usart_SendDMA_COMMON_SendFun) refers to p_data_queue.o(i.p_pop_data_from_queue2) for p_pop_data_from_queue2
@@ -2952,7 +2952,7 @@ Section Cross References
     taskworkhandle.o(i.Handle_DWT) refers to sys_dwt.o(i.DWT_Delay_us) for DWT_Delay_us
     taskworkhandle.o(i.Handle_IIC_TOUCH) refers to touch_drv.o(i.touch_drv_while_test) for touch_drv_while_test
     taskworkhandle.o(i.Handle_QUEUE_USART_COMMON_GETBUFF_PRINT) refers to usart485_common_verify.o(i.Usart485CommonComTask) for Usart485CommonComTask
-    taskworkhandle.o(i.Handle_QUEUE_USART_COMMON_GETBUFF_PRINT) refers to bsp_usart_common_com485.o(.data) for com03_com485Inst
+    taskworkhandle.o(i.Handle_QUEUE_USART_COMMON_GETBUFF_PRINT) refers to bsp_usart_common_com485.o(.data) for com04_com485Inst
     taskworkhandle.o(i.Handle_led) refers to frtos_printf.o(i.SYSTEM_i_print) for SYSTEM_i_print
     taskworkhandle.o(i.Handle_letter_Shell_NoOsWhile) refers to shell_port.o(i.letter_Shell_NoOsWhileTask) for letter_Shell_NoOsWhileTask
     taskworkhandle.o(i.Handle_test3) refers to systick.o(i.GetSysRunTime) for GetSysRunTime
@@ -3691,11 +3691,11 @@ Section Cross References
     bsp_usart_common_com485.o(i.USART_COMMON_COM485_GpioInit) refers to bsp_usart_common_com485.o(i.UART_Common_GpioInit) for UART_Common_GpioInit
     bsp_usart_common_com485.o(i.USART_COMMON_COM485_GpioInit) refers to segger_rtt.o(i.SEGGER_RTT_SetTerminal) for SEGGER_RTT_SetTerminal
     bsp_usart_common_com485.o(i.USART_COMMON_COM485_GpioInit) refers to segger_rtt_printf.o(i.SEGGER_RTT_printf) for SEGGER_RTT_printf
-    bsp_usart_common_com485.o(i.USART_COMMON_COM485_GpioInit) refers to bsp_usart_common_com485.o(i.COM485_COM03_GpioClockEnable) for COM485_COM03_GpioClockEnable
+    bsp_usart_common_com485.o(i.USART_COMMON_COM485_GpioInit) refers to bsp_usart_common_com485.o(i.COM485_COM04_GpioClockEnable) for COM485_COM04_GpioClockEnable
     bsp_usart_common_com485.o(i.USART_common_COM485_UartInit) refers to bsp_usart_common_com485.o(i.UART_Common_Init) for UART_Common_Init
     bsp_usart_common_com485.o(i.USART_common_COM485_UartInit) refers to segger_rtt.o(i.SEGGER_RTT_SetTerminal) for SEGGER_RTT_SetTerminal
     bsp_usart_common_com485.o(i.USART_common_COM485_UartInit) refers to segger_rtt_printf.o(i.SEGGER_RTT_printf) for SEGGER_RTT_printf
-    bsp_usart_common_com485.o(i.USART_common_COM485_UartInit) refers to bsp_usart_common_com485.o(i.USART_common_com3_ClockEnable) for USART_common_com3_ClockEnable
+    bsp_usart_common_com485.o(i.USART_common_COM485_UartInit) refers to bsp_usart_common_com485.o(i.USART_common_com4_ClockEnable) for USART_common_com4_ClockEnable
     bsp_usart_common_com485.o(i.USART_common_COM485_UartInit) refers to bsp_usart_common_com485.o(.data) for .data
     bsp_usart_common_com485.o(i.UartRxPushToQueueCb) refers to queue3.o(i.QueuePush) for QueuePush
     bsp_usart_common_com485.o(i.UartRxPushToQueueCb) refers to segger_rtt.o(i.SEGGER_RTT_SetTerminal) for SEGGER_RTT_SetTerminal
@@ -3708,38 +3708,38 @@ Section Cross References
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(i.Wrapper_U485ComSendAllFunc) for Wrapper_U485ComSendAllFunc
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(i.Wrapper_U485ComSendDmaSaveDataFunc) for Wrapper_U485ComSendDmaSaveDataFunc
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(i.Wrapper_U485ComSendAllFunc) for Wrapper_U485ComSendAllFunc
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(i.Wrapper_U485ComSendDmaSaveDataFunc) for Wrapper_U485ComSendDmaSaveDataFunc
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(i.Wrapper_U485ComSendAllFunc) for Wrapper_U485ComSendAllFunc
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for huart_COM01_COM485_Handle
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM1_Data
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for com01_parseBuf
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM1_Send
     bsp_usart_common_com485.o(.data) refers to p_data_queue_outer.o(.bss) for q_tx_rx_queue_GROUP_1
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for huart_COM03_COM485_Handle
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM3_Data
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for com03_parseBuf
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM3_Send
-    bsp_usart_common_com485.o(.data) refers to p_data_queue_outer.o(.bss) for q_tx_rx_queue_GROUP_3
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(i.Wrapper_U485ComSendDmaSaveDataFunc) for Wrapper_U485ComSendDmaSaveDataFunc
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(i.Wrapper_U485ComSendAllFunc) for Wrapper_U485ComSendAllFunc
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for huart_COM02_COM485_Handle
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM2_Data
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for com02_parseBuf
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM2_Send
-    bsp_usart_common_com485.o(.data) refers to p_data_queue_outer.o(.bss) for q_tx_rx_queue_GROUP_2
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for huart_COM04_COM485_Handle
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM4_Data
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for com04_parseBuf
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM4_Send
     bsp_usart_common_com485.o(.data) refers to p_data_queue_outer.o(.bss) for q_tx_rx_queue_GROUP_4
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for huart_COM02_COM485_Handle
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM2_Data
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for com02_parseBuf
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM2_Send
+    bsp_usart_common_com485.o(.data) refers to p_data_queue_outer.o(.bss) for q_tx_rx_queue_GROUP_2
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for huart_COM03_COM485_Handle
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM3_Data
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for com03_parseBuf
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM3_Send
+    bsp_usart_common_com485.o(.data) refers to p_data_queue_outer.o(.bss) for q_tx_rx_queue_GROUP_3
     usart485_common_verify.o(i.Usart485CommonComAppInit) refers to usart485_common_verify.o(i.UART_INST_SetSlaveCb) for UART_INST_SetSlaveCb
-    usart485_common_verify.o(i.Usart485CommonComAppInit) refers to usart485_common_verify.o(i.com03_frame_process) for com03_frame_process
-    usart485_common_verify.o(i.Usart485CommonComAppInit) refers to bsp_usart_common_com485.o(.data) for com03_com485Inst
+    usart485_common_verify.o(i.Usart485CommonComAppInit) refers to usart485_common_verify.o(i.com04_frame_process) for com04_frame_process
+    usart485_common_verify.o(i.Usart485CommonComAppInit) refers to bsp_usart_common_com485.o(.data) for com04_com485Inst
     usart485_common_verify.o(i.Usart485CommonComTask) refers to segger_rtt.o(i.SEGGER_RTT_SetTerminal) for SEGGER_RTT_SetTerminal
     usart485_common_verify.o(i.Usart485CommonComTask) refers to segger_rtt_printf.o(i.SEGGER_RTT_printf) for SEGGER_RTT_printf
     usart485_common_verify.o(i.Usart485CommonComTask) refers to queue3.o(i.QueueCount) for QueueCount
     usart485_common_verify.o(i.Usart485CommonComTask) refers to queue3.o(i.QueuePop) for QueuePop
-    usart485_common_verify.o(i.com03_frame_process) refers to segger_rtt.o(i.SEGGER_RTT_SetTerminal) for SEGGER_RTT_SetTerminal
-    usart485_common_verify.o(i.com03_frame_process) refers to segger_rtt_printf.o(i.SEGGER_RTT_printf) for SEGGER_RTT_printf
-    usart485_common_verify.o(i.com03_frame_process) refers to usart485_common_verify.o(.conststring) for .conststring
+    usart485_common_verify.o(i.com04_frame_process) refers to segger_rtt.o(i.SEGGER_RTT_SetTerminal) for SEGGER_RTT_SetTerminal
+    usart485_common_verify.o(i.com04_frame_process) refers to segger_rtt_printf.o(i.SEGGER_RTT_printf) for SEGGER_RTT_printf
+    usart485_common_verify.o(i.com04_frame_process) refers to usart485_common_verify.o(.conststring) for .conststring
     usart485_common_verify.o(i.reg_SlaveCommonComCb) refers to usart485_common_verify.o(.data) for .data
     usart485_common_verify.o(i.s485_convert_queue222) refers to segger_rtt.o(i.SEGGER_RTT_SetTerminal) for SEGGER_RTT_SetTerminal
     usart485_common_verify.o(i.s485_convert_queue222) refers to segger_rtt_printf.o(i.SEGGER_RTT_printf) for SEGGER_RTT_printf
@@ -6853,8 +6853,8 @@ Image Symbol Table
     i.USART_COMMON_TX_RX_DMA_ConfigALL       0x080046dc   Section        0  bsp_usart_common_dma.o(i.USART_COMMON_TX_RX_DMA_ConfigALL)
     i.USART_RX_DMA_COMMON_Config             0x08004748   Section        0  bsp_usart_common_dma.o(i.USART_RX_DMA_COMMON_Config)
     i.USART_TX_RX_DMA_COMMON_Config          0x080047f4   Section        0  bsp_usart_common_dma.o(i.USART_TX_RX_DMA_COMMON_Config)
-    i.USART_common_com3_ClockEnable          0x080048a8   Section        0  bsp_usart_common_com485.o(i.USART_common_com3_ClockEnable)
-    USART_common_com3_ClockEnable            0x080048a9   Thumb Code    22  bsp_usart_common_com485.o(i.USART_common_com3_ClockEnable)
+    i.USART_common_com4_ClockEnable          0x080048a8   Section        0  bsp_usart_common_com485.o(i.USART_common_com4_ClockEnable)
+    USART_common_com4_ClockEnable            0x080048a9   Thumb Code    22  bsp_usart_common_com485.o(i.USART_common_com4_ClockEnable)
     i.USARTx_COMMON_DMA_Init                 0x080048c4   Section        0  bsp_usart_common_dma.o(i.USARTx_COMMON_DMA_Init)
     i.Usart485CommonComTask                  0x080048f0   Section        0  usart485_common_verify.o(i.Usart485CommonComTask)
     i.Usart_COMMON_DMA_SendFUN_ALL           0x0800496c   Section        0  bsp_usart_common_dma.o(i.Usart_COMMON_DMA_SendFUN_ALL)
@@ -6896,8 +6896,8 @@ Image Symbol Table
     _sputc                                   0x08005707   Thumb Code    10  printfa.o(i._sputc)
     i.agencylogSetLevel                      0x08005710   Section        0  log.o(i.agencylogSetLevel)
     i.calculate_TASK_NUM_MAX                 0x0800572a   Section        0  taskfun_outer.o(i.calculate_TASK_NUM_MAX)
-    i.com03_frame_process                    0x08005730   Section        0  usart485_common_verify.o(i.com03_frame_process)
-    com03_frame_process                      0x08005731   Thumb Code   144  usart485_common_verify.o(i.com03_frame_process)
+    i.com04_frame_process                    0x08005730   Section        0  usart485_common_verify.o(i.com04_frame_process)
+    com04_frame_process                      0x08005731   Thumb Code   144  usart485_common_verify.o(i.com04_frame_process)
     i.crc_16                                 0x08005888   Section        0  data_verification.o(i.crc_16)
     i.elog_output_lock                       0x080058bc   Section        0  elog.o(i.elog_output_lock)
     i.elog_port_get_t_info                   0x080058e0   Section        0  elog_port.o(i.elog_port_get_t_info)
@@ -7136,9 +7136,9 @@ Image Symbol Table
     i.AsciiToHex                             0x08100932   Section        0  data_convert.o(i.AsciiToHex)
     i.Board_MPU_Config                       0x081009a0   Section        0  bsp_mpu.o(i.Board_MPU_Config)
     i.BusFault_Handler                       0x08100a20   Section        0  stm32h7xx_it.o(i.BusFault_Handler)
-    i.COM485_COM03_GpioClockEnable           0x08100a4c   Section        0  bsp_usart_common_com485.o(i.COM485_COM03_GpioClockEnable)
-    COM485_COM03_GpioClockEnable             0x08100a4d   Thumb Code    38  bsp_usart_common_com485.o(i.COM485_COM03_GpioClockEnable)
-    i.DMA1_Stream3_IRQHandler                0x08100a78   Section        0  bsp_usart_common_dma.o(i.DMA1_Stream3_IRQHandler)
+    i.COM485_COM04_GpioClockEnable           0x08100a4c   Section        0  bsp_usart_common_com485.o(i.COM485_COM04_GpioClockEnable)
+    COM485_COM04_GpioClockEnable             0x08100a4d   Thumb Code    38  bsp_usart_common_com485.o(i.COM485_COM04_GpioClockEnable)
+    i.DMA1_Stream4_IRQHandler                0x08100a78   Section        0  bsp_usart_common_dma.o(i.DMA1_Stream4_IRQHandler)
     i.DMA_CalcDMAMUXChannelBaseAndMask       0x08100a84   Section        0  stm32h7xx_hal_dma.o(i.DMA_CalcDMAMUXChannelBaseAndMask)
     DMA_CalcDMAMUXChannelBaseAndMask         0x08100a85   Thumb Code   144  stm32h7xx_hal_dma.o(i.DMA_CalcDMAMUXChannelBaseAndMask)
     i.DMA_CheckFifoParam                     0x08100b24   Section        0  stm32h7xx_hal_dma.o(i.DMA_CheckFifoParam)
@@ -8038,7 +8038,7 @@ Image Symbol Table
     DMA1_Stream0_IRQHandler                  0x0810001b   Thumb Code     0  startup_stm32h743xx.o(.text)
     DMA1_Stream1_IRQHandler                  0x0810001b   Thumb Code     0  startup_stm32h743xx.o(.text)
     DMA1_Stream2_IRQHandler                  0x0810001b   Thumb Code     0  startup_stm32h743xx.o(.text)
-    DMA1_Stream4_IRQHandler                  0x0810001b   Thumb Code     0  startup_stm32h743xx.o(.text)
+    DMA1_Stream3_IRQHandler                  0x0810001b   Thumb Code     0  startup_stm32h743xx.o(.text)
     DMA1_Stream5_IRQHandler                  0x0810001b   Thumb Code     0  startup_stm32h743xx.o(.text)
     DMA1_Stream6_IRQHandler                  0x0810001b   Thumb Code     0  startup_stm32h743xx.o(.text)
     DMA1_Stream7_IRQHandler                  0x0810001b   Thumb Code     0  startup_stm32h743xx.o(.text)
@@ -8183,7 +8183,7 @@ Image Symbol Table
     AsciiToHex                               0x08100933   Thumb Code   110  data_convert.o(i.AsciiToHex)
     Board_MPU_Config                         0x081009a1   Thumb Code   128  bsp_mpu.o(i.Board_MPU_Config)
     BusFault_Handler                         0x08100a21   Thumb Code    16  stm32h7xx_it.o(i.BusFault_Handler)
-    DMA1_Stream3_IRQHandler                  0x08100a79   Thumb Code     6  bsp_usart_common_dma.o(i.DMA1_Stream3_IRQHandler)
+    DMA1_Stream4_IRQHandler                  0x08100a79   Thumb Code     6  bsp_usart_common_dma.o(i.DMA1_Stream4_IRQHandler)
     DWT_Delay_us                             0x08100cdd   Thumb Code    40  sys_dwt.o(i.DWT_Delay_us)
     DWT_Init                                 0x08100d11   Thumb Code    32  sys_dwt.o(i.DWT_Init)
     EXTI3_IRQHandler                         0x08100d41   Thumb Code    26  gt9xx.o(i.EXTI3_IRQHandler)
@@ -8277,7 +8277,7 @@ Image Symbol Table
     USART_Shell_UartDeInit                   0x08104fd9   Thumb Code    18  bsp_usart_shell.o(i.USART_Shell_UartDeInit)
     USART_Shell_UartInit                     0x08104ff1   Thumb Code   182  bsp_usart_shell.o(i.USART_Shell_UartInit)
     USART_TX_DMA_COMMON_Config               0x0810511d   Thumb Code   232  bsp_usart_common_dma.o(i.USART_TX_DMA_COMMON_Config)
-    USART_common_COM485_UartInit             0x08105265   Thumb Code    70  bsp_usart_common_com485.o(i.USART_common_COM485_UartInit)
+    USART_common_COM485_UartInit             0x08105265   Thumb Code    72  bsp_usart_common_com485.o(i.USART_common_COM485_UartInit)
     UsageFault_Handler                       0x08105359   Thumb Code    16  stm32h7xx_it.o(i.UsageFault_Handler)
     Usart485CommonComAppInit                 0x08105389   Thumb Code     8  usart485_common_verify.o(i.Usart485CommonComAppInit)
     Usart_SendDMA_COMMON_SaveFun             0x08105399   Thumb Code    36  bsp_usart_common_dma.o(i.Usart_SendDMA_COMMON_SaveFun)
@@ -8478,10 +8478,10 @@ Image Symbol Table
     timedelar_T_2_Task                       0x240000aa   Data           2  user_task_1.o(.data)
     GV_ndb_2                                 0x240000ac   Data           8  p_data_queue_outer.o(.data)
     GV_ndb_UsartDMAsend                      0x240000b4   Data           8  p_data_queue_outer.o(.data)
-    GV_ndb_GROUP_3                           0x240000bc   Data           8  p_data_queue_outer.o(.data)
+    GV_ndb_GROUP_4                           0x240000bc   Data           8  p_data_queue_outer.o(.data)
     GV_usartdmaSend                          0x240000c4   Data          72  bsp_usart_dma.o(.data)
     GV_usartdmaCOMMON_COM1_Send              0x2400010c   Data          72  bsp_usart_common_dma.o(.data)
-    GV_usartdmaCOMMON_COM3_Send              0x24000154   Data          72  bsp_usart_common_dma.o(.data)
+    GV_usartdmaCOMMON_COM4_Send              0x24000154   Data          72  bsp_usart_common_dma.o(.data)
     IIC_EE_currentDriver                     0x2400019c   Data           4  factory_iic.o(.data)
     touchIC                                  0x240001a0   Data           1  gt9xx.o(.data)
     mst_handle                               0x240001a8   Data           4  busi_test.o(.data)
@@ -8508,9 +8508,9 @@ Image Symbol Table
     cbCfg                                    0x240003a4   Data           8  bsp_usart_com485.o(.data)
     g_U485UsartSendCb                        0x240003ac   Data           8  bsp_usart_com485.o(.data)
     this_com_com485_Usart_Send               0x240003b4   Data           4  bsp_usart_common_com485.o(.data)
-    com03_485_cbCfg                          0x240003b8   Data           8  bsp_usart_common_com485.o(.data)
+    com04_485_cbCfg                          0x240003b8   Data           8  bsp_usart_common_com485.o(.data)
     com01_com485Inst                         0x240003c0   Data          40  bsp_usart_common_com485.o(.data)
-    com03_com485Inst                         0x240003e8   Data          40  bsp_usart_common_com485.o(.data)
+    com04_com485Inst                         0x240003e8   Data          40  bsp_usart_common_com485.o(.data)
     GV_send_run_state_data                   0x24000410   Data           2  gv_variable.o(.data)
     GV_send_run_state_bigdata                0x24000412   Data           2  gv_variable.o(.data)
     GV_send_setting_data                     0x24000414   Data           8  gv_variable.o(.data)
@@ -8530,15 +8530,15 @@ Image Symbol Table
     global_node_buff_UsartDMAsend            0x24021b1c   Data         200  p_data_queue_outer.o(.bss)
     node_data_UsartDMAsend                   0x24021be4   Data          32  p_data_queue_outer.o(.bss)
     q_tx_rx_queue_UsartDMAsend               0x24021c04   Data          28  p_data_queue_outer.o(.bss)
-    global_elems_GROUP_3                     0x24021c20   Data          32  p_data_queue_outer.o(.bss)
-    global_node_buff_GROUP_3                 0x24021c40   Data         200  p_data_queue_outer.o(.bss)
-    node_data_GROUP_3                        0x24021d08   Data          32  p_data_queue_outer.o(.bss)
-    q_tx_rx_queue_GROUP_3                    0x24021d28   Data          28  p_data_queue_outer.o(.bss)
+    global_elems_GROUP_4                     0x24021c20   Data          32  p_data_queue_outer.o(.bss)
+    global_node_buff_GROUP_4                 0x24021c40   Data         200  p_data_queue_outer.o(.bss)
+    node_data_GROUP_4                        0x24021d08   Data          32  p_data_queue_outer.o(.bss)
+    q_tx_rx_queue_GROUP_4                    0x24021d28   Data          28  p_data_queue_outer.o(.bss)
     q_tx_rx_queue_GROUP_1                    0x24021d44   Data          28  p_data_queue_outer.o(.bss)
     RcvDmaQue_COM1_Data                      0x24021d60   Data          72  bsp_usart_common_dma.o(.bss)
-    RcvDmaQue_COM3_Data                      0x24021da8   Data          72  bsp_usart_common_dma.o(.bss)
-    hdma_usartx_COM3_rx                      0x24021df0   Data         120  bsp_usart_common_dma.o(.bss)
-    hdma_usartx_COM3_tx                      0x24021e68   Data         120  bsp_usart_common_dma.o(.bss)
+    RcvDmaQue_COM4_Data                      0x24021da8   Data          72  bsp_usart_common_dma.o(.bss)
+    hdma_usartx_COM4_rx                      0x24021df0   Data         120  bsp_usart_common_dma.o(.bss)
+    hdma_usartx_COM4_tx                      0x24021e68   Data         120  bsp_usart_common_dma.o(.bss)
     shellRingBuffer                          0x24021ee0   Data          76  user_buffers.o(.bss)
     huart_shell_Handle                       0x24021f2c   Data         140  bsp_usart_shell.o(.bss)
     I2C_A_Handle                             0x24021fb8   Data          76  bsp_iic.o(.bss)
@@ -8554,9 +8554,9 @@ Image Symbol Table
     logList                                  0x24022acc   Data          20  log.o(.bss)
     huart_COM485_Handle                      0x24022ce0   Data         140  bsp_usart_com485.o(.bss)
     huart_COM01_COM485_Handle                0x24022d6c   Data         140  bsp_usart_common_com485.o(.bss)
-    huart_COM03_COM485_Handle                0x24022df8   Data         140  bsp_usart_common_com485.o(.bss)
+    huart_COM04_COM485_Handle                0x24022df8   Data         140  bsp_usart_common_com485.o(.bss)
     com01_parseBuf                           0x24022e84   Data         126  bsp_usart_common_com485.o(.bss)
-    com03_parseBuf                           0x24022f02   Data         126  bsp_usart_common_com485.o(.bss)
+    com04_parseBuf                           0x24022f02   Data         126  bsp_usart_common_com485.o(.bss)
     GV_get_vol_real_data                     0x24022f80   Data         144  gv_variable.o(.bss)
     __heap_base                              0x24023010   Data           0  startup_stm32h743xx.o(HEAP)
     __heap_limit                             0x24024210   Data           0  startup_stm32h743xx.o(HEAP)
@@ -8727,7 +8727,7 @@ Memory Map of the image
     0x080046dc   0x080046dc   0x0000006c   Code   RO        11090    i.USART_COMMON_TX_RX_DMA_ConfigALL  bsp_usart_common_dma.o
     0x08004748   0x08004748   0x000000ac   Code   RO        11091    i.USART_RX_DMA_COMMON_Config  bsp_usart_common_dma.o
     0x080047f4   0x080047f4   0x000000b4   Code   RO        11095    i.USART_TX_RX_DMA_COMMON_Config  bsp_usart_common_dma.o
-    0x080048a8   0x080048a8   0x0000001c   Code   RO        16002    i.USART_common_com3_ClockEnable  bsp_usart_common_com485.o
+    0x080048a8   0x080048a8   0x0000001c   Code   RO        16002    i.USART_common_com4_ClockEnable  bsp_usart_common_com485.o
     0x080048c4   0x080048c4   0x0000002c   Code   RO        11096    i.USARTx_COMMON_DMA_Init  bsp_usart_common_dma.o
     0x080048f0   0x080048f0   0x0000007c   Code   RO        16127    i.Usart485CommonComTask  usart485_common_verify.o
     0x0800496c   0x0800496c   0x00000018   Code   RO        11097    i.Usart_COMMON_DMA_SendFUN_ALL  bsp_usart_common_dma.o
@@ -8761,7 +8761,7 @@ Memory Map of the image
     0x08005710   0x08005710   0x0000001a   Code   RO        15821    i.agencylogSetLevel  log.o
     0x0800572a   0x0800572a   0x00000004   Code   RO        13105    i.calculate_TASK_NUM_MAX  taskfun_outer.o
     0x0800572e   0x0800572e   0x00000002   PAD
-    0x08005730   0x08005730   0x00000158   Code   RO        16128    i.com03_frame_process  usart485_common_verify.o
+    0x08005730   0x08005730   0x00000158   Code   RO        16128    i.com04_frame_process  usart485_common_verify.o
     0x08005888   0x08005888   0x00000034   Code   RO        14205    i.crc_16            data_verification.o
     0x080058bc   0x080058bc   0x00000024   Code   RO        14812    i.elog_output_lock  elog.o
     0x080058e0   0x080058e0   0x0000000c   Code   RO        15024    i.elog_port_get_t_info  elog_port.o
@@ -8972,7 +8972,7 @@ Memory Map of the image
     0x240000ac   COMPRESSED   0x00000018   Data   RW        10673    .data               p_data_queue_outer.o
     0x240000c4   COMPRESSED   0x00000048   Data   RW        11003    .data               bsp_usart_dma.o
     0x2400010c   COMPRESSED   0x00000048   Data   RW        11113    .data               bsp_usart_common_dma.o
-    0x24000154   COMPRESSED   0x00000048   Data   RW        11115    .data               bsp_usart_common_dma.o
+    0x24000154   COMPRESSED   0x00000048   Data   RW        11116    .data               bsp_usart_common_dma.o
     0x2400019c   COMPRESSED   0x00000004   Data   RW        11284    .data               factory_iic.o
     0x240001a0   COMPRESSED   0x00000002   Data   RW        12301    .data               gt9xx.o
     0x240001a2   COMPRESSED   0x00000002   PAD
@@ -8995,7 +8995,7 @@ Memory Map of the image
     0x24000324   COMPRESSED   0x00000058   Data   RW        15319    .data               shell.o
     0x2400037c   COMPRESSED   0x00000020   Data   RW        15737    .data               shell_port.o
     0x2400039c   COMPRESSED   0x00000018   Data   RW        15914    .data               bsp_usart_com485.o
-    0x240003b4   COMPRESSED   0x0000005c   Data   RW        16016    .data               bsp_usart_common_com485.o
+    0x240003b4   COMPRESSED   0x0000005c   Data   RW        16017    .data               bsp_usart_common_com485.o
     0x24000410   COMPRESSED   0x00000002   Data   RW        16304    .data               gv_variable.o
     0x24000412   COMPRESSED   0x00000002   Data   RW        16305    .data               gv_variable.o
     0x24000414   COMPRESSED   0x00000008   Data   RW        16306    .data               gv_variable.o
@@ -9018,7 +9018,7 @@ Memory Map of the image
     0x240219d8        -       0x0000036c   Zero   RW        10660    .bss                p_data_queue_outer.o
     0x24021d44        -       0x0000001c   Zero   RW        10664    .bss                p_data_queue_outer.o
     0x24021d60        -       0x00000048   Zero   RW        11102    .bss                bsp_usart_common_dma.o
-    0x24021da8        -       0x00000138   Zero   RW        11104    .bss                bsp_usart_common_dma.o
+    0x24021da8        -       0x00000138   Zero   RW        11105    .bss                bsp_usart_common_dma.o
     0x24021ee0        -       0x0000004c   Zero   RW        11483    .bss                user_buffers.o
     0x24021f2c        -       0x0000008c   Zero   RW        11626    .bss                bsp_usart_shell.o
     0x24021fb8        -       0x0000004c   Zero   RW        11698    .bss                bsp_iic.o
@@ -9033,9 +9033,9 @@ Memory Map of the image
     0x24022acc        -       0x00000214   Zero   RW        15829    .bss                log.o
     0x24022ce0        -       0x0000008c   Zero   RW        15912    .bss                bsp_usart_com485.o
     0x24022d6c        -       0x0000008c   Zero   RW        16005    .bss                bsp_usart_common_com485.o
-    0x24022df8        -       0x0000008c   Zero   RW        16007    .bss                bsp_usart_common_com485.o
+    0x24022df8        -       0x0000008c   Zero   RW        16008    .bss                bsp_usart_common_com485.o
     0x24022e84        -       0x0000007e   Zero   RW        16009    .bss                bsp_usart_common_com485.o
-    0x24022f02        -       0x0000007e   Zero   RW        16011    .bss                bsp_usart_common_com485.o
+    0x24022f02        -       0x0000007e   Zero   RW        16012    .bss                bsp_usart_common_com485.o
     0x24022f80        -       0x00000090   Zero   RW        16303    .bss                gv_variable.o
     0x24023010        -       0x00001200   Zero   RW            2    HEAP                startup_stm32h743xx.o
     0x24024210        -       0x00002400   Zero   RW            1    STACK               startup_stm32h743xx.o
@@ -9071,8 +9071,8 @@ Memory Map of the image
     0x08100932   0x08100932   0x0000006e   Code   RO        13952    i.AsciiToHex        data_convert.o
     0x081009a0   0x081009a0   0x00000080   Code   RO        11423    i.Board_MPU_Config  bsp_mpu.o
     0x08100a20   0x08100a20   0x0000002c   Code   RO        10473    i.BusFault_Handler  stm32h7xx_it.o
-    0x08100a4c   0x08100a4c   0x0000002c   Code   RO        15988    i.COM485_COM03_GpioClockEnable  bsp_usart_common_com485.o
-    0x08100a78   0x08100a78   0x0000000c   Code   RO        11083    i.DMA1_Stream3_IRQHandler  bsp_usart_common_dma.o
+    0x08100a4c   0x08100a4c   0x0000002c   Code   RO        15988    i.COM485_COM04_GpioClockEnable  bsp_usart_common_com485.o
+    0x08100a78   0x08100a78   0x0000000c   Code   RO        11083    i.DMA1_Stream4_IRQHandler  bsp_usart_common_dma.o
     0x08100a84   0x08100a84   0x000000a0   Code   RO          892    i.DMA_CalcDMAMUXChannelBaseAndMask  stm32h7xx_hal_dma.o
     0x08100b24   0x08100b24   0x00000078   Code   RO          894    i.DMA_CheckFifoParam  stm32h7xx_hal_dma.o
     0x08100b9c   0x08100b9c   0x00000140   Code   RO          895    i.DMA_SetConfig     stm32h7xx_hal_dma.o
@@ -9418,7 +9418,7 @@ Image component sizes
        204         24          0          0          0       2141   bsp_usart.o
         92         56          0          0          0       2417   bsp_usart_callback.o
         56         10          0         24        140       3029   bsp_usart_com485.o
-      1090        316         66         92        532      17571   bsp_usart_common_com485.o
+      1090        314         66         92        532      17563   bsp_usart_common_com485.o
       1146        240          0        144        384      54434   bsp_usart_common_dma.o
        184         26          0         72          0       4292   bsp_usart_dma.o
        482        140          0          0        140       4165   bsp_usart_shell.o
@@ -9503,7 +9503,7 @@ Image component sizes
         38          0          0          0          0        726   w_string.o
 
     ----------------------------------------------------------------------
-     63858      11054       5899       1072     156112    2004625   Object Totals
+     63858      11052       5899       1072     156112    2004617   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         92          0         25         13         32          0   (incl. Padding)
 
@@ -9575,9 +9575,9 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     68584      11210       6032       1088     156112    1957577   Grand Totals
-     68584      11210       6032        308     156112    1957577   ELF Image Totals (compressed)
-     68584      11210       6032        308          0          0   ROM Totals
+     68584      11208       6032       1088     156112    1957569   Grand Totals
+     68584      11208       6032        308     156112    1957569   ELF Image Totals (compressed)
+     68584      11208       6032        308          0          0   ROM Totals
 
 ==============================================================================
 

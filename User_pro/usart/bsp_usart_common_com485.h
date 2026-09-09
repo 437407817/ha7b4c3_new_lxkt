@@ -144,7 +144,7 @@
 
 #define USE_COM03_COM485_IT_1				1
 
-#define USE_COM03_COM485_FUN        1   
+#define USE_COM03_COM485_FUN        0   
 /************************ COM04 配置（替换原USART6） ************************/
 
 //串口波特率
@@ -185,7 +185,7 @@
 
 #define USE_COM04_COM485_IT_1				1
 
-#define USE_COM04_COM485_FUN        0   
+#define USE_COM04_COM485_FUN        1   
 
 
 

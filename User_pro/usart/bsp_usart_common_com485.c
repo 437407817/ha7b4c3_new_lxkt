@@ -334,8 +334,8 @@ void USART_common_COM485_UartInit(void)
                         USART_COM03_COM485_IRQ,
                         10,        //抢占优先级
                         0,         //子优先级
-                        USART_COM02_IDLE_IT_STATUS,         //enableIdleIt
-                        USART_COM02_RXNE_IT_STATUS,          //enableRxneIt
+                        USART_COM03_IDLE_IT_STATUS,         //enableIdleIt
+                        USART_COM03_RXNE_IT_STATUS,          //enableRxneIt
                         USART_common_com3_ClockEnable) != HAL_OK)
     {
         Error_Handler();
@@ -348,8 +348,8 @@ void USART_common_COM485_UartInit(void)
                         USART_COM04_COM485_IRQ,
                         10,        //抢占优先级
                         0,         //子优先级
-                        USART_COM03_IDLE_IT_STATUS,         //enableIdleIt
-                        USART_COM03_RXNE_IT_STATUS,          //enableRxneIt
+                        USART_COM04_IDLE_IT_STATUS,         //enableIdleIt
+                        USART_COM04_RXNE_IT_STATUS,          //enableRxneIt
                         USART_common_com4_ClockEnable) != HAL_OK)
     {
         Error_Handler();
