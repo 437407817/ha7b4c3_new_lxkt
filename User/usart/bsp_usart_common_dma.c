@@ -27,36 +27,36 @@
 
 //  #include "./usart/bsp_usart.h"
 /* USER CODE BEGIN 0 */
-DMA_HandleTypeDef hdma_usartx_COM1_rx;
-DMA_HandleTypeDef hdma_usartx_COM1_tx;
+DMA_HandleTypeDef hdma_usartx_COM01_rx;
+DMA_HandleTypeDef hdma_usartx_COM01_tx;
 
-DMA_HandleTypeDef hdma_usartx_COM2_rx;
-DMA_HandleTypeDef hdma_usartx_COM2_tx;
+DMA_HandleTypeDef hdma_usartx_COM02_rx;
+DMA_HandleTypeDef hdma_usartx_COM02_tx;
 
-DMA_HandleTypeDef hdma_usartx_COM3_rx;
-DMA_HandleTypeDef hdma_usartx_COM3_tx;
+DMA_HandleTypeDef hdma_usartx_COM03_rx;
+DMA_HandleTypeDef hdma_usartx_COM03_tx;
 
-DMA_HandleTypeDef hdma_usartx_COM4_rx;
-DMA_HandleTypeDef hdma_usartx_COM4_tx;
+DMA_HandleTypeDef hdma_usartx_COM04_rx;
+DMA_HandleTypeDef hdma_usartx_COM04_tx;
 
-DMA_HandleTypeDef hdma_usartx_COM5_rx;
-DMA_HandleTypeDef hdma_usartx_COM5_tx;
+DMA_HandleTypeDef hdma_usartx_COM05_rx;
+DMA_HandleTypeDef hdma_usartx_COM05_tx;
 
-DMA_HandleTypeDef hdma_usartx_COM6_rx;
-DMA_HandleTypeDef hdma_usartx_COM6_tx;
+DMA_HandleTypeDef hdma_usartx_COM06_rx;
+DMA_HandleTypeDef hdma_usartx_COM06_tx;
 //extern UART_HandleTypeDef huart_DMA_Handle;
 
-STR_RCV_DMA_que_data RcvDmaQue_COM1_Data={0};
+STR_RCV_DMA_que_data RcvDmaQue_COM01_Data={0};
 
-STR_RCV_DMA_que_data RcvDmaQue_COM2_Data={0};
+STR_RCV_DMA_que_data RcvDmaQue_COM02_Data={0};
 
-STR_RCV_DMA_que_data RcvDmaQue_COM3_Data={0};
+STR_RCV_DMA_que_data RcvDmaQue_COM03_Data={0};
 
-STR_RCV_DMA_que_data RcvDmaQue_COM4_Data={0};
+STR_RCV_DMA_que_data RcvDmaQue_COM04_Data={0};
 
-STR_RCV_DMA_que_data RcvDmaQue_COM5_Data={0};
+STR_RCV_DMA_que_data RcvDmaQue_COM05_Data={0};
 
-STR_RCV_DMA_que_data RcvDmaQue_COM6_Data={0};
+STR_RCV_DMA_que_data RcvDmaQue_COM06_Data={0};
 
 
 
@@ -77,7 +77,7 @@ extern SemaphoreHandle_t g_com_uart_send_sem;
 extern __IO uint32_t NowUse_rtos;
 	#endif
 
-str_DMA_usart_send GV_usartdmaCOMMON_COM1_Send = {
+str_DMA_usart_send GV_usartdmaCOMMON_COM01_Send = {
     .send_data = {0},  // 数组初始化为全0（字符串结束符+无效数据清0）
     .uart_tx_justSaveOver = 0,  // 初始化为未保存完成
     .uart_tx_thisdatas_sendover = 0,      // 初始化为未发送完成
@@ -90,7 +90,7 @@ str_DMA_usart_send GV_usartdmaCOMMON_COM1_Send = {
 
 
 
-str_DMA_usart_send GV_usartdmaCOMMON_COM2_Send = {
+str_DMA_usart_send GV_usartdmaCOMMON_COM02_Send = {
     .send_data = {0},  // 数组初始化为全0（字符串结束符+无效数据清0）
     .uart_tx_justSaveOver = 0,  // 初始化为未保存完成
     .uart_tx_thisdatas_sendover = 0,      // 初始化为未发送完成
@@ -101,32 +101,7 @@ str_DMA_usart_send GV_usartdmaCOMMON_COM2_Send = {
     .last_tx_complete_time = 0  // 初始无上次触发时间
 };
 
-str_DMA_usart_send GV_usartdmaCOMMON_COM3_Send = {
-    .send_data = {0},  // 数组初始化为全0（字符串结束符+无效数据清0）
-    .uart_tx_justSaveOver = 0,  // 初始化为未保存完成
-    .uart_tx_thisdatas_sendover = 0,      // 初始化为未发送完成
-    .read_out_len = 0,          // 初始读取长度为0
-    .daret = 0,                 // 按需初始化（根据实际用途设值）
-    .complete_timeout = TX_WAITTING_TIMEOUT,   // 超时阈值3000ms（可按需调整）
-    .current_time = 0,          // 初始时间设0（后续用HAL_GetTick()更新）
-    .last_tx_complete_time = 0  // 初始无上次触发时间
-};
-
-
-
-str_DMA_usart_send GV_usartdmaCOMMON_COM4_Send = {
-    .send_data = {0},  // 数组初始化为全0（字符串结束符+无效数据清0）
-    .uart_tx_justSaveOver = 0,  // 初始化为未保存完成
-    .uart_tx_thisdatas_sendover = 0,      // 初始化为未发送完成
-    .read_out_len = 0,          // 初始读取长度为0
-    .daret = 0,                 // 按需初始化（根据实际用途设值）
-    .complete_timeout = TX_WAITTING_TIMEOUT,   // 超时阈值3000ms（可按需调整）
-    .current_time = 0,          // 初始时间设0（后续用HAL_GetTick()更新）
-    .last_tx_complete_time = 0  // 初始无上次触发时间
-};
-
-
-str_DMA_usart_send GV_usartdmaCOMMON_COM5_Send = {
+str_DMA_usart_send GV_usartdmaCOMMON_COM03_Send = {
     .send_data = {0},  // 数组初始化为全0（字符串结束符+无效数据清0）
     .uart_tx_justSaveOver = 0,  // 初始化为未保存完成
     .uart_tx_thisdatas_sendover = 0,      // 初始化为未发送完成
@@ -139,7 +114,32 @@ str_DMA_usart_send GV_usartdmaCOMMON_COM5_Send = {
 
 
 
-str_DMA_usart_send GV_usartdmaCOMMON_COM6_Send = {
+str_DMA_usart_send GV_usartdmaCOMMON_COM04_Send = {
+    .send_data = {0},  // 数组初始化为全0（字符串结束符+无效数据清0）
+    .uart_tx_justSaveOver = 0,  // 初始化为未保存完成
+    .uart_tx_thisdatas_sendover = 0,      // 初始化为未发送完成
+    .read_out_len = 0,          // 初始读取长度为0
+    .daret = 0,                 // 按需初始化（根据实际用途设值）
+    .complete_timeout = TX_WAITTING_TIMEOUT,   // 超时阈值3000ms（可按需调整）
+    .current_time = 0,          // 初始时间设0（后续用HAL_GetTick()更新）
+    .last_tx_complete_time = 0  // 初始无上次触发时间
+};
+
+
+str_DMA_usart_send GV_usartdmaCOMMON_COM05_Send = {
+    .send_data = {0},  // 数组初始化为全0（字符串结束符+无效数据清0）
+    .uart_tx_justSaveOver = 0,  // 初始化为未保存完成
+    .uart_tx_thisdatas_sendover = 0,      // 初始化为未发送完成
+    .read_out_len = 0,          // 初始读取长度为0
+    .daret = 0,                 // 按需初始化（根据实际用途设值）
+    .complete_timeout = TX_WAITTING_TIMEOUT,   // 超时阈值3000ms（可按需调整）
+    .current_time = 0,          // 初始时间设0（后续用HAL_GetTick()更新）
+    .last_tx_complete_time = 0  // 初始无上次触发时间
+};
+
+
+
+str_DMA_usart_send GV_usartdmaCOMMON_COM06_Send = {
     .send_data = {0},  // 数组初始化为全0（字符串结束符+无效数据清0）
     .uart_tx_justSaveOver = 0,  // 初始化为未保存完成
     .uart_tx_thisdatas_sendover = 0,      // 初始化为未发送完成
@@ -325,7 +325,7 @@ void HAL_UART_COMMON_TxCpltCallback(UART_HandleTypeDef *huart)
 	#if USE_COM01_COM485_FUN
     if(huart->Instance == DMA_COM01_USARTx)
     {
-        UART_COMMON_DmaTxCpltProcess(&GV_usartdmaCOMMON_COM1_Send);
+        UART_COMMON_DmaTxCpltProcess(&GV_usartdmaCOMMON_COM01_Send);
 //			SYSTEM_INFO("8*");
     }
 		
@@ -335,14 +335,14 @@ void HAL_UART_COMMON_TxCpltCallback(UART_HandleTypeDef *huart)
 		 
 		if(huart->Instance == DMA_COM02_USARTx)
     {
-        UART_COMMON_DmaTxCpltProcess(&GV_usartdmaCOMMON_COM2_Send);
+        UART_COMMON_DmaTxCpltProcess(&GV_usartdmaCOMMON_COM02_Send);
 //			SYSTEM_INFO("8*");
     }
 		#endif
 		#if USE_COM03_COM485_FUN
 		 if(huart->Instance == DMA_COM03_USARTx)
     {
-        UART_COMMON_DmaTxCpltProcess(&GV_usartdmaCOMMON_COM3_Send);
+        UART_COMMON_DmaTxCpltProcess(&GV_usartdmaCOMMON_COM03_Send);
 //			SYSTEM_INFO("8*");
     }
 		#endif
@@ -350,14 +350,14 @@ void HAL_UART_COMMON_TxCpltCallback(UART_HandleTypeDef *huart)
 		
 		if(huart->Instance == DMA_COM04_USARTx)
     {
-        UART_COMMON_DmaTxCpltProcess(&GV_usartdmaCOMMON_COM4_Send);
+        UART_COMMON_DmaTxCpltProcess(&GV_usartdmaCOMMON_COM04_Send);
 //			SYSTEM_INFO("8*");
     }
 				#endif
 		#if USE_COM05_COM485_FUN
 		 if(huart->Instance == DMA_COM05_USARTx)
     {
-        UART_COMMON_DmaTxCpltProcess(&GV_usartdmaCOMMON_COM5_Send);
+        UART_COMMON_DmaTxCpltProcess(&GV_usartdmaCOMMON_COM05_Send);
 //			SYSTEM_INFO("8*");
     }
 		#endif
@@ -365,7 +365,7 @@ void HAL_UART_COMMON_TxCpltCallback(UART_HandleTypeDef *huart)
 		
 		if(huart->Instance == DMA_COM06_USARTx)
     {
-        UART_COMMON_DmaTxCpltProcess(&GV_usartdmaCOMMON_COM6_Send);
+        UART_COMMON_DmaTxCpltProcess(&GV_usartdmaCOMMON_COM06_Send);
 //			SYSTEM_INFO("8*");
     }
 				#endif		
@@ -487,22 +487,22 @@ USART_TX_RX_DMA_COMMON_Config(com01_com485Inst.huart_handle,
         DMA_COM01_STREAMx_TX,
         DMA_COM01_STREAM_IRQ_TX,
         DMA_COM01_REQUEST_USART_TX,
-        &hdma_usartx_COM1_tx,
+        &hdma_usartx_COM01_tx,
 				USE_UART_COMMON_COM01_DMA_TX,
 
         DMA_COM01_STREAMx_RX,
         DMA_COM01_STREAM_IRQ_RX,
         DMA_COM01_REQUEST_USART_RX,
-        &hdma_usartx_COM1_rx,
+        &hdma_usartx_COM01_rx,
 				USE_UART_COMMON_COM01_DMA_RX,
 
         USARTx_DMA_COM01_IRQ,
 
-        &RcvDmaQue_COM1_Data.g_uartRingBuf,
-        RcvDmaQue_COM1_Data.g_ringBufData,
+        &RcvDmaQue_COM01_Data.g_uartRingBuf,
+        RcvDmaQue_COM01_Data.g_ringBufData,
         MAX_RING_BUFF_COM01_SIZE,
 
-        RcvDmaQue_COM1_Data.g_rcvDataBuf,
+        RcvDmaQue_COM01_Data.g_rcvDataBuf,
         MAX_BUF_COM01_R_SIZE);
 #endif	
 
@@ -514,19 +514,19 @@ USART_TX_RX_DMA_COMMON_Config(com02_com485Inst.huart_handle,
         DMA_COM02_STREAMx_TX,
         DMA_COM02_STREAM_IRQ_TX,
         DMA_COM02_REQUEST_USART_TX,
-        &hdma_usartx_COM2_tx,
+        &hdma_usartx_COM02_tx,
 				USE_UART_COMMON_COM02_DMA_TX,
 
         DMA_COM02_STREAMx_RX,
         DMA_COM02_STREAM_IRQ_RX,
         DMA_COM02_REQUEST_USART_RX,
-        &hdma_usartx_COM2_rx,
+        &hdma_usartx_COM02_rx,
 				USE_UART_COMMON_COM02_DMA_RX,
 				
         USARTx_DMA_COM02_IRQ,
 
-        &RcvDmaQue_COM2_Data.g_uartRingBuf,
-        RcvDmaQue_COM2_Data.g_ringBufData,
+        &RcvDmaQue_COM02_Data.g_uartRingBuf,
+        RcvDmaQue_COM02_Data.g_ringBufData,
         MAX_RING_BUFF_COM02_SIZE,
 
         RcvDmaQue_COM2_Data.g_rcvDataBuf,
@@ -543,16 +543,16 @@ USART_TX_RX_DMA_COMMON_Config(com03_com485Inst.huart_handle,
         DMA_COM03_STREAMx_RX,
         DMA_COM03_STREAM_IRQ_RX,
         DMA_COM03_REQUEST_USART_RX,
-        &hdma_usartx_COM3_rx,
+        &hdma_usartx_COM03_rx,
 				USE_UART_COMMON_COM03_DMA_RX,
 
         USARTx_DMA_COM03_IRQ,
 
-        &RcvDmaQue_COM3_Data.g_uartRingBuf,
-        RcvDmaQue_COM3_Data.g_ringBufData,
+        &RcvDmaQue_COM03_Data.g_uartRingBuf,
+        RcvDmaQue_COM03_Data.g_ringBufData,
         MAX_RING_BUFF_COM03_SIZE,
 
-        RcvDmaQue_COM3_Data.g_rcvDataBuf,
+        RcvDmaQue_COM03_Data.g_rcvDataBuf,
         MAX_BUF_COM03_R_SIZE);
 #endif	
 #if USE_COM04_COM485_FUN	&& USE_UART_COMMON_COM04_DMA
@@ -571,11 +571,11 @@ USART_TX_RX_DMA_COMMON_Config(com04_com485Inst.huart_handle,
 
         USARTx_DMA_COM04_IRQ,
 
-        &RcvDmaQue_COM4_Data.g_uartRingBuf,
-        RcvDmaQue_COM4_Data.g_ringBufData,
+        &RcvDmaQue_COM04_Data.g_uartRingBuf,
+        RcvDmaQue_COM04_Data.g_ringBufData,
         MAX_RING_BUFF_COM04_SIZE,
 
-        RcvDmaQue_COM4_Data.g_rcvDataBuf,
+        RcvDmaQue_COM04_Data.g_rcvDataBuf,
         MAX_BUF_COM04_R_SIZE);	
 #endif	
 #if USE_COM05_COM485_FUN	&& USE_UART_COMMON_COM05_DMA
@@ -583,7 +583,7 @@ USART_TX_RX_DMA_COMMON_Config(com05_com485Inst.huart_handle,
         DMA_COM05_STREAMx_TX,
         DMA_COM05_STREAM_IRQ_TX,
         DMA_COM05_REQUEST_USART_TX,
-        &hdma_usartx_COM5_tx,
+        &hdma_usartx_COM05_tx,
 				USE_UART_COMMON_COM05_DMA_TX,
 
         DMA_COM05_STREAMx_RX,
@@ -594,11 +594,11 @@ USART_TX_RX_DMA_COMMON_Config(com05_com485Inst.huart_handle,
 
         USARTx_DMA_COM05_IRQ,
 
-        &RcvDmaQue_COM5_Data.g_uartRingBuf,
-        RcvDmaQue_COM5_Data.g_ringBufData,
+        &RcvDmaQue_COM05_Data.g_uartRingBuf,
+        RcvDmaQue_COM05_Data.g_ringBufData,
         MAX_RING_BUFF_COM05_SIZE,
 
-        RcvDmaQue_COM5_Data.g_rcvDataBuf,
+        RcvDmaQue_COM05_Data.g_rcvDataBuf,
         MAX_BUF_COM05_R_SIZE);	
 #endif	
 #if USE_COM06_COM485_FUN	&& USE_UART_COMMON_COM06_DMA
@@ -606,22 +606,22 @@ USART_TX_RX_DMA_COMMON_Config(com06_com485Inst.huart_handle,
         DMA_COM06_STREAMx_TX,
         DMA_COM06_STREAM_IRQ_TX,
         DMA_COM06_REQUEST_USART_TX,
-        &hdma_usartx_COM6_tx,
+        &hdma_usartx_COM06_tx,
 				USE_UART_COMMON_COM06_DMA_TX,
 
         DMA_COM06_STREAMx_RX,
         DMA_COM06_STREAM_IRQ_RX,
         DMA_COM06_REQUEST_USART_RX,
-        &hdma_usartx_COM6_rx,
+        &hdma_usartx_COM06_rx,
 				USE_UART_COMMON_COM06_DMA_RX,
 
         USARTx_DMA_COM06_IRQ,
 
-        &RcvDmaQue_COM6_Data.g_uartRingBuf,
-        RcvDmaQue_COM6_Data.g_ringBufData,
+        &RcvDmaQue_COM06_Data.g_uartRingBuf,
+        RcvDmaQue_COM06_Data.g_ringBufData,
         MAX_RING_BUFF_COM06_SIZE,
 
-        RcvDmaQue_COM6_Data.g_rcvDataBuf,
+        RcvDmaQue_COM06_Data.g_rcvDataBuf,
         MAX_BUF_COM06_R_SIZE);	
 #endif	
 
@@ -1099,7 +1099,7 @@ void UART_COMMON_DmaIdleProcess(UART_HandleTypeDef *huart,
 #if (USE_UART_COMMON_COM01_DMA_RX&&USE_COM01_COM485_FUN)
 void USARTx_DMA_COM01_IRQHandler(void)
 {
-    UART_COMMON_DmaIdleProcess(com01_com485Inst.huart_handle, &hdma_usartx_COM1_rx, &RcvDmaQue_COM1_Data);
+    UART_COMMON_DmaIdleProcess(com01_com485Inst.huart_handle, &hdma_usartx_COM01_rx, &RcvDmaQue_COM01_Data);
     HAL_UART_IRQHandler(com01_com485Inst.huart_handle);
 }
 #endif
@@ -1107,7 +1107,7 @@ void USARTx_DMA_COM01_IRQHandler(void)
 #if (USE_UART_COMMON_COM02_DMA_RX&&USE_COM02_COM485_FUN)
 void USARTx_DMA_COM02_IRQHandler(void)
 {
-    UART_COMMON_DmaIdleProcess(com02_com485Inst.huart_handle, &hdma_usartx_COM2_rx, &RcvDmaQue_COM2_Data);
+    UART_COMMON_DmaIdleProcess(com02_com485Inst.huart_handle, &hdma_usartx_COM02_rx, &RcvDmaQue_COM02_Data);
     HAL_UART_IRQHandler(com02_com485Inst.huart_handle);
 //	SYSTEM_INFO("PPPP");
 }
@@ -1116,7 +1116,7 @@ void USARTx_DMA_COM02_IRQHandler(void)
 #if (USE_UART_COMMON_COM03_DMA_RX&&USE_COM03_COM485_FUN)
 void USARTx_DMA_COM03_IRQHandler(void)
 {
-    UART_COMMON_DmaIdleProcess(com03_com485Inst.huart_handle, &hdma_usartx_COM3_rx, &RcvDmaQue_COM3_Data);
+    UART_COMMON_DmaIdleProcess(com03_com485Inst.huart_handle, &hdma_usartx_COM03_rx, &RcvDmaQue_COM03_Data);
     HAL_UART_IRQHandler(com03_com485Inst.huart_handle);
 }
 #endif
@@ -1124,7 +1124,7 @@ void USARTx_DMA_COM03_IRQHandler(void)
 #if (USE_UART_COMMON_COM04_DMA_RX&&USE_COM04_COM485_FUN)
 void USARTx_DMA_COM04_IRQHandler(void)
 {
-    UART_COMMON_DmaIdleProcess(com04_com485Inst.huart_handle, &hdma_usartx_COM4_rx, &RcvDmaQue_COM4_Data);
+    UART_COMMON_DmaIdleProcess(com04_com485Inst.huart_handle, &hdma_usartx_COM04_rx, &RcvDmaQue_COM04_Data);
     HAL_UART_IRQHandler(com04_com485Inst.huart_handle);
 }
 #endif
@@ -1132,7 +1132,7 @@ void USARTx_DMA_COM04_IRQHandler(void)
 #if (USE_UART_COMMON_COM05_DMA_RX&&USE_COM05_COM485_FUN)
 void USARTx_DMA_COM05_IRQHandler(void)
 {
-    UART_COMMON_DmaIdleProcess(com05_com485Inst.huart_handle, &hdma_usartx_COM5_rx, &RcvDmaQue_COM5_Data);
+    UART_COMMON_DmaIdleProcess(com05_com485Inst.huart_handle, &hdma_usartx_COM05_rx, &RcvDmaQue_COM05_Data);
     HAL_UART_IRQHandler(com05_com485Inst.huart_handle);
 }
 #endif
@@ -1140,7 +1140,7 @@ void USARTx_DMA_COM05_IRQHandler(void)
 #if (USE_UART_COMMON_COM06_DMA_RX&&USE_COM06_COM485_FUN)
 void USARTx_DMA_COM06_IRQHandler(void)
 {
-    UART_COMMON_DmaIdleProcess(com06_com485Inst.huart_handle, &hdma_usartx_COM6_rx, &RcvDmaQue_COM6_Data);
+    UART_COMMON_DmaIdleProcess(com06_com485Inst.huart_handle, &hdma_usartx_COM06_rx, &RcvDmaQue_COM06_Data);
     HAL_UART_IRQHandler(com06_com485Inst.huart_handle);
 }
 #endif
@@ -1185,12 +1185,12 @@ void USARTx_DMA_COM06_IRQHandler(void)
 
 #if (USE_UART_COMMON_COM01_DMA_RX && USE_COM01_COM485_FUN)
 
-void DMA_com1_rx_Streamx_IRQHandler(void)
+void DMA_COM01_rx_Streamx_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
 
   /* USER CODE END DMA2_Stream2_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_usartx_COM1_rx);
+  HAL_DMA_IRQHandler(&hdma_usartx_COM01_rx);
   /* USER CODE BEGIN DMA2_Stream2_IRQn 1 */
 
   /* USER CODE END DMA2_Stream2_IRQn 1 */
@@ -1201,12 +1201,12 @@ void DMA_com1_rx_Streamx_IRQHandler(void)
 
 
 #if (USE_UART_COMMON_COM01_DMA_TX && USE_COM01_COM485_FUN)
-void DMA_com1_tx_Streamx_IRQHandler(void)
+void DMA_COM01_tx_Streamx_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
 
   /* USER CODE END DMA2_Stream2_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_usartx_COM1_tx);
+  HAL_DMA_IRQHandler(&hdma_usartx_COM01_tx);
   /* USER CODE BEGIN DMA2_Stream2_IRQn 1 */
 
   /* USER CODE END DMA2_Stream2_IRQn 1 */
@@ -1216,12 +1216,12 @@ void DMA_com1_tx_Streamx_IRQHandler(void)
 
 #if (USE_UART_COMMON_COM02_DMA_RX && USE_COM02_COM485_FUN)
 
-void DMA_com2_rx_Streamx_IRQHandler(void)
+void DMA_COM02_rx_Streamx_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
 
   /* USER CODE END DMA2_Stream2_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_usartx_COM2_rx);
+  HAL_DMA_IRQHandler(&hdma_usartx_COM02_rx);
   /* USER CODE BEGIN DMA2_Stream2_IRQn 1 */
 
   /* USER CODE END DMA2_Stream2_IRQn 1 */
@@ -1232,12 +1232,12 @@ void DMA_com2_rx_Streamx_IRQHandler(void)
 
 
 #if (USE_UART_COMMON_COM02_DMA_TX && USE_COM02_COM485_FUN)
-void DMA_com2_tx_Streamx_IRQHandler(void)
+void DMA_COM02_tx_Streamx_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
 
   /* USER CODE END DMA2_Stream2_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_usartx_COM2_tx);
+  HAL_DMA_IRQHandler(&hdma_usartx_COM02_tx);
   /* USER CODE BEGIN DMA2_Stream2_IRQn 1 */
 
   /* USER CODE END DMA2_Stream2_IRQn 1 */
@@ -1246,12 +1246,12 @@ void DMA_com2_tx_Streamx_IRQHandler(void)
 
 #if (USE_UART_COMMON_COM03_DMA_RX && USE_COM03_COM485_FUN)
 
-void DMA_com3_rx_Streamx_IRQHandler(void)
+void DMA_COM03_rx_Streamx_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
 
   /* USER CODE END DMA2_Stream2_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_usartx_COM3_rx);
+  HAL_DMA_IRQHandler(&hdma_usartx_COM03_rx);
   /* USER CODE BEGIN DMA2_Stream2_IRQn 1 */
 
   /* USER CODE END DMA2_Stream2_IRQn 1 */
@@ -1262,12 +1262,12 @@ void DMA_com3_rx_Streamx_IRQHandler(void)
 
 
 #if (USE_UART_COMMON_COM03_DMA_TX && USE_COM03_COM485_FUN)
-void DMA_com3_tx_Streamx_IRQHandler(void)
+void DMA_COM03_tx_Streamx_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
 
   /* USER CODE END DMA2_Stream2_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_usartx_COM3_tx);
+  HAL_DMA_IRQHandler(&hdma_usartx_COM03_tx);
   /* USER CODE BEGIN DMA2_Stream2_IRQn 1 */
 
   /* USER CODE END DMA2_Stream2_IRQn 1 */
@@ -1277,12 +1277,12 @@ void DMA_com3_tx_Streamx_IRQHandler(void)
 
 #if (USE_UART_COMMON_COM04_DMA_RX && USE_COM04_COM485_FUN)
 
-void DMA_com4_rx_Streamx_IRQHandler(void)
+void DMA_COM04_rx_Streamx_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
 
   /* USER CODE END DMA2_Stream2_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_usartx_COM4_rx);
+  HAL_DMA_IRQHandler(&hdma_usartx_COM04_rx);
   /* USER CODE BEGIN DMA2_Stream2_IRQn 1 */
 
   /* USER CODE END DMA2_Stream2_IRQn 1 */
@@ -1293,12 +1293,12 @@ void DMA_com4_rx_Streamx_IRQHandler(void)
 
 
 #if (USE_UART_COMMON_COM04_DMA_TX && USE_COM04_COM485_FUN)
-void DMA_com4_tx_Streamx_IRQHandler(void)
+void DMA_COM04_tx_Streamx_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
 
   /* USER CODE END DMA2_Stream2_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_usartx_COM4_tx);
+  HAL_DMA_IRQHandler(&hdma_usartx_COM04_tx);
   /* USER CODE BEGIN DMA2_Stream2_IRQn 1 */
 
   /* USER CODE END DMA2_Stream2_IRQn 1 */
@@ -1308,12 +1308,12 @@ void DMA_com4_tx_Streamx_IRQHandler(void)
 
 #if (USE_UART_COMMON_COM05_DMA_RX && USE_COM05_COM485_FUN)
 
-void DMA_com5_rx_Streamx_IRQHandler(void)
+void DMA_COM05_rx_Streamx_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
 
   /* USER CODE END DMA2_Stream2_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_usartx_COM5_rx);
+  HAL_DMA_IRQHandler(&hdma_usartx_COM05_rx);
   /* USER CODE BEGIN DMA2_Stream2_IRQn 1 */
 
   /* USER CODE END DMA2_Stream2_IRQn 1 */
@@ -1324,12 +1324,12 @@ void DMA_com5_rx_Streamx_IRQHandler(void)
 
 
 #if (USE_UART_COMMON_COM05_DMA_TX && USE_COM05_COM485_FUN)
-void DMA_com5_tx_Streamx_IRQHandler(void)
+void DMA_COM05_tx_Streamx_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
 
   /* USER CODE END DMA2_Stream2_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_usartx_COM5_tx);
+  HAL_DMA_IRQHandler(&hdma_usartx_COM05_tx);
   /* USER CODE BEGIN DMA2_Stream2_IRQn 1 */
 
   /* USER CODE END DMA2_Stream2_IRQn 1 */
@@ -1338,12 +1338,12 @@ void DMA_com5_tx_Streamx_IRQHandler(void)
 
 #if (USE_UART_COMMON_COM06_DMA_RX && USE_COM06_COM485_FUN)
 
-void DMA_com6_rx_Streamx_IRQHandler(void)
+void DMA_COM06_rx_Streamx_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
 
   /* USER CODE END DMA2_Stream2_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_usartx_COM6_rx);
+  HAL_DMA_IRQHandler(&hdma_usartx_COM06_rx);
   /* USER CODE BEGIN DMA2_Stream2_IRQn 1 */
 
   /* USER CODE END DMA2_Stream2_IRQn 1 */
@@ -1353,12 +1353,12 @@ void DMA_com6_rx_Streamx_IRQHandler(void)
 
 
 #if (USE_UART_COMMON_COM06_DMA_TX && USE_COM06_COM485_FUN)
-void DMA_com6_tx_Streamx_IRQHandler(void)
+void DMA_COM06_tx_Streamx_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
 
   /* USER CODE END DMA2_Stream2_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_usartx_COM6_tx);
+  HAL_DMA_IRQHandler(&hdma_usartx_COM06_tx);
   /* USER CODE BEGIN DMA2_Stream2_IRQn 1 */
 
   /* USER CODE END DMA2_Stream2_IRQn 1 */

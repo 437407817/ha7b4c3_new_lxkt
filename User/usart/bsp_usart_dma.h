@@ -120,12 +120,12 @@ extern STR_RCV_DMA_que_data RcvDmaQueData;
 
 
 
-extern STR_RCV_DMA_que_data RcvDmaQue_COM1_Data;
-extern STR_RCV_DMA_que_data RcvDmaQue_COM2_Data;
-extern STR_RCV_DMA_que_data RcvDmaQue_COM3_Data;
-extern STR_RCV_DMA_que_data RcvDmaQue_COM4_Data;
-extern STR_RCV_DMA_que_data RcvDmaQue_COM5_Data;
-extern STR_RCV_DMA_que_data RcvDmaQue_COM6_Data;
+extern STR_RCV_DMA_que_data RcvDmaQue_COM01_Data;
+extern STR_RCV_DMA_que_data RcvDmaQue_COM02_Data;
+extern STR_RCV_DMA_que_data RcvDmaQue_COM03_Data;
+extern STR_RCV_DMA_que_data RcvDmaQue_COM04_Data;
+extern STR_RCV_DMA_que_data RcvDmaQue_COM05_Data;
+extern STR_RCV_DMA_que_data RcvDmaQue_COM06_Data;
 
 
 

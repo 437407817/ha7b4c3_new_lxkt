@@ -11,8 +11,8 @@
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
+  * in the root directory of this software COM0ponent.
+  * If no LICENSE file COM0es with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -35,16 +35,16 @@ extern "C" {
 /* USER CODE BEGIN Includes */
  #include "./buffer/p_data_queue_outer.h"
  #include "./buffer/queue3.h"
- #include "./pro_com/usart485verify.h"
+ #include "./pro_COM/usart485verify.h"
  
  #include "./usart/bsp_usart_dma.h"
- #include "./usart/bsp_usart_common_com485.h"
+ #include "./usart/bsp_usart_COMMON_COM485.h"
 //#include "./usart/p_data_queue.h"
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN Private defines */
 
-//#define TX_COMPLETE_TIMEOUT 3000 
+//#define TX_COM0PLETE_TIMEOUT 3000 
 //#define TX_WAITTING_TIMEOUT 5000  
 
 
@@ -69,14 +69,14 @@ extern "C" {
 #define DMA_COM01_STREAM_IRQ_TX 												DMA1_Stream1_IRQn
 #define DMA_COM01_REQUEST_USART_TX 											USART_COM01_DMA_REQUEST_USART_TX
 
-#define DMA_com1_tx_Streamx_IRQHandler							DMA1_Stream1_IRQHandler
+#define DMA_COM01_tx_Streamx_IRQHandler							DMA1_Stream1_IRQHandler
 
 
 #define DMA_COM01_STREAMx_RX 														DMA2_Stream1
 #define DMA_COM01_STREAM_IRQ_RX 												DMA2_Stream1_IRQn
 #define DMA_COM01_REQUEST_USART_RX 											USART_COM01_DMA_REQUEST_USART_RX
 
-#define DMA_com1_rx_Streamx_IRQHandler							DMA2_Stream1_IRQHandler
+#define DMA_COM01_rx_Streamx_IRQHandler							DMA2_Stream1_IRQHandler
 
 
 
@@ -104,14 +104,14 @@ extern "C" {
 #define DMA_COM02_STREAM_IRQ_TX 												DMA1_Stream2_IRQn
 #define DMA_COM02_REQUEST_USART_TX 											USART_COM02_DMA_REQUEST_USART_TX
 
-#define DMA_com2_tx_Streamx_IRQHandler							DMA1_Stream2_IRQHandler
+#define DMA_COM02_tx_Streamx_IRQHandler							DMA1_Stream2_IRQHandler
 
 
 #define DMA_COM02_STREAMx_RX 														DMA2_Stream2
 #define DMA_COM02_STREAM_IRQ_RX 												DMA2_Stream2_IRQn
 #define DMA_COM02_REQUEST_USART_RX 											USART_COM02_DMA_REQUEST_USART_RX
 
-#define DMA_com2_rx_Streamx_IRQHandler							DMA2_Stream2_IRQHandler
+#define DMA_COM02_rx_Streamx_IRQHandler							DMA2_Stream2_IRQHandler
 
 
 #define USE_UART_COMMON_COM02_DMA 1
@@ -136,14 +136,14 @@ extern "C" {
 #define DMA_COM03_STREAM_IRQ_TX 												DMA1_Stream3_IRQn
 #define DMA_COM03_REQUEST_USART_TX 											USART_COM03_DMA_REQUEST_USART_TX
 
-#define DMA_com3_tx_Streamx_IRQHandler							DMA1_Stream3_IRQHandler
+#define DMA_COM03_tx_Streamx_IRQHandler							DMA1_Stream3_IRQHandler
 
 
 #define DMA_COM03_STREAMx_RX 														DMA2_Stream3
 #define DMA_COM03_STREAM_IRQ_RX 												DMA2_Stream3_IRQn
 #define DMA_COM03_REQUEST_USART_RX 											USART_COM03_DMA_REQUEST_USART_RX
 
-#define DMA_com3_rx_Streamx_IRQHandler							DMA2_Stream3_IRQHandler
+#define DMA_COM03_rx_Streamx_IRQHandler							DMA2_Stream3_IRQHandler
 
 
 
@@ -170,14 +170,14 @@ extern "C" {
 #define DMA_COM04_STREAM_IRQ_TX 												DMA1_Stream4_IRQn
 #define DMA_COM04_REQUEST_USART_TX 											USART_COM04_DMA_REQUEST_USART_TX
 
-#define DMA_com4_tx_Streamx_IRQHandler							DMA1_Stream4_IRQHandler
+#define DMA_COM04_tx_Streamx_IRQHandler							DMA1_Stream4_IRQHandler
 
 
 #define DMA_COM04_STREAMx_RX 														DMA2_Stream4
 #define DMA_COM04_STREAM_IRQ_RX 												DMA2_Stream4_IRQn
 #define DMA_COM04_REQUEST_USART_RX 											USART_COM04_DMA_REQUEST_USART_RX
 
-#define DMA_com4_rx_Streamx_IRQHandler							DMA2_Stream4_IRQHandler
+#define DMA_COM04_rx_Streamx_IRQHandler							DMA2_Stream4_IRQHandler
 
 
 
@@ -203,14 +203,14 @@ extern "C" {
 #define DMA_COM05_STREAM_IRQ_TX 												DMA1_Stream5_IRQn
 #define DMA_COM05_REQUEST_USART_TX 											USART_COM05_DMA_REQUEST_USART_TX
 
-#define DMA_com5_tx_Streamx_IRQHandler							DMA1_Stream5_IRQHandler
+#define DMA_COM05_tx_Streamx_IRQHandler							DMA1_Stream5_IRQHandler
 
 
 #define DMA_COM05_STREAMx_RX 														DMA2_Stream5
 #define DMA_COM05_STREAM_IRQ_RX 												DMA2_Stream5_IRQn
 #define DMA_COM05_REQUEST_USART_RX 											USART_COM05_DMA_REQUEST_USART_RX
 
-#define DMA_com5_rx_Streamx_IRQHandler							DMA2_Stream5_IRQHandler
+#define DMA_COM05_rx_Streamx_IRQHandler							DMA2_Stream5_IRQHandler
 
 
 
@@ -235,14 +235,14 @@ extern "C" {
 #define DMA_COM06_STREAM_IRQ_TX 												DMA1_Stream6_IRQn
 #define DMA_COM06_REQUEST_USART_TX 											USART_COM06_DMA_REQUEST_USART_TX
 
-#define DMA_com6_tx_Streamx_IRQHandler							DMA1_Stream6_IRQHandler
+#define DMA_COM06_tx_Streamx_IRQHandler							DMA1_Stream6_IRQHandler
 
 
 #define DMA_COM06_STREAMx_RX 														DMA2_Stream6
 #define DMA_COM06_STREAM_IRQ_RX 												DMA2_Stream6_IRQn
 #define DMA_COM06_REQUEST_USART_RX 											USART_COM06_DMA_REQUEST_USART_RX
 
-#define DMA_com6_rx_Streamx_IRQHandler							DMA2_Stream6_IRQHandler
+#define DMA_COM06_rx_Streamx_IRQHandler							DMA2_Stream6_IRQHandler
 
 
 
@@ -274,13 +274,13 @@ extern "C" {
 
 extern STR_RCV_DMA_que_data RcvDmaQueData;
 
-extern str_DMA_usart_send GV_usartdmaCOMMON_COM1_Send;
-extern str_DMA_usart_send GV_usartdmaCOMMON_COM2_Send;
-extern str_DMA_usart_send GV_usartdmaCOMMON_COM3_Send;
-extern str_DMA_usart_send GV_usartdmaCOMMON_COM4_Send;
+extern str_DMA_usart_send GV_usartdmaCOMMON_COM01_Send;
+extern str_DMA_usart_send GV_usartdmaCOMMON_COM02_Send;
+extern str_DMA_usart_send GV_usartdmaCOMMON_COM03_Send;
+extern str_DMA_usart_send GV_usartdmaCOMMON_COM04_Send;
 
-extern str_DMA_usart_send GV_usartdmaCOMMON_COM5_Send;
-extern str_DMA_usart_send GV_usartdmaCOMMON_COM6_Send;
+extern str_DMA_usart_send GV_usartdmaCOMMON_COM05_Send;
+extern str_DMA_usart_send GV_usartdmaCOMMON_COM06_Send;
 
 
 

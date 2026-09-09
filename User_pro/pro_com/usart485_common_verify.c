@@ -36,37 +36,37 @@
 //static uint8_t g_rcvDataBuf[MAX_BUF_SIZE];
 //static QueueType_t g_rcvQueue;
 
-extern STR_RCV_DMA_que_data RcvDmaQue_COM1_Data;
+extern STR_RCV_DMA_que_data RcvDmaQue_COM01_Data;
 
-extern STR_RCV_DMA_que_data RcvDmaQue_COM2_Data;
+extern STR_RCV_DMA_que_data RcvDmaQue_COM02_Data;
 
-extern STR_RCV_DMA_que_data RcvDmaQue_COM3_Data;
+extern STR_RCV_DMA_que_data RcvDmaQue_COM03_Data;
 
-extern STR_RCV_DMA_que_data RcvDmaQue_COM4_Data;
+extern STR_RCV_DMA_que_data RcvDmaQue_COM04_Data;
 
-extern STR_RCV_DMA_que_data RcvDmaQue_COM5_Data;
+extern STR_RCV_DMA_que_data RcvDmaQue_COM05_Data;
 
-extern STR_RCV_DMA_que_data RcvDmaQue_COM6_Data;
+extern STR_RCV_DMA_que_data RcvDmaQue_COM06_Data;
 
 
 //extern STR_RCV_DMA_que_data Rcv_Common_DmaQueData_Com1;
-#define g_com01_rcvDataBuf RcvDmaQue_COM1_Data.g_ringBufData
-#define g_com01_rcvQueue RcvDmaQue_COM1_Data.g_uartRingBuf
+#define g_com01_rcvDataBuf RcvDmaQue_COM01_Data.g_ringBufData
+#define g_com01_rcvQueue RcvDmaQue_COM01_Data.g_uartRingBuf
 
-#define g_com02_rcvDataBuf RcvDmaQue_COM2_Data.g_ringBufData
-#define g_com02_rcvQueue RcvDmaQue_COM2_Data.g_uartRingBuf
+#define g_com02_rcvDataBuf RcvDmaQue_COM02_Data.g_ringBufData
+#define g_com02_rcvQueue RcvDmaQue_COM02_Data.g_uartRingBuf
 
-#define g_com03_rcvDataBuf RcvDmaQue_COM3_Data.g_ringBufData
-#define g_com03_rcvQueue RcvDmaQue_COM3_Data.g_uartRingBuf
+#define g_com03_rcvDataBuf RcvDmaQue_COM03_Data.g_ringBufData
+#define g_com03_rcvQueue RcvDmaQue_COM03_Data.g_uartRingBuf
 
-#define g_com04_rcvDataBuf RcvDmaQue_COM4_Data.g_ringBufData
-#define g_com04_rcvQueue RcvDmaQue_COM4_Data.g_uartRingBuf
+#define g_com04_rcvDataBuf RcvDmaQue_COM04_Data.g_ringBufData
+#define g_com04_rcvQueue RcvDmaQue_COM04_Data.g_uartRingBuf
 
-#define g_com05_rcvDataBuf RcvDmaQue_COM5_Data.g_ringBufData
-#define g_com05_rcvQueue RcvDmaQue_COM5_Data.g_uartRingBuf
+#define g_com05_rcvDataBuf RcvDmaQue_COM05_Data.g_ringBufData
+#define g_com05_rcvQueue RcvDmaQue_COM05_Data.g_uartRingBuf
 
-#define g_com06_rcvDataBuf RcvDmaQue_COM6_Data.g_ringBufData
-#define g_com06_rcvQueue RcvDmaQue_COM6_Data.g_uartRingBuf
+#define g_com06_rcvDataBuf RcvDmaQue_COM06_Data.g_ringBufData
+#define g_com06_rcvQueue RcvDmaQue_COM06_Data.g_uartRingBuf
 
 
 

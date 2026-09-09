@@ -98,14 +98,14 @@ UartComInstance com01_com485Inst = {
     .huart_handle = &huart_COM01_COM485_Handle,
     .sendCbStore = {0},
 
-    .pRcvQueue      = &RcvDmaQue_COM1_Data.g_uartRingBuf,
+    .pRcvQueue      = &RcvDmaQue_COM01_Data.g_uartRingBuf,
     .parseBuf       = com01_parseBuf,
     .parseBufLen    = COM01_PARSE_BUF_SIZE,
 
     .pRxByteCb      = NULL,
     .pSlaveProcCb   = NULL,
 		    /* DMA发送成员 */
-    .pDmaSendCtrl   = &GV_usartdmaCOMMON_COM1_Send,
+    .pDmaSendCtrl   = &GV_usartdmaCOMMON_COM01_Send,
     .pTxQueue       = &q_tx_rx_queue_GROUP_1,
 };
 
@@ -114,14 +114,14 @@ UartComInstance com02_com485Inst = {
     .huart_handle = &huart_COM02_COM485_Handle,
     .sendCbStore = {0},
 
-    .pRcvQueue      = &RcvDmaQue_COM2_Data.g_uartRingBuf,
+    .pRcvQueue      = &RcvDmaQue_COM02_Data.g_uartRingBuf,
     .parseBuf       = com02_parseBuf,
     .parseBufLen    = COM02_PARSE_BUF_SIZE,
 
     .pRxByteCb      = NULL,
     .pSlaveProcCb   = NULL,
 		    /* DMA发送成员 */
-    .pDmaSendCtrl   = &GV_usartdmaCOMMON_COM2_Send,
+    .pDmaSendCtrl   = &GV_usartdmaCOMMON_COM02_Send,
     .pTxQueue       = &q_tx_rx_queue_GROUP_2,
 };
 
@@ -129,14 +129,14 @@ UartComInstance com03_com485Inst = {
     .huart_handle = &huart_COM03_COM485_Handle,
     .sendCbStore = {0},
 
-    .pRcvQueue      = &RcvDmaQue_COM3_Data.g_uartRingBuf,
+    .pRcvQueue      = &RcvDmaQue_COM03_Data.g_uartRingBuf,
     .parseBuf       = com03_parseBuf,
     .parseBufLen    = COM03_PARSE_BUF_SIZE,
 
     .pRxByteCb      = NULL,
     .pSlaveProcCb   = NULL,
 		    /* DMA发送成员 */
-    .pDmaSendCtrl   = &GV_usartdmaCOMMON_COM3_Send,
+    .pDmaSendCtrl   = &GV_usartdmaCOMMON_COM03_Send,
     .pTxQueue       = &q_tx_rx_queue_GROUP_3,
 };
 
@@ -145,14 +145,14 @@ UartComInstance com04_com485Inst = {
     .huart_handle = &huart_COM04_COM485_Handle,
     .sendCbStore = {0},
 
-    .pRcvQueue      = &RcvDmaQue_COM4_Data.g_uartRingBuf,
+    .pRcvQueue      = &RcvDmaQue_COM04_Data.g_uartRingBuf,
     .parseBuf       = com04_parseBuf,
     .parseBufLen    = COM04_PARSE_BUF_SIZE,
 
     .pRxByteCb      = NULL,
     .pSlaveProcCb   = NULL,
 		    /* DMA发送成员 */
-    .pDmaSendCtrl   = &GV_usartdmaCOMMON_COM4_Send,
+    .pDmaSendCtrl   = &GV_usartdmaCOMMON_COM04_Send,
     .pTxQueue       = &q_tx_rx_queue_GROUP_4,
 };
 
@@ -160,14 +160,14 @@ UartComInstance com05_com485Inst = {
     .huart_handle = &huart_COM05_COM485_Handle,
     .sendCbStore = {0},
 
-    .pRcvQueue      = &RcvDmaQue_COM5_Data.g_uartRingBuf,
+    .pRcvQueue      = &RcvDmaQue_COM05_Data.g_uartRingBuf,
     .parseBuf       = com05_parseBuf,
     .parseBufLen    = COM05_PARSE_BUF_SIZE,
 
     .pRxByteCb      = NULL,
     .pSlaveProcCb   = NULL,
 		    /* DMA发送成员 */
-    .pDmaSendCtrl   = &GV_usartdmaCOMMON_COM5_Send,
+    .pDmaSendCtrl   = &GV_usartdmaCOMMON_COM05_Send,
     .pTxQueue       = &q_tx_rx_queue_GROUP_5,
 };
 
@@ -176,14 +176,14 @@ UartComInstance com06_com485Inst = {
     .huart_handle = &huart_COM06_COM485_Handle,
     .sendCbStore = {0},
 
-    .pRcvQueue      = &RcvDmaQue_COM6_Data.g_uartRingBuf,
+    .pRcvQueue      = &RcvDmaQue_COM06_Data.g_uartRingBuf,
     .parseBuf       = com06_parseBuf,
     .parseBufLen    = COM06_PARSE_BUF_SIZE,
 
     .pRxByteCb      = NULL,
     .pSlaveProcCb   = NULL,
 		    /* DMA发送成员 */
-    .pDmaSendCtrl   = &GV_usartdmaCOMMON_COM6_Send,
+    .pDmaSendCtrl   = &GV_usartdmaCOMMON_COM06_Send,
     .pTxQueue       = &q_tx_rx_queue_GROUP_6,
 };
 
@@ -304,37 +304,37 @@ HAL_StatusTypeDef UART_Common_Init(UART_HandleTypeDef *huart,
 
 
 #if USE_COM01_COM485_FUN
-static void USART_common_com1_ClockEnable(void)
+static void USART_common_COM01_ClockEnable(void)
 {
     USART_COM01_COM485_CLK_ENABLE();
 }
 	#endif
 		#if USE_COM02_COM485_FUN
-static void USART_common_com2_ClockEnable(void)
+static void USART_common_COM02_ClockEnable(void)
 {
     USART_COM02_COM485_CLK_ENABLE();
 }
 	#endif
 		#if USE_COM03_COM485_FUN
-static void USART_common_com3_ClockEnable(void)
+static void USART_common_COM03_ClockEnable(void)
 {
     USART_COM03_COM485_CLK_ENABLE();
 }
 	#endif
 	#if USE_COM04_COM485_FUN
-static void USART_common_com4_ClockEnable(void)
+static void USART_common_COM04_ClockEnable(void)
 {
     USART_COM04_COM485_CLK_ENABLE();
 }
 	#endif
 		#if USE_COM05_COM485_FUN
-static void USART_common_com5_ClockEnable(void)
+static void USART_common_COM05_ClockEnable(void)
 {
     USART_COM05_COM485_CLK_ENABLE();
 }
 	#endif
 	#if USE_COM06_COM485_FUN
-static void USART_common_com6_ClockEnable(void)
+static void USART_common_COM06_ClockEnable(void)
 {
     USART_COM06_COM485_CLK_ENABLE();
 }
@@ -366,7 +366,7 @@ void USART_common_COM485_UartInit(void)
                         0,         //子优先级
                         USART_COM01_IDLE_IT_STATUS,         //enableIdleIt
                         USART_COM01_RXNE_IT_STATUS,          //enableRxneIt
-                        USART_common_com1_ClockEnable) != HAL_OK)
+                        USART_common_COM01_ClockEnable) != HAL_OK)
     {
         Error_Handler();
     }
@@ -380,7 +380,7 @@ void USART_common_COM485_UartInit(void)
                         0,         //子优先级
                         USART_COM02_IDLE_IT_STATUS,         //enableIdleIt
                         USART_COM02_RXNE_IT_STATUS,          //enableRxneIt
-                        USART_common_com2_ClockEnable) != HAL_OK)
+                        USART_common_COM02_ClockEnable) != HAL_OK)
     {
         Error_Handler();
     }
@@ -394,7 +394,7 @@ void USART_common_COM485_UartInit(void)
                         0,         //子优先级
                         USART_COM03_IDLE_IT_STATUS,         //enableIdleIt
                         USART_COM03_RXNE_IT_STATUS,          //enableRxneIt
-                        USART_common_com3_ClockEnable) != HAL_OK)
+                        USART_common_COM03_ClockEnable) != HAL_OK)
     {
         Error_Handler();
     }
@@ -408,7 +408,7 @@ void USART_common_COM485_UartInit(void)
                         0,         //子优先级
                         USART_COM04_IDLE_IT_STATUS,         //enableIdleIt
                         USART_COM04_RXNE_IT_STATUS,          //enableRxneIt
-                        USART_common_com4_ClockEnable) != HAL_OK)
+                        USART_common_COM04_ClockEnable) != HAL_OK)
     {
         Error_Handler();
     }
@@ -423,7 +423,7 @@ void USART_common_COM485_UartInit(void)
                         0,         //子优先级
                         USART_COM05_IDLE_IT_STATUS,         //enableIdleIt
                         USART_COM05_RXNE_IT_STATUS,          //enableRxneIt
-                        USART_common_com5_ClockEnable) != HAL_OK)
+                        USART_common_COM05_ClockEnable) != HAL_OK)
     {
         Error_Handler();
     }
@@ -437,7 +437,7 @@ void USART_common_COM485_UartInit(void)
                         0,         //子优先级
                         USART_COM06_IDLE_IT_STATUS,         //enableIdleIt
                         USART_COM06_RXNE_IT_STATUS,          //enableRxneIt
-                        USART_common_com6_ClockEnable) != HAL_OK)
+                        USART_common_COM06_ClockEnable) != HAL_OK)
     {
         Error_Handler();
     }

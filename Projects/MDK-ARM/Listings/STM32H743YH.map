@@ -3699,7 +3699,7 @@ Section Cross References
     bsp_usart_common_com485.o(i.USART_common_COM485_UartInit) refers to bsp_usart_common_com485.o(i.UART_Common_Init) for UART_Common_Init
     bsp_usart_common_com485.o(i.USART_common_COM485_UartInit) refers to segger_rtt.o(i.SEGGER_RTT_SetTerminal) for SEGGER_RTT_SetTerminal
     bsp_usart_common_com485.o(i.USART_common_COM485_UartInit) refers to segger_rtt_printf.o(i.SEGGER_RTT_printf) for SEGGER_RTT_printf
-    bsp_usart_common_com485.o(i.USART_common_COM485_UartInit) refers to bsp_usart_common_com485.o(i.USART_common_com6_ClockEnable) for USART_common_com6_ClockEnable
+    bsp_usart_common_com485.o(i.USART_common_COM485_UartInit) refers to bsp_usart_common_com485.o(i.USART_common_COM06_ClockEnable) for USART_common_COM06_ClockEnable
     bsp_usart_common_com485.o(i.USART_common_COM485_UartInit) refers to bsp_usart_common_com485.o(.data) for .data
     bsp_usart_common_com485.o(i.UartRxPushToQueueCb) refers to queue3.o(i.QueuePush) for QueuePush
     bsp_usart_common_com485.o(i.UartRxPushToQueueCb) refers to segger_rtt.o(i.SEGGER_RTT_SetTerminal) for SEGGER_RTT_SetTerminal
@@ -3719,34 +3719,34 @@ Section Cross References
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(i.Wrapper_U485ComSendDmaSaveDataFunc) for Wrapper_U485ComSendDmaSaveDataFunc
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(i.Wrapper_U485ComSendAllFunc) for Wrapper_U485ComSendAllFunc
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for huart_COM01_COM485_Handle
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM1_Data
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM01_Data
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for com01_parseBuf
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM1_Send
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM01_Send
     bsp_usart_common_com485.o(.data) refers to p_data_queue_outer.o(.bss) for q_tx_rx_queue_GROUP_1
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for huart_COM06_COM485_Handle
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM6_Data
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM06_Data
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for com06_parseBuf
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM6_Send
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM06_Send
     bsp_usart_common_com485.o(.data) refers to p_data_queue_outer.o(.bss) for q_tx_rx_queue_GROUP_6
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for huart_COM02_COM485_Handle
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM2_Data
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM02_Data
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for com02_parseBuf
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM2_Send
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM02_Send
     bsp_usart_common_com485.o(.data) refers to p_data_queue_outer.o(.bss) for q_tx_rx_queue_GROUP_2
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for huart_COM03_COM485_Handle
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM3_Data
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM03_Data
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for com03_parseBuf
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM3_Send
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM03_Send
     bsp_usart_common_com485.o(.data) refers to p_data_queue_outer.o(.bss) for q_tx_rx_queue_GROUP_3
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for huart_COM04_COM485_Handle
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM4_Data
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM04_Data
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for com04_parseBuf
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM4_Send
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM04_Send
     bsp_usart_common_com485.o(.data) refers to p_data_queue_outer.o(.bss) for q_tx_rx_queue_GROUP_4
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for huart_COM05_COM485_Handle
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM5_Data
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.bss) for RcvDmaQue_COM05_Data
     bsp_usart_common_com485.o(.data) refers to bsp_usart_common_com485.o(.bss) for com05_parseBuf
-    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM5_Send
+    bsp_usart_common_com485.o(.data) refers to bsp_usart_common_dma.o(.data) for GV_usartdmaCOMMON_COM05_Send
     bsp_usart_common_com485.o(.data) refers to p_data_queue_outer.o(.bss) for q_tx_rx_queue_GROUP_5
     usart485_common_verify.o(i.Usart485CommonComAppInit) refers to usart485_common_verify.o(i.UART_INST_SetSlaveCb) for UART_INST_SetSlaveCb
     usart485_common_verify.o(i.Usart485CommonComAppInit) refers to usart485_common_verify.o(i.com06_frame_process) for com06_frame_process
@@ -6905,9 +6905,9 @@ Image Symbol Table
     i.USART_RX_DMA_COMMON_Config             0x08004bb8   Section        0  bsp_usart_common_dma.o(i.USART_RX_DMA_COMMON_Config)
     i.USART_Shell_UartInit                   0x08004c64   Section        0  bsp_usart_shell.o(i.USART_Shell_UartInit)
     i.USART_TX_DMA_COMMON_Config             0x08004d90   Section        0  bsp_usart_common_dma.o(i.USART_TX_DMA_COMMON_Config)
-    i.USART_common_COM485_UartInit           0x08004ed8   Section        0  bsp_usart_common_com485.o(i.USART_common_COM485_UartInit)
-    i.USART_common_com6_ClockEnable          0x08004f8c   Section        0  bsp_usart_common_com485.o(i.USART_common_com6_ClockEnable)
-    USART_common_com6_ClockEnable            0x08004f8d   Thumb Code    22  bsp_usart_common_com485.o(i.USART_common_com6_ClockEnable)
+    i.USART_common_COM06_ClockEnable         0x08004ed8   Section        0  bsp_usart_common_com485.o(i.USART_common_COM06_ClockEnable)
+    USART_common_COM06_ClockEnable           0x08004ed9   Thumb Code    22  bsp_usart_common_com485.o(i.USART_common_COM06_ClockEnable)
+    i.USART_common_COM485_UartInit           0x08004ef4   Section        0  bsp_usart_common_com485.o(i.USART_common_COM485_UartInit)
     i.USARTx_COMMON_DMA_Init                 0x08004fa8   Section        0  bsp_usart_common_dma.o(i.USARTx_COMMON_DMA_Init)
     i.Usart485CommonComTask                  0x08004fd4   Section        0  usart485_common_verify.o(i.Usart485CommonComTask)
     i.Usart_COMMON_DMA_SendFUN_ALL           0x08005050   Section        0  bsp_usart_common_dma.o(i.Usart_COMMON_DMA_SendFUN_ALL)
@@ -8054,7 +8054,7 @@ Image Symbol Table
     USART_RX_DMA_COMMON_Config               0x08004bb9   Thumb Code    84  bsp_usart_common_dma.o(i.USART_RX_DMA_COMMON_Config)
     USART_Shell_UartInit                     0x08004c65   Thumb Code   182  bsp_usart_shell.o(i.USART_Shell_UartInit)
     USART_TX_DMA_COMMON_Config               0x08004d91   Thumb Code   232  bsp_usart_common_dma.o(i.USART_TX_DMA_COMMON_Config)
-    USART_common_COM485_UartInit             0x08004ed9   Thumb Code    70  bsp_usart_common_com485.o(i.USART_common_COM485_UartInit)
+    USART_common_COM485_UartInit             0x08004ef5   Thumb Code    70  bsp_usart_common_com485.o(i.USART_common_COM485_UartInit)
     USARTx_COMMON_DMA_Init                   0x08004fa9   Thumb Code    38  bsp_usart_common_dma.o(i.USARTx_COMMON_DMA_Init)
     Usart485CommonComTask                    0x08004fd5   Thumb Code    90  usart485_common_verify.o(i.Usart485CommonComTask)
     Usart_COMMON_DMA_SendFUN_ALL             0x08005051   Thumb Code    10  bsp_usart_common_dma.o(i.Usart_COMMON_DMA_SendFUN_ALL)
@@ -8530,8 +8530,8 @@ Image Symbol Table
     GV_ndb_UsartDMAsend                      0x240000b4   Data           8  p_data_queue_outer.o(.data)
     GV_ndb_GROUP_6                           0x240000bc   Data           8  p_data_queue_outer.o(.data)
     GV_usartdmaSend                          0x240000c4   Data          72  bsp_usart_dma.o(.data)
-    GV_usartdmaCOMMON_COM1_Send              0x2400010c   Data          72  bsp_usart_common_dma.o(.data)
-    GV_usartdmaCOMMON_COM6_Send              0x24000154   Data          72  bsp_usart_common_dma.o(.data)
+    GV_usartdmaCOMMON_COM01_Send             0x2400010c   Data          72  bsp_usart_common_dma.o(.data)
+    GV_usartdmaCOMMON_COM06_Send             0x24000154   Data          72  bsp_usart_common_dma.o(.data)
     IIC_EE_currentDriver                     0x2400019c   Data           4  factory_iic.o(.data)
     touchIC                                  0x240001a0   Data           1  gt9xx.o(.data)
     mst_handle                               0x240001a8   Data           4  busi_test.o(.data)
@@ -8585,10 +8585,10 @@ Image Symbol Table
     node_data_GROUP_6                        0x24021d08   Data          32  p_data_queue_outer.o(.bss)
     q_tx_rx_queue_GROUP_6                    0x24021d28   Data          28  p_data_queue_outer.o(.bss)
     q_tx_rx_queue_GROUP_1                    0x24021d44   Data          28  p_data_queue_outer.o(.bss)
-    RcvDmaQue_COM1_Data                      0x24021d60   Data          72  bsp_usart_common_dma.o(.bss)
-    RcvDmaQue_COM6_Data                      0x24021da8   Data          72  bsp_usart_common_dma.o(.bss)
-    hdma_usartx_COM6_rx                      0x24021df0   Data         120  bsp_usart_common_dma.o(.bss)
-    hdma_usartx_COM6_tx                      0x24021e68   Data         120  bsp_usart_common_dma.o(.bss)
+    RcvDmaQue_COM01_Data                     0x24021d60   Data          72  bsp_usart_common_dma.o(.bss)
+    RcvDmaQue_COM06_Data                     0x24021da8   Data          72  bsp_usart_common_dma.o(.bss)
+    hdma_usartx_COM06_rx                     0x24021df0   Data         120  bsp_usart_common_dma.o(.bss)
+    hdma_usartx_COM06_tx                     0x24021e68   Data         120  bsp_usart_common_dma.o(.bss)
     shellRingBuffer                          0x24021ee0   Data          76  user_buffers.o(.bss)
     huart_shell_Handle                       0x24021f2c   Data         140  bsp_usart_shell.o(.bss)
     I2C_A_Handle                             0x24021fb8   Data          76  bsp_iic.o(.bss)
@@ -8627,48 +8627,48 @@ Memory Map of the image
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08000000   0x08000000   0x00000298   Data   RO            3    RESET               startup_stm32h743xx.o
-    0x08000298   0x08000298   0x00000000   Code   RO        16516  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x08000298   0x08000298   0x00000004   Code   RO        16871    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x0800029c   0x0800029c   0x00000004   Code   RO        16874    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x080002a0   0x080002a0   0x00000000   Code   RO        16876    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x080002a0   0x080002a0   0x00000000   Code   RO        16878    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x080002a0   0x080002a0   0x00000008   Code   RO        16879    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x080002a8   0x080002a8   0x00000000   Code   RO        16881    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
-    0x080002a8   0x080002a8   0x00000000   Code   RO        16883    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
-    0x080002a8   0x080002a8   0x00000004   Code   RO        16872    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x08000298   0x08000298   0x00000000   Code   RO        16519  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x08000298   0x08000298   0x00000004   Code   RO        16874    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x0800029c   0x0800029c   0x00000004   Code   RO        16877    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x080002a0   0x080002a0   0x00000000   Code   RO        16879    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x080002a0   0x080002a0   0x00000000   Code   RO        16881    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x080002a0   0x080002a0   0x00000008   Code   RO        16882    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x080002a8   0x080002a8   0x00000000   Code   RO        16884    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
+    0x080002a8   0x080002a8   0x00000000   Code   RO        16886    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
+    0x080002a8   0x080002a8   0x00000004   Code   RO        16875    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x080002ac   0x080002ac   0x00000024   Code   RO            4    .text               startup_stm32h743xx.o
-    0x080002d0   0x080002d0   0x00000062   Code   RO        16519    .text               mc_w.l(uldiv.o)
-    0x08000332   0x08000332   0x00000040   Code   RO        16554    .text               mc_w.l(memmovea.o)
-    0x08000372   0x08000372   0x00000024   Code   RO        16558    .text               mc_w.l(strstr.o)
-    0x08000396   0x08000396   0x0000000e   Code   RO        16562    .text               mc_w.l(strlen.o)
-    0x080003a4   0x080003a4   0x00000012   Code   RO        16570    .text               mc_w.l(strcpy.o)
-    0x080003b6   0x080003b6   0x0000001e   Code   RO        16572    .text               mc_w.l(strncmp.o)
-    0x080003d4   0x080003d4   0x0000001a   Code   RO        16869    .text               mc_w.l(atoi.o)
-    0x080003ee   0x080003ee   0x0000014e   Code   RO        16904    .text               mf_w.l(dadd.o)
-    0x0800053c   0x0800053c   0x000000e4   Code   RO        16906    .text               mf_w.l(dmul.o)
-    0x08000620   0x08000620   0x000000de   Code   RO        16908    .text               mf_w.l(ddiv.o)
-    0x080006fe   0x080006fe   0x00000030   Code   RO        16910    .text               mf_w.l(dfixul.o)
+    0x080002d0   0x080002d0   0x00000062   Code   RO        16522    .text               mc_w.l(uldiv.o)
+    0x08000332   0x08000332   0x00000040   Code   RO        16557    .text               mc_w.l(memmovea.o)
+    0x08000372   0x08000372   0x00000024   Code   RO        16561    .text               mc_w.l(strstr.o)
+    0x08000396   0x08000396   0x0000000e   Code   RO        16565    .text               mc_w.l(strlen.o)
+    0x080003a4   0x080003a4   0x00000012   Code   RO        16573    .text               mc_w.l(strcpy.o)
+    0x080003b6   0x080003b6   0x0000001e   Code   RO        16575    .text               mc_w.l(strncmp.o)
+    0x080003d4   0x080003d4   0x0000001a   Code   RO        16872    .text               mc_w.l(atoi.o)
+    0x080003ee   0x080003ee   0x0000014e   Code   RO        16907    .text               mf_w.l(dadd.o)
+    0x0800053c   0x0800053c   0x000000e4   Code   RO        16909    .text               mf_w.l(dmul.o)
+    0x08000620   0x08000620   0x000000de   Code   RO        16911    .text               mf_w.l(ddiv.o)
+    0x080006fe   0x080006fe   0x00000030   Code   RO        16913    .text               mf_w.l(dfixul.o)
     0x0800072e   0x0800072e   0x00000002   PAD
-    0x08000730   0x08000730   0x00000024   Code   RO        16914    .text               mc_w.l(init.o)
-    0x08000754   0x08000754   0x00000024   Code   RO        16916    .text               mc_w.l(llsshr.o)
-    0x08000778   0x08000778   0x0000009e   Code   RO        16918    .text               mc_w.l(_strtoul.o)
-    0x08000816   0x08000816   0x000000ba   Code   RO        16920    .text               mf_w.l(depilogue.o)
-    0x080008d0   0x080008d0   0x0000001c   Code   RO        16922    .text               mc_w.l(_chval.o)
-    0x080008ec   0x080008ec   0x00000010   Code   RO        13706    i.AppSemaTaskScheduleInit  tasksema.o
-    0x080008fc   0x080008fc   0x00000018   Code   RO        13048    i.AppTaskScheduleInit  taskfun.o
-    0x08000914   0x08000914   0x00000036   Code   RO        13981    i.AsciiRemoveSpace02  data_convert.o
-    0x0800094a   0x0800094a   0x00000058   Code   RO        11452    i.BSP_MPU_ConfigRegion  bsp_mpu.o
+    0x08000730   0x08000730   0x00000024   Code   RO        16917    .text               mc_w.l(init.o)
+    0x08000754   0x08000754   0x00000024   Code   RO        16919    .text               mc_w.l(llsshr.o)
+    0x08000778   0x08000778   0x0000009e   Code   RO        16921    .text               mc_w.l(_strtoul.o)
+    0x08000816   0x08000816   0x000000ba   Code   RO        16923    .text               mf_w.l(depilogue.o)
+    0x080008d0   0x080008d0   0x0000001c   Code   RO        16925    .text               mc_w.l(_chval.o)
+    0x080008ec   0x080008ec   0x00000010   Code   RO        13709    i.AppSemaTaskScheduleInit  tasksema.o
+    0x080008fc   0x080008fc   0x00000018   Code   RO        13051    i.AppTaskScheduleInit  taskfun.o
+    0x08000914   0x08000914   0x00000036   Code   RO        13984    i.AsciiRemoveSpace02  data_convert.o
+    0x0800094a   0x0800094a   0x00000058   Code   RO        11455    i.BSP_MPU_ConfigRegion  bsp_mpu.o
     0x080009a2   0x080009a2   0x00000002   PAD
     0x080009a4   0x080009a4   0x0000000c   Code   RO        11094    i.DMA2_Stream6_IRQHandler  bsp_usart_common_dma.o
     0x080009b0   0x080009b0   0x000000a0   Code   RO          892    i.DMA_CalcDMAMUXChannelBaseAndMask  stm32h7xx_hal_dma.o
     0x08000a50   0x08000a50   0x0000007c   Code   RO          893    i.DMA_CalcDMAMUXRequestGenBaseAndMask  stm32h7xx_hal_dma.o
-    0x08000acc   0x08000acc   0x00000010   Code   RO        12882    i.DWT_Delay_ms      sys_dwt.o
+    0x08000acc   0x08000acc   0x00000010   Code   RO        12885    i.DWT_Delay_ms      sys_dwt.o
     0x08000adc   0x08000adc   0x00000002   Code   RO        10474    i.DebugMon_Handler  stm32h7xx_it.o
     0x08000ade   0x08000ade   0x00000002   PAD
-    0x08000ae0   0x08000ae0   0x00000020   Code   RO        12295    i.EXTI3_IRQHandler  gt9xx.o
-    0x08000b00   0x08000b00   0x00000022   Code   RO        13987    i.EndianSwap_VpChange16HL  data_convert.o
+    0x08000ae0   0x08000ae0   0x00000020   Code   RO        12298    i.EXTI3_IRQHandler  gt9xx.o
+    0x08000b00   0x08000b00   0x00000022   Code   RO        13990    i.EndianSwap_VpChange16HL  data_convert.o
     0x08000b22   0x08000b22   0x00000002   PAD
-    0x08000b24   0x08000b24   0x0000000c   Code   RO        12997    i.GetSysRunTime     systick.o
+    0x08000b24   0x08000b24   0x0000000c   Code   RO        13000    i.GetSysRunTime     systick.o
     0x08000b30   0x08000b30   0x0000023c   Code   RO          896    i.HAL_DMA_Abort     stm32h7xx_hal_dma.o
     0x08000d6c   0x08000d6c   0x000001f8   Code   RO          898    i.HAL_DMA_DeInit    stm32h7xx_hal_dma.o
     0x08000f64   0x08000f64   0x00000004   Code   RO          899    i.HAL_DMA_GetError  stm32h7xx_hal_dma.o
@@ -8703,30 +8703,30 @@ Memory Map of the image
     0x08002d4e   0x08002d4e   0x00000002   PAD
     0x08002d50   0x08002d50   0x000001d0   Code   RO         6349    i.HAL_UART_IRQHandler  stm32h7xx_hal_uart.o
     0x08002f20   0x08002f20   0x00000070   Code   RO         6350    i.HAL_UART_Init     stm32h7xx_hal_uart.o
-    0x08002f90   0x08002f90   0x00000044   Code   RO        11554    i.HAL_UART_MspDeInit  bsp_usart.o
-    0x08002fd4   0x08002fd4   0x00000088   Code   RO        11555    i.HAL_UART_MspInit  bsp_usart.o
+    0x08002f90   0x08002f90   0x00000044   Code   RO        11557    i.HAL_UART_MspDeInit  bsp_usart.o
+    0x08002fd4   0x08002fd4   0x00000088   Code   RO        11558    i.HAL_UART_MspInit  bsp_usart.o
     0x0800305c   0x0800305c   0x000000a8   Code   RO         6354    i.HAL_UART_Receive_DMA  stm32h7xx_hal_uart.o
     0x08003104   0x08003104   0x00000110   Code   RO         6355    i.HAL_UART_Receive_IT  stm32h7xx_hal_uart.o
     0x08003214   0x08003214   0x00000010   Code   RO        10895    i.HAL_UART_RxCpltCallback  bsp_usart_callback.o
     0x08003224   0x08003224   0x00000002   Code   RO         6359    i.HAL_UART_RxHalfCpltCallback  stm32h7xx_hal_uart.o
     0x08003226   0x08003226   0x000000c8   Code   RO         6360    i.HAL_UART_Transmit  stm32h7xx_hal_uart.o
     0x080032ee   0x080032ee   0x00000002   PAD
-    0x080032f0   0x080032f0   0x000000bc   Code   RO        13785    i.HandleSema_test   tasksemafun_outer.o
-    0x080033ac   0x080033ac   0x000000b8   Code   RO        13828    i.Handle_COMMON_DMA_USART_Send  taskworkhandle.o
-    0x08003464   0x08003464   0x00000004   Code   RO        13836    i.Handle_letter_Shell_NoOsWhile  taskworkhandle.o
-    0x08003468   0x08003468   0x000000fc   Code   RO        13134    i.Handle_test2      taskfun_outer.o
+    0x080032f0   0x080032f0   0x000000bc   Code   RO        13788    i.HandleSema_test   tasksemafun_outer.o
+    0x080033ac   0x080033ac   0x000000b8   Code   RO        13831    i.Handle_COMMON_DMA_USART_Send  taskworkhandle.o
+    0x08003464   0x08003464   0x00000004   Code   RO        13839    i.Handle_letter_Shell_NoOsWhile  taskworkhandle.o
+    0x08003468   0x08003468   0x000000fc   Code   RO        13137    i.Handle_test2      taskfun_outer.o
     0x08003564   0x08003564   0x0000002c   Code   RO        10475    i.HardFault_Handler  stm32h7xx_it.o
-    0x08003590   0x08003590   0x0000001c   Code   RO        11373    i.I2C_EE_BufferRead  bsp_i2c_ee.o
-    0x080035ac   0x080035ac   0x0000000e   Code   RO        11725    i.I2C_EE_Init       bsp_iic.o
+    0x08003590   0x08003590   0x0000001c   Code   RO        11376    i.I2C_EE_BufferRead  bsp_i2c_ee.o
+    0x080035ac   0x080035ac   0x0000000e   Code   RO        11728    i.I2C_EE_Init       bsp_iic.o
     0x080035ba   0x080035ba   0x00000002   PAD
-    0x080035bc   0x080035bc   0x00000048   Code   RO        11376    i.I2C_EE_PageWrite  bsp_i2c_ee.o
+    0x080035bc   0x080035bc   0x00000048   Code   RO        11379    i.I2C_EE_PageWrite  bsp_i2c_ee.o
     0x08003604   0x08003604   0x00000074   Code   RO         1986    i.I2C_RequestMemoryRead  stm32h7xx_hal_i2c.o
     0x08003678   0x08003678   0x0000002c   Code   RO         1990    i.I2C_TransferConfig  stm32h7xx_hal_i2c.o
     0x080036a4   0x080036a4   0x00000050   Code   RO         1994    i.I2C_WaitOnTXISFlagUntilTimeout  stm32h7xx_hal_i2c.o
-    0x080036f4   0x080036f4   0x0000000e   Code   RO        11308    i.IIC_EE_DriverFactory_Register  factory_iic.o
+    0x080036f4   0x080036f4   0x0000000e   Code   RO        11311    i.IIC_EE_DriverFactory_Register  factory_iic.o
     0x08003702   0x08003702   0x00000002   PAD
-    0x08003704   0x08003704   0x00000030   Code   RO        11309    i.IIC_EE_Factory_Init  factory_iic.o
-    0x08003734   0x08003734   0x00000034   Code   RO        11454    i.LVGL_MPU_Config   bsp_mpu.o
+    0x08003704   0x08003704   0x00000030   Code   RO        11312    i.IIC_EE_Factory_Init  factory_iic.o
+    0x08003734   0x08003734   0x00000034   Code   RO        11457    i.LVGL_MPU_Config   bsp_mpu.o
     0x08003768   0x08003768   0x00000004   Code   RO        10363    i.NeedToOnceOperate_Pro  sys_init_all.o
     0x0800376c   0x0800376c   0x0000000e   Code   RO        10364    i.NeedToRepeatOperate_Pro  sys_init_all.o
     0x0800377a   0x0800377a   0x00000002   PAD
@@ -8735,7 +8735,7 @@ Memory Map of the image
     0x080037b8   0x080037b8   0x00000026   Code   RO        10844    i.QueuePush         queue3.o
     0x080037de   0x080037de   0x00000002   PAD
     0x080037e0   0x080037e0   0x00000124   Code   RO         4047    i.RCCEx_PLL2_Config  stm32h7xx_hal_rcc_ex.o
-    0x08003904   0x08003904   0x000000c0   Code   RO        14155    i.RNG_BuildWeightMap  data_random.o
+    0x08003904   0x08003904   0x000000c0   Code   RO        14158    i.RNG_BuildWeightMap  data_random.o
     0x080039c4   0x080039c4   0x00000004   Code   RO        10169    i.RNG_SelectOpByWeight2  user_testtask.o
     0x080039c8   0x080039c8   0x0000000c   Code   RO        10775    i.RingBuffer_Init   queue2.o
     0x080039d4   0x080039d4   0x0000002e   Code   RO        10778    i.RingBuffer_ReadByte  queue2.o
@@ -8763,41 +8763,41 @@ Memory Map of the image
     0x0800433c   0x0800433c   0x00000074   Code   RO         7675    i.SYSVIEW_AddTask   segger_sysview_freertos.o
     0x080043b0   0x080043b0   0x00000030   Code   RO         7677    i.SYSVIEW_SendTaskInfo  segger_sysview_freertos.o
     0x080043e0   0x080043e0   0x00000080   Code   RO         7678    i.SYSVIEW_UpdateTask  segger_sysview_freertos.o
-    0x08004460   0x08004460   0x00000030   Code   RO        12956    i.Software_Reset    sys_interrupt.o
+    0x08004460   0x08004460   0x00000030   Code   RO        12959    i.Software_Reset    sys_interrupt.o
     0x08004490   0x08004490   0x000000a0   Code   RO        10313    i.SystemClock_Config  main.o
     0x08004530   0x08004530   0x00000084   Code   RO           14    i.SystemInit        system_stm32h7xx.o
-    0x080045b4   0x080045b4   0x0000003c   Code   RO        13055    i.TaskScheduleCb    taskfun.o
-    0x080045f0   0x080045f0   0x000000a4   Code   RO        13714    i.TaskSemaConsumeHandler  tasksema.o
+    0x080045b4   0x080045b4   0x0000003c   Code   RO        13058    i.TaskScheduleCb    taskfun.o
+    0x080045f0   0x080045f0   0x000000a4   Code   RO        13717    i.TaskSemaConsumeHandler  tasksema.o
     0x08004694   0x08004694   0x00000064   Code   RO         6739    i.UARTEx_SetNbDataToProcess  stm32h7xx_hal_uart_ex.o
     0x080046f8   0x080046f8   0x000000c8   Code   RO         6365    i.UART_AdvFeatureConfig  stm32h7xx_hal_uart.o
-    0x080047c0   0x080047c0   0x00000040   Code   RO        16020    i.UART_COMMON_Instance_SendArray_DMA  bsp_usart_common_com485.o
-    0x08004800   0x08004800   0x00000064   Code   RO        16021    i.UART_COMMON_Instance_SetSendCallback  bsp_usart_common_com485.o
-    0x08004864   0x08004864   0x00000084   Code   RO        16024    i.UART_Common_GpioInit  bsp_usart_common_com485.o
+    0x080047c0   0x080047c0   0x00000040   Code   RO        16023    i.UART_COMMON_Instance_SendArray_DMA  bsp_usart_common_com485.o
+    0x08004800   0x08004800   0x00000064   Code   RO        16024    i.UART_COMMON_Instance_SetSendCallback  bsp_usart_common_com485.o
+    0x08004864   0x08004864   0x00000084   Code   RO        16027    i.UART_Common_GpioInit  bsp_usart_common_com485.o
     0x080048e8   0x080048e8   0x00000050   Code   RO         6368    i.UART_DMAError     stm32h7xx_hal_uart.o
     0x08004938   0x08004938   0x00000030   Code   RO         6373    i.UART_DMATransmitCplt  stm32h7xx_hal_uart.o
     0x08004968   0x08004968   0x0000000a   Code   RO         6375    i.UART_DMATxHalfCplt  stm32h7xx_hal_uart.o
     0x08004972   0x08004972   0x0000001c   Code   RO         6378    i.UART_EndTransmit_IT  stm32h7xx_hal_uart.o
-    0x0800498e   0x0800498e   0x00000008   Code   RO        16157    i.UART_INST_SetSlaveCb  usart485_common_verify.o
+    0x0800498e   0x0800498e   0x00000008   Code   RO        16160    i.UART_INST_SetSlaveCb  usart485_common_verify.o
     0x08004996   0x08004996   0x0000005c   Code   RO         6380    i.UART_RxISR_16BIT  stm32h7xx_hal_uart.o
     0x080049f2   0x080049f2   0x00000002   PAD
     0x080049f4   0x080049f4   0x000000a0   Code   RO         6381    i.UART_RxISR_16BIT_FIFOEN  stm32h7xx_hal_uart.o
     0x08004a94   0x08004a94   0x0000005c   Code   RO         6382    i.UART_RxISR_8BIT   stm32h7xx_hal_uart.o
-    0x08004af0   0x08004af0   0x0000000c   Code   RO        15755    i.USART1_IRQHandler  shell_port.o
+    0x08004af0   0x08004af0   0x0000000c   Code   RO        15758    i.USART1_IRQHandler  shell_port.o
     0x08004afc   0x08004afc   0x00000024   Code   RO        11101    i.USART2_IRQHandler  bsp_usart_common_dma.o
-    0x08004b20   0x08004b20   0x00000030   Code   RO        16028    i.USART_COMMON_COM485_232_ComDrvInit  bsp_usart_common_com485.o
+    0x08004b20   0x08004b20   0x00000030   Code   RO        16031    i.USART_COMMON_COM485_232_ComDrvInit  bsp_usart_common_com485.o
     0x08004b50   0x08004b50   0x00000068   Code   RO        11102    i.USART_COMMON_TX_RX_DMA_ConfigALL  bsp_usart_common_dma.o
     0x08004bb8   0x08004bb8   0x000000ac   Code   RO        11103    i.USART_RX_DMA_COMMON_Config  bsp_usart_common_dma.o
-    0x08004c64   0x08004c64   0x0000012c   Code   RO        11653    i.USART_Shell_UartInit  bsp_usart_shell.o
+    0x08004c64   0x08004c64   0x0000012c   Code   RO        11656    i.USART_Shell_UartInit  bsp_usart_shell.o
     0x08004d90   0x08004d90   0x00000148   Code   RO        11106    i.USART_TX_DMA_COMMON_Config  bsp_usart_common_dma.o
-    0x08004ed8   0x08004ed8   0x000000b4   Code   RO        16030    i.USART_common_COM485_UartInit  bsp_usart_common_com485.o
-    0x08004f8c   0x08004f8c   0x0000001c   Code   RO        16031    i.USART_common_com6_ClockEnable  bsp_usart_common_com485.o
+    0x08004ed8   0x08004ed8   0x0000001c   Code   RO        16033    i.USART_common_COM06_ClockEnable  bsp_usart_common_com485.o
+    0x08004ef4   0x08004ef4   0x000000b4   Code   RO        16034    i.USART_common_COM485_UartInit  bsp_usart_common_com485.o
     0x08004fa8   0x08004fa8   0x0000002c   Code   RO        11108    i.USARTx_COMMON_DMA_Init  bsp_usart_common_dma.o
-    0x08004fd4   0x08004fd4   0x0000007c   Code   RO        16159    i.Usart485CommonComTask  usart485_common_verify.o
+    0x08004fd4   0x08004fd4   0x0000007c   Code   RO        16162    i.Usart485CommonComTask  usart485_common_verify.o
     0x08005050   0x08005050   0x00000018   Code   RO        11109    i.Usart_COMMON_DMA_SendFUN_ALL  bsp_usart_common_dma.o
     0x08005068   0x08005068   0x00000024   Code   RO        11008    i.Usart_SendDMA_SaveFun  bsp_usart_dma.o
     0x0800508c   0x0800508c   0x00000088   Code   RO        11009    i.Usart_SendDMA_SendFun  bsp_usart_dma.o
     0x08005114   0x08005114   0x0000000c   Code   RO        11010    i.Usart_SendFUN_ALL  bsp_usart_dma.o
-    0x08005120   0x08005120   0x00000010   Code   RO        14160    i.Weight_RANDOM_INIT  data_random.o
+    0x08005120   0x08005120   0x00000010   Code   RO        14163    i.Weight_RANDOM_INIT  data_random.o
     0x08005130   0x08005130   0x0000001e   Code   RO        11112    i.Wrapper_U485ComSendAllFunc  bsp_usart_common_dma.o
     0x0800514e   0x0800514e   0x00000024   Code   RO        11113    i.Wrapper_U485ComSendDmaSaveDataFunc  bsp_usart_common_dma.o
     0x08005172   0x08005172   0x00000002   PAD
@@ -8811,39 +8811,39 @@ Memory Map of the image
     0x0800547c   0x0800547c   0x0000003e   Code   RO         7596    i._StoreChar        segger_rtt_printf.o
     0x080054ba   0x080054ba   0x0000005c   Code   RO         7890    i._TrySendOverflowPacket  segger_sysview.o
     0x08005516   0x08005516   0x00000002   PAD
-    0x08005518   0x08005518   0x00000020   Code   RO        16813    i.__0printf         mc_w.l(printfa.o)
-    0x08005538   0x08005538   0x00000010   Code   RO        16817    i.__0vprintf        mc_w.l(printfa.o)
-    0x08005548   0x08005548   0x0000002c   Code   RO        16818    i.__0vsnprintf      mc_w.l(printfa.o)
-    0x08005574   0x08005574   0x00000008   Code   RO        16894    i.__aeabi_errno_addr  mc_w.l(errno.o)
-    0x0800557c   0x0800557c   0x0000000e   Code   RO        16926    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x0800558a   0x0800558a   0x00000002   Code   RO        16927    i.__scatterload_null  mc_w.l(handlers.o)
-    0x0800558c   0x0800558c   0x0000000e   Code   RO        16928    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x08005518   0x08005518   0x00000020   Code   RO        16816    i.__0printf         mc_w.l(printfa.o)
+    0x08005538   0x08005538   0x00000010   Code   RO        16820    i.__0vprintf        mc_w.l(printfa.o)
+    0x08005548   0x08005548   0x0000002c   Code   RO        16821    i.__0vsnprintf      mc_w.l(printfa.o)
+    0x08005574   0x08005574   0x00000008   Code   RO        16897    i.__aeabi_errno_addr  mc_w.l(errno.o)
+    0x0800557c   0x0800557c   0x0000000e   Code   RO        16929    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x0800558a   0x0800558a   0x00000002   Code   RO        16930    i.__scatterload_null  mc_w.l(handlers.o)
+    0x0800558c   0x0800558c   0x0000000e   Code   RO        16931    i.__scatterload_zeroinit  mc_w.l(handlers.o)
     0x0800559a   0x0800559a   0x00000002   PAD
-    0x0800559c   0x0800559c   0x000006dc   Code   RO        16821    i._printf_core      mc_w.l(printfa.o)
-    0x08005c78   0x08005c78   0x00000020   Code   RO        15850    i.agencylogHexDump  log.o
-    0x08005c98   0x08005c98   0x0000001a   Code   RO        15851    i.agencylogSetLevel  log.o
-    0x08005cb2   0x08005cb2   0x00000004   Code   RO        13135    i.calculate_TASK_NUM_MAX  taskfun_outer.o
+    0x0800559c   0x0800559c   0x000006dc   Code   RO        16824    i._printf_core      mc_w.l(printfa.o)
+    0x08005c78   0x08005c78   0x00000020   Code   RO        15853    i.agencylogHexDump  log.o
+    0x08005c98   0x08005c98   0x0000001a   Code   RO        15854    i.agencylogSetLevel  log.o
+    0x08005cb2   0x08005cb2   0x00000004   Code   RO        13138    i.calculate_TASK_NUM_MAX  taskfun_outer.o
     0x08005cb6   0x08005cb6   0x00000002   PAD
     0x08005cb8   0x08005cb8   0x000000c4   Code   RO        10121    i.changetime        user_task_1.o
-    0x08005d7c   0x08005d7c   0x000000d0   Code   RO        16219    i.com_DW_write_cmd_print  usart_485_232_send.o
-    0x08005e4c   0x08005e4c   0x00000034   Code   RO        14235    i.crc_16            data_verification.o
-    0x08005e80   0x08005e80   0x00000024   Code   RO        14842    i.elog_output_lock  elog.o
-    0x08005ea4   0x08005ea4   0x00000010   Code   RO        15055    i.elog_port_get_time  elog_port.o
-    0x08005eb4   0x08005eb4   0x00000004   Code   RO        15056    i.elog_port_init    elog_port.o
-    0x08005eb8   0x08005eb8   0x0000003c   Code   RO        15057    i.elog_port_output  elog_port.o
-    0x08005ef4   0x08005ef4   0x00000004   Code   RO        15059    i.elog_port_output_unlock  elog_port.o
-    0x08005ef8   0x08005ef8   0x00000010   Code   RO        14849    i.elog_set_filter_tag  elog.o
-    0x08005f08   0x08005f08   0x0000000c   Code   RO        14854    i.elog_set_text_color_enabled  elog.o
-    0x08005f14   0x08005f14   0x00000014   Code   RO        14858    i.get_fmt_used_and_enabled_ptr  elog.o
-    0x08005f28   0x08005f28   0x0000009c   Code   RO        15156    i.l_delete          letter_shell_rtos_cmd.o
-    0x08005fc4   0x08005fc4   0x0000001c   Code   RO        15124    i.l_print           letter_shell_noos_cmd.o
-    0x08005fe0   0x08005fe0   0x000000b0   Code   RO        15161    i.l_pti             letter_shell_rtos_cmd.o
-    0x08006090   0x08006090   0x000000c8   Code   RO        15165    i.l_suspend         letter_shell_rtos_cmd.o
-    0x08006158   0x08006158   0x00000044   Code   RO        15756    i.letterShell_no_os_WhileInit  shell_port.o
-    0x0800619c   0x0800619c   0x000000a8   Code   RO        15854    i.logSetLevel       log.o
-    0x08006244   0x08006244   0x00000058   Code   RO        15858    i.logWriteBuffer    log.o
+    0x08005d7c   0x08005d7c   0x000000d0   Code   RO        16222    i.com_DW_write_cmd_print  usart_485_232_send.o
+    0x08005e4c   0x08005e4c   0x00000034   Code   RO        14238    i.crc_16            data_verification.o
+    0x08005e80   0x08005e80   0x00000024   Code   RO        14845    i.elog_output_lock  elog.o
+    0x08005ea4   0x08005ea4   0x00000010   Code   RO        15058    i.elog_port_get_time  elog_port.o
+    0x08005eb4   0x08005eb4   0x00000004   Code   RO        15059    i.elog_port_init    elog_port.o
+    0x08005eb8   0x08005eb8   0x0000003c   Code   RO        15060    i.elog_port_output  elog_port.o
+    0x08005ef4   0x08005ef4   0x00000004   Code   RO        15062    i.elog_port_output_unlock  elog_port.o
+    0x08005ef8   0x08005ef8   0x00000010   Code   RO        14852    i.elog_set_filter_tag  elog.o
+    0x08005f08   0x08005f08   0x0000000c   Code   RO        14857    i.elog_set_text_color_enabled  elog.o
+    0x08005f14   0x08005f14   0x00000014   Code   RO        14861    i.get_fmt_used_and_enabled_ptr  elog.o
+    0x08005f28   0x08005f28   0x0000009c   Code   RO        15159    i.l_delete          letter_shell_rtos_cmd.o
+    0x08005fc4   0x08005fc4   0x0000001c   Code   RO        15127    i.l_print           letter_shell_noos_cmd.o
+    0x08005fe0   0x08005fe0   0x000000b0   Code   RO        15164    i.l_pti             letter_shell_rtos_cmd.o
+    0x08006090   0x08006090   0x000000c8   Code   RO        15168    i.l_suspend         letter_shell_rtos_cmd.o
+    0x08006158   0x08006158   0x00000044   Code   RO        15759    i.letterShell_no_os_WhileInit  shell_port.o
+    0x0800619c   0x0800619c   0x000000a8   Code   RO        15857    i.logSetLevel       log.o
+    0x08006244   0x08006244   0x00000058   Code   RO        15861    i.logWriteBuffer    log.o
     0x0800629c   0x0800629c   0x00000104   Code   RO        10314    i.main              main.o
-    0x080063a0   0x080063a0   0x000001bc   Code   RO        12739    i.mock_switch_task_entry  busi_test.o
+    0x080063a0   0x080063a0   0x000001bc   Code   RO        12742    i.mock_switch_task_entry  busi_test.o
     0x0800655c   0x0800655c   0x0000002c   Code   RO        10532    i.p_cbInit          p_data_queue.o
     0x08006588   0x08006588   0x00000010   Code   RO        10533    i.p_cbIsEmpty       p_data_queue.o
     0x08006598   0x08006598   0x00000030   Code   RO        10535    i.p_cbRead          p_data_queue.o
@@ -8866,54 +8866,54 @@ Memory Map of the image
     0x080069d4   0x080069d4   0x0000007c   Code   RO         9085    i.prvUnlockQueue    queue.o
     0x08006a50   0x08006a50   0x00000024   Code   RO         9480    i.prvWriteNameToBuffer  tasks.o
     0x08006a74   0x08006a74   0x00000080   Code   RO        10171    i.rds               user_testtask.o
-    0x08006af4   0x08006af4   0x00000034   Code   RO        16463    i.run_machine       usart_485_sendmethod.o
-    0x08006b28   0x08006b28   0x00000054   Code   RO        14330    i.setInt16Array     data_set.o
-    0x08006b7c   0x08006b7c   0x00000006   Code   RO        15260    i.shellBackspace    shell.o
+    0x08006af4   0x08006af4   0x00000034   Code   RO        16466    i.run_machine       usart_485_sendmethod.o
+    0x08006b28   0x08006b28   0x00000054   Code   RO        14333    i.setInt16Array     data_set.o
+    0x08006b7c   0x08006b7c   0x00000006   Code   RO        15263    i.shellBackspace    shell.o
     0x08006b82   0x08006b82   0x00000002   PAD
-    0x08006b84   0x08006b84   0x00000040   Code   RO        15261    i.shellCheckPassword  shell.o
-    0x08006bc4   0x08006bc4   0x0000002a   Code   RO        15264    i.shellClearCommandLine  shell.o
-    0x08006bee   0x08006bee   0x00000014   Code   RO        15265    i.shellCmds         shell.o
-    0x08006c02   0x08006c02   0x00000008   Code   RO        15266    i.shellDelete       shell.o
-    0x08006c0a   0x08006c0a   0x000000be   Code   RO        15267    i.shellDeleteByte   shell.o
-    0x08006cc8   0x08006cc8   0x0000001c   Code   RO        15268    i.shellDeleteCommandLine  shell.o
-    0x08006ce4   0x08006ce4   0x00000074   Code   RO        15271    i.shellExec         shell.o
-    0x08006d58   0x08006d58   0x0000004e   Code   RO        15701    i.shellExtNumType   shell_ext.o
-    0x08006da6   0x08006da6   0x00000028   Code   RO        15706    i.shellExtParseVar  shell_ext.o
-    0x08006dce   0x08006dce   0x0000002c   Code   RO        15708    i.shellExtToNum     shell_ext.o
-    0x08006dfa   0x08006dfa   0x0000000a   Code   RO        15272    i.shellGetCommandDesc  shell.o
-    0x08006e04   0x08006e04   0x00000028   Code   RO        15274    i.shellGetCurrent   shell.o
-    0x08006e2c   0x08006e2c   0x000000cc   Code   RO        15276    i.shellHandler      shell.o
-    0x08006ef8   0x08006ef8   0x0000009a   Code   RO        15278    i.shellHistory      shell.o
-    0x08006f92   0x08006f92   0x0000006c   Code   RO        15279    i.shellHistoryAdd   shell.o
+    0x08006b84   0x08006b84   0x00000040   Code   RO        15264    i.shellCheckPassword  shell.o
+    0x08006bc4   0x08006bc4   0x0000002a   Code   RO        15267    i.shellClearCommandLine  shell.o
+    0x08006bee   0x08006bee   0x00000014   Code   RO        15268    i.shellCmds         shell.o
+    0x08006c02   0x08006c02   0x00000008   Code   RO        15269    i.shellDelete       shell.o
+    0x08006c0a   0x08006c0a   0x000000be   Code   RO        15270    i.shellDeleteByte   shell.o
+    0x08006cc8   0x08006cc8   0x0000001c   Code   RO        15271    i.shellDeleteCommandLine  shell.o
+    0x08006ce4   0x08006ce4   0x00000074   Code   RO        15274    i.shellExec         shell.o
+    0x08006d58   0x08006d58   0x0000004e   Code   RO        15704    i.shellExtNumType   shell_ext.o
+    0x08006da6   0x08006da6   0x00000028   Code   RO        15709    i.shellExtParseVar  shell_ext.o
+    0x08006dce   0x08006dce   0x0000002c   Code   RO        15711    i.shellExtToNum     shell_ext.o
+    0x08006dfa   0x08006dfa   0x0000000a   Code   RO        15275    i.shellGetCommandDesc  shell.o
+    0x08006e04   0x08006e04   0x00000028   Code   RO        15277    i.shellGetCurrent   shell.o
+    0x08006e2c   0x08006e2c   0x000000cc   Code   RO        15279    i.shellHandler      shell.o
+    0x08006ef8   0x08006ef8   0x0000009a   Code   RO        15281    i.shellHistory      shell.o
+    0x08006f92   0x08006f92   0x0000006c   Code   RO        15282    i.shellHistoryAdd   shell.o
     0x08006ffe   0x08006ffe   0x00000002   PAD
-    0x08007000   0x08007000   0x00000088   Code   RO        15280    i.shellInit         shell.o
-    0x08007088   0x08007088   0x000000d8   Code   RO        15281    i.shellInsertByte   shell.o
-    0x08007160   0x08007160   0x0000001a   Code   RO        15283    i.shellLeft         shell.o
+    0x08007000   0x08007000   0x00000088   Code   RO        15283    i.shellInit         shell.o
+    0x08007088   0x08007088   0x000000d8   Code   RO        15284    i.shellInsertByte   shell.o
+    0x08007160   0x08007160   0x0000001a   Code   RO        15286    i.shellLeft         shell.o
     0x0800717a   0x0800717a   0x00000002   PAD
-    0x0800717c   0x0800717c   0x0000004c   Code   RO        15285    i.shellListCommand  shell.o
-    0x080071c8   0x080071c8   0x000000d4   Code   RO        15286    i.shellListItem     shell.o
-    0x0800729c   0x0800729c   0x00000050   Code   RO        15287    i.shellListKey      shell.o
-    0x080072ec   0x080072ec   0x00000010   Code   RO        15290    i.shellNormalInput  shell.o
-    0x080072fc   0x080072fc   0x00000042   Code   RO        15294    i.shellRemoveParamQuotes  shell.o
-    0x0800733e   0x0800733e   0x00000016   Code   RO        15295    i.shellRight        shell.o
-    0x08007354   0x08007354   0x00000064   Code   RO        15300    i.shellSetVar       shell.o
-    0x080073b8   0x080073b8   0x0000007c   Code   RO        15301    i.shellSetVarValue  shell.o
-    0x08007434   0x08007434   0x00000024   Code   RO        15304    i.shellStringCompare  shell.o
-    0x08007458   0x08007458   0x00000018   Code   RO        15305    i.shellStringCopy   shell.o
-    0x08007470   0x08007470   0x00000014   Code   RO        15311    i.shellUsers        shell.o
-    0x08007484   0x08007484   0x00000050   Code   RO        15314    i.shellWriteCommandDesc  shell.o
-    0x080074d4   0x080074d4   0x00000060   Code   RO        15315    i.shellWriteCommandHelp  shell.o
-    0x08007534   0x08007534   0x00000028   Code   RO        15319    i.shellWriteString  shell.o
-    0x0800755c   0x0800755c   0x00000060   Code   RO        16466    i.shell_settingfun  usart_485_sendmethod.o
-    0x080075bc   0x080075bc   0x000000dc   Code   RO        12740    i.smst              busi_test.o
-    0x08007698   0x08007698   0x000003c8   Code   RO        14614    i.uart_debug_dump   hal_ext_uart.o
-    0x08007a60   0x08007a60   0x00000018   Code   RO        14543    i.uart_debug_error  task_check.o
-    0x08007a78   0x08007a78   0x0000000c   Code   RO        14544    i.uart_debug_fixerror  task_check.o
-    0x08007a84   0x08007a84   0x00000044   Code   RO        14546    i.uart_reableIRQ_task  task_check.o
-    0x08007ac8   0x08007ac8   0x00000060   Code   RO        14547    i.uart_reable_task  task_check.o
-    0x08007b28   0x08007b28   0x00000048   Code   RO        14548    i.uart_unlock_task  task_check.o
-    0x08007b70   0x08007b70   0x00000038   Code   RO        15761    i.userShellRead     shell_port.o
-    0x08007ba8   0x08007ba8   0x00000034   Code   RO        15763    i.userShellWrite    shell_port.o
+    0x0800717c   0x0800717c   0x0000004c   Code   RO        15288    i.shellListCommand  shell.o
+    0x080071c8   0x080071c8   0x000000d4   Code   RO        15289    i.shellListItem     shell.o
+    0x0800729c   0x0800729c   0x00000050   Code   RO        15290    i.shellListKey      shell.o
+    0x080072ec   0x080072ec   0x00000010   Code   RO        15293    i.shellNormalInput  shell.o
+    0x080072fc   0x080072fc   0x00000042   Code   RO        15297    i.shellRemoveParamQuotes  shell.o
+    0x0800733e   0x0800733e   0x00000016   Code   RO        15298    i.shellRight        shell.o
+    0x08007354   0x08007354   0x00000064   Code   RO        15303    i.shellSetVar       shell.o
+    0x080073b8   0x080073b8   0x0000007c   Code   RO        15304    i.shellSetVarValue  shell.o
+    0x08007434   0x08007434   0x00000024   Code   RO        15307    i.shellStringCompare  shell.o
+    0x08007458   0x08007458   0x00000018   Code   RO        15308    i.shellStringCopy   shell.o
+    0x08007470   0x08007470   0x00000014   Code   RO        15314    i.shellUsers        shell.o
+    0x08007484   0x08007484   0x00000050   Code   RO        15317    i.shellWriteCommandDesc  shell.o
+    0x080074d4   0x080074d4   0x00000060   Code   RO        15318    i.shellWriteCommandHelp  shell.o
+    0x08007534   0x08007534   0x00000028   Code   RO        15322    i.shellWriteString  shell.o
+    0x0800755c   0x0800755c   0x00000060   Code   RO        16469    i.shell_settingfun  usart_485_sendmethod.o
+    0x080075bc   0x080075bc   0x000000dc   Code   RO        12743    i.smst              busi_test.o
+    0x08007698   0x08007698   0x000003c8   Code   RO        14617    i.uart_debug_dump   hal_ext_uart.o
+    0x08007a60   0x08007a60   0x00000018   Code   RO        14546    i.uart_debug_error  task_check.o
+    0x08007a78   0x08007a78   0x0000000c   Code   RO        14547    i.uart_debug_fixerror  task_check.o
+    0x08007a84   0x08007a84   0x00000044   Code   RO        14549    i.uart_reableIRQ_task  task_check.o
+    0x08007ac8   0x08007ac8   0x00000060   Code   RO        14550    i.uart_reable_task  task_check.o
+    0x08007b28   0x08007b28   0x00000048   Code   RO        14551    i.uart_unlock_task  task_check.o
+    0x08007b70   0x08007b70   0x00000038   Code   RO        15764    i.userShellRead     shell_port.o
+    0x08007ba8   0x08007ba8   0x00000034   Code   RO        15766    i.userShellWrite    shell_port.o
     0x08007bdc   0x08007bdc   0x00000026   Code   RO         9040    i.uxListRemove      list.o
     0x08007c02   0x08007c02   0x00000016   Code   RO         9041    i.vListInitialise   list.o
     0x08007c18   0x08007c18   0x00000006   Code   RO         9042    i.vListInitialiseItem  list.o
@@ -8922,7 +8922,7 @@ Memory Map of the image
     0x08007c66   0x08007c66   0x00000002   PAD
     0x08007c68   0x08007c68   0x0000001c   Code   RO         9872    i.vPortEnterCritical  port.o
     0x08007c84   0x08007c84   0x00000018   Code   RO         9873    i.vPortExitCritical  port.o
-    0x08007c9c   0x08007c9c   0x00000058   Code   RO        14415    i.vPrintHeapState   hook_mem.o
+    0x08007c9c   0x08007c9c   0x00000058   Code   RO        14418    i.vPrintHeapState   hook_mem.o
     0x08007cf4   0x08007cf4   0x00000010   Code   RO         9496    i.vTaskInternalSetTimeOutState  tasks.o
     0x08007d04   0x08007d04   0x000000ac   Code   RO         9497    i.vTaskList         tasks.o
     0x08007db0   0x08007db0   0x00000090   Code   RO         9502    i.vTaskPriorityDisinheritAfterTimeout  tasks.o
@@ -8941,67 +8941,67 @@ Memory Map of the image
     0x080084e3   0x080084e3   0x0000001a   Data   RO         7894    .constdata          segger_sysview.o
     0x080084fd   0x080084fd   0x00000012   Data   RO        10123    .constdata          user_task_1.o
     0x0800850f   0x0800850f   0x00000001   PAD
-    0x08008510   0x08008510   0x00000010   Data   RO        11312    .constdata          factory_iic.o
-    0x08008520   0x08008520   0x00000033   Data   RO        12743    .constdata          busi_test.o
+    0x08008510   0x08008510   0x00000010   Data   RO        11315    .constdata          factory_iic.o
+    0x08008520   0x08008520   0x00000033   Data   RO        12746    .constdata          busi_test.o
     0x08008553   0x08008553   0x00000001   PAD
-    0x08008554   0x08008554   0x00000045   Data   RO        14164    .constdata          data_random.o
-    0x08008599   0x08008599   0x00000200   Data   RO        14236    .constdata          data_verification.o
-    0x08008799   0x08008799   0x00000006   Data   RO        15125    .constdata          letter_shell_noos_cmd.o
-    0x0800879f   0x0800879f   0x00000009   Data   RO        15126    .constdata          letter_shell_noos_cmd.o
-    0x080087a8   0x080087a8   0x00000008   Data   RO        15127    .constdata          letter_shell_noos_cmd.o
-    0x080087b0   0x080087b0   0x00000011   Data   RO        15167    .constdata          letter_shell_rtos_cmd.o
-    0x080087c1   0x080087c1   0x00000004   Data   RO        15168    .constdata          letter_shell_rtos_cmd.o
-    0x080087c5   0x080087c5   0x00000014   Data   RO        15169    .constdata          letter_shell_rtos_cmd.o
-    0x080087d9   0x080087d9   0x0000000e   Data   RO        15175    .constdata          letter_shell_rtos_cmd.o
-    0x080087e7   0x080087e7   0x0000000c   Data   RO        15178    .constdata          letter_shell_rtos_cmd.o
-    0x080087f3   0x080087f3   0x00000004   Data   RO        15180    .constdata          letter_shell_rtos_cmd.o
-    0x080087f7   0x080087f7   0x00000004   Data   RO        15184    .constdata          letter_shell_rtos_cmd.o
-    0x080087fb   0x080087fb   0x00000015   Data   RO        15185    .constdata          letter_shell_rtos_cmd.o
-    0x08008810   0x08008810   0x00000007   Data   RO        15321    .constdata          shell.o
-    0x08008817   0x08008817   0x00000008   Data   RO        15325    .constdata          shell.o
-    0x0800881f   0x0800881f   0x00000005   Data   RO        15327    .constdata          shell.o
-    0x08008824   0x08008824   0x00000006   Data   RO        15328    .constdata          shell.o
-    0x0800882a   0x0800882a   0x00000004   Data   RO        15330    .constdata          shell.o
-    0x0800882e   0x0800882e   0x0000000a   Data   RO        15332    .constdata          shell.o
-    0x08008838   0x08008838   0x00000007   Data   RO        15333    .constdata          shell.o
-    0x0800883f   0x0800883f   0x00000006   Data   RO        15335    .constdata          shell.o
-    0x08008845   0x08008845   0x00000005   Data   RO        15336    .constdata          shell.o
-    0x0800884a   0x0800884a   0x0000001e   Data   RO        15337    .constdata          shell.o
-    0x08008868   0x08008868   0x0000000e   Data   RO        15339    .constdata          shell.o
-    0x08008876   0x08008876   0x00000005   Data   RO        15342    .constdata          shell.o
-    0x0800887b   0x0800887b   0x0000000d   Data   RO        15343    .constdata          shell.o
-    0x08008888   0x08008888   0x00000006   Data   RO        15346    .constdata          shell.o
-    0x0800888e   0x0800888e   0x00000024   Data   RO        15861    .constdata          log.o
-    0x080088b2   0x080088b2   0x0000000c   Data   RO        15865    .constdata          log.o
-    0x080088be   0x080088be   0x00000003   Data   RO        16468    .constdata          usart_485_sendmethod.o
-    0x080088c1   0x080088c1   0x00000007   Data   RO        16471    .constdata          usart_485_sendmethod.o
-    0x080088c8   0x080088c8   0x00000081   Data   RO        16522    .constdata          mc_w.l(ctype_o.o)
+    0x08008554   0x08008554   0x00000045   Data   RO        14167    .constdata          data_random.o
+    0x08008599   0x08008599   0x00000200   Data   RO        14239    .constdata          data_verification.o
+    0x08008799   0x08008799   0x00000006   Data   RO        15128    .constdata          letter_shell_noos_cmd.o
+    0x0800879f   0x0800879f   0x00000009   Data   RO        15129    .constdata          letter_shell_noos_cmd.o
+    0x080087a8   0x080087a8   0x00000008   Data   RO        15130    .constdata          letter_shell_noos_cmd.o
+    0x080087b0   0x080087b0   0x00000011   Data   RO        15170    .constdata          letter_shell_rtos_cmd.o
+    0x080087c1   0x080087c1   0x00000004   Data   RO        15171    .constdata          letter_shell_rtos_cmd.o
+    0x080087c5   0x080087c5   0x00000014   Data   RO        15172    .constdata          letter_shell_rtos_cmd.o
+    0x080087d9   0x080087d9   0x0000000e   Data   RO        15178    .constdata          letter_shell_rtos_cmd.o
+    0x080087e7   0x080087e7   0x0000000c   Data   RO        15181    .constdata          letter_shell_rtos_cmd.o
+    0x080087f3   0x080087f3   0x00000004   Data   RO        15183    .constdata          letter_shell_rtos_cmd.o
+    0x080087f7   0x080087f7   0x00000004   Data   RO        15187    .constdata          letter_shell_rtos_cmd.o
+    0x080087fb   0x080087fb   0x00000015   Data   RO        15188    .constdata          letter_shell_rtos_cmd.o
+    0x08008810   0x08008810   0x00000007   Data   RO        15324    .constdata          shell.o
+    0x08008817   0x08008817   0x00000008   Data   RO        15328    .constdata          shell.o
+    0x0800881f   0x0800881f   0x00000005   Data   RO        15330    .constdata          shell.o
+    0x08008824   0x08008824   0x00000006   Data   RO        15331    .constdata          shell.o
+    0x0800882a   0x0800882a   0x00000004   Data   RO        15333    .constdata          shell.o
+    0x0800882e   0x0800882e   0x0000000a   Data   RO        15335    .constdata          shell.o
+    0x08008838   0x08008838   0x00000007   Data   RO        15336    .constdata          shell.o
+    0x0800883f   0x0800883f   0x00000006   Data   RO        15338    .constdata          shell.o
+    0x08008845   0x08008845   0x00000005   Data   RO        15339    .constdata          shell.o
+    0x0800884a   0x0800884a   0x0000001e   Data   RO        15340    .constdata          shell.o
+    0x08008868   0x08008868   0x0000000e   Data   RO        15342    .constdata          shell.o
+    0x08008876   0x08008876   0x00000005   Data   RO        15345    .constdata          shell.o
+    0x0800887b   0x0800887b   0x0000000d   Data   RO        15346    .constdata          shell.o
+    0x08008888   0x08008888   0x00000006   Data   RO        15349    .constdata          shell.o
+    0x0800888e   0x0800888e   0x00000024   Data   RO        15864    .constdata          log.o
+    0x080088b2   0x080088b2   0x0000000c   Data   RO        15868    .constdata          log.o
+    0x080088be   0x080088be   0x00000003   Data   RO        16471    .constdata          usart_485_sendmethod.o
+    0x080088c1   0x080088c1   0x00000007   Data   RO        16474    .constdata          usart_485_sendmethod.o
+    0x080088c8   0x080088c8   0x00000081   Data   RO        16525    .constdata          mc_w.l(ctype_o.o)
     0x08008949   0x08008949   0x00000003   PAD
-    0x0800894c   0x0800894c   0x00000004   Data   RO        16523    .constdata          mc_w.l(ctype_o.o)
+    0x0800894c   0x0800894c   0x00000004   Data   RO        16526    .constdata          mc_w.l(ctype_o.o)
     0x08008950   0x08008950   0x000000d9   Data   RO         7636    .conststring        segger_toolkit.o
     0x08008a29   0x08008a29   0x00000003   PAD
-    0x08008a2c   0x08008a2c   0x0000020b   Data   RO        14615    .conststring        hal_ext_uart.o
+    0x08008a2c   0x08008a2c   0x0000020b   Data   RO        14618    .conststring        hal_ext_uart.o
     0x08008c37   0x08008c37   0x00000001   PAD
-    0x08008c38   0x08008c38   0x00000047   Data   RO        14862    .conststring        elog.o
+    0x08008c38   0x08008c38   0x00000047   Data   RO        14865    .conststring        elog.o
     0x08008c7f   0x08008c7f   0x00000001   PAD
-    0x08008c80   0x08008c80   0x00000043   Data   RO        15130    .conststring        letter_shell_noos_cmd.o
+    0x08008c80   0x08008c80   0x00000043   Data   RO        15133    .conststring        letter_shell_noos_cmd.o
     0x08008cc3   0x08008cc3   0x00000001   PAD
-    0x08008cc4   0x08008cc4   0x00000187   Data   RO        15186    .conststring        letter_shell_rtos_cmd.o
+    0x08008cc4   0x08008cc4   0x00000187   Data   RO        15189    .conststring        letter_shell_rtos_cmd.o
     0x08008e4b   0x08008e4b   0x00000001   PAD
-    0x08008e4c   0x08008e4c   0x000002a1   Data   RO        15348    .conststring        shell.o
+    0x08008e4c   0x08008e4c   0x000002a1   Data   RO        15351    .conststring        shell.o
     0x080090ed   0x080090ed   0x00000003   PAD
-    0x080090f0   0x080090f0   0x00000048   Data   RO        16220    .conststring        usart_485_232_send.o
-    0x08009138   0x08009138   0x00000041   Data   RO        16472    .conststring        usart_485_sendmethod.o
+    0x080090f0   0x080090f0   0x00000048   Data   RO        16223    .conststring        usart_485_232_send.o
+    0x08009138   0x08009138   0x00000041   Data   RO        16475    .conststring        usart_485_sendmethod.o
     0x08009179   0x08009179   0x00000003   PAD
-    0x0800917c   0x0800917c   0x00000020   Data   RO        16924    Region$$Table       anon$$obj.o
+    0x0800917c   0x0800917c   0x00000020   Data   RO        16927    Region$$Table       anon$$obj.o
     0x0800919c   0x0800919c   0x00000010   Data   RO        10125    shellCommand        user_task_1.o
     0x080091ac   0x080091ac   0x00000010   Data   RO        10178    shellCommand        user_testtask.o
-    0x080091bc   0x080091bc   0x00000010   Data   RO        12745    shellCommand        busi_test.o
-    0x080091cc   0x080091cc   0x00000020   Data   RO        15131    shellCommand        letter_shell_noos_cmd.o
-    0x080091ec   0x080091ec   0x000000a0   Data   RO        15188    shellCommand        letter_shell_rtos_cmd.o
-    0x0800928c   0x0800928c   0x00000120   Data   RO        15350    shellCommand        shell.o
-    0x080093ac   0x080093ac   0x00000030   Data   RO        15867    shellCommand        log.o
-    0x080093dc   0x080093dc   0x00000020   Data   RO        16473    shellCommand        usart_485_sendmethod.o
+    0x080091bc   0x080091bc   0x00000010   Data   RO        12748    shellCommand        busi_test.o
+    0x080091cc   0x080091cc   0x00000020   Data   RO        15134    shellCommand        letter_shell_noos_cmd.o
+    0x080091ec   0x080091ec   0x000000a0   Data   RO        15191    shellCommand        letter_shell_rtos_cmd.o
+    0x0800928c   0x0800928c   0x00000120   Data   RO        15353    shellCommand        shell.o
+    0x080093ac   0x080093ac   0x00000030   Data   RO        15870    shellCommand        log.o
+    0x080093dc   0x080093dc   0x00000020   Data   RO        16476    shellCommand        usart_485_sendmethod.o
 
 
     Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x080093fc, Size: 0x00000000, Max: 0x00020000, ABSOLUTE)
@@ -9029,41 +9029,41 @@ Memory Map of the image
     0x240000c4   COMPRESSED   0x00000048   Data   RW        11013    .data               bsp_usart_dma.o
     0x2400010c   COMPRESSED   0x00000048   Data   RW        11131    .data               bsp_usart_common_dma.o
     0x24000154   COMPRESSED   0x00000048   Data   RW        11136    .data               bsp_usart_common_dma.o
-    0x2400019c   COMPRESSED   0x00000004   Data   RW        11314    .data               factory_iic.o
-    0x240001a0   COMPRESSED   0x00000002   Data   RW        12331    .data               gt9xx.o
+    0x2400019c   COMPRESSED   0x00000004   Data   RW        11317    .data               factory_iic.o
+    0x240001a0   COMPRESSED   0x00000002   Data   RW        12334    .data               gt9xx.o
     0x240001a2   COMPRESSED   0x00000002   PAD
-    0x240001a4   COMPRESSED   0x00000008   Data   RW        12744    .data               busi_test.o
-    0x240001ac   COMPRESSED   0x0000000c   Data   RW        12792    .data               bsp_systime.o
-    0x240001b8   COMPRESSED   0x00000008   Data   RW        13000    .data               systick.o
-    0x240001c0   COMPRESSED   0x00000008   Data   RW        13056    .data               taskfun.o
-    0x240001c8   COMPRESSED   0x000000a8   Data   RW        13137    .data               taskfun_outer.o
-    0x24000270   COMPRESSED   0x00000002   Data   RW        13138    .data               taskfun_outer.o
-    0x24000272   COMPRESSED   0x00000001   Data   RW        13716    .data               tasksema.o
+    0x240001a4   COMPRESSED   0x00000008   Data   RW        12747    .data               busi_test.o
+    0x240001ac   COMPRESSED   0x0000000c   Data   RW        12795    .data               bsp_systime.o
+    0x240001b8   COMPRESSED   0x00000008   Data   RW        13003    .data               systick.o
+    0x240001c0   COMPRESSED   0x00000008   Data   RW        13059    .data               taskfun.o
+    0x240001c8   COMPRESSED   0x000000a8   Data   RW        13140    .data               taskfun_outer.o
+    0x24000270   COMPRESSED   0x00000002   Data   RW        13141    .data               taskfun_outer.o
+    0x24000272   COMPRESSED   0x00000001   Data   RW        13719    .data               tasksema.o
     0x24000273   COMPRESSED   0x00000001   PAD
-    0x24000274   COMPRESSED   0x00000048   Data   RW        13788    .data               tasksemafun_outer.o
-    0x240002bc   COMPRESSED   0x00000002   Data   RW        13789    .data               tasksemafun_outer.o
+    0x24000274   COMPRESSED   0x00000048   Data   RW        13791    .data               tasksemafun_outer.o
+    0x240002bc   COMPRESSED   0x00000002   Data   RW        13792    .data               tasksemafun_outer.o
     0x240002be   COMPRESSED   0x00000002   PAD
-    0x240002c0   COMPRESSED   0x00000014   Data   RW        14425    .data               hook_mem.o
-    0x240002d4   COMPRESSED   0x00000001   Data   RW        14503    .data               frtos_printf.o
+    0x240002c0   COMPRESSED   0x00000014   Data   RW        14428    .data               hook_mem.o
+    0x240002d4   COMPRESSED   0x00000001   Data   RW        14506    .data               frtos_printf.o
     0x240002d5   COMPRESSED   0x00000003   PAD
-    0x240002d8   COMPRESSED   0x00000034   Data   RW        14863    .data               elog.o
-    0x2400030c   COMPRESSED   0x00000018   Data   RW        15187    .data               letter_shell_rtos_cmd.o
-    0x24000324   COMPRESSED   0x00000058   Data   RW        15349    .data               shell.o
-    0x2400037c   COMPRESSED   0x00000020   Data   RW        15767    .data               shell_port.o
-    0x2400039c   COMPRESSED   0x00000018   Data   RW        15944    .data               bsp_usart_com485.o
-    0x240003b4   COMPRESSED   0x0000005c   Data   RW        16052    .data               bsp_usart_common_com485.o
-    0x24000410   COMPRESSED   0x00000002   Data   RW        16336    .data               gv_variable.o
-    0x24000412   COMPRESSED   0x00000002   Data   RW        16337    .data               gv_variable.o
-    0x24000414   COMPRESSED   0x00000008   Data   RW        16338    .data               gv_variable.o
-    0x2400041c   COMPRESSED   0x00000008   Data   RW        16339    .data               gv_variable.o
-    0x24000424   COMPRESSED   0x00000008   Data   RW        16341    .data               gv_variable.o
-    0x2400042c   COMPRESSED   0x00000001   Data   RW        16342    .data               gv_variable.o
-    0x2400042d   COMPRESSED   0x00000001   Data   RW        16343    .data               gv_variable.o
+    0x240002d8   COMPRESSED   0x00000034   Data   RW        14866    .data               elog.o
+    0x2400030c   COMPRESSED   0x00000018   Data   RW        15190    .data               letter_shell_rtos_cmd.o
+    0x24000324   COMPRESSED   0x00000058   Data   RW        15352    .data               shell.o
+    0x2400037c   COMPRESSED   0x00000020   Data   RW        15770    .data               shell_port.o
+    0x2400039c   COMPRESSED   0x00000018   Data   RW        15947    .data               bsp_usart_com485.o
+    0x240003b4   COMPRESSED   0x0000005c   Data   RW        16055    .data               bsp_usart_common_com485.o
+    0x24000410   COMPRESSED   0x00000002   Data   RW        16339    .data               gv_variable.o
+    0x24000412   COMPRESSED   0x00000002   Data   RW        16340    .data               gv_variable.o
+    0x24000414   COMPRESSED   0x00000008   Data   RW        16341    .data               gv_variable.o
+    0x2400041c   COMPRESSED   0x00000008   Data   RW        16342    .data               gv_variable.o
+    0x24000424   COMPRESSED   0x00000008   Data   RW        16344    .data               gv_variable.o
+    0x2400042c   COMPRESSED   0x00000001   Data   RW        16345    .data               gv_variable.o
+    0x2400042d   COMPRESSED   0x00000001   Data   RW        16346    .data               gv_variable.o
     0x2400042e   COMPRESSED   0x00000002   PAD
-    0x24000430   COMPRESSED   0x00000004   Data   RW        16885    .data               mc_w.l(stdout.o)
-    0x24000434   COMPRESSED   0x00000004   Data   RW        16892    .data               mc_w.l(mvars.o)
-    0x24000438   COMPRESSED   0x00000004   Data   RW        16893    .data               mc_w.l(mvars.o)
-    0x2400043c   COMPRESSED   0x00000004   Data   RW        16897    .data               mc_w.l(errno.o)
+    0x24000430   COMPRESSED   0x00000004   Data   RW        16888    .data               mc_w.l(stdout.o)
+    0x24000434   COMPRESSED   0x00000004   Data   RW        16895    .data               mc_w.l(mvars.o)
+    0x24000438   COMPRESSED   0x00000004   Data   RW        16896    .data               mc_w.l(mvars.o)
+    0x2400043c   COMPRESSED   0x00000004   Data   RW        16900    .data               mc_w.l(errno.o)
     0x24000440        -       0x00000ce4   Zero   RW         7398    .bss                segger_rtt.o
     0x24001124        -       0x000000a0   Zero   RW         7681    .bss                segger_sysview_freertos.o
     0x240011c4   COMPRESSED   0x0000001c   PAD
@@ -9075,24 +9075,24 @@ Memory Map of the image
     0x24021d44        -       0x0000001c   Zero   RW        10664    .bss                p_data_queue_outer.o
     0x24021d60        -       0x00000048   Zero   RW        11114    .bss                bsp_usart_common_dma.o
     0x24021da8        -       0x00000138   Zero   RW        11119    .bss                bsp_usart_common_dma.o
-    0x24021ee0        -       0x0000004c   Zero   RW        11513    .bss                user_buffers.o
-    0x24021f2c        -       0x0000008c   Zero   RW        11656    .bss                bsp_usart_shell.o
-    0x24021fb8        -       0x0000004c   Zero   RW        11728    .bss                bsp_iic.o
-    0x24022004        -       0x000001dc   Zero   RW        11917    .bss                bsp_lcd.o
-    0x240221e0        -       0x00000050   Zero   RW        12713    .bss                business.o
-    0x24022230        -       0x00000014   Zero   RW        14163    .bss                data_random.o
-    0x24022244        -       0x00000100   Zero   RW        14501    .bss                frtos_printf.o
-    0x24022344        -       0x000004f8   Zero   RW        14860    .bss                elog.o
-    0x2402283c        -       0x0000001d   Zero   RW        15320    .bss                shell.o
+    0x24021ee0        -       0x0000004c   Zero   RW        11516    .bss                user_buffers.o
+    0x24021f2c        -       0x0000008c   Zero   RW        11659    .bss                bsp_usart_shell.o
+    0x24021fb8        -       0x0000004c   Zero   RW        11731    .bss                bsp_iic.o
+    0x24022004        -       0x000001dc   Zero   RW        11920    .bss                bsp_lcd.o
+    0x240221e0        -       0x00000050   Zero   RW        12716    .bss                business.o
+    0x24022230        -       0x00000014   Zero   RW        14166    .bss                data_random.o
+    0x24022244        -       0x00000100   Zero   RW        14504    .bss                frtos_printf.o
+    0x24022344        -       0x000004f8   Zero   RW        14863    .bss                elog.o
+    0x2402283c        -       0x0000001d   Zero   RW        15323    .bss                shell.o
     0x24022859   COMPRESSED   0x00000003   PAD
-    0x2402285c        -       0x00000270   Zero   RW        15764    .bss                shell_port.o
-    0x24022acc        -       0x00000214   Zero   RW        15859    .bss                log.o
-    0x24022ce0        -       0x0000008c   Zero   RW        15942    .bss                bsp_usart_com485.o
-    0x24022d6c        -       0x0000008c   Zero   RW        16034    .bss                bsp_usart_common_com485.o
-    0x24022df8        -       0x0000008c   Zero   RW        16039    .bss                bsp_usart_common_com485.o
-    0x24022e84        -       0x0000007e   Zero   RW        16040    .bss                bsp_usart_common_com485.o
-    0x24022f02        -       0x0000007e   Zero   RW        16045    .bss                bsp_usart_common_com485.o
-    0x24022f80        -       0x00000090   Zero   RW        16335    .bss                gv_variable.o
+    0x2402285c        -       0x00000270   Zero   RW        15767    .bss                shell_port.o
+    0x24022acc        -       0x00000214   Zero   RW        15862    .bss                log.o
+    0x24022ce0        -       0x0000008c   Zero   RW        15945    .bss                bsp_usart_com485.o
+    0x24022d6c        -       0x0000008c   Zero   RW        16037    .bss                bsp_usart_common_com485.o
+    0x24022df8        -       0x0000008c   Zero   RW        16042    .bss                bsp_usart_common_com485.o
+    0x24022e84        -       0x0000007e   Zero   RW        16043    .bss                bsp_usart_common_com485.o
+    0x24022f02        -       0x0000007e   Zero   RW        16048    .bss                bsp_usart_common_com485.o
+    0x24022f80        -       0x00000090   Zero   RW        16338    .bss                gv_variable.o
     0x24023010        -       0x00001200   Zero   RW            2    HEAP                startup_stm32h743xx.o
     0x24024210        -       0x00002400   Zero   RW            1    STACK               startup_stm32h743xx.o
 
@@ -9106,45 +9106,45 @@ Memory Map of the image
 
     0x08100000   0x08100000   0x000000be   Code   RO         9868    .emb_text           port.o
     0x081000be   0x081000be   0x00000002   PAD
-    0x081000c0   0x081000c0   0x00000008   Code   RO        16521    .text               mc_w.l(ctype_o.o)
-    0x081000c8   0x081000c8   0x00000024   Code   RO        16556    .text               mc_w.l(memseta.o)
-    0x081000ec   0x081000ec   0x00000018   Code   RO        16560    .text               mc_w.l(strncpy.o)
-    0x08100104   0x08100104   0x0000001c   Code   RO        16564    .text               mc_w.l(strcmp.o)
-    0x08100120   0x08100120   0x0000001a   Code   RO        16568    .text               mc_w.l(memcmp.o)
-    0x0810013a   0x0810013a   0x0000002c   Code   RO        16886    .text               mc_w.l(uidiv.o)
-    0x08100166   0x08100166   0x0000001e   Code   RO        16888    .text               mc_w.l(llshl.o)
-    0x08100184   0x08100184   0x00000020   Code   RO        16890    .text               mc_w.l(llushr.o)
-    0x081001a4   0x081001a4   0x00000070   Code   RO        16901    .text               mc_w.l(strtol.o)
-    0x08100214   0x08100214   0x00000000   Code   RO        16903    .text               mc_w.l(iusefp.o)
-    0x08100214   0x08100214   0x00000030   Code   RO        16912    .text               mf_w.l(cdrcmple.o)
-    0x08100244   0x08100244   0x00000056   Code   RO        16932    .text               mc_w.l(__dczerorl2.o)
+    0x081000c0   0x081000c0   0x00000008   Code   RO        16524    .text               mc_w.l(ctype_o.o)
+    0x081000c8   0x081000c8   0x00000024   Code   RO        16559    .text               mc_w.l(memseta.o)
+    0x081000ec   0x081000ec   0x00000018   Code   RO        16563    .text               mc_w.l(strncpy.o)
+    0x08100104   0x08100104   0x0000001c   Code   RO        16567    .text               mc_w.l(strcmp.o)
+    0x08100120   0x08100120   0x0000001a   Code   RO        16571    .text               mc_w.l(memcmp.o)
+    0x0810013a   0x0810013a   0x0000002c   Code   RO        16889    .text               mc_w.l(uidiv.o)
+    0x08100166   0x08100166   0x0000001e   Code   RO        16891    .text               mc_w.l(llshl.o)
+    0x08100184   0x08100184   0x00000020   Code   RO        16893    .text               mc_w.l(llushr.o)
+    0x081001a4   0x081001a4   0x00000070   Code   RO        16904    .text               mc_w.l(strtol.o)
+    0x08100214   0x08100214   0x00000000   Code   RO        16906    .text               mc_w.l(iusefp.o)
+    0x08100214   0x08100214   0x00000030   Code   RO        16915    .text               mf_w.l(cdrcmple.o)
+    0x08100244   0x08100244   0x00000056   Code   RO        16935    .text               mc_w.l(__dczerorl2.o)
     0x0810029a   0x0810029a   0x00000002   PAD
     0x0810029c   0x0810029c   0x000002fc   Code   RO        10361    i.ALL_Init_cfg      sys_init_all.o
-    0x08100598   0x08100598   0x00000024   Code   RO        13046    i.AppTaskCb         taskfun.o
-    0x081005bc   0x081005bc   0x0000000e   Code   RO        13047    i.AppTaskHandler    taskfun.o
-    0x081005ca   0x081005ca   0x0000006e   Code   RO        13982    i.AsciiToHex        data_convert.o
+    0x08100598   0x08100598   0x00000024   Code   RO        13049    i.AppTaskCb         taskfun.o
+    0x081005bc   0x081005bc   0x0000000e   Code   RO        13050    i.AppTaskHandler    taskfun.o
+    0x081005ca   0x081005ca   0x0000006e   Code   RO        13985    i.AsciiToHex        data_convert.o
     0x08100638   0x08100638   0x00000008   Code   RO        10362    i.BSP_GetVersion    sys_init_all.o
-    0x08100640   0x08100640   0x00000080   Code   RO        11453    i.Board_MPU_Config  bsp_mpu.o
+    0x08100640   0x08100640   0x00000080   Code   RO        11456    i.Board_MPU_Config  bsp_mpu.o
     0x081006c0   0x081006c0   0x0000002c   Code   RO        10473    i.BusFault_Handler  stm32h7xx_it.o
-    0x081006ec   0x081006ec   0x0000002c   Code   RO        16018    i.COM485_COM06_GpioClockEnable  bsp_usart_common_com485.o
+    0x081006ec   0x081006ec   0x0000002c   Code   RO        16021    i.COM485_COM06_GpioClockEnable  bsp_usart_common_com485.o
     0x08100718   0x08100718   0x0000000c   Code   RO        11093    i.DMA1_Stream6_IRQHandler  bsp_usart_common_dma.o
     0x08100724   0x08100724   0x000000c0   Code   RO          891    i.DMA_CalcBaseAndBitshift  stm32h7xx_hal_dma.o
     0x081007e4   0x081007e4   0x00000078   Code   RO          894    i.DMA_CheckFifoParam  stm32h7xx_hal_dma.o
     0x0810085c   0x0810085c   0x00000140   Code   RO          895    i.DMA_SetConfig     stm32h7xx_hal_dma.o
-    0x0810099c   0x0810099c   0x00000034   Code   RO        12884    i.DWT_Delay_us      sys_dwt.o
-    0x081009d0   0x081009d0   0x00000030   Code   RO        12885    i.DWT_Init          sys_dwt.o
+    0x0810099c   0x0810099c   0x00000034   Code   RO        12887    i.DWT_Delay_us      sys_dwt.o
+    0x081009d0   0x081009d0   0x00000030   Code   RO        12888    i.DWT_Init          sys_dwt.o
     0x08100a00   0x08100a00   0x000001f8   Code   RO          897    i.HAL_DMA_Abort_IT  stm32h7xx_hal_dma.o
     0x08100bf8   0x08100bf8   0x000002e8   Code   RO          902    i.HAL_DMA_Init      stm32h7xx_hal_dma.o
     0x08100ee0   0x08100ee0   0x00000248   Code   RO          906    i.HAL_DMA_Start_IT  stm32h7xx_hal_dma.o
     0x08101128   0x08101128   0x00000024   Code   RO          201    i.HAL_Delay         stm32h7xx_hal.o
     0x0810114c   0x0810114c   0x0000013c   Code   RO         1695    i.HAL_GPIO_DeInit   stm32h7xx_hal_gpio.o
     0x08101288   0x08101288   0x000001f0   Code   RO         1698    i.HAL_GPIO_Init     stm32h7xx_hal_gpio.o
-    0x08101478   0x08101478   0x0000001c   Code   RO        12784    i.HAL_GetTick       bsp_systime.o
+    0x08101478   0x08101478   0x0000001c   Code   RO        12787    i.HAL_GetTick       bsp_systime.o
     0x08101494   0x08101494   0x0000005a   Code   RO         2374    i.HAL_I2CEx_ConfigAnalogFilter  stm32h7xx_hal_i2c_ex.o
     0x081014ee   0x081014ee   0x00000006   Code   RO         1927    i.HAL_I2C_GetState  stm32h7xx_hal_i2c.o
     0x081014f4   0x081014f4   0x00000058   Code   RO          224    i.HAL_Init          stm32h7xx_hal.o
     0x0810154c   0x0810154c   0x0000004c   Code   RO          225    i.HAL_InitTick      stm32h7xx_hal.o
-    0x08101598   0x08101598   0x00000048   Code   RO        11865    i.HAL_LTDC_ErrorCallback  bsp_lcd.o
+    0x08101598   0x08101598   0x00000048   Code   RO        11868    i.HAL_LTDC_ErrorCallback  bsp_lcd.o
     0x081015e0   0x081015e0   0x000000ca   Code   RO         2555    i.HAL_LTDC_IRQHandler  stm32h7xx_hal_ltdc.o
     0x081016aa   0x081016aa   0x00000002   Code   RO         2557    i.HAL_LTDC_LineEventCallback  stm32h7xx_hal_ltdc.o
     0x081016ac   0x081016ac   0x0000001c   Code   RO         3007    i.HAL_MspInit       stm32h7xx_hal_msp.o
@@ -9166,27 +9166,27 @@ Memory Map of the image
     0x0810202a   0x0810202a   0x0000003e   Code   RO         6343    i.HAL_UART_DeInit   stm32h7xx_hal_uart.o
     0x08102068   0x08102068   0x00000048   Code   RO        10894    i.HAL_UART_ErrorCallback  bsp_usart_callback.o
     0x081020b0   0x081020b0   0x00000100   Code   RO         6356    i.HAL_UART_Receive_IT_UNLOCK  stm32h7xx_hal_uart.o
-    0x081021b0   0x081021b0   0x0000007c   Code   RO        15753    i.HAL_UART_Shell_RxCpltCallback  shell_port.o
+    0x081021b0   0x081021b0   0x0000007c   Code   RO        15756    i.HAL_UART_Shell_RxCpltCallback  shell_port.o
     0x0810222c   0x0810222c   0x0000009c   Code   RO         6361    i.HAL_UART_Transmit_DMA  stm32h7xx_hal_uart.o
     0x081022c8   0x081022c8   0x00000004   Code   RO        10896    i.HAL_UART_TxCpltCallback  bsp_usart_callback.o
     0x081022cc   0x081022cc   0x00000002   Code   RO         6364    i.HAL_UART_TxHalfCpltCallback  stm32h7xx_hal_uart.o
     0x081022ce   0x081022ce   0x00000002   PAD
-    0x081022d0   0x081022d0   0x000000cc   Code   RO        13786    i.HandleSema_test2  tasksemafun_outer.o
-    0x0810239c   0x0810239c   0x00000010   Code   RO        13834    i.Handle_QUEUE_USART_COMMON_GETBUFF_PRINT  taskworkhandle.o
-    0x081023ac   0x081023ac   0x0000020c   Code   RO        13133    i.Handle_test       taskfun_outer.o
-    0x081025b8   0x081025b8   0x00000004   Code   RO        13839    i.Handle_usart      taskworkhandle.o
-    0x081025bc   0x081025bc   0x000000b2   Code   RO        11374    i.I2C_EE_BufferWrite  bsp_i2c_ee.o
+    0x081022d0   0x081022d0   0x000000cc   Code   RO        13789    i.HandleSema_test2  tasksemafun_outer.o
+    0x0810239c   0x0810239c   0x00000010   Code   RO        13837    i.Handle_QUEUE_USART_COMMON_GETBUFF_PRINT  taskworkhandle.o
+    0x081023ac   0x081023ac   0x0000020c   Code   RO        13136    i.Handle_test       taskfun_outer.o
+    0x081025b8   0x081025b8   0x00000004   Code   RO        13842    i.Handle_usart      taskworkhandle.o
+    0x081025bc   0x081025bc   0x000000b2   Code   RO        11377    i.I2C_EE_BufferWrite  bsp_i2c_ee.o
     0x0810266e   0x0810266e   0x00000022   Code   RO         1975    i.I2C_Flush_TXDR    stm32h7xx_hal_i2c.o
-    0x08102690   0x08102690   0x00000084   Code   RO        11726    i.I2C_GPIO_Config   bsp_iic.o
+    0x08102690   0x08102690   0x00000084   Code   RO        11729    i.I2C_GPIO_Config   bsp_iic.o
     0x08102714   0x08102714   0x0000008c   Code   RO         1983    i.I2C_IsAcknowledgeFailed  stm32h7xx_hal_i2c.o
-    0x081027a0   0x081027a0   0x0000003c   Code   RO        11727    i.I2C_Mode_Config   bsp_iic.o
+    0x081027a0   0x081027a0   0x0000003c   Code   RO        11730    i.I2C_Mode_Config   bsp_iic.o
     0x081027dc   0x081027dc   0x00000074   Code   RO         1987    i.I2C_RequestMemoryWrite  stm32h7xx_hal_i2c.o
     0x08102850   0x08102850   0x00000056   Code   RO         1991    i.I2C_WaitOnFlagUntilTimeout  stm32h7xx_hal_i2c.o
     0x081028a6   0x081028a6   0x0000004c   Code   RO         1993    i.I2C_WaitOnSTOPFlagUntilTimeout  stm32h7xx_hal_i2c.o
-    0x081028f2   0x081028f2   0x00000010   Code   RO        11307    i.IIC_EE_DriverFactory_Create  factory_iic.o
+    0x081028f2   0x081028f2   0x00000010   Code   RO        11310    i.IIC_EE_DriverFactory_Create  factory_iic.o
     0x08102902   0x08102902   0x00000002   PAD
-    0x08102904   0x08102904   0x00000058   Code   RO        11913    i.LTDC_IRQHandler   bsp_lcd.o
-    0x0810295c   0x0810295c   0x000000b8   Code   RO        14154    i.MX_RNG_Init       data_random.o
+    0x08102904   0x08102904   0x00000058   Code   RO        11916    i.LTDC_IRQHandler   bsp_lcd.o
+    0x0810295c   0x0810295c   0x000000b8   Code   RO        14157    i.MX_RNG_Init       data_random.o
     0x08102a14   0x08102a14   0x00000034   Code   RO        10476    i.MemManage_Handler  stm32h7xx_it.o
     0x08102a48   0x08102a48   0x0000002c   Code   RO        10477    i.NMI_Handler       stm32h7xx_it.o
     0x08102a74   0x08102a74   0x0000000c   Code   RO        10841    i.QueueInit         queue3.o
@@ -9194,7 +9194,7 @@ Memory Map of the image
     0x08102aa6   0x08102aa6   0x00000002   PAD
     0x08102aa8   0x08102aa8   0x000000ac   Code   RO        10845    i.QueuePushArray    queue3.o
     0x08102b54   0x08102b54   0x00000124   Code   RO         4048    i.RCCEx_PLL3_Config  stm32h7xx_hal_rcc_ex.o
-    0x08102c78   0x08102c78   0x00000018   Code   RO        14157    i.RNG_InitWeight    data_random.o
+    0x08102c78   0x08102c78   0x00000018   Code   RO        14160    i.RNG_InitWeight    data_random.o
     0x08102c90   0x08102c90   0x00000010   Code   RO        10776    i.RingBuffer_IsEmpty  queue2.o
     0x08102ca0   0x08102ca0   0x0000001c   Code   RO        10777    i.RingBuffer_IsFull  queue2.o
     0x08102cbc   0x08102cbc   0x0000002c   Code   RO        10780    i.RingBuffer_WriteByte  queue2.o
@@ -9217,36 +9217,36 @@ Memory Map of the image
     0x081032ac   0x081032ac   0x0000001c   Code   RO         7851    i.SEGGER_SYSVIEW_Stop  segger_sysview.o
     0x081032c8   0x081032c8   0x00000034   Code   RO         7852    i.SEGGER_SYSVIEW_Stop_Ex  segger_sysview.o
     0x081032fc   0x081032fc   0x00000064   Code   RO         7861    i.SEGGER_SYSVIEW_Warn  segger_sysview.o
-    0x08103360   0x08103360   0x00000068   Code   RO        14499    i.SYSTEM_i_print    frtos_printf.o
+    0x08103360   0x08103360   0x00000068   Code   RO        14502    i.SYSTEM_i_print    frtos_printf.o
     0x081033c8   0x081033c8   0x00000080   Code   RO         7676    i.SYSVIEW_DeleteTask  segger_sysview_freertos.o
-    0x08103448   0x08103448   0x00000028   Code   RO        12998    i.SysTick_Handler   systick.o
-    0x08103470   0x08103470   0x00000018   Code   RO        14687    i.TEST_ALL_TEST     bsp_all_test.o
-    0x08103488   0x08103488   0x0000004c   Code   RO        13054    i.TaskHandler       taskfun.o
-    0x081034d4   0x081034d4   0x00000044   Code   RO        13713    i.TaskSemaConsumeCb  tasksema.o
+    0x08103448   0x08103448   0x00000028   Code   RO        13001    i.SysTick_Handler   systick.o
+    0x08103470   0x08103470   0x00000018   Code   RO        14690    i.TEST_ALL_TEST     bsp_all_test.o
+    0x08103488   0x08103488   0x0000004c   Code   RO        13057    i.TaskHandler       taskfun.o
+    0x081034d4   0x081034d4   0x00000044   Code   RO        13716    i.TaskSemaConsumeCb  tasksema.o
     0x08103518   0x08103518   0x0000000c   Code   RO        10656    i.Test_all_queue    p_data_queue_outer.o
     0x08103524   0x08103524   0x000000f4   Code   RO        11098    i.UART_COMMON_DmaIdleProcess  bsp_usart_common_dma.o
     0x08103618   0x08103618   0x0000000c   Code   RO        11100    i.UART_COMMON_DmaTxCpltProcess  bsp_usart_common_dma.o
     0x08103624   0x08103624   0x0000005e   Code   RO         6366    i.UART_CheckIdleState  stm32h7xx_hal_uart.o
-    0x08103682   0x08103682   0x000000aa   Code   RO        16026    i.UART_Common_Init  bsp_usart_common_com485.o
+    0x08103682   0x08103682   0x000000aa   Code   RO        16029    i.UART_Common_Init  bsp_usart_common_com485.o
     0x0810372c   0x0810372c   0x00000014   Code   RO         6367    i.UART_DMAAbortOnError  stm32h7xx_hal_uart.o
     0x08103740   0x08103740   0x0000003e   Code   RO         6369    i.UART_DMAReceiveCplt  stm32h7xx_hal_uart.o
     0x0810377e   0x0810377e   0x0000000a   Code   RO         6371    i.UART_DMARxHalfCplt  stm32h7xx_hal_uart.o
     0x08103788   0x08103788   0x00000024   Code   RO         6377    i.UART_EndRxTransfer  stm32h7xx_hal_uart.o
     0x081037ac   0x081037ac   0x0000001c   Code   RO         6379    i.UART_EndTxTransfer  stm32h7xx_hal_uart.o
-    0x081037c8   0x081037c8   0x00000004   Code   RO        16027    i.UART_INST_SetRxByteCb  bsp_usart_common_com485.o
+    0x081037c8   0x081037c8   0x00000004   Code   RO        16030    i.UART_INST_SetRxByteCb  bsp_usart_common_com485.o
     0x081037cc   0x081037cc   0x000000a0   Code   RO         6383    i.UART_RxISR_8BIT_FIFOEN  stm32h7xx_hal_uart.o
     0x0810386c   0x0810386c   0x00001540   Code   RO         6384    i.UART_SetConfig    stm32h7xx_hal_uart.o
     0x08104dac   0x08104dac   0x000000a8   Code   RO         6389    i.UART_WaitOnFlagUntilTimeout  stm32h7xx_hal_uart.o
-    0x08104e54   0x08104e54   0x00000038   Code   RO        15933    i.USART3_IRQHandler  bsp_usart_com485.o
-    0x08104e8c   0x08104e8c   0x000000b0   Code   RO        16029    i.USART_COMMON_COM485_GpioInit  bsp_usart_common_com485.o
-    0x08104f3c   0x08104f3c   0x0000000e   Code   RO        11647    i.USART_Shell_ComDrvInit  bsp_usart_shell.o
+    0x08104e54   0x08104e54   0x00000038   Code   RO        15936    i.USART3_IRQHandler  bsp_usart_com485.o
+    0x08104e8c   0x08104e8c   0x000000b0   Code   RO        16032    i.USART_COMMON_COM485_GpioInit  bsp_usart_common_com485.o
+    0x08104f3c   0x08104f3c   0x0000000e   Code   RO        11650    i.USART_Shell_ComDrvInit  bsp_usart_shell.o
     0x08104f4a   0x08104f4a   0x00000002   PAD
-    0x08104f4c   0x08104f4c   0x0000007c   Code   RO        11648    i.USART_Shell_GpioInit  bsp_usart_shell.o
-    0x08104fc8   0x08104fc8   0x00000018   Code   RO        11652    i.USART_Shell_UartDeInit  bsp_usart_shell.o
+    0x08104f4c   0x08104f4c   0x0000007c   Code   RO        11651    i.USART_Shell_GpioInit  bsp_usart_shell.o
+    0x08104fc8   0x08104fc8   0x00000018   Code   RO        11655    i.USART_Shell_UartDeInit  bsp_usart_shell.o
     0x08104fe0   0x08104fe0   0x000000b4   Code   RO        11107    i.USART_TX_RX_DMA_COMMON_Config  bsp_usart_common_dma.o
-    0x08105094   0x08105094   0x00000040   Code   RO        16032    i.UartRxPushToQueueCb  bsp_usart_common_com485.o
+    0x08105094   0x08105094   0x00000040   Code   RO        16035    i.UartRxPushToQueueCb  bsp_usart_common_com485.o
     0x081050d4   0x081050d4   0x00000030   Code   RO        10478    i.UsageFault_Handler  stm32h7xx_it.o
-    0x08105104   0x08105104   0x00000010   Code   RO        16158    i.Usart485CommonComAppInit  usart485_common_verify.o
+    0x08105104   0x08105104   0x00000010   Code   RO        16161    i.Usart485CommonComAppInit  usart485_common_verify.o
     0x08105114   0x08105114   0x00000024   Code   RO        11110    i.Usart_SendDMA_COMMON_SaveFun  bsp_usart_common_dma.o
     0x08105138   0x08105138   0x0000008c   Code   RO        11111    i.Usart_SendDMA_COMMON_SendFun  bsp_usart_common_dma.o
     0x081051c4   0x081051c4   0x0000006c   Code   RO         7393    i._DoInit           segger_rtt.o
@@ -9259,57 +9259,57 @@ Memory Map of the image
     0x081054b2   0x081054b2   0x0000005c   Code   RO         7396    i._WriteBlocking    segger_rtt.o
     0x0810550e   0x0810550e   0x00000044   Code   RO         7397    i._WriteNoCheck     segger_rtt.o
     0x08105552   0x08105552   0x00000002   PAD
-    0x08105554   0x08105554   0x00000030   Code   RO        16814    i.__0snprintf       mc_w.l(printfa.o)
-    0x08105584   0x08105584   0x00000028   Code   RO        16815    i.__0sprintf        mc_w.l(printfa.o)
+    0x08105554   0x08105554   0x00000030   Code   RO        16817    i.__0snprintf       mc_w.l(printfa.o)
+    0x08105584   0x08105584   0x00000028   Code   RO        16818    i.__0sprintf        mc_w.l(printfa.o)
     0x081055ac   0x081055ac   0x00000020   Code   RO          625    i.__NVIC_SetPriority  stm32h7xx_hal_cortex.o
-    0x081055cc   0x081055cc   0x00000184   Code   RO        16820    i._fp_digits        mc_w.l(printfa.o)
-    0x08105750   0x08105750   0x00000024   Code   RO        16822    i._printf_post_padding  mc_w.l(printfa.o)
-    0x08105774   0x08105774   0x0000002e   Code   RO        16823    i._printf_pre_padding  mc_w.l(printfa.o)
-    0x081057a2   0x081057a2   0x00000016   Code   RO        16824    i._snputc           mc_w.l(printfa.o)
-    0x081057b8   0x081057b8   0x0000000a   Code   RO        16825    i._sputc            mc_w.l(printfa.o)
-    0x081057c2   0x081057c2   0x00000004   Code   RO        13787    i.calculate_TASKSema_NUM_MAX  tasksemafun_outer.o
+    0x081055cc   0x081055cc   0x00000184   Code   RO        16823    i._fp_digits        mc_w.l(printfa.o)
+    0x08105750   0x08105750   0x00000024   Code   RO        16825    i._printf_post_padding  mc_w.l(printfa.o)
+    0x08105774   0x08105774   0x0000002e   Code   RO        16826    i._printf_pre_padding  mc_w.l(printfa.o)
+    0x081057a2   0x081057a2   0x00000016   Code   RO        16827    i._snputc           mc_w.l(printfa.o)
+    0x081057b8   0x081057b8   0x0000000a   Code   RO        16828    i._sputc            mc_w.l(printfa.o)
+    0x081057c2   0x081057c2   0x00000004   Code   RO        13790    i.calculate_TASKSema_NUM_MAX  tasksemafun_outer.o
     0x081057c6   0x081057c6   0x00000002   PAD
-    0x081057c8   0x081057c8   0x00000158   Code   RO        16160    i.com06_frame_process  usart485_common_verify.o
+    0x081057c8   0x081057c8   0x00000158   Code   RO        16163    i.com06_frame_process  usart485_common_verify.o
     0x08105920   0x08105920   0x00000068   Code   RO         9466    i.eTaskGetState     tasks.o
-    0x08105988   0x08105988   0x0000003c   Code   RO        15051    i.easylogger_init   elog_port.o
-    0x081059c4   0x081059c4   0x00000108   Code   RO        14836    i.elog_get_filter_tag_lvl  elog.o
-    0x08105acc   0x08105acc   0x00000040   Code   RO        14840    i.elog_init         elog.o
-    0x08105b0c   0x08105b0c   0x000003d8   Code   RO        14841    i.elog_output       elog.o
-    0x08105ee4   0x08105ee4   0x00000030   Code   RO        14843    i.elog_output_lock_enabled  elog.o
-    0x08105f14   0x08105f14   0x00000024   Code   RO        14844    i.elog_output_unlock  elog.o
-    0x08105f38   0x08105f38   0x00000010   Code   RO        15053    i.elog_port_get_p_info  elog_port.o
-    0x08105f48   0x08105f48   0x0000000c   Code   RO        15054    i.elog_port_get_t_info  elog_port.o
-    0x08105f54   0x08105f54   0x00000004   Code   RO        15058    i.elog_port_output_lock  elog_port.o
-    0x08105f58   0x08105f58   0x00000010   Code   RO        14847    i.elog_set_filter_kw  elog.o
-    0x08105f68   0x08105f68   0x000000c8   Code   RO        14848    i.elog_set_filter_lvl  elog.o
-    0x08106030   0x08106030   0x00000034   Code   RO        14851    i.elog_set_filter_tag_lvl_default  elog.o
-    0x08106064   0x08106064   0x000000d0   Code   RO        14852    i.elog_set_fmt      elog.o
-    0x08106134   0x08106134   0x0000000c   Code   RO        14853    i.elog_set_output_enabled  elog.o
-    0x08106140   0x08106140   0x000000a0   Code   RO        14855    i.elog_start        elog.o
-    0x081061e0   0x081061e0   0x00000114   Code   RO        15025    i.elog_strcpy       elog_utils.o
-    0x081062f4   0x081062f4   0x00000014   Code   RO        11655    i.fputc             bsp_usart_shell.o
-    0x08106308   0x08106308   0x00000050   Code   RO        16841    i.free              mc_w.l(malloc.o)
-    0x08106358   0x08106358   0x000000dc   Code   RO        14857    i.get_fmt_enabled   elog.o
-    0x08106434   0x08106434   0x00000014   Code   RO        14859    i.get_fmt_used_and_enabled_u32  elog.o
-    0x08106448   0x08106448   0x00000026   Code   RO        14266    i.isNumericString   w_string.o
-    0x0810646e   0x0810646e   0x00000010   Code   RO        12957    i.is_faultmask_active  sys_interrupt.o
-    0x0810647e   0x0810647e   0x0000001a   Code   RO        14611    i.is_uart_configured  hal_ext_uart.o
-    0x08106498   0x08106498   0x000000a4   Code   RO        15157    i.l_filterElogLever  letter_shell_rtos_cmd.o
-    0x0810653c   0x0810653c   0x00000058   Code   RO        15158    i.l_fllk            letter_shell_rtos_cmd.o
-    0x08106594   0x08106594   0x00000054   Code   RO        15159    i.l_fllt            letter_shell_rtos_cmd.o
-    0x081065e8   0x081065e8   0x0000011c   Code   RO        15123    i.l_log             letter_shell_noos_cmd.o
-    0x08106704   0x08106704   0x0000002c   Code   RO        15160    i.l_mem             letter_shell_rtos_cmd.o
-    0x08106730   0x08106730   0x00000038   Code   RO        15162    i.l_ptl             letter_shell_rtos_cmd.o
-    0x08106768   0x08106768   0x000000d0   Code   RO        15163    i.l_resume          letter_shell_rtos_cmd.o
-    0x08106838   0x08106838   0x00000134   Code   RO        15164    i.l_setpriority     letter_shell_rtos_cmd.o
-    0x0810696c   0x0810696c   0x00000024   Code   RO        15757    i.letter_Shell_NoOsWhileTask  shell_port.o
-    0x08106990   0x08106990   0x0000017c   Code   RO        15852    i.logHexDump        log.o
-    0x08106b0c   0x08106b0c   0x00000034   Code   RO        15853    i.logRegister       log.o
-    0x08106b40   0x08106b40   0x00000044   Code   RO        15855    i.logSwitchLevel    log.o
-    0x08106b84   0x08106b84   0x0000003c   Code   RO        15857    i.logWrite          log.o
-    0x08106bc0   0x08106bc0   0x0000006c   Code   RO        16842    i.malloc            mc_w.l(malloc.o)
-    0x08106c2c   0x08106c2c   0x000001ac   Code   RO        12738    i.mock_sample_task_entry  busi_test.o
-    0x08106dd8   0x08106dd8   0x00000094   Code   RO        11455    i.mpu_init          bsp_mpu.o
+    0x08105988   0x08105988   0x0000003c   Code   RO        15054    i.easylogger_init   elog_port.o
+    0x081059c4   0x081059c4   0x00000108   Code   RO        14839    i.elog_get_filter_tag_lvl  elog.o
+    0x08105acc   0x08105acc   0x00000040   Code   RO        14843    i.elog_init         elog.o
+    0x08105b0c   0x08105b0c   0x000003d8   Code   RO        14844    i.elog_output       elog.o
+    0x08105ee4   0x08105ee4   0x00000030   Code   RO        14846    i.elog_output_lock_enabled  elog.o
+    0x08105f14   0x08105f14   0x00000024   Code   RO        14847    i.elog_output_unlock  elog.o
+    0x08105f38   0x08105f38   0x00000010   Code   RO        15056    i.elog_port_get_p_info  elog_port.o
+    0x08105f48   0x08105f48   0x0000000c   Code   RO        15057    i.elog_port_get_t_info  elog_port.o
+    0x08105f54   0x08105f54   0x00000004   Code   RO        15061    i.elog_port_output_lock  elog_port.o
+    0x08105f58   0x08105f58   0x00000010   Code   RO        14850    i.elog_set_filter_kw  elog.o
+    0x08105f68   0x08105f68   0x000000c8   Code   RO        14851    i.elog_set_filter_lvl  elog.o
+    0x08106030   0x08106030   0x00000034   Code   RO        14854    i.elog_set_filter_tag_lvl_default  elog.o
+    0x08106064   0x08106064   0x000000d0   Code   RO        14855    i.elog_set_fmt      elog.o
+    0x08106134   0x08106134   0x0000000c   Code   RO        14856    i.elog_set_output_enabled  elog.o
+    0x08106140   0x08106140   0x000000a0   Code   RO        14858    i.elog_start        elog.o
+    0x081061e0   0x081061e0   0x00000114   Code   RO        15028    i.elog_strcpy       elog_utils.o
+    0x081062f4   0x081062f4   0x00000014   Code   RO        11658    i.fputc             bsp_usart_shell.o
+    0x08106308   0x08106308   0x00000050   Code   RO        16844    i.free              mc_w.l(malloc.o)
+    0x08106358   0x08106358   0x000000dc   Code   RO        14860    i.get_fmt_enabled   elog.o
+    0x08106434   0x08106434   0x00000014   Code   RO        14862    i.get_fmt_used_and_enabled_u32  elog.o
+    0x08106448   0x08106448   0x00000026   Code   RO        14269    i.isNumericString   w_string.o
+    0x0810646e   0x0810646e   0x00000010   Code   RO        12960    i.is_faultmask_active  sys_interrupt.o
+    0x0810647e   0x0810647e   0x0000001a   Code   RO        14614    i.is_uart_configured  hal_ext_uart.o
+    0x08106498   0x08106498   0x000000a4   Code   RO        15160    i.l_filterElogLever  letter_shell_rtos_cmd.o
+    0x0810653c   0x0810653c   0x00000058   Code   RO        15161    i.l_fllk            letter_shell_rtos_cmd.o
+    0x08106594   0x08106594   0x00000054   Code   RO        15162    i.l_fllt            letter_shell_rtos_cmd.o
+    0x081065e8   0x081065e8   0x0000011c   Code   RO        15126    i.l_log             letter_shell_noos_cmd.o
+    0x08106704   0x08106704   0x0000002c   Code   RO        15163    i.l_mem             letter_shell_rtos_cmd.o
+    0x08106730   0x08106730   0x00000038   Code   RO        15165    i.l_ptl             letter_shell_rtos_cmd.o
+    0x08106768   0x08106768   0x000000d0   Code   RO        15166    i.l_resume          letter_shell_rtos_cmd.o
+    0x08106838   0x08106838   0x00000134   Code   RO        15167    i.l_setpriority     letter_shell_rtos_cmd.o
+    0x0810696c   0x0810696c   0x00000024   Code   RO        15760    i.letter_Shell_NoOsWhileTask  shell_port.o
+    0x08106990   0x08106990   0x0000017c   Code   RO        15855    i.logHexDump        log.o
+    0x08106b0c   0x08106b0c   0x00000034   Code   RO        15856    i.logRegister       log.o
+    0x08106b40   0x08106b40   0x00000044   Code   RO        15858    i.logSwitchLevel    log.o
+    0x08106b84   0x08106b84   0x0000003c   Code   RO        15860    i.logWrite          log.o
+    0x08106bc0   0x08106bc0   0x0000006c   Code   RO        16845    i.malloc            mc_w.l(malloc.o)
+    0x08106c2c   0x08106c2c   0x000001ac   Code   RO        12741    i.mock_sample_task_entry  busi_test.o
+    0x08106dd8   0x08106dd8   0x00000094   Code   RO        11458    i.mpu_init          bsp_mpu.o
     0x08106e6c   0x08106e6c   0x00000010   Code   RO        10531    i.p_cbIncr          p_data_queue.o
     0x08106e7c   0x08106e7c   0x00000014   Code   RO        10534    i.p_cbIsFull        p_data_queue.o
     0x08106e90   0x08106e90   0x00000030   Code   RO        10537    i.p_cbWrite         p_data_queue.o
@@ -9332,56 +9332,56 @@ Memory Map of the image
     0x08107394   0x08107394   0x00000024   Code   RO         9870    i.pxPortInitialiseStack  port.o
     0x081073b8   0x081073b8   0x00000208   Code   RO        10170    i.rdatasettask      user_testtask.o
     0x081075c0   0x081075c0   0x0000027c   Code   RO         7268    i.segger_outfun     segger_outinterface.o
-    0x0810783c   0x0810783c   0x00000020   Code   RO        15259    i.shellAdd          shell.o
-    0x0810785c   0x0810785c   0x00000032   Code   RO        15262    i.shellCheckPermission  shell.o
+    0x0810783c   0x0810783c   0x00000020   Code   RO        15262    i.shellAdd          shell.o
+    0x0810785c   0x0810785c   0x00000032   Code   RO        15265    i.shellCheckPermission  shell.o
     0x0810788e   0x0810788e   0x00000002   PAD
-    0x08107890   0x08107890   0x0000001c   Code   RO        15263    i.shellClear        shell.o
-    0x081078ac   0x081078ac   0x00000028   Code   RO        15677    i.shellCompanionAdd  shell_companion.o
-    0x081078d4   0x081078d4   0x0000001e   Code   RO        15679    i.shellCompanionGet  shell_companion.o
-    0x081078f2   0x081078f2   0x00000008   Code   RO        15269    i.shellDown         shell.o
-    0x081078fa   0x081078fa   0x00000016   Code   RO        15270    i.shellEnter        shell.o
-    0x08107910   0x08107910   0x00000044   Code   RO        15702    i.shellExtParseChar  shell_ext.o
-    0x08107954   0x08107954   0x000000c2   Code   RO        15703    i.shellExtParseNumber  shell_ext.o
-    0x08107a16   0x08107a16   0x00000066   Code   RO        15704    i.shellExtParsePara  shell_ext.o
-    0x08107a7c   0x08107a7c   0x00000046   Code   RO        15705    i.shellExtParseString  shell_ext.o
-    0x08107ac2   0x08107ac2   0x000000c8   Code   RO        15707    i.shellExtRun       shell_ext.o
+    0x08107890   0x08107890   0x0000001c   Code   RO        15266    i.shellClear        shell.o
+    0x081078ac   0x081078ac   0x00000028   Code   RO        15680    i.shellCompanionAdd  shell_companion.o
+    0x081078d4   0x081078d4   0x0000001e   Code   RO        15682    i.shellCompanionGet  shell_companion.o
+    0x081078f2   0x081078f2   0x00000008   Code   RO        15272    i.shellDown         shell.o
+    0x081078fa   0x081078fa   0x00000016   Code   RO        15273    i.shellEnter        shell.o
+    0x08107910   0x08107910   0x00000044   Code   RO        15705    i.shellExtParseChar  shell_ext.o
+    0x08107954   0x08107954   0x000000c2   Code   RO        15706    i.shellExtParseNumber  shell_ext.o
+    0x08107a16   0x08107a16   0x00000066   Code   RO        15707    i.shellExtParsePara  shell_ext.o
+    0x08107a7c   0x08107a7c   0x00000046   Code   RO        15708    i.shellExtParseString  shell_ext.o
+    0x08107ac2   0x08107ac2   0x000000c8   Code   RO        15710    i.shellExtRun       shell_ext.o
     0x08107b8a   0x08107b8a   0x00000002   PAD
-    0x08107b8c   0x08107b8c   0x00000040   Code   RO        15273    i.shellGetCommandName  shell.o
-    0x08107bcc   0x08107bcc   0x0000003e   Code   RO        15275    i.shellGetVarValue  shell.o
-    0x08107c0a   0x08107c0a   0x00000028   Code   RO        15277    i.shellHelp         shell.o
-    0x08107c32   0x08107c32   0x00000014   Code   RO        15282    i.shellKeys         shell.o
-    0x08107c46   0x08107c46   0x00000004   Code   RO        15284    i.shellListAll      shell.o
+    0x08107b8c   0x08107b8c   0x00000040   Code   RO        15276    i.shellGetCommandName  shell.o
+    0x08107bcc   0x08107bcc   0x0000003e   Code   RO        15278    i.shellGetVarValue  shell.o
+    0x08107c0a   0x08107c0a   0x00000028   Code   RO        15280    i.shellHelp         shell.o
+    0x08107c32   0x08107c32   0x00000014   Code   RO        15285    i.shellKeys         shell.o
+    0x08107c46   0x08107c46   0x00000004   Code   RO        15287    i.shellListAll      shell.o
     0x08107c4a   0x08107c4a   0x00000002   PAD
-    0x08107c4c   0x08107c4c   0x00000050   Code   RO        15288    i.shellListUser     shell.o
-    0x08107c9c   0x08107c9c   0x0000004c   Code   RO        15289    i.shellListVar      shell.o
-    0x08107ce8   0x08107ce8   0x0000001a   Code   RO        15291    i.shellParserParam  shell.o
-    0x08107d02   0x08107d02   0x00000092   Code   RO        15297    i.shellRunCommand   shell.o
-    0x08107d94   0x08107d94   0x00000074   Code   RO        15298    i.shellSeekCommand  shell.o
-    0x08107e08   0x08107e08   0x00000060   Code   RO        15299    i.shellSetUser      shell.o
-    0x08107e68   0x08107e68   0x000000bc   Code   RO        15302    i.shellShowVar      shell.o
-    0x08107f24   0x08107f24   0x000000e4   Code   RO        15303    i.shellSplit        shell.o
-    0x08108008   0x08108008   0x000000fc   Code   RO        15306    i.shellTab          shell.o
-    0x08108104   0x08108104   0x00000052   Code   RO        15308    i.shellToDec        shell.o
-    0x08108156   0x08108156   0x0000002a   Code   RO        15309    i.shellToHex        shell.o
-    0x08108180   0x08108180   0x00000006   Code   RO        15310    i.shellUp           shell.o
-    0x08108186   0x08108186   0x00000014   Code   RO        15312    i.shellVars         shell.o
-    0x0810819a   0x0810819a   0x0000000c   Code   RO        15313    i.shellWriteByte    shell.o
+    0x08107c4c   0x08107c4c   0x00000050   Code   RO        15291    i.shellListUser     shell.o
+    0x08107c9c   0x08107c9c   0x0000004c   Code   RO        15292    i.shellListVar      shell.o
+    0x08107ce8   0x08107ce8   0x0000001a   Code   RO        15294    i.shellParserParam  shell.o
+    0x08107d02   0x08107d02   0x00000092   Code   RO        15300    i.shellRunCommand   shell.o
+    0x08107d94   0x08107d94   0x00000074   Code   RO        15301    i.shellSeekCommand  shell.o
+    0x08107e08   0x08107e08   0x00000060   Code   RO        15302    i.shellSetUser      shell.o
+    0x08107e68   0x08107e68   0x000000bc   Code   RO        15305    i.shellShowVar      shell.o
+    0x08107f24   0x08107f24   0x000000e4   Code   RO        15306    i.shellSplit        shell.o
+    0x08108008   0x08108008   0x000000fc   Code   RO        15309    i.shellTab          shell.o
+    0x08108104   0x08108104   0x00000052   Code   RO        15311    i.shellToDec        shell.o
+    0x08108156   0x08108156   0x0000002a   Code   RO        15312    i.shellToHex        shell.o
+    0x08108180   0x08108180   0x00000006   Code   RO        15313    i.shellUp           shell.o
+    0x08108186   0x08108186   0x00000014   Code   RO        15315    i.shellVars         shell.o
+    0x0810819a   0x0810819a   0x0000000c   Code   RO        15316    i.shellWriteByte    shell.o
     0x081081a6   0x081081a6   0x00000002   PAD
-    0x081081a8   0x081081a8   0x00000060   Code   RO        15316    i.shellWriteEndLine  shell.o
-    0x08108208   0x08108208   0x00000064   Code   RO        15317    i.shellWritePrompt  shell.o
-    0x0810826c   0x0810826c   0x00000088   Code   RO        15318    i.shellWriteReturnValue  shell.o
-    0x081082f4   0x081082f4   0x00000064   Code   RO        16465    i.shell_runfunc     usart_485_sendmethod.o
-    0x08108358   0x08108358   0x00000034   Code   RO        16467    i.stop_machine      usart_485_sendmethod.o
-    0x0810838c   0x0810838c   0x0000011c   Code   RO        14613    i.uart_debug_checkerror  hal_ext_uart.o
-    0x081084a8   0x081084a8   0x0000001c   Code   RO        15758    i.userLogWrite      shell_port.o
-    0x081084c4   0x081084c4   0x00000010   Code   RO        11512    i.user_all_buffer_create  user_buffers.o
+    0x081081a8   0x081081a8   0x00000060   Code   RO        15319    i.shellWriteEndLine  shell.o
+    0x08108208   0x08108208   0x00000064   Code   RO        15320    i.shellWritePrompt  shell.o
+    0x0810826c   0x0810826c   0x00000088   Code   RO        15321    i.shellWriteReturnValue  shell.o
+    0x081082f4   0x081082f4   0x00000064   Code   RO        16468    i.shell_runfunc     usart_485_sendmethod.o
+    0x08108358   0x08108358   0x00000034   Code   RO        16470    i.stop_machine      usart_485_sendmethod.o
+    0x0810838c   0x0810838c   0x0000011c   Code   RO        14616    i.uart_debug_checkerror  hal_ext_uart.o
+    0x081084a8   0x081084a8   0x0000001c   Code   RO        15761    i.userLogWrite      shell_port.o
+    0x081084c4   0x081084c4   0x00000010   Code   RO        11515    i.user_all_buffer_create  user_buffers.o
     0x081084d4   0x081084d4   0x000000ac   Code   RO         9486    i.uxTaskGetSystemState  tasks.o
-    0x08108580   0x08108580   0x000000b0   Code   RO        14413    i.vApplicationMallocFailedHook  hook_mem.o
-    0x08108630   0x08108630   0x0000014c   Code   RO        14414    i.vApplicationStackOverflowHook  hook_mem.o
+    0x08108580   0x08108580   0x000000b0   Code   RO        14416    i.vApplicationMallocFailedHook  hook_mem.o
+    0x08108630   0x08108630   0x0000014c   Code   RO        14417    i.vApplicationStackOverflowHook  hook_mem.o
     0x0810877c   0x0810877c   0x00000002   Code   RO         9946    i.vApplicationTickHook  freerotspro.o
     0x0810877e   0x0810877e   0x00000002   PAD
     0x08108780   0x08108780   0x00000044   Code   RO         8890    i.vPortFree         heap_4.o
-    0x081087c4   0x081087c4   0x00000088   Code   RO        14416    i.vPrintStack_TaskCreationResult  hook_mem.o
+    0x081087c4   0x081087c4   0x00000088   Code   RO        14419    i.vPrintStack_TaskCreationResult  hook_mem.o
     0x0810884c   0x0810884c   0x0000003c   Code   RO         9491    i.vTaskDelay        tasks.o
     0x08108888   0x08108888   0x000000c0   Code   RO         9493    i.vTaskDelete       tasks.o
     0x08108948   0x08108948   0x00000074   Code   RO         9495    i.vTaskGetInfo      tasks.o
@@ -9403,55 +9403,55 @@ Memory Map of the image
     0x08108f38   0x08108f38   0x00000004   Data   RO        10174    .constdata          user_testtask.o
     0x08108f3c   0x08108f3c   0x00000011   Data   RO        10175    .constdata          user_testtask.o
     0x08108f4d   0x08108f4d   0x00000011   Data   RO        10176    .constdata          user_testtask.o
-    0x08108f5e   0x08108f5e   0x00000005   Data   RO        12741    .constdata          busi_test.o
-    0x08108f63   0x08108f63   0x0000000f   Data   RO        12742    .constdata          busi_test.o
-    0x08108f72   0x08108f72   0x0000000c   Data   RO        13136    .constdata          taskfun_outer.o
-    0x08108f7e   0x08108f7e   0x0000001e   Data   RO        14502    .constdata          frtos_printf.o
-    0x08108f9c   0x08108f9c   0x000000e2   Data   RO        14861    .constdata          elog.o
-    0x0810907e   0x0810907e   0x00000023   Data   RO        15026    .constdata          elog_utils.o
-    0x081090a1   0x081090a1   0x0000000b   Data   RO        15128    .constdata          letter_shell_noos_cmd.o
-    0x081090ac   0x081090ac   0x00000006   Data   RO        15129    .constdata          letter_shell_noos_cmd.o
-    0x081090b2   0x081090b2   0x00000004   Data   RO        15166    .constdata          letter_shell_rtos_cmd.o
-    0x081090b6   0x081090b6   0x00000004   Data   RO        15170    .constdata          letter_shell_rtos_cmd.o
-    0x081090ba   0x081090ba   0x0000000a   Data   RO        15171    .constdata          letter_shell_rtos_cmd.o
-    0x081090c4   0x081090c4   0x00000008   Data   RO        15172    .constdata          letter_shell_rtos_cmd.o
-    0x081090cc   0x081090cc   0x0000000f   Data   RO        15173    .constdata          letter_shell_rtos_cmd.o
-    0x081090db   0x081090db   0x00000007   Data   RO        15174    .constdata          letter_shell_rtos_cmd.o
-    0x081090e2   0x081090e2   0x00000007   Data   RO        15176    .constdata          letter_shell_rtos_cmd.o
-    0x081090e9   0x081090e9   0x0000000e   Data   RO        15177    .constdata          letter_shell_rtos_cmd.o
-    0x081090f7   0x081090f7   0x00000014   Data   RO        15179    .constdata          letter_shell_rtos_cmd.o
-    0x0810910b   0x0810910b   0x00000012   Data   RO        15181    .constdata          letter_shell_rtos_cmd.o
-    0x0810911d   0x0810911d   0x00000004   Data   RO        15182    .constdata          letter_shell_rtos_cmd.o
-    0x08109121   0x08109121   0x00000010   Data   RO        15183    .constdata          letter_shell_rtos_cmd.o
-    0x08109131   0x08109131   0x00000001   Data   RO        15322    .constdata          shell.o
-    0x08109132   0x08109132   0x0000000d   Data   RO        15323    .constdata          shell.o
-    0x0810913f   0x0810913f   0x00000007   Data   RO        15324    .constdata          shell.o
-    0x08109146   0x08109146   0x00000003   Data   RO        15326    .constdata          shell.o
-    0x08109149   0x08109149   0x00000005   Data   RO        15329    .constdata          shell.o
-    0x0810914e   0x0810914e   0x0000000a   Data   RO        15331    .constdata          shell.o
-    0x08109158   0x08109158   0x00000006   Data   RO        15334    .constdata          shell.o
-    0x0810915e   0x0810915e   0x00000006   Data   RO        15338    .constdata          shell.o
-    0x08109164   0x08109164   0x00000005   Data   RO        15340    .constdata          shell.o
-    0x08109169   0x08109169   0x0000000d   Data   RO        15341    .constdata          shell.o
-    0x08109176   0x08109176   0x00000005   Data   RO        15344    .constdata          shell.o
-    0x0810917b   0x0810917b   0x0000000d   Data   RO        15345    .constdata          shell.o
-    0x08109188   0x08109188   0x0000000e   Data   RO        15347    .constdata          shell.o
-    0x08109196   0x08109196   0x0000000c   Data   RO        15860    .constdata          log.o
-    0x081091a2   0x081091a2   0x00000008   Data   RO        15862    .constdata          log.o
-    0x081091aa   0x081091aa   0x00000020   Data   RO        15863    .constdata          log.o
-    0x081091ca   0x081091ca   0x00000011   Data   RO        15864    .constdata          log.o
-    0x081091db   0x081091db   0x00000007   Data   RO        16469    .constdata          usart_485_sendmethod.o
-    0x081091e2   0x081091e2   0x00000003   Data   RO        16470    .constdata          usart_485_sendmethod.o
+    0x08108f5e   0x08108f5e   0x00000005   Data   RO        12744    .constdata          busi_test.o
+    0x08108f63   0x08108f63   0x0000000f   Data   RO        12745    .constdata          busi_test.o
+    0x08108f72   0x08108f72   0x0000000c   Data   RO        13139    .constdata          taskfun_outer.o
+    0x08108f7e   0x08108f7e   0x0000001e   Data   RO        14505    .constdata          frtos_printf.o
+    0x08108f9c   0x08108f9c   0x000000e2   Data   RO        14864    .constdata          elog.o
+    0x0810907e   0x0810907e   0x00000023   Data   RO        15029    .constdata          elog_utils.o
+    0x081090a1   0x081090a1   0x0000000b   Data   RO        15131    .constdata          letter_shell_noos_cmd.o
+    0x081090ac   0x081090ac   0x00000006   Data   RO        15132    .constdata          letter_shell_noos_cmd.o
+    0x081090b2   0x081090b2   0x00000004   Data   RO        15169    .constdata          letter_shell_rtos_cmd.o
+    0x081090b6   0x081090b6   0x00000004   Data   RO        15173    .constdata          letter_shell_rtos_cmd.o
+    0x081090ba   0x081090ba   0x0000000a   Data   RO        15174    .constdata          letter_shell_rtos_cmd.o
+    0x081090c4   0x081090c4   0x00000008   Data   RO        15175    .constdata          letter_shell_rtos_cmd.o
+    0x081090cc   0x081090cc   0x0000000f   Data   RO        15176    .constdata          letter_shell_rtos_cmd.o
+    0x081090db   0x081090db   0x00000007   Data   RO        15177    .constdata          letter_shell_rtos_cmd.o
+    0x081090e2   0x081090e2   0x00000007   Data   RO        15179    .constdata          letter_shell_rtos_cmd.o
+    0x081090e9   0x081090e9   0x0000000e   Data   RO        15180    .constdata          letter_shell_rtos_cmd.o
+    0x081090f7   0x081090f7   0x00000014   Data   RO        15182    .constdata          letter_shell_rtos_cmd.o
+    0x0810910b   0x0810910b   0x00000012   Data   RO        15184    .constdata          letter_shell_rtos_cmd.o
+    0x0810911d   0x0810911d   0x00000004   Data   RO        15185    .constdata          letter_shell_rtos_cmd.o
+    0x08109121   0x08109121   0x00000010   Data   RO        15186    .constdata          letter_shell_rtos_cmd.o
+    0x08109131   0x08109131   0x00000001   Data   RO        15325    .constdata          shell.o
+    0x08109132   0x08109132   0x0000000d   Data   RO        15326    .constdata          shell.o
+    0x0810913f   0x0810913f   0x00000007   Data   RO        15327    .constdata          shell.o
+    0x08109146   0x08109146   0x00000003   Data   RO        15329    .constdata          shell.o
+    0x08109149   0x08109149   0x00000005   Data   RO        15332    .constdata          shell.o
+    0x0810914e   0x0810914e   0x0000000a   Data   RO        15334    .constdata          shell.o
+    0x08109158   0x08109158   0x00000006   Data   RO        15337    .constdata          shell.o
+    0x0810915e   0x0810915e   0x00000006   Data   RO        15341    .constdata          shell.o
+    0x08109164   0x08109164   0x00000005   Data   RO        15343    .constdata          shell.o
+    0x08109169   0x08109169   0x0000000d   Data   RO        15344    .constdata          shell.o
+    0x08109176   0x08109176   0x00000005   Data   RO        15347    .constdata          shell.o
+    0x0810917b   0x0810917b   0x0000000d   Data   RO        15348    .constdata          shell.o
+    0x08109188   0x08109188   0x0000000e   Data   RO        15350    .constdata          shell.o
+    0x08109196   0x08109196   0x0000000c   Data   RO        15863    .constdata          log.o
+    0x081091a2   0x081091a2   0x00000008   Data   RO        15865    .constdata          log.o
+    0x081091aa   0x081091aa   0x00000020   Data   RO        15866    .constdata          log.o
+    0x081091ca   0x081091ca   0x00000011   Data   RO        15867    .constdata          log.o
+    0x081091db   0x081091db   0x00000007   Data   RO        16472    .constdata          usart_485_sendmethod.o
+    0x081091e2   0x081091e2   0x00000003   Data   RO        16473    .constdata          usart_485_sendmethod.o
     0x081091e5   0x081091e5   0x00000003   PAD
     0x081091e8   0x081091e8   0x00000050   Data   RO         7683    .conststring        segger_sysview_freertos.o
     0x08109238   0x08109238   0x00000043   Data   RO        10177    .conststring        user_testtask.o
     0x0810927b   0x0810927b   0x00000001   PAD
     0x0810927c   0x0810927c   0x00000042   Data   RO        10365    .conststring        sys_init_all.o
     0x081092be   0x081092be   0x00000002   PAD
-    0x081092c0   0x081092c0   0x00000089   Data   RO        14424    .conststring        hook_mem.o
+    0x081092c0   0x081092c0   0x00000089   Data   RO        14427    .conststring        hook_mem.o
     0x08109349   0x08109349   0x00000003   PAD
-    0x0810934c   0x0810934c   0x00000048   Data   RO        15866    .conststring        log.o
-    0x08109394   0x08109394   0x00000042   Data   RO        16046    .conststring        bsp_usart_common_com485.o
+    0x0810934c   0x0810934c   0x00000048   Data   RO        15869    .conststring        log.o
+    0x08109394   0x08109394   0x00000042   Data   RO        16049    .conststring        bsp_usart_common_com485.o
 
 
 ==============================================================================
@@ -9471,8 +9471,8 @@ Image component sizes
         92         56          0          0          0       2417   bsp_usart_callback.o
         56         10          0         24        140       3029   bsp_usart_com485.o
       1010        312         66         92        532      18754   bsp_usart_common_com485.o
-      1470        270          0        144        384      59813   bsp_usart_common_dma.o
-       184         26          0         72          0       4392   bsp_usart_dma.o
+      1470        270          0        144        384      59861   bsp_usart_common_dma.o
+       184         26          0         72          0       4402   bsp_usart_dma.o
        482        140          0          0        140       4165   bsp_usart_shell.o
       1092        644         87          8          0       3266   busi_test.o
          0          0          0          0         80       1122   business.o
@@ -9504,7 +9504,7 @@ Image component sizes
       1298         12          0          0          0      13266   queue.o
        146          0          0          0          0       3688   queue2.o
        280        106          0          0          0       3689   queue3.o
-         0          0          0          0          0       2344   rtos_comtask.o
+         0          0          0          0          0       2354   rtos_comtask.o
        196         52          0          4          0       7094   segger_dao.o
        636        402          0          0          0      23744   segger_outinterface.o
       1006         62         33          1       3300      17257   segger_rtt.o
@@ -9545,7 +9545,7 @@ Image component sizes
        248         80          0          1          0       2171   tasksema.o
        396        320          0         74          0       2656   tasksemafun_outer.o
        208        154          0          0          0       2296   taskworkhandle.o
-       492        242          0          0          0       4626   usart485_common_verify.o
+       492        242          0          0          0       4638   usart485_common_verify.o
        208         56         72          0          0       1853   usart_485_232_send.o
        300        106        117          0          0       4066   usart_485_sendmethod.o
         16          4          0          0         76        747   user_buffers.o
@@ -9555,7 +9555,7 @@ Image component sizes
         38          0          0          0          0        726   w_string.o
 
     ----------------------------------------------------------------------
-     64970      11196       5900       1072     156112    2018104   Object Totals
+     64970      11196       5900       1072     156112    2018184   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         82          0         26         13         32          0   (incl. Padding)
 
@@ -9627,8 +9627,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     69696      11352       6036       1088     156112    1970456   Grand Totals
-     69696      11352       6036        308     156112    1970456   ELF Image Totals (compressed)
+     69696      11352       6036       1088     156112    1970536   Grand Totals
+     69696      11352       6036        308     156112    1970536   ELF Image Totals (compressed)
      69696      11352       6036        308          0          0   ROM Totals
 
 ==============================================================================
