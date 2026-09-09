@@ -182,8 +182,73 @@ extern "C" {
 
 
 #define USE_UART_COMMON_COM04_DMA 1
-#define USE_UART_COMMON_COM04_DMA_RX 0
+#define USE_UART_COMMON_COM04_DMA_RX 1
 #define USE_UART_COMMON_COM04_DMA_TX 1
+
+
+
+
+
+#define MAX_BUF_COM05_R_SIZE 					5  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
+#define MAX_RING_BUFF_COM05_SIZE 			MAX_BUF_COM05_R_SIZE*10
+
+
+
+#define DMA_COM05_USARTx 														USART_COM05_COM485
+#define USARTx_DMA_COM05_IRQHandler                 USART_COM05_COM485_IRQHandler
+#define USARTx_DMA_COM05_IRQ                 		    USART_COM05_COM485_IRQ
+#define huart_DMA_COM05_Handle                      huart_COM05_COM485_Handle 
+
+#define DMA_COM05_STREAMx_TX 														DMA1_Stream5
+#define DMA_COM05_STREAM_IRQ_TX 												DMA1_Stream5_IRQn
+#define DMA_COM05_REQUEST_USART_TX 											USART_COM05_DMA_REQUEST_USART_TX
+
+#define DMA_com5_tx_Streamx_IRQHandler							DMA1_Stream5_IRQHandler
+
+
+#define DMA_COM05_STREAMx_RX 														DMA2_Stream5
+#define DMA_COM05_STREAM_IRQ_RX 												DMA2_Stream5_IRQn
+#define DMA_COM05_REQUEST_USART_RX 											USART_COM05_DMA_REQUEST_USART_RX
+
+#define DMA_com5_rx_Streamx_IRQHandler							DMA2_Stream5_IRQHandler
+
+
+
+#define USE_UART_COMMON_COM05_DMA 1
+#define USE_UART_COMMON_COM05_DMA_RX 1
+#define USE_UART_COMMON_COM05_DMA_TX 1
+
+
+
+
+#define MAX_BUF_COM06_R_SIZE 					5  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
+#define MAX_RING_BUFF_COM06_SIZE 			MAX_BUF_COM06_R_SIZE*10
+
+
+
+#define DMA_COM06_USARTx 														USART_COM06_COM485
+#define USARTx_DMA_COM06_IRQHandler                 USART_COM06_COM485_IRQHandler
+#define USARTx_DMA_COM06_IRQ                 		    USART_COM06_COM485_IRQ
+#define huart_DMA_COM06_Handle                      huart_COM06_COM485_Handle 
+
+#define DMA_COM06_STREAMx_TX 														DMA1_Stream6
+#define DMA_COM06_STREAM_IRQ_TX 												DMA1_Stream6_IRQn
+#define DMA_COM06_REQUEST_USART_TX 											USART_COM06_DMA_REQUEST_USART_TX
+
+#define DMA_com6_tx_Streamx_IRQHandler							DMA1_Stream6_IRQHandler
+
+
+#define DMA_COM06_STREAMx_RX 														DMA2_Stream6
+#define DMA_COM06_STREAM_IRQ_RX 												DMA2_Stream6_IRQn
+#define DMA_COM06_REQUEST_USART_RX 											USART_COM06_DMA_REQUEST_USART_RX
+
+#define DMA_com6_rx_Streamx_IRQHandler							DMA2_Stream6_IRQHandler
+
+
+
+#define USE_UART_COMMON_COM06_DMA 1
+#define USE_UART_COMMON_COM06_DMA_RX 1
+#define USE_UART_COMMON_COM06_DMA_TX 1
 
 
 
@@ -214,7 +279,8 @@ extern str_DMA_usart_send GV_usartdmaCOMMON_COM2_Send;
 extern str_DMA_usart_send GV_usartdmaCOMMON_COM3_Send;
 extern str_DMA_usart_send GV_usartdmaCOMMON_COM4_Send;
 
-
+extern str_DMA_usart_send GV_usartdmaCOMMON_COM5_Send;
+extern str_DMA_usart_send GV_usartdmaCOMMON_COM6_Send;
 
 
 

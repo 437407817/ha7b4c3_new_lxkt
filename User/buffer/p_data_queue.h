@@ -70,6 +70,11 @@ typedef struct str_nood_data_buff {
 #define q_QUEUE_NODE_NUM_GROUP_4        (1*4) //缓冲队列的个数需要为2的幂,否则出错
 #define q_QUEUE_NODE_DATA_LEN_GROUP_4   (1 * 50)
 
+#define q_QUEUE_NODE_NUM_GROUP_5        (1*4) //缓冲队列的个数需要为2的幂,否则出错
+#define q_QUEUE_NODE_DATA_LEN_GROUP_5   (1 * 50)
+
+#define q_QUEUE_NODE_NUM_GROUP_6        (1*4) //缓冲队列的个数需要为2的幂,否则出错
+#define q_QUEUE_NODE_DATA_LEN_GROUP_6   (1 * 50)
 //#define creat_que(que_name, len)	\
 //    unsigned char que_buf_##que_name[len] = {0}; \
 //    que_t que_##que_name = {que_buf_##que_name, len, 0, 0}; \

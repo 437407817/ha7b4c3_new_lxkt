@@ -53,6 +53,9 @@ CREAT_Group_queue(GROUP_2,q_QUEUE_NODE_NUM_GROUP_2,q_QUEUE_NODE_DATA_LEN_GROUP_2
 CREAT_Group_queue(GROUP_3,q_QUEUE_NODE_NUM_GROUP_3,q_QUEUE_NODE_DATA_LEN_GROUP_3);
 CREAT_Group_queue(GROUP_4,q_QUEUE_NODE_NUM_GROUP_4,q_QUEUE_NODE_DATA_LEN_GROUP_4);
 
+CREAT_Group_queue(GROUP_5,q_QUEUE_NODE_NUM_GROUP_5,q_QUEUE_NODE_DATA_LEN_GROUP_5);
+CREAT_Group_queue(GROUP_6,q_QUEUE_NODE_NUM_GROUP_6,q_QUEUE_NODE_DATA_LEN_GROUP_6);
+
 
 //extern Q_QueueBuffer q_rx_queue_1;
 //CREAT_GROUP_QUEUE_NEW(GROUP_3,q_QUEUE_NODE_NUM_GROUP_3,q_QUEUE_NODE_DATA_LEN_GROUP_3);
@@ -128,7 +131,15 @@ p_tx_rx_groupedqueue_init(&q_tx_rx_queue_GROUP_3,&GV_ndb_GROUP_3,q_QUEUE_NODE_NU
 p_tx_rx_groupedqueue_init(&q_tx_rx_queue_GROUP_4,&GV_ndb_GROUP_4,q_QUEUE_NODE_NUM_GROUP_4,
 	q_QUEUE_NODE_DATA_LEN_GROUP_4,global_elems_GROUP_4,node_data_GROUP_4,global_node_buff_GROUP_4);	
 	#endif
+		#if USE_COM05_COM485_FUN	
+p_tx_rx_groupedqueue_init(&q_tx_rx_queue_GROUP_5,&GV_ndb_GROUP_5,q_QUEUE_NODE_NUM_GROUP_5,
+	q_QUEUE_NODE_DATA_LEN_GROUP_5,global_elems_GROUP_5,node_data_GROUP_5,global_node_buff_GROUP_5);
+	#endif
 	
+	#if USE_COM06_COM485_FUN
+p_tx_rx_groupedqueue_init(&q_tx_rx_queue_GROUP_6,&GV_ndb_GROUP_6,q_QUEUE_NODE_NUM_GROUP_6,
+	q_QUEUE_NODE_DATA_LEN_GROUP_6,global_elems_GROUP_6,node_data_GROUP_6,global_node_buff_GROUP_6);	
+	#endif
 	
 	
 //p_tx_rx_groupedqueue_init(&q_GROUPqueue_3_UsartDMAsend,&GV_ndb__GROUP_3,q_QUEUE_NODE_NUM__GROUP_3,

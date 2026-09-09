@@ -36,6 +36,9 @@ UART_HandleTypeDef huart_COM03_COM485_Handle;
 
 UART_HandleTypeDef huart_COM04_COM485_Handle;
 
+UART_HandleTypeDef huart_COM05_COM485_Handle;
+
+UART_HandleTypeDef huart_COM06_COM485_Handle;
 
 // .c文件
 uint8_t com01_parseBuf[COM01_PARSE_BUF_SIZE];
@@ -45,6 +48,10 @@ uint8_t com02_parseBuf[COM02_PARSE_BUF_SIZE];
 uint8_t com03_parseBuf[COM03_PARSE_BUF_SIZE];
 
 uint8_t com04_parseBuf[COM04_PARSE_BUF_SIZE];
+
+uint8_t com05_parseBuf[COM05_PARSE_BUF_SIZE];
+
+uint8_t com06_parseBuf[COM06_PARSE_BUF_SIZE];
 // 全局实例，可以切换赋值
 //U485UsartSend_Callback_t g_U485UsartSendCb;
 
@@ -64,6 +71,16 @@ U485ComUsartSend_Callback_t com03_485_cbCfg = {
 
 };
 U485ComUsartSend_Callback_t com04_485_cbCfg = {
+    .U485ComSendDmaSaveDataFunc  = Wrapper_U485ComSendDmaSaveDataFunc,
+    .U485ComSendAllFunc  = Wrapper_U485ComSendAllFunc,
+
+};
+U485ComUsartSend_Callback_t com05_485_cbCfg = {
+    .U485ComSendDmaSaveDataFunc  = Wrapper_U485ComSendDmaSaveDataFunc,
+    .U485ComSendAllFunc  = Wrapper_U485ComSendAllFunc,
+
+};
+U485ComUsartSend_Callback_t com06_485_cbCfg = {
     .U485ComSendDmaSaveDataFunc  = Wrapper_U485ComSendDmaSaveDataFunc,
     .U485ComSendAllFunc  = Wrapper_U485ComSendAllFunc,
 
@@ -139,6 +156,36 @@ UartComInstance com04_com485Inst = {
     .pTxQueue       = &q_tx_rx_queue_GROUP_4,
 };
 
+UartComInstance com05_com485Inst = {
+    .huart_handle = &huart_COM05_COM485_Handle,
+    .sendCbStore = {0},
+
+    .pRcvQueue      = &RcvDmaQue_COM5_Data.g_uartRingBuf,
+    .parseBuf       = com05_parseBuf,
+    .parseBufLen    = COM05_PARSE_BUF_SIZE,
+
+    .pRxByteCb      = NULL,
+    .pSlaveProcCb   = NULL,
+		    /* DMA发送成员 */
+    .pDmaSendCtrl   = &GV_usartdmaCOMMON_COM5_Send,
+    .pTxQueue       = &q_tx_rx_queue_GROUP_5,
+};
+
+
+UartComInstance com06_com485Inst = {
+    .huart_handle = &huart_COM06_COM485_Handle,
+    .sendCbStore = {0},
+
+    .pRcvQueue      = &RcvDmaQue_COM6_Data.g_uartRingBuf,
+    .parseBuf       = com06_parseBuf,
+    .parseBufLen    = COM06_PARSE_BUF_SIZE,
+
+    .pRxByteCb      = NULL,
+    .pSlaveProcCb   = NULL,
+		    /* DMA发送成员 */
+    .pDmaSendCtrl   = &GV_usartdmaCOMMON_COM6_Send,
+    .pTxQueue       = &q_tx_rx_queue_GROUP_6,
+};
 
 
 
@@ -280,7 +327,18 @@ static void USART_common_com4_ClockEnable(void)
     USART_COM04_COM485_CLK_ENABLE();
 }
 	#endif
-
+		#if USE_COM05_COM485_FUN
+static void USART_common_com5_ClockEnable(void)
+{
+    USART_COM05_COM485_CLK_ENABLE();
+}
+	#endif
+	#if USE_COM06_COM485_FUN
+static void USART_common_com6_ClockEnable(void)
+{
+    USART_COM06_COM485_CLK_ENABLE();
+}
+	#endif
 //#define USART_COM01_COM485                             USART2
 //#define USART_COM01_COM485_CLK_ENABLE()                __USART2_CLK_ENABLE();
 //			  
@@ -356,7 +414,35 @@ void USART_common_COM485_UartInit(void)
     }
 		
 				#endif
-
+				#if USE_COM05_COM485_FUN
+		    if(UART_Common_Init(com05_com485Inst.huart_handle,
+                        USART_COM05_COM485,
+                        USART_COM05_COM485_BAUDRATE,
+                        USART_COM05_COM485_IRQ,
+                        10,        //抢占优先级
+                        0,         //子优先级
+                        USART_COM05_IDLE_IT_STATUS,         //enableIdleIt
+                        USART_COM05_RXNE_IT_STATUS,          //enableRxneIt
+                        USART_common_com5_ClockEnable) != HAL_OK)
+    {
+        Error_Handler();
+    }
+				#endif
+				#if USE_COM06_COM485_FUN
+		    if(UART_Common_Init(com06_com485Inst.huart_handle,
+                        USART_COM06_COM485,
+                        USART_COM06_COM485_BAUDRATE,
+                        USART_COM06_COM485_IRQ,
+                        10,        //抢占优先级
+                        0,         //子优先级
+                        USART_COM06_IDLE_IT_STATUS,         //enableIdleIt
+                        USART_COM06_RXNE_IT_STATUS,          //enableRxneIt
+                        USART_common_com6_ClockEnable) != HAL_OK)
+    {
+        Error_Handler();
+    }
+		
+				#endif
 }
 
 
@@ -464,7 +550,20 @@ static void COM485_COM04_GpioClockEnable(void)
     USART_COM04_COM485_RX_GPIO_CLK_ENABLE();
 }
 #endif
-
+#if USE_COM05_COM485_FUN
+static void COM485_COM05_GpioClockEnable(void)
+{
+    USART_COM05_COM485_TX_GPIO_CLK_ENABLE();
+    USART_COM05_COM485_RX_GPIO_CLK_ENABLE();
+}
+#endif
+#if USE_COM06_COM485_FUN
+static void COM485_COM06_GpioClockEnable(void)
+{
+    USART_COM06_COM485_TX_GPIO_CLK_ENABLE();
+    USART_COM06_COM485_RX_GPIO_CLK_ENABLE();
+}
+#endif
 //#define USART_COM01_COM485                             USART2
 //#define USART_COM01_COM485_CLK_ENABLE()                __USART2_CLK_ENABLE();
 //			  
@@ -572,8 +671,40 @@ void USART_COMMON_COM485_GpioInit(void)
         Error_Handler();
     }
 			#endif	
+		#if USE_COM05_COM485_FUN
+		    if(UART_Common_GpioInit(USART_COM05_COM485_TX_GPIO_PORT,
+                            USART_COM05_COM485_TX_PIN,
+                            USART_COM05_COM485_TX_AF,
 		
-	
+                            USART_COM05_COM485_RX_GPIO_PORT,
+                            USART_COM05_COM485_RX_PIN,
+                            USART_COM05_COM485_RX_AF,
+		
+                            COM485_COM05_GpioClockEnable,
+                            USART_COM05_COM485_RCC_PERIPHCLK,
+                            USART_COM05_COM485_RCC_CLKSOURCE,
+                            0) != HAL_OK)  
+		{
+        Error_Handler();
+    }
+			#endif			
+		#if USE_COM06_COM485_FUN
+		    if(UART_Common_GpioInit(USART_COM06_COM485_TX_GPIO_PORT,
+                            USART_COM06_COM485_TX_PIN,
+                            USART_COM06_COM485_TX_AF,
+		
+                            USART_COM06_COM485_RX_GPIO_PORT,
+                            USART_COM06_COM485_RX_PIN,
+                            USART_COM06_COM485_RX_AF,
+		
+                            COM485_COM06_GpioClockEnable,
+                            USART_COM06_COM485_RCC_PERIPHCLK,
+                            USART_COM06_COM485_RCC_CLKSOURCE,
+                            0) != HAL_OK)  
+		{
+        Error_Handler();
+    }
+			#endif		
 }
 
 
@@ -666,6 +797,18 @@ void USART_COMMON_COM485_232_ComDrvInit(void)
 	UART_COMMON_Instance_SetSendCallback(&com04_com485Inst, &com04_485_cbCfg);
     //绑定接收回调：收到字节直接压入实例内部的pRcvQueue
   UART_INST_SetRxByteCb(&com04_com485Inst, UartRxPushToQueueCb);
+#endif	
+
+#if USE_COM05_COM485_FUN	
+	UART_COMMON_Instance_SetSendCallback(&com05_com485Inst, &com05_485_cbCfg);
+    //绑定接收回调：收到字节直接压入实例内部的pRcvQueue
+  UART_INST_SetRxByteCb(&com05_com485Inst, UartRxPushToQueueCb);
+#endif	
+
+#if USE_COM06_COM485_FUN	
+	UART_COMMON_Instance_SetSendCallback(&com06_com485Inst, &com06_485_cbCfg);
+    //绑定接收回调：收到字节直接压入实例内部的pRcvQueue
+  UART_INST_SetRxByteCb(&com06_com485Inst, UartRxPushToQueueCb);
 #endif	
 
 	Usart485CommonComAppInit();
@@ -835,6 +978,43 @@ void USART_COM04_COM485_IRQHandler(void)
 
 
 #endif
+
+#if USE_COM05_COM485_IT_1 && !USE_UART_COMMON_COM05_DMA_RX 
+
+extern UartComInstance com05_com485Inst;
+
+void USART_COM05_COM485_IRQHandler(void)
+{
+    //把实例指针作为上下文传入
+    UART_Common_IT_Process(com05_com485Inst.huart_handle,
+                           com05_com485Inst.pRxByteCb,
+                           &com05_com485Inst);
+
+    HAL_UART_IRQHandler(com05_com485Inst.huart_handle);
+}
+
+
+#endif
+
+#if USE_COM06_COM485_IT_1 && !USE_UART_COMMON_COM06_DMA_RX 
+
+extern UartComInstance com06_com485Inst;
+
+void USART_COM06_COM485_IRQHandler(void)
+{
+    //把实例指针作为上下文传入
+    UART_Common_IT_Process(com06_com485Inst.huart_handle,
+                           com06_com485Inst.pRxByteCb,
+                           &com06_com485Inst);
+
+    HAL_UART_IRQHandler(com06_com485Inst.huart_handle);
+}
+
+
+#endif
+
+
+
 //void UART_COMMON_Instance_SendArray(UART_HandleTypeDef *huart, uint8_t *array, uint16_t num);
 
 

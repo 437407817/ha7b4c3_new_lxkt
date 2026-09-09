@@ -43,6 +43,12 @@ extern STR_RCV_DMA_que_data RcvDmaQue_COM2_Data;
 extern STR_RCV_DMA_que_data RcvDmaQue_COM3_Data;
 
 extern STR_RCV_DMA_que_data RcvDmaQue_COM4_Data;
+
+extern STR_RCV_DMA_que_data RcvDmaQue_COM5_Data;
+
+extern STR_RCV_DMA_que_data RcvDmaQue_COM6_Data;
+
+
 //extern STR_RCV_DMA_que_data Rcv_Common_DmaQueData_Com1;
 #define g_com01_rcvDataBuf RcvDmaQue_COM1_Data.g_ringBufData
 #define g_com01_rcvQueue RcvDmaQue_COM1_Data.g_uartRingBuf
@@ -55,6 +61,14 @@ extern STR_RCV_DMA_que_data RcvDmaQue_COM4_Data;
 
 #define g_com04_rcvDataBuf RcvDmaQue_COM4_Data.g_ringBufData
 #define g_com04_rcvQueue RcvDmaQue_COM4_Data.g_uartRingBuf
+
+#define g_com05_rcvDataBuf RcvDmaQue_COM5_Data.g_ringBufData
+#define g_com05_rcvQueue RcvDmaQue_COM5_Data.g_uartRingBuf
+
+#define g_com06_rcvDataBuf RcvDmaQue_COM6_Data.g_ringBufData
+#define g_com06_rcvQueue RcvDmaQue_COM6_Data.g_uartRingBuf
+
+
 
 typedef struct
 {
@@ -381,6 +395,7 @@ void Usart485CommonComTask(UartComInstance *pInst,
  * @param frameBuf  帧缓冲区（可能是实例自带parseBuf，也可能是外部传入的extReadBuf）
  * @param frameLen  整帧总长度(帧头+长度+数据+校验)
  */
+ #if USE_COM01_COM485_FUN
 static void com01_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 {
 	#if 0
@@ -405,7 +420,8 @@ static void com01_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 	
 	#endif
 }
-
+	#endif
+	#if USE_COM02_COM485_FUN
 static void com02_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 {
 	#if 0
@@ -430,7 +446,8 @@ static void com02_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 	
 	#endif
 }
-
+	#endif
+	#if USE_COM03_COM485_FUN
 static void com03_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 {
 	#if 0
@@ -455,7 +472,8 @@ static void com03_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 	
 	#endif
 }
-
+	#endif
+	#if USE_COM04_COM485_FUN
 static void com04_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 {
 	#if 0
@@ -480,7 +498,60 @@ static void com04_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 	
 	#endif
 }
+	#endif
+	#if USE_COM05_COM485_FUN
+static void com05_frame_process(uint8_t *frameBuf, uint16_t frameLen)
+{
+	#if 0
+    if(frameBuf == NULL || frameLen < 3U)
+    {
+        return;
+    }
 
+    // frameBuf[0] = FRAME_REC_HEAD_0
+    // frameBuf[1] = FRAME_REC_HEAD_1
+    // frameBuf[2] = 数据域长度
+    // frameBuf[3] = FUNC_DATA_IDX 功能码
+
+    // ⚠️重要：frameBuf是临时工作缓冲区，下次Usart485CommonComTask执行会被覆盖
+    // 如果需要保存这帧数据，必须memcpy拷贝出来，不要直接保存frameBuf指针
+
+    /* 示例业务逻辑 */
+    SYSTEM_INFO("recv frame len:%d func:%02X\n", frameLen, frameBuf[3]);
+	#else
+	SYSTEM_INFO("-%c\n",  frameBuf[0]);
+	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"com05_frame_process=\r\n");
+	
+	#endif
+}
+	#endif
+	#if USE_COM06_COM485_FUN
+static void com06_frame_process(uint8_t *frameBuf, uint16_t frameLen)
+{
+	#if 0
+    if(frameBuf == NULL || frameLen < 3U)
+    {
+        return;
+    }
+
+    // frameBuf[0] = FRAME_REC_HEAD_0
+    // frameBuf[1] = FRAME_REC_HEAD_1
+    // frameBuf[2] = 数据域长度
+    // frameBuf[3] = FUNC_DATA_IDX 功能码
+
+    // ⚠️重要：frameBuf是临时工作缓冲区，下次Usart485CommonComTask执行会被覆盖
+    // 如果需要保存这帧数据，必须memcpy拷贝出来，不要直接保存frameBuf指针
+
+    /* 示例业务逻辑 */
+    SYSTEM_INFO("recv frame len:%d func:%02X\n", frameLen, frameBuf[3]);
+	#else
+	SYSTEM_INFO("-%c\n",  frameBuf[0]);
+	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"com06_frame_process=\r\n");
+	
+	#endif
+}
+	#endif
+	
 /**
 ***********************************************************
 * @brief USB转串口应用初始化函数
@@ -504,6 +575,12 @@ void Usart485CommonComAppInit(void)
 	#endif
 	#if USE_COM04_COM485_FUN
 	UART_INST_SetSlaveCb(&com04_com485Inst, com04_frame_process);	
+	#endif
+	#if USE_COM05_COM485_FUN
+	UART_INST_SetSlaveCb(&com05_com485Inst, com05_frame_process);
+	#endif
+	#if USE_COM06_COM485_FUN
+	UART_INST_SetSlaveCb(&com06_com485Inst, com06_frame_process);	
 	#endif
 //	reg485ComCb(ProcUartData);//injectUARTIDLEcptCP
 //	reg_SlaveComCb(pull_data_from_485);

@@ -185,11 +185,91 @@
 
 #define USE_COM04_COM485_IT_1				1
 
-#define USE_COM04_COM485_FUN        1   
+#define USE_COM04_COM485_FUN        0   
+
+/************************ COM05 配置（替换原USART6） ************************/
+
+//串口波特率
+#define USART_COM05_COM485_BAUDRATE                    115200
+#define USART_COM05_COM485                             USART2
+#define USART_COM05_COM485_CLK_ENABLE()                __USART2_CLK_ENABLE();
+			  
+#define USART_COM05_COM485_RX_GPIO_PORT                GPIOD
+#define USART_COM05_COM485_RX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+#define USART_COM05_COM485_RX_PIN                      GPIO_PIN_6
+#define USART_COM05_COM485_RX_AF                       GPIO_AF7_USART2
+			  
+#define USART_COM05_COM485_TX_GPIO_PORT                GPIOD
+#define USART_COM05_COM485_TX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+#define USART_COM05_COM485_TX_PIN                      GPIO_PIN_5
+#define USART_COM05_COM485_TX_AF                       GPIO_AF7_USART2
+			  
+#define USART_COM05_COM485_IRQHandler                  USART2_IRQHandler
+#define USART_COM05_COM485_IRQ                 		    USART2_IRQn
+
+
+#define USART_COM05_COM485_RCC_PERIPHCLK                       RCC_PERIPHCLK_USART2
+#define USART_COM05_COM485_RCC_CLKSOURCE                       RCC_USART234578CLKSOURCE_D2PCLK1
 
 
 
+#define USART_COM05_DMA_REQUEST_USART_TX							DMA_REQUEST_USART2_TX
+#define USART_COM05_DMA_REQUEST_USART_RX							DMA_REQUEST_USART2_RX
 
+#if USE_UART_COMMON_COM05_DMA_RX
+#define USART_COM05_IDLE_IT_STATUS										DISENABLE_IDLE_IT_STATUS	
+#define USART_COM05_RXNE_IT_STATUS										DISENABLE_RXNE_IT_STATUS	
+#else
+#define USART_COM05_IDLE_IT_STATUS										ENABLE_IDLE_IT_STATUS	
+#define USART_COM05_RXNE_IT_STATUS										ENABLE_RXNE_IT_STATUS
+#endif
+
+
+#define USE_COM05_COM485_IT_1				1
+
+#define USE_COM05_COM485_FUN        0   
+
+/************************ COM06 配置（替换原USART6） ************************/
+
+//串口波特率
+#define USART_COM06_COM485_BAUDRATE                    115200
+#define USART_COM06_COM485                             USART2
+#define USART_COM06_COM485_CLK_ENABLE()                __USART2_CLK_ENABLE();
+			  
+#define USART_COM06_COM485_RX_GPIO_PORT                GPIOD
+#define USART_COM06_COM485_RX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+#define USART_COM06_COM485_RX_PIN                      GPIO_PIN_6
+#define USART_COM06_COM485_RX_AF                       GPIO_AF7_USART2
+			  
+#define USART_COM06_COM485_TX_GPIO_PORT                GPIOD
+#define USART_COM06_COM485_TX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+#define USART_COM06_COM485_TX_PIN                      GPIO_PIN_5
+#define USART_COM06_COM485_TX_AF                       GPIO_AF7_USART2
+			  
+#define USART_COM06_COM485_IRQHandler                  USART2_IRQHandler
+#define USART_COM06_COM485_IRQ                 		    USART2_IRQn
+
+
+#define USART_COM06_COM485_RCC_PERIPHCLK                       RCC_PERIPHCLK_USART2
+#define USART_COM06_COM485_RCC_CLKSOURCE                       RCC_USART234578CLKSOURCE_D2PCLK1
+
+
+
+#define USART_COM06_DMA_REQUEST_USART_TX							DMA_REQUEST_USART2_TX
+#define USART_COM06_DMA_REQUEST_USART_RX							DMA_REQUEST_USART2_RX
+
+#if USE_UART_COMMON_COM06_DMA_RX
+#define USART_COM06_IDLE_IT_STATUS										DISENABLE_IDLE_IT_STATUS	
+#define USART_COM06_RXNE_IT_STATUS										DISENABLE_RXNE_IT_STATUS	
+#else
+#define USART_COM06_IDLE_IT_STATUS										ENABLE_IDLE_IT_STATUS	
+#define USART_COM06_RXNE_IT_STATUS										ENABLE_RXNE_IT_STATUS
+#endif
+
+
+#define USE_COM06_COM485_IT_1				1
+
+#define USE_COM06_COM485_FUN        1   
 
 
 
@@ -327,7 +407,17 @@ extern UartComInstance com04_com485Inst;
 extern uint8_t com04_parseBuf[COM04_PARSE_BUF_SIZE];
 extern U485ComUsartSend_Callback_t com04_485_cbCfg;
 
+#define COM05_PARSE_BUF_SIZE    (PACKET_DATA_LEN_MAX + 4U)
 
+extern UartComInstance com05_com485Inst;
+extern uint8_t com05_parseBuf[COM05_PARSE_BUF_SIZE];
+extern U485ComUsartSend_Callback_t com05_485_cbCfg;
+
+#define COM06_PARSE_BUF_SIZE    (PACKET_DATA_LEN_MAX + 4U)
+
+extern UartComInstance com06_com485Inst;
+extern uint8_t com06_parseBuf[COM06_PARSE_BUF_SIZE];
+extern U485ComUsartSend_Callback_t com06_485_cbCfg;
 
 
 

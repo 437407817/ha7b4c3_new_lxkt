@@ -33,7 +33,8 @@ extern Q_QueueBuffer q_tx_rx_queue_GROUP_1;
 extern Q_QueueBuffer q_tx_rx_queue_GROUP_2;
 extern Q_QueueBuffer q_tx_rx_queue_GROUP_3;
 extern Q_QueueBuffer q_tx_rx_queue_GROUP_4;
-
+extern Q_QueueBuffer q_tx_rx_queue_GROUP_5;
+extern Q_QueueBuffer q_tx_rx_queue_GROUP_6;
 
 
 

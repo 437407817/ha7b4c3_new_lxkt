@@ -145,6 +145,14 @@ void Handle_QUEUE_USART_COMMON_GETBUFF_PRINT(void){//success
 	Usart485CommonComTask(&com04_com485Inst, NULL, 0);
 #endif
 	
+#if (USE_COM05_COM485_FUN)
+	Usart485CommonComTask(&com05_com485Inst, NULL, 0);
+#endif
+	
+#if (USE_COM06_COM485_FUN)	
+	Usart485CommonComTask(&com06_com485Inst, NULL, 0);
+#endif
+		
 	
 	
 	
