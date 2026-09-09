@@ -130,27 +130,27 @@ void Handle_QUEUE_USART_COMMON_GETBUFF_PRINT(void){//success
 	
 	
 #if (USE_COM01_COM485_FUN)
-	Usart485CommonComTask(&com01_com485Inst, NULL, 0);
+	Usart485CommonComTask(&COM01_com485Inst, NULL, 0);
 #endif
 	
 #if (USE_COM02_COM485_FUN)	
-	Usart485CommonComTask(&com02_com485Inst, NULL, 0);
+	Usart485CommonComTask(&COM02_com485Inst, NULL, 0);
 #endif
 	
 #if (USE_COM03_COM485_FUN)
-	Usart485CommonComTask(&com03_com485Inst, NULL, 0);
+	Usart485CommonComTask(&COM03_com485Inst, NULL, 0);
 #endif
 	
 #if (USE_COM04_COM485_FUN)	
-	Usart485CommonComTask(&com04_com485Inst, NULL, 0);
+	Usart485CommonComTask(&COM04_com485Inst, NULL, 0);
 #endif
 	
 #if (USE_COM05_COM485_FUN)
-	Usart485CommonComTask(&com05_com485Inst, NULL, 0);
+	Usart485CommonComTask(&COM05_com485Inst, NULL, 0);
 #endif
 	
 #if (USE_COM06_COM485_FUN)	
-	Usart485CommonComTask(&com06_com485Inst, NULL, 0);
+	Usart485CommonComTask(&COM06_com485Inst, NULL, 0);
 #endif
 		
 	

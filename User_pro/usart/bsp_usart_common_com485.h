@@ -383,41 +383,41 @@ struct tag_UartComInstance
 
 #define COM01_PARSE_BUF_SIZE    (PACKET_DATA_LEN_MAX + 4U)
 
-extern UartComInstance com01_com485Inst;
-extern uint8_t com01_parseBuf[COM01_PARSE_BUF_SIZE];
-extern U485ComUsartSend_Callback_t com01_485_cbCfg;
+extern UartComInstance COM01_com485Inst;
+extern uint8_t COM01_parseBuf[COM01_PARSE_BUF_SIZE];
+extern U485ComUsartSend_Callback_t COM01_485_cbCfg;
 
 
 #define COM02_PARSE_BUF_SIZE    (PACKET_DATA_LEN_MAX + 4U)
 
-extern UartComInstance com02_com485Inst;
-extern uint8_t com02_parseBuf[COM02_PARSE_BUF_SIZE];
-extern U485ComUsartSend_Callback_t com02_485_cbCfg;
+extern UartComInstance COM02_com485Inst;
+extern uint8_t COM02_parseBuf[COM02_PARSE_BUF_SIZE];
+extern U485ComUsartSend_Callback_t COM02_485_cbCfg;
 
 
 #define COM03_PARSE_BUF_SIZE    (PACKET_DATA_LEN_MAX + 4U)
 
-extern UartComInstance com03_com485Inst;
-extern uint8_t com03_parseBuf[COM03_PARSE_BUF_SIZE];
-extern U485ComUsartSend_Callback_t com03_485_cbCfg;
+extern UartComInstance COM03_com485Inst;
+extern uint8_t COM03_parseBuf[COM03_PARSE_BUF_SIZE];
+extern U485ComUsartSend_Callback_t COM03_485_cbCfg;
 
 #define COM04_PARSE_BUF_SIZE    (PACKET_DATA_LEN_MAX + 4U)
 
-extern UartComInstance com04_com485Inst;
-extern uint8_t com04_parseBuf[COM04_PARSE_BUF_SIZE];
-extern U485ComUsartSend_Callback_t com04_485_cbCfg;
+extern UartComInstance COM04_com485Inst;
+extern uint8_t COM04_parseBuf[COM04_PARSE_BUF_SIZE];
+extern U485ComUsartSend_Callback_t COM04_485_cbCfg;
 
 #define COM05_PARSE_BUF_SIZE    (PACKET_DATA_LEN_MAX + 4U)
 
-extern UartComInstance com05_com485Inst;
-extern uint8_t com05_parseBuf[COM05_PARSE_BUF_SIZE];
-extern U485ComUsartSend_Callback_t com05_485_cbCfg;
+extern UartComInstance COM05_com485Inst;
+extern uint8_t COM05_parseBuf[COM05_PARSE_BUF_SIZE];
+extern U485ComUsartSend_Callback_t COM05_485_cbCfg;
 
 #define COM06_PARSE_BUF_SIZE    (PACKET_DATA_LEN_MAX + 4U)
 
-extern UartComInstance com06_com485Inst;
-extern uint8_t com06_parseBuf[COM06_PARSE_BUF_SIZE];
-extern U485ComUsartSend_Callback_t com06_485_cbCfg;
+extern UartComInstance COM06_com485Inst;
+extern uint8_t COM06_parseBuf[COM06_PARSE_BUF_SIZE];
+extern U485ComUsartSend_Callback_t COM06_485_cbCfg;
 
 
 

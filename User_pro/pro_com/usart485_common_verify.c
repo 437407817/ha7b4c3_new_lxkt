@@ -50,23 +50,23 @@ extern STR_RCV_DMA_que_data RcvDmaQue_COM06_Data;
 
 
 //extern STR_RCV_DMA_que_data Rcv_Common_DmaQueData_Com1;
-#define g_com01_rcvDataBuf RcvDmaQue_COM01_Data.g_ringBufData
-#define g_com01_rcvQueue RcvDmaQue_COM01_Data.g_uartRingBuf
+#define g_COM01_rcvDataBuf RcvDmaQue_COM01_Data.g_ringBufData
+#define g_COM01_rcvQueue RcvDmaQue_COM01_Data.g_uartRingBuf
 
-#define g_com02_rcvDataBuf RcvDmaQue_COM02_Data.g_ringBufData
-#define g_com02_rcvQueue RcvDmaQue_COM02_Data.g_uartRingBuf
+#define g_COM02_rcvDataBuf RcvDmaQue_COM02_Data.g_ringBufData
+#define g_COM02_rcvQueue RcvDmaQue_COM02_Data.g_uartRingBuf
 
-#define g_com03_rcvDataBuf RcvDmaQue_COM03_Data.g_ringBufData
-#define g_com03_rcvQueue RcvDmaQue_COM03_Data.g_uartRingBuf
+#define g_COM03_rcvDataBuf RcvDmaQue_COM03_Data.g_ringBufData
+#define g_COM03_rcvQueue RcvDmaQue_COM03_Data.g_uartRingBuf
 
-#define g_com04_rcvDataBuf RcvDmaQue_COM04_Data.g_ringBufData
-#define g_com04_rcvQueue RcvDmaQue_COM04_Data.g_uartRingBuf
+#define g_COM04_rcvDataBuf RcvDmaQue_COM04_Data.g_ringBufData
+#define g_COM04_rcvQueue RcvDmaQue_COM04_Data.g_uartRingBuf
 
-#define g_com05_rcvDataBuf RcvDmaQue_COM05_Data.g_ringBufData
-#define g_com05_rcvQueue RcvDmaQue_COM05_Data.g_uartRingBuf
+#define g_COM05_rcvDataBuf RcvDmaQue_COM05_Data.g_ringBufData
+#define g_COM05_rcvQueue RcvDmaQue_COM05_Data.g_uartRingBuf
 
-#define g_com06_rcvDataBuf RcvDmaQue_COM06_Data.g_ringBufData
-#define g_com06_rcvQueue RcvDmaQue_COM06_Data.g_uartRingBuf
+#define g_COM06_rcvDataBuf RcvDmaQue_COM06_Data.g_ringBufData
+#define g_COM06_rcvQueue RcvDmaQue_COM06_Data.g_uartRingBuf
 
 
 
@@ -396,7 +396,7 @@ void Usart485CommonComTask(UartComInstance *pInst,
  * @param frameLen  整帧总长度(帧头+长度+数据+校验)
  */
  #if USE_COM01_COM485_FUN
-static void com01_frame_process(uint8_t *frameBuf, uint16_t frameLen)
+static void COM01_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 {
 	#if 0
     if(frameBuf == NULL || frameLen < 3U)
@@ -416,13 +416,13 @@ static void com01_frame_process(uint8_t *frameBuf, uint16_t frameLen)
     SYSTEM_INFO("recv frame len:%d func:%02X\n", frameLen, frameBuf[3]);
 	#else
 	SYSTEM_INFO("-%c\n",  frameBuf[0]);
-	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"com01_frame_process=\r\n");
+	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"COM01_frame_process=\r\n");
 	
 	#endif
 }
 	#endif
 	#if USE_COM02_COM485_FUN
-static void com02_frame_process(uint8_t *frameBuf, uint16_t frameLen)
+static void COM02_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 {
 	#if 0
     if(frameBuf == NULL || frameLen < 3U)
@@ -442,13 +442,13 @@ static void com02_frame_process(uint8_t *frameBuf, uint16_t frameLen)
     SYSTEM_INFO("recv frame len:%d func:%02X\n", frameLen, frameBuf[3]);
 	#else
 	SYSTEM_INFO("-%c\n",  frameBuf[0]);
-	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"com02_frame_process=\r\n");
+	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"COM02_frame_process=\r\n");
 	
 	#endif
 }
 	#endif
 	#if USE_COM03_COM485_FUN
-static void com03_frame_process(uint8_t *frameBuf, uint16_t frameLen)
+static void COM03_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 {
 	#if 0
     if(frameBuf == NULL || frameLen < 3U)
@@ -468,13 +468,13 @@ static void com03_frame_process(uint8_t *frameBuf, uint16_t frameLen)
     SYSTEM_INFO("recv frame len:%d func:%02X\n", frameLen, frameBuf[3]);
 	#else
 	SYSTEM_INFO("-%c\n",  frameBuf[0]);
-	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"com03_frame_process=\r\n");
+	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"COM03_frame_process=\r\n");
 	
 	#endif
 }
 	#endif
 	#if USE_COM04_COM485_FUN
-static void com04_frame_process(uint8_t *frameBuf, uint16_t frameLen)
+static void COM04_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 {
 	#if 0
     if(frameBuf == NULL || frameLen < 3U)
@@ -494,13 +494,13 @@ static void com04_frame_process(uint8_t *frameBuf, uint16_t frameLen)
     SYSTEM_INFO("recv frame len:%d func:%02X\n", frameLen, frameBuf[3]);
 	#else
 	SYSTEM_INFO("-%c\n",  frameBuf[0]);
-	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"com04_frame_process=\r\n");
+	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"COM04_frame_process=\r\n");
 	
 	#endif
 }
 	#endif
 	#if USE_COM05_COM485_FUN
-static void com05_frame_process(uint8_t *frameBuf, uint16_t frameLen)
+static void COM05_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 {
 	#if 0
     if(frameBuf == NULL || frameLen < 3U)
@@ -520,13 +520,13 @@ static void com05_frame_process(uint8_t *frameBuf, uint16_t frameLen)
     SYSTEM_INFO("recv frame len:%d func:%02X\n", frameLen, frameBuf[3]);
 	#else
 	SYSTEM_INFO("-%c\n",  frameBuf[0]);
-	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"com05_frame_process=\r\n");
+	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"COM05_frame_process=\r\n");
 	
 	#endif
 }
 	#endif
 	#if USE_COM06_COM485_FUN
-static void com06_frame_process(uint8_t *frameBuf, uint16_t frameLen)
+static void COM06_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 {
 	#if 0
     if(frameBuf == NULL || frameLen < 3U)
@@ -546,7 +546,7 @@ static void com06_frame_process(uint8_t *frameBuf, uint16_t frameLen)
     SYSTEM_INFO("recv frame len:%d func:%02X\n", frameLen, frameBuf[3]);
 	#else
 	SYSTEM_INFO("-%c\n",  frameBuf[0]);
-	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"com06_frame_process=\r\n");
+	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"COM06_frame_process=\r\n");
 	
 	#endif
 }
@@ -563,24 +563,24 @@ void Usart485CommonComAppInit(void)
 {
 	
 	    // 传入函数地址，不要加()
-//    UART_INST_SetRxByteCb(&com01_com485Inst, ProcUartData_Common);
+//    UART_INST_SetRxByteCb(&COM01_com485Inst, ProcUartData_Common);
 	#if USE_COM01_COM485_FUN
-	UART_INST_SetSlaveCb(&com01_com485Inst, com01_frame_process);
+	UART_INST_SetSlaveCb(&COM01_com485Inst, COM01_frame_process);
 	#endif
 	#if USE_COM02_COM485_FUN
-	UART_INST_SetSlaveCb(&com02_com485Inst, com02_frame_process);
+	UART_INST_SetSlaveCb(&COM02_com485Inst, COM02_frame_process);
 	#endif
 	#if USE_COM03_COM485_FUN
-	UART_INST_SetSlaveCb(&com03_com485Inst, com03_frame_process);
+	UART_INST_SetSlaveCb(&COM03_com485Inst, COM03_frame_process);
 	#endif
 	#if USE_COM04_COM485_FUN
-	UART_INST_SetSlaveCb(&com04_com485Inst, com04_frame_process);	
+	UART_INST_SetSlaveCb(&COM04_com485Inst, COM04_frame_process);	
 	#endif
 	#if USE_COM05_COM485_FUN
-	UART_INST_SetSlaveCb(&com05_com485Inst, com05_frame_process);
+	UART_INST_SetSlaveCb(&COM05_com485Inst, COM05_frame_process);
 	#endif
 	#if USE_COM06_COM485_FUN
-	UART_INST_SetSlaveCb(&com06_com485Inst, com06_frame_process);	
+	UART_INST_SetSlaveCb(&COM06_com485Inst, COM06_frame_process);	
 	#endif
 //	reg485ComCb(ProcUartData);//injectUARTIDLEcptCP
 //	reg_SlaveComCb(pull_data_from_485);
