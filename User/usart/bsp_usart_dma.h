@@ -94,16 +94,22 @@ uint32_t	current_time;
 uint32_t last_tx_complete_time;
 }str_DMA_usart_send;
 
+//typedef struct
+//{
+//	QueueType_t g_uartRingBuf;
+////	 RingBuffer_t g_uartRingBuf;  
+//	uint8_t g_ringBufData[MAX_RING_BUFF_SIZE]; // 缓冲区数据存储
+//	uint8_t g_rcvDataBuf[MAX_BUF_R_SIZE];//临时接收的数据，之后压入g_ringBufData中
+//	uint8_t received_data_len;
+//} STR_RCV_DMA_que_data;
+
 typedef struct
 {
 	QueueType_t g_uartRingBuf;
-//	 RingBuffer_t g_uartRingBuf;  
-	uint8_t g_ringBufData[MAX_RING_BUFF_SIZE]; // 缓冲区数据存储
-	uint8_t g_rcvDataBuf[MAX_BUF_R_SIZE];//临时接收的数据，之后压入g_ringBufData中
+	uint8_t *g_ringBufData;   //指针，不再内置数组
+	uint8_t *g_rcvDataBuf;    //指针
 	uint8_t received_data_len;
 } STR_RCV_DMA_que_data;
-
-
 /* USER CODE END Private defines */
 
 

@@ -46,16 +46,33 @@ DMA_HandleTypeDef hdma_usartx_COM06_rx;
 DMA_HandleTypeDef hdma_usartx_COM06_tx;
 //extern UART_HandleTypeDef huart_DMA_Handle;
 
+static uint8_t COM01_ringBuf[MAX_RING_BUFF_COM01_SIZE];
+static uint8_t COM01_rcvBuf[MAX_BUF_COM01_R_SIZE];
 STR_RCV_DMA_que_data RcvDmaQue_COM01_Data={0};
 
+
+static uint8_t COM02_ringBuf[MAX_RING_BUFF_COM02_SIZE];
+static uint8_t COM02_rcvBuf[MAX_BUF_COM02_R_SIZE];
 STR_RCV_DMA_que_data RcvDmaQue_COM02_Data={0};
 
+
+static uint8_t COM03_ringBuf[MAX_RING_BUFF_COM03_SIZE];
+static uint8_t COM03_rcvBuf[MAX_BUF_COM03_R_SIZE];
 STR_RCV_DMA_que_data RcvDmaQue_COM03_Data={0};
 
+
+static uint8_t COM04_ringBuf[MAX_RING_BUFF_COM04_SIZE];
+static uint8_t COM04_rcvBuf[MAX_BUF_COM04_R_SIZE];
 STR_RCV_DMA_que_data RcvDmaQue_COM04_Data={0};
 
+
+static uint8_t COM05_ringBuf[MAX_RING_BUFF_COM05_SIZE];
+static uint8_t COM05_rcvBuf[MAX_BUF_COM05_R_SIZE];
 STR_RCV_DMA_que_data RcvDmaQue_COM05_Data={0};
 
+
+static uint8_t COM06_ringBuf[MAX_RING_BUFF_COM06_SIZE];
+static uint8_t COM06_rcvBuf[MAX_BUF_COM06_R_SIZE];
 STR_RCV_DMA_que_data RcvDmaQue_COM06_Data={0};
 
 
@@ -403,7 +420,7 @@ void HAL_UART_COMMON_TxCpltCallback(UART_HandleTypeDef *huart)
  * @param  dmaRcvBuf         DMA接收缓冲区指针 uint8_t*
  * @param  dmaRcvBufSize     DMA接收缓冲区长度
  */
-void USART_TX_RX_DMA_COMMON_Config(UART_HandleTypeDef* uartHandle,
+void USART_TX_RX_DMA_COMMON_Config2(UART_HandleTypeDef* uartHandle,
                                    DMA_Stream_TypeDef* dmaTxInstance,
                                    IRQn_Type dmaTxIrq,
                                    uint32_t dmaTxRequest,
@@ -473,6 +490,74 @@ if(enableDmaRx){
 
 }
 
+void USART_TX_RX_DMA_COMMON_Config(UART_HandleTypeDef* uartHandle,
+                                   DMA_Stream_TypeDef* dmaTxInstance,
+                                   IRQn_Type dmaTxIrq,
+                                   uint32_t dmaTxRequest,
+                                   DMA_HandleTypeDef* hdmaTx,
+                                   uint8_t enableDmaTx,
+                                   DMA_Stream_TypeDef* dmaRxInstance,
+                                   IRQn_Type dmaRxIrq,
+                                   uint32_t dmaRxRequest,
+                                   DMA_HandleTypeDef* hdmaRx,
+                                   uint8_t enableDmaRx,
+                                   IRQn_Type usartIrq,
+
+                                   //====新增：外部传入两块内存地址与大小====
+                                   uint8_t *pExtRingBuf,
+                                   uint32_t ringBufSize,
+                                   uint8_t *pExtDmaRcvBuf,
+                                   uint32_t dmaRcvBufSize,
+
+                                   QueueType_t *queue,
+                                   STR_RCV_DMA_que_data *pRcvData)  //传入COM01/COM02的结构体指针
+{
+    //====================第一步：给结构体指针赋值外部buffer地址====================
+    if(pRcvData != NULL)
+    {
+        pRcvData->g_ringBufData = pExtRingBuf;
+        pRcvData->g_rcvDataBuf  = pExtDmaRcvBuf;
+        pRcvData->received_data_len = 0U;
+    }
+
+    if(enableDmaTx){
+		USART_TX_DMA_COMMON_Config(uartHandle, dmaTxInstance, dmaTxIrq, dmaTxRequest, hdmaTx);
+    }
+
+    if(enableDmaRx){
+        USART_RX_DMA_COMMON_Config(uartHandle, dmaRxInstance, dmaRxIrq, dmaRxRequest, hdmaRx);
+
+        //❗❗❗ QueueInit不再使用结构体内部旧数组，使用外部传进来pExtRingBuf
+        QueueInit(queue, pExtRingBuf, ringBufSize);
+
+        SCB_CleanInvalidateDCache_by_Addr((uint32_t *)pExtDmaRcvBuf, dmaRcvBufSize);
+        HAL_UART_Receive_DMA(uartHandle, pExtDmaRcvBuf, dmaRcvBufSize);
+        memset(pExtDmaRcvBuf, 0, dmaRcvBufSize);
+
+        __HAL_UART_CLEAR_IDLEFLAG(uartHandle);
+        volatile uint32_t temp_isr = uartHandle->Instance->ISR;
+        (void)temp_isr;
+        volatile uint32_t temp_rdr = uartHandle->Instance->RDR;
+        (void)temp_rdr;
+        __HAL_UART_CLEAR_FLAG(uartHandle, UART_FLAG_RXNE);
+        __HAL_UART_ENABLE_IT(uartHandle, UART_IT_IDLE);
+        HAL_NVIC_SetPriority(usartIrq, 3, 0);
+        HAL_NVIC_EnableIRQ(usartIrq);
+        HAL_Delay(1);
+    }
+}
+
+
+
+static void RcvDmaQue_SetBuf(STR_RCV_DMA_que_data *pQue,
+                             uint8_t *ringBuf,uint32_t ringSize,
+                             uint8_t *rcvBuf,uint32_t rcvSize)
+{
+    pQue->g_ringBufData = ringBuf;
+    pQue->g_rcvDataBuf = rcvBuf;
+    pQue->received_data_len = 0U;
+    QueueInit(&pQue->g_uartRingBuf, ringBuf, ringSize);
+}
 
 
 ///FIRST-----------------------
@@ -483,146 +568,176 @@ void USART_COMMON_TX_RX_DMA_ConfigALL(void){
 	USARTx_COMMON_DMA_Init();
 	
 #if USE_COM01_COM485_FUN	&& USE_UART_COMMON_COM01_DMA
-USART_TX_RX_DMA_COMMON_Config(COM01_com485Inst.huart_handle,
+
+RcvDmaQue_SetBuf(&RcvDmaQue_COM01_Data, COM01_ringBuf,MAX_RING_BUFF_COM01_SIZE, COM01_rcvBuf,MAX_BUF_COM01_R_SIZE);
+
+USART_TX_RX_DMA_COMMON_Config(
+        COM01_com485Inst.huart_handle,
         DMA_COM01_STREAMx_TX,
         DMA_COM01_STREAM_IRQ_TX,
         DMA_COM01_REQUEST_USART_TX,
         &hdma_usartx_COM01_tx,
 				USE_UART_COMMON_COM01_DMA_TX,
-
         DMA_COM01_STREAMx_RX,
         DMA_COM01_STREAM_IRQ_RX,
         DMA_COM01_REQUEST_USART_RX,
         &hdma_usartx_COM01_rx,
 				USE_UART_COMMON_COM01_DMA_RX,
-
         USARTx_DMA_COM01_IRQ,
 
-        &RcvDmaQue_COM01_Data.g_uartRingBuf,
-        RcvDmaQue_COM01_Data.g_ringBufData,
+        //====传入COM01自己的buffer地址与大小====
+        COM01_ringBuf,
         MAX_RING_BUFF_COM01_SIZE,
+        COM01_rcvBuf,
+        MAX_BUF_COM01_R_SIZE,
 
-        RcvDmaQue_COM01_Data.g_rcvDataBuf,
-        MAX_BUF_COM01_R_SIZE);
+        &RcvDmaQue_COM01_Data.g_uartRingBuf,
+        &RcvDmaQue_COM01_Data   //把COM01的结构体指针传入函数
+);
 #endif	
 
 
 
 
 #if USE_COM02_COM485_FUN	&& USE_UART_COMMON_COM02_DMA
-USART_TX_RX_DMA_COMMON_Config(COM02_com485Inst.huart_handle,
+
+RcvDmaQue_SetBuf(&RcvDmaQue_COM02_Data, COM02_ringBuf,MAX_RING_BUFF_COM02_SIZE, COM02_rcvBuf,MAX_BUF_COM02_R_SIZE);
+
+USART_TX_RX_DMA_COMMON_Config(
+        COM02_com485Inst.huart_handle,
         DMA_COM02_STREAMx_TX,
         DMA_COM02_STREAM_IRQ_TX,
         DMA_COM02_REQUEST_USART_TX,
         &hdma_usartx_COM02_tx,
 				USE_UART_COMMON_COM02_DMA_TX,
-
         DMA_COM02_STREAMx_RX,
         DMA_COM02_STREAM_IRQ_RX,
         DMA_COM02_REQUEST_USART_RX,
         &hdma_usartx_COM02_rx,
 				USE_UART_COMMON_COM02_DMA_RX,
-				
         USARTx_DMA_COM02_IRQ,
 
-        &RcvDmaQue_COM02_Data.g_uartRingBuf,
-        RcvDmaQue_COM02_Data.g_ringBufData,
+        //====传入COM02自己的buffer地址与大小====
+        COM02_ringBuf,
         MAX_RING_BUFF_COM02_SIZE,
+        COM02_rcvBuf,
+        MAX_BUF_COM02_R_SIZE,
 
-        RcvDmaQue_COM2_Data.g_rcvDataBuf,
-        MAX_BUF_COM02_R_SIZE);
+        &RcvDmaQue_COM02_Data.g_uartRingBuf,
+        &RcvDmaQue_COM02_Data   //把COM02的结构体指针传入函数
+);
 #endif
 #if USE_COM03_COM485_FUN && USE_UART_COMMON_COM03_DMA
-USART_TX_RX_DMA_COMMON_Config(COM03_com485Inst.huart_handle,
+
+RcvDmaQue_SetBuf(&RcvDmaQue_COM03_Data, COM03_ringBuf,MAX_RING_BUFF_COM03_SIZE, COM03_rcvBuf,MAX_BUF_COM03_R_SIZE);
+
+USART_TX_RX_DMA_COMMON_Config(
+        COM03_com485Inst.huart_handle,
         DMA_COM03_STREAMx_TX,
         DMA_COM03_STREAM_IRQ_TX,
         DMA_COM03_REQUEST_USART_TX,
-        &hdma_usartx_COM3_tx,
+        &hdma_usartx_COM03_tx,
 				USE_UART_COMMON_COM03_DMA_TX,
-
         DMA_COM03_STREAMx_RX,
         DMA_COM03_STREAM_IRQ_RX,
         DMA_COM03_REQUEST_USART_RX,
         &hdma_usartx_COM03_rx,
 				USE_UART_COMMON_COM03_DMA_RX,
-
         USARTx_DMA_COM03_IRQ,
 
-        &RcvDmaQue_COM03_Data.g_uartRingBuf,
-        RcvDmaQue_COM03_Data.g_ringBufData,
+        //====传入COM03自己的buffer地址与大小====
+        COM03_ringBuf,
         MAX_RING_BUFF_COM03_SIZE,
+        COM03_rcvBuf,
+        MAX_BUF_COM03_R_SIZE,
 
-        RcvDmaQue_COM03_Data.g_rcvDataBuf,
-        MAX_BUF_COM03_R_SIZE);
+        &RcvDmaQue_COM03_Data.g_uartRingBuf,
+        &RcvDmaQue_COM03_Data   //把COM03的结构体指针传入函数
+);
 #endif	
 #if USE_COM04_COM485_FUN	&& USE_UART_COMMON_COM04_DMA
-USART_TX_RX_DMA_COMMON_Config(COM04_com485Inst.huart_handle,
+
+RcvDmaQue_SetBuf(&RcvDmaQue_COM04_Data, COM04_ringBuf,MAX_RING_BUFF_COM04_SIZE, COM04_rcvBuf,MAX_BUF_COM04_R_SIZE);
+
+USART_TX_RX_DMA_COMMON_Config(
+        COM04_com485Inst.huart_handle,
         DMA_COM04_STREAMx_TX,
         DMA_COM04_STREAM_IRQ_TX,
         DMA_COM04_REQUEST_USART_TX,
-        &hdma_usartx_COM4_tx,
+        &hdma_usartx_COM04_tx,
 				USE_UART_COMMON_COM04_DMA_TX,
-
         DMA_COM04_STREAMx_RX,
         DMA_COM04_STREAM_IRQ_RX,
         DMA_COM04_REQUEST_USART_RX,
-        &hdma_usartx_COM4_rx,
+        &hdma_usartx_COM04_rx,
 				USE_UART_COMMON_COM04_DMA_RX,
-
         USARTx_DMA_COM04_IRQ,
 
-        &RcvDmaQue_COM04_Data.g_uartRingBuf,
-        RcvDmaQue_COM04_Data.g_ringBufData,
+        //====传入COM04自己的buffer地址与大小====
+        COM04_ringBuf,
         MAX_RING_BUFF_COM04_SIZE,
+        COM04_rcvBuf,
+        MAX_BUF_COM04_R_SIZE,
 
-        RcvDmaQue_COM04_Data.g_rcvDataBuf,
-        MAX_BUF_COM04_R_SIZE);	
+        &RcvDmaQue_COM04_Data.g_uartRingBuf,
+        &RcvDmaQue_COM04_Data   //把COM04的结构体指针传入函数
+);
 #endif	
 #if USE_COM05_COM485_FUN	&& USE_UART_COMMON_COM05_DMA
-USART_TX_RX_DMA_COMMON_Config(COM05_com485Inst.huart_handle,
+
+RcvDmaQue_SetBuf(&RcvDmaQue_COM05_Data, COM05_ringBuf,MAX_RING_BUFF_COM05_SIZE, COM05_rcvBuf,MAX_BUF_COM05_R_SIZE);
+
+USART_TX_RX_DMA_COMMON_Config(
+        COM05_com485Inst.huart_handle,
         DMA_COM05_STREAMx_TX,
         DMA_COM05_STREAM_IRQ_TX,
         DMA_COM05_REQUEST_USART_TX,
         &hdma_usartx_COM05_tx,
 				USE_UART_COMMON_COM05_DMA_TX,
-
         DMA_COM05_STREAMx_RX,
         DMA_COM05_STREAM_IRQ_RX,
         DMA_COM05_REQUEST_USART_RX,
-        &hdma_usartx_COM5_rx,
+        &hdma_usartx_COM05_rx,
 				USE_UART_COMMON_COM05_DMA_RX,
-
         USARTx_DMA_COM05_IRQ,
 
-        &RcvDmaQue_COM05_Data.g_uartRingBuf,
-        RcvDmaQue_COM05_Data.g_ringBufData,
+        //====传入COM05自己的buffer地址与大小====
+        COM05_ringBuf,
         MAX_RING_BUFF_COM05_SIZE,
+        COM05_rcvBuf,
+        MAX_BUF_COM05_R_SIZE,
 
-        RcvDmaQue_COM05_Data.g_rcvDataBuf,
-        MAX_BUF_COM05_R_SIZE);	
+        &RcvDmaQue_COM05_Data.g_uartRingBuf,
+        &RcvDmaQue_COM05_Data   //把COM05的结构体指针传入函数
+);
 #endif	
 #if USE_COM06_COM485_FUN	&& USE_UART_COMMON_COM06_DMA
-USART_TX_RX_DMA_COMMON_Config(COM06_com485Inst.huart_handle,
+
+RcvDmaQue_SetBuf(&RcvDmaQue_COM06_Data, COM06_ringBuf,MAX_RING_BUFF_COM06_SIZE, COM06_rcvBuf,MAX_BUF_COM06_R_SIZE);
+
+USART_TX_RX_DMA_COMMON_Config(
+        COM06_com485Inst.huart_handle,
         DMA_COM06_STREAMx_TX,
         DMA_COM06_STREAM_IRQ_TX,
         DMA_COM06_REQUEST_USART_TX,
         &hdma_usartx_COM06_tx,
 				USE_UART_COMMON_COM06_DMA_TX,
-
         DMA_COM06_STREAMx_RX,
         DMA_COM06_STREAM_IRQ_RX,
         DMA_COM06_REQUEST_USART_RX,
         &hdma_usartx_COM06_rx,
 				USE_UART_COMMON_COM06_DMA_RX,
-
         USARTx_DMA_COM06_IRQ,
 
-        &RcvDmaQue_COM06_Data.g_uartRingBuf,
-        RcvDmaQue_COM06_Data.g_ringBufData,
+        //====传入COM06自己的buffer地址与大小====
+        COM06_ringBuf,
         MAX_RING_BUFF_COM06_SIZE,
+        COM06_rcvBuf,
+        MAX_BUF_COM06_R_SIZE,
 
-        RcvDmaQue_COM06_Data.g_rcvDataBuf,
-        MAX_BUF_COM06_R_SIZE);	
+        &RcvDmaQue_COM06_Data.g_uartRingBuf,
+        &RcvDmaQue_COM06_Data   //把COM06的结构体指针传入函数
+);
 #endif	
 
 

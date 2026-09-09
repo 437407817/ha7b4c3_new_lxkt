@@ -59,7 +59,6 @@ extern "C" {
 #define MAX_RING_BUFF_COM01_SIZE 			MAX_BUF_COM01_R_SIZE*10
 
 
-
 #define DMA_COM01_USARTx 														USART_COM01_COM485
 #define USARTx_DMA_COM01_IRQHandler                 USART_COM01_COM485_IRQHandler
 #define USARTx_DMA_COM01_IRQ                 		    USART_COM01_COM485_IRQ
@@ -81,7 +80,7 @@ extern "C" {
 
 
 #define USE_UART_COMMON_COM01_DMA 1
-#define USE_UART_COMMON_COM01_DMA_RX 1
+#define USE_UART_COMMON_COM01_DMA_RX 0
 #define USE_UART_COMMON_COM01_DMA_TX 1
 
 
@@ -125,6 +124,13 @@ extern "C" {
 #define MAX_BUF_COM03_R_SIZE 					5  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
 #define MAX_RING_BUFF_COM03_SIZE 			MAX_BUF_COM03_R_SIZE*10
 
+
+typedef struct
+{
+    STR_RCV_DMA_que_data obj;
+    uint8_t ringMem[MAX_RING_BUFF_COM03_SIZE];
+    uint8_t rcvMem[MAX_BUF_COM03_R_SIZE];
+} STR_RCV_DMA_que_data_COM03_t;
 
 
 #define DMA_COM03_USARTx 														USART_COM03_COM485
@@ -247,8 +253,67 @@ extern "C" {
 
 
 #define USE_UART_COMMON_COM06_DMA 1
-#define USE_UART_COMMON_COM06_DMA_RX 0
+#define USE_UART_COMMON_COM06_DMA_RX 1
 #define USE_UART_COMMON_COM06_DMA_TX 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//typedef struct
+//{
+//    STR_RCV_DMA_que_data obj;
+//    uint8_t ringMem[MAX_RING_BUFF_COM01_SIZE];
+//    uint8_t rcvMem[MAX_BUF_COM01_R_SIZE];
+//} STR_RCV_DMA_que_data_COM01_t;
+
+//typedef struct
+//{
+//    STR_RCV_DMA_que_data obj;
+//    uint8_t ringMem[MAX_RING_BUFF_COM02_SIZE];
+//    uint8_t rcvMem[MAX_BUF_COM02_R_SIZE];
+//} STR_RCV_DMA_que_data_COM02_t;
+
+
+//typedef struct
+//{
+//    STR_RCV_DMA_que_data obj;
+//    uint8_t ringMem[MAX_RING_BUFF_COM03_SIZE];
+//    uint8_t rcvMem[MAX_BUF_COM03_R_SIZE];
+//} STR_RCV_DMA_que_data_COM03_t;
+
+//typedef struct
+//{
+//    STR_RCV_DMA_que_data obj;
+//    uint8_t ringMem[MAX_RING_BUFF_COM04_SIZE];
+//    uint8_t rcvMem[MAX_BUF_COM04_R_SIZE];
+//} STR_RCV_DMA_que_data_COM04_t;
+
+
+//typedef struct
+//{
+//    STR_RCV_DMA_que_data obj;
+//    uint8_t ringMem[MAX_RING_BUFF_COM05_SIZE];
+//    uint8_t rcvMem[MAX_BUF_COM05_R_SIZE];
+//} STR_RCV_DMA_que_data_COM05_t;
+
+//typedef struct
+//{
+//    STR_RCV_DMA_que_data obj;
+//    uint8_t ringMem[MAX_RING_BUFF_COM06_SIZE];
+//    uint8_t rcvMem[MAX_BUF_COM06_R_SIZE];
+//} STR_RCV_DMA_que_data_COM06_t;
+
+
 
 
 
