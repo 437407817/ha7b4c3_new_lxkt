@@ -57,7 +57,7 @@
 //#include "./io/IN_io/bsp_gpio_in.h"
 ////#include "./spi/lcd/lcd.h"
 //#include "./i2c/soft_i2c/bsp_soft_i2c_gpio.h"
-//#include "./io/OUT_io/bsp_gpio_out.h"  
+#include "./io/bsp_io_output.h"   
 //#include "./adc/ADS7822.h"
 //#include "./adc/CC6902.h"
 //#include "./time/bsp_TiMbase.h" 
@@ -151,7 +151,7 @@ SYSTEM_INFO("VERSION:%X\n",BSP_GetVersion());
 AppTaskScheduleInit();SYSTEM_INFO("TaskSchedule_Init over------------- \n");	
 #endif	
 ////	
-//OUT_Io_GPIO_Config();		SYSTEM_INFO("OUT_Io_GPIO_Init over------------- \n");
+OUT_Io_GPIO_Config();		SYSTEM_INFO("OUT_Io_GPIO_Init over------------- \n");
 //IN_Io_ALL_GPIO_Config();	SYSTEM_INFO("IN_Io_GPIO_Init over------------- \n");
 //	
 

@@ -1855,6 +1855,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\spi\bsp_qspi.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_io_input.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\io\bsp_io_input.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_io_output.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\io\bsp_io_output.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

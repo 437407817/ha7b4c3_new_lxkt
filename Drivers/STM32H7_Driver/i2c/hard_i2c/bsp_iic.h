@@ -39,8 +39,9 @@
 //#define EEPROM_PAGESIZE           8
 #define EEPROM_PAGESIZE 	   8
 /* AT24C04/08A/16A每页有16个字节 */
-//#define EEPROM_PAGESIZE           16			
-
+//#define EEPROM_PAGESIZE           16		
+//AT24C256 -64
+//#define EEPROM_PAGESIZE           64
 #define EEPROM_I2C_FORCE_RESET()      __HAL_RCC_I2C2_FORCE_RESET()
 #define EEPROM_I2C_RELEASE_RESET()    __HAL_RCC_I2C2_RELEASE_RESET()
 /* I2C interrupt requests */

@@ -18,41 +18,174 @@
 #include "./io/bsp_io_input.h"
 #include "./io/bsp_io_output.h"  
 
+
+
+
+
+
+
+//时钟包装函数
+static void IO1_ClkEnable(void)
+{
+    IO1_INT_GPIO_CLK_ENABLE();
+}
+static void IO2_ClkEnable(void)
+{
+    IO2_INT_GPIO_CLK_ENABLE();
+}
+static void IO3_ClkEnable(void)
+{
+    IO3_INT_GPIO_CLK_ENABLE();
+}
+static void IO4_ClkEnable(void)
+{
+    IO4_INT_GPIO_CLK_ENABLE();
+}
+
+/**
+ * @brief 通用批量EXTI按键外部中断初始化
+ * @param pCfg 配置表数组
+ * @param cfgCnt 条目数量
+ */
+void IO_EXTI_BatchConfig(const IO_EXTI_Config_t *pCfg, uint8_t cfgCnt)
+{
+    if(pCfg == NULL || cfgCnt == 0U)
+    {
+        return;
+    }
+
+    GPIO_InitTypeDef GPIO_InitStruct;
+
+    for(uint8_t i = 0; i < cfgCnt; i++)
+    {
+        const IO_EXTI_Config_t *pItem = &pCfg[i];
+        if(pItem->port == NULL)
+        {
+            continue;
+        }
+
+        //开启GPIO端口时钟
+        if(pItem->clkEnFunc != NULL)
+        {
+            pItem->clkEnFunc();
+        }
+
+        GPIO_InitStruct.Pin    = pItem->pin;
+        GPIO_InitStruct.Mode   = pItem->itMode;
+        GPIO_InitStruct.Pull   = pItem->pullMode;
+        GPIO_InitStruct.Speed  = GPIO_SPEED_HIGH;
+
+        HAL_GPIO_Init(pItem->port, &GPIO_InitStruct);
+
+        //配置NVIC中断优先级、使能中断
+        HAL_NVIC_SetPriority(pItem->irqN, pItem->prePriority, pItem->subPriority);
+        HAL_NVIC_EnableIRQ(pItem->irqN);
+    }
+}
+
+
+
+/**
+ * @brief 原函数入口，在这里填写按键配置表
+ */
+void IO_EXTI_Key_Config(void)
+{
+    const IO_EXTI_Config_t keyCfgTable[] =
+    {
+        //key1：上升沿中断，不上拉不下拉，抢占0，子0
+        {
+            .port           = IO1_INT_GPIO_PORT,
+            .pin            = IO1_INT_GPIO_PIN,
+            .clkEnFunc      = IO1_ClkEnable,
+            .itMode         = GPIO_MODE_IT_RISING,
+            .pullMode       = GPIO_NOPULL,
+            .irqN           = IO1_INT_EXTI_IRQ,
+            .prePriority    = 0,
+            .subPriority    = 0,
+        },
+        //key2
+        {
+            .port           = IO2_INT_GPIO_PORT,
+            .pin            = IO2_INT_GPIO_PIN,
+            .clkEnFunc      = IO2_ClkEnable,
+            .itMode         = GPIO_MODE_IT_RISING,
+            .pullMode       = GPIO_NOPULL,
+            .irqN           = IO2_INT_EXTI_IRQ,
+            .prePriority    = 0,
+            .subPriority    = 0,
+        },
+				        //key1：上升沿中断，不上拉不下拉，抢占0，子0
+        {
+            .port           = IO3_INT_GPIO_PORT,
+            .pin            = IO3_INT_GPIO_PIN,
+            .clkEnFunc      = IO3_ClkEnable,
+            .itMode         = GPIO_MODE_IT_RISING,
+            .pullMode       = GPIO_NOPULL,
+            .irqN           = IO3_INT_EXTI_IRQ,
+            .prePriority    = 0,
+            .subPriority    = 0,
+        },
+        //key2
+        {
+            .port           = IO4_INT_GPIO_PORT,
+            .pin            = IO4_INT_GPIO_PIN,
+            .clkEnFunc      = IO4_ClkEnable,
+            .itMode         = GPIO_MODE_IT_RISING,
+            .pullMode       = GPIO_NOPULL,
+            .irqN           = IO4_INT_EXTI_IRQ,
+            .prePriority    = 0,
+            .subPriority    = 0,
+        },
+    };
+
+    uint8_t cnt = sizeof(keyCfgTable) / sizeof(keyCfgTable[0]);
+    IO_EXTI_BatchConfig(keyCfgTable, cnt);
+}
+
+
+
+
+
+
+
+
+
+
  /**
   * @brief  配置 PA0 为线中断口，并设置中断优先级
   * @param  无
   * @retval 无
   */
-void IO_EXTI_Key_Config(void)
-{
-    GPIO_InitTypeDef GPIO_InitStructure; 
+//void IO_EXTI_Key_Config(void)
+//{
+//    GPIO_InitTypeDef GPIO_InitStructure; 
 
-    /*开启按键GPIO口的时钟*/
-    KEY1_INT_GPIO_CLK_ENABLE();
-    KEY2_INT_GPIO_CLK_ENABLE();
+//    /*开启按键GPIO口的时钟*/
+//    KEY1_INT_GPIO_CLK_ENABLE();
+//    KEY2_INT_GPIO_CLK_ENABLE();
 
-    /* 选择按键1的引脚 */ 
-    GPIO_InitStructure.Pin = KEY1_INT_GPIO_PIN;
-    /* 设置引脚为输入模式 */ 
-    GPIO_InitStructure.Mode = GPIO_MODE_IT_RISING;	    		
-    /* 设置引脚不上拉也不下拉 */
-    GPIO_InitStructure.Pull = GPIO_NOPULL;
-    /* 使用上面的结构体初始化按键 */
-    HAL_GPIO_Init(KEY1_INT_GPIO_PORT, &GPIO_InitStructure); 
-    /* 配置 EXTI 中断源 到key1 引脚、配置中断优先级*/
-    HAL_NVIC_SetPriority(KEY1_INT_EXTI_IRQ, 0, 0);
-    /* 使能中断 */
-    HAL_NVIC_EnableIRQ(KEY1_INT_EXTI_IRQ);
+//    /* 选择按键1的引脚 */ 
+//    GPIO_InitStructure.Pin = KEY1_INT_GPIO_PIN;
+//    /* 设置引脚为输入模式 */ 
+//    GPIO_InitStructure.Mode = GPIO_MODE_IT_RISING;	    		
+//    /* 设置引脚不上拉也不下拉 */
+//    GPIO_InitStructure.Pull = GPIO_NOPULL;
+//    /* 使用上面的结构体初始化按键 */
+//    HAL_GPIO_Init(KEY1_INT_GPIO_PORT, &GPIO_InitStructure); 
+//    /* 配置 EXTI 中断源 到key1 引脚、配置中断优先级*/
+//    HAL_NVIC_SetPriority(KEY1_INT_EXTI_IRQ, 0, 0);
+//    /* 使能中断 */
+//    HAL_NVIC_EnableIRQ(KEY1_INT_EXTI_IRQ);
 
-    /* 选择按键2的引脚 */ 
-    GPIO_InitStructure.Pin = KEY2_INT_GPIO_PIN;  
-    /* 其他配置与上面相同 */
-    HAL_GPIO_Init(KEY2_INT_GPIO_PORT, &GPIO_InitStructure);      
-    /* 配置 EXTI 中断源 到key1 引脚、配置中断优先级*/
-    HAL_NVIC_SetPriority(KEY2_INT_EXTI_IRQ, 0, 0);
-    /* 使能中断 */
-    HAL_NVIC_EnableIRQ(KEY2_INT_EXTI_IRQ);
-}
+//    /* 选择按键2的引脚 */ 
+//    GPIO_InitStructure.Pin = KEY2_INT_GPIO_PIN;  
+//    /* 其他配置与上面相同 */
+//    HAL_GPIO_Init(KEY2_INT_GPIO_PORT, &GPIO_InitStructure);      
+//    /* 配置 EXTI 中断源 到key1 引脚、配置中断优先级*/
+//    HAL_NVIC_SetPriority(KEY2_INT_EXTI_IRQ, 0, 0);
+//    /* 使能中断 */
+//    HAL_NVIC_EnableIRQ(KEY2_INT_EXTI_IRQ);
+//}
 
 
 
@@ -84,9 +217,9 @@ IO_EXTI_Key_Config();
 //}
 
 
-void KEY1_IRQHandler(void)
+void IO1_IRQHandler(void)
 {
-	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+	HAL_GPIO_EXTI_IRQHandler(IO1_INT_GPIO_PIN);
   //确保是否产生了EXTI Line中断
 //	if(__HAL_GPIO_EXTI_GET_IT(KEY1_INT_GPIO_PIN) != RESET) 
 //	{
@@ -96,6 +229,49 @@ void KEY1_IRQHandler(void)
 //		__HAL_GPIO_EXTI_CLEAR_IT(KEY1_INT_GPIO_PIN);     
 //	}  
 }
+void IO2_IRQHandler(void)
+{
+	HAL_GPIO_EXTI_IRQHandler(IO2_INT_GPIO_PIN);
+  //确保是否产生了EXTI Line中断
+//	if(__HAL_GPIO_EXTI_GET_IT(KEY1_INT_GPIO_PIN) != RESET) 
+//	{
+//		// LED1 取反		
+//		LED1_TOGGLE;
+//    //清除中断标志位
+//		__HAL_GPIO_EXTI_CLEAR_IT(KEY1_INT_GPIO_PIN);     
+//	}  
+}
+void IO3_IRQHandler(void)
+{
+	HAL_GPIO_EXTI_IRQHandler(IO3_INT_GPIO_PIN);
+  //确保是否产生了EXTI Line中断
+//	if(__HAL_GPIO_EXTI_GET_IT(KEY1_INT_GPIO_PIN) != RESET) 
+//	{
+//		// LED1 取反		
+//		LED1_TOGGLE;
+//    //清除中断标志位
+//		__HAL_GPIO_EXTI_CLEAR_IT(KEY1_INT_GPIO_PIN);     
+//	}  
+}
+void IO4_IRQHandler(void)
+{
+	HAL_GPIO_EXTI_IRQHandler(IO4_INT_GPIO_PIN);
+  //确保是否产生了EXTI Line中断
+//	if(__HAL_GPIO_EXTI_GET_IT(KEY1_INT_GPIO_PIN) != RESET) 
+//	{
+//		// LED1 取反		
+//		LED1_TOGGLE;
+//    //清除中断标志位
+//		__HAL_GPIO_EXTI_CLEAR_IT(KEY1_INT_GPIO_PIN);     
+//	}  
+}
+
+
+
+
+
+
+
 
 //void KEY2_IRQHandler(void)
 //{
