@@ -78,8 +78,10 @@ extern "C" {
 #define TEST_DMA_RB_READ	0			//测试接收功能
 
 
-
-
+//发送前回调：即将启动DMA发送
+typedef void (*UartDmaTxPreStartCb_t)(void);
+// 回调函数原型：发送完成回调
+typedef void (*UartDmaTxCpltCb_t)(void);
 
 typedef struct {
 uint8_t send_data[q_QUEUE_NODE_DATA_LEN_UsartDMAsend];
@@ -92,6 +94,9 @@ uint8_t		dbret;
 uint32_t	complete_timeout;
 uint32_t	current_time;
 uint32_t last_tx_complete_time;
+	//====新增：DMA发送完成回调函数指针====
+	UartDmaTxPreStartCb_t  pTxPreStartCallback;  //发送前回调，启动DMA之前执行
+	UartDmaTxCpltCb_t  pTxCpltCallback;	
 }str_DMA_usart_send;
 
 //typedef struct

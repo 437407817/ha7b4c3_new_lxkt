@@ -20,32 +20,63 @@
 #define ENABLE_RXNE_IT_STATUS (1)
 /************************ COM01 配置（替换原USART6） ************************/
 
+#if EXCHINGE_UASRT_SHELL_WORKBOARD_NEWLXKT
+
+#define USART_COM01_COM485_BAUDRATE                    115200
+#define USART_COM01_COM485                             UART4                  // 外设名称改为USART1
+#define USART_COM01_COM485_CLK_ENABLE()                __UART4_CLK_ENABLE();  // USART1 外设时钟使能
+
+// USART1 RX引脚：PA10（复用AF7）
+#define USART_COM01_COM485_RX_GPIO_PORT                GPIOD                   // RX引脚端口：GPIOA
+#define USART_COM01_COM485_RX_GPIO_CLK_ENABLE()        __HAL_RCC_GPIOD_CLK_ENABLE()    // GPIOA 时钟使能
+#define USART_COM01_COM485_RX_PIN                      GPIO_PIN_0             // RX引脚：PA10
+#define USART_COM01_COM485_RX_AF                       GPIO_AF8_UART4         // RX引脚复用功能：AF7（F429 USART1固定AF7）
+
+// USART1 TX引脚：PA9（复用AF7）
+#define USART_COM01_COM485_TX_GPIO_PORT                GPIOD                   // TX引脚端口：GPIOA
+#define USART_COM01_COM485_TX_GPIO_CLK_ENABLE()        __HAL_RCC_GPIOD_CLK_ENABLE()    // GPIOA 时钟使能
+#define USART_COM01_COM485_TX_PIN                      GPIO_PIN_1              // TX引脚：PA9
+#define USART_COM01_COM485_TX_AF                       GPIO_AF8_UART4         // TX引脚复用功能：AF7
+
+// USART1 中断配置
+#define USART_COM01_COM485_IRQHandler                  UART4_IRQHandler       // 中断服务函数名
+#define USART_COM01_COM485_IRQ                         UART4_IRQn             // 中断向量号
+
+#define USART_COM01_DMA_REQUEST_USART_TX				DMA_REQUEST_UART4_TX
+#define USART_COM01_DMA_REQUEST_USART_RX				DMA_REQUEST_UART4_RX
+
+#define USART_COM01_COM485_RCC_PERIPHCLK     					RCC_PERIPHCLK_UART4
+#define USART_COM01_COM485_RCC_CLKSOURCE     					RCC_USART234578CLKSOURCE_D2PCLK1
+
+#define USART_COM01_COM485_IS_USART16                   0
+#else
+
 //串口波特率
 #define USART_COM01_COM485_BAUDRATE                    115200
-#define USART_COM01_COM485                             USART2
-#define USART_COM01_COM485_CLK_ENABLE()                __USART2_CLK_ENABLE();
-			  
-#define USART_COM01_COM485_RX_GPIO_PORT                GPIOD
-#define USART_COM01_COM485_RX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
-#define USART_COM01_COM485_RX_PIN                      GPIO_PIN_6
-#define USART_COM01_COM485_RX_AF                       GPIO_AF7_USART2
-			  
-#define USART_COM01_COM485_TX_GPIO_PORT                GPIOD
-#define USART_COM01_COM485_TX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
-#define USART_COM01_COM485_TX_PIN                      GPIO_PIN_5
-#define USART_COM01_COM485_TX_AF                       GPIO_AF7_USART2
-			  
-#define USART_COM01_COM485_IRQHandler                  USART2_IRQHandler
-#define USART_COM01_COM485_IRQ                 		    USART2_IRQn
+#define USART_COM01_COM485                             UART8   //❗这里！！UART8，不要USART8
+#define USART_COM01_COM485_CLK_ENABLE()                __HAL_RCC_UART8_CLK_ENABLE();
 
+#define USART_COM01_COM485_RX_GPIO_PORT                GPIOE
+#define USART_COM01_COM485_RX_GPIO_CLK_ENABLE()        __HAL_RCC_GPIOE_CLK_ENABLE()
+#define USART_COM01_COM485_RX_PIN                      GPIO_PIN_1
+#define USART_COM01_COM485_RX_AF                       GPIO_AF8_UART8
 
-#define USART_COM01_COM485_RCC_PERIPHCLK                       RCC_PERIPHCLK_USART2
+#define USART_COM01_COM485_TX_GPIO_PORT                GPIOE
+#define USART_COM01_COM485_TX_GPIO_CLK_ENABLE()        __HAL_RCC_GPIOE_CLK_ENABLE()
+#define USART_COM01_COM485_TX_PIN                      GPIO_PIN_0
+#define USART_COM01_COM485_TX_AF                       GPIO_AF8_UART8
+
+#define USART_COM01_COM485_IRQHandler                  UART8_IRQHandler
+#define USART_COM01_COM485_IRQ                 		    UART8_IRQn
+
+// DMA请求ID H743
+#define USART_COM01_DMA_REQUEST_USART_TX				DMA_REQUEST_UART8_TX
+#define USART_COM01_DMA_REQUEST_USART_RX				DMA_REQUEST_UART8_RX
+
+#define USART_COM01_COM485_RCC_PERIPHCLK                       RCC_PERIPHCLK_UART8
 #define USART_COM01_COM485_RCC_CLKSOURCE                       RCC_USART234578CLKSOURCE_D2PCLK1
-
-
-
-#define USART_COM01_DMA_REQUEST_USART_TX							DMA_REQUEST_USART2_TX
-#define USART_COM01_DMA_REQUEST_USART_RX							DMA_REQUEST_USART2_RX
+#define USART_COM01_COM485_IS_USART16                   0
+#endif
 
 #if USE_UART_COMMON_COM01_DMA_RX
 #define USART_COM01_IDLE_IT_STATUS										DISENABLE_IDLE_IT_STATUS	
@@ -58,6 +89,15 @@
 #define USE_COM01_COM485_IT_1				1
 
 #define USE_COM01_COM485_FUN        1   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -85,7 +125,7 @@
 #define USART_COM02_COM485_RCC_PERIPHCLK                       RCC_PERIPHCLK_USART2
 #define USART_COM02_COM485_RCC_CLKSOURCE                       RCC_USART234578CLKSOURCE_D2PCLK1
 
-
+#define USART_COM01_COM485_IS_USART16                   0
 
 #define USART_COM02_DMA_REQUEST_USART_TX							DMA_REQUEST_USART2_TX
 #define USART_COM02_DMA_REQUEST_USART_RX							DMA_REQUEST_USART2_RX

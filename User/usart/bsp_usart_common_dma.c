@@ -22,7 +22,7 @@
 
 #include "./usart/bsp_usart_common_dma.h"
 #include "./sys/sysio.h"
-
+#include "./io/bsp_io_output.h"  
 #define DEBUG_DmaUsartPrint 0
 
 //  #include "./usart/bsp_usart.h"
@@ -94,6 +94,22 @@ extern SemaphoreHandle_t g_com_uart_send_sem;
 extern __IO uint32_t NowUse_rtos;
 	#endif
 
+static void UartDmaTxPreStart_COMMON_COM01_485TxMode(void)
+{
+    COMMON_COM01_RS485_ENTER_TX;
+//	SYSTEM_INFO("tx-");
+}
+/**
+ * @brief DMA发送完成回调：485切换为接收模式
+ * @note 运行在DMA中断上下文，禁止HAL_Delay、printf/SYSTEM_INFO
+ */
+static void UartDmaTxComplete_COMMON_COM01_485SwitchRx(void)
+{
+	COMMON_COM01_RS485_ENTER_RX;   //DE/RE拉低，进入接收模式
+//	SYSTEM_INFO("rx-");
+}
+
+
 str_DMA_usart_send GV_usartdmaCOMMON_COM01_Send = {
     .send_data = {0},  // 数组初始化为全0（字符串结束符+无效数据清0）
     .uart_tx_justSaveOver = 0,  // 初始化为未保存完成
@@ -102,10 +118,20 @@ str_DMA_usart_send GV_usartdmaCOMMON_COM01_Send = {
     .daret = 0,                 // 按需初始化（根据实际用途设值）
     .complete_timeout = TX_WAITTING_TIMEOUT,   // 超时阈值3000ms（可按需调整）
     .current_time = 0,          // 初始时间设0（后续用HAL_GetTick()更新）
-    .last_tx_complete_time = 0  // 初始无上次触发时间
+    .last_tx_complete_time = 0,  // 初始无上次触发时间
+			//====绑定485发送完成切接收回调====
+		 .pTxPreStartCallback  = UartDmaTxPreStart_COMMON_COM01_485TxMode,
+	.pTxCpltCallback = UartDmaTxComplete_COMMON_COM01_485SwitchRx,
 };
 
-
+static void UartDmaTxPreStart_COMMON_COM02_485TxMode(void)
+{
+    COMMON_COM02_RS485_ENTER_TX;
+}
+static void UartDmaTxComplete_COMMON_COM02_485SwitchRx(void)
+{
+	COMMON_COM02_RS485_ENTER_RX;   //DE/RE拉低，进入接收模式
+}
 
 str_DMA_usart_send GV_usartdmaCOMMON_COM02_Send = {
     .send_data = {0},  // 数组初始化为全0（字符串结束符+无效数据清0）
@@ -115,9 +141,19 @@ str_DMA_usart_send GV_usartdmaCOMMON_COM02_Send = {
     .daret = 0,                 // 按需初始化（根据实际用途设值）
     .complete_timeout = TX_WAITTING_TIMEOUT,   // 超时阈值3000ms（可按需调整）
     .current_time = 0,          // 初始时间设0（后续用HAL_GetTick()更新）
-    .last_tx_complete_time = 0  // 初始无上次触发时间
+    .last_tx_complete_time = 0,  // 初始无上次触发时间
+				 .pTxPreStartCallback  = UartDmaTxPreStart_COMMON_COM02_485TxMode,
+			.pTxCpltCallback = UartDmaTxComplete_COMMON_COM02_485SwitchRx,
 };
 
+static void UartDmaTxPreStart_COMMON_COM03_485TxMode(void)
+{
+    COMMON_COM03_RS485_ENTER_TX;
+}
+static void UartDmaTxComplete_COMMON_COM03_485SwitchRx(void)
+{
+	COMMON_COM03_RS485_ENTER_RX;   //DE/RE拉低，进入接收模式
+}
 str_DMA_usart_send GV_usartdmaCOMMON_COM03_Send = {
     .send_data = {0},  // 数组初始化为全0（字符串结束符+无效数据清0）
     .uart_tx_justSaveOver = 0,  // 初始化为未保存完成
@@ -126,11 +162,19 @@ str_DMA_usart_send GV_usartdmaCOMMON_COM03_Send = {
     .daret = 0,                 // 按需初始化（根据实际用途设值）
     .complete_timeout = TX_WAITTING_TIMEOUT,   // 超时阈值3000ms（可按需调整）
     .current_time = 0,          // 初始时间设0（后续用HAL_GetTick()更新）
-    .last_tx_complete_time = 0  // 初始无上次触发时间
+    .last_tx_complete_time = 0 , // 初始无上次触发时间
+				 .pTxPreStartCallback  = UartDmaTxPreStart_COMMON_COM03_485TxMode,
+			.pTxCpltCallback = UartDmaTxComplete_COMMON_COM03_485SwitchRx,
 };
 
-
-
+static void UartDmaTxPreStart_COMMON_COM04_485TxMode(void)
+{
+    COMMON_COM04_RS485_ENTER_TX;
+}
+static void UartDmaTxComplete_COMMON_COM04_485SwitchRx(void)
+{
+	COMMON_COM04_RS485_ENTER_RX;   //DE/RE拉低，进入接收模式
+}
 str_DMA_usart_send GV_usartdmaCOMMON_COM04_Send = {
     .send_data = {0},  // 数组初始化为全0（字符串结束符+无效数据清0）
     .uart_tx_justSaveOver = 0,  // 初始化为未保存完成
@@ -139,7 +183,9 @@ str_DMA_usart_send GV_usartdmaCOMMON_COM04_Send = {
     .daret = 0,                 // 按需初始化（根据实际用途设值）
     .complete_timeout = TX_WAITTING_TIMEOUT,   // 超时阈值3000ms（可按需调整）
     .current_time = 0,          // 初始时间设0（后续用HAL_GetTick()更新）
-    .last_tx_complete_time = 0  // 初始无上次触发时间
+    .last_tx_complete_time = 0,  // 初始无上次触发时间
+				 .pTxPreStartCallback  = UartDmaTxPreStart_COMMON_COM04_485TxMode,
+					.pTxCpltCallback = UartDmaTxComplete_COMMON_COM04_485SwitchRx,
 };
 
 
@@ -152,6 +198,7 @@ str_DMA_usart_send GV_usartdmaCOMMON_COM05_Send = {
     .complete_timeout = TX_WAITTING_TIMEOUT,   // 超时阈值3000ms（可按需调整）
     .current_time = 0,          // 初始时间设0（后续用HAL_GetTick()更新）
     .last_tx_complete_time = 0  // 初始无上次触发时间
+					
 };
 
 
@@ -324,7 +371,11 @@ void UART_COMMON_DmaTxCpltProcess(str_DMA_usart_send *pDmaSendCtrl)
 
     pDmaSendCtrl->uart_tx_thisdatas_sendover  = 1;  // 当前帧发送完成
 //	SYSTEM_DEBUG("TX Callback \n");
-
+    // 如果注册了回调函数，则执行回调（中断上下文！）
+    if(pDmaSendCtrl->pTxCpltCallback != NULL)
+    {
+        pDmaSendCtrl->pTxCpltCallback();
+    }
 }
 
 
@@ -900,6 +951,11 @@ void Usart_SendDMA_COMMON_SendFun(str_DMA_usart_send *pDmaSendCtrl,
         if (pDmaSendCtrl->daret == 0)
         {
             pDmaSendCtrl->uart_tx_thisdatas_sendover=0;
+					            //========发送前回调：启动DMA发送之前执行========
+            if(pDmaSendCtrl->pTxPreStartCallback != NULL)
+            {
+                pDmaSendCtrl->pTxPreStartCallback();
+            }
             HAL_UART_Transmit_DMA(huart_x, pDmaSendCtrl->send_data, pDmaSendCtrl->read_out_len);
 
             if(pDmaSendCtrl->read_out_len==0)

@@ -599,7 +599,7 @@ void USART_COMMON_COM485_GpioInit(void)
                             COM485_COM01_GpioClockEnable,
                             USART_COM01_COM485_RCC_PERIPHCLK,
                             USART_COM01_COM485_RCC_CLKSOURCE,
-                            0) != HAL_OK)
+                            USART_COM01_COM485_IS_USART16) != HAL_OK)
 #else
     // USART1/6组
     if(UART_Common_GpioInit(USART_COM485_TX_GPIO_PORT,
@@ -632,7 +632,7 @@ void USART_COMMON_COM485_GpioInit(void)
                             COM485_COM02_GpioClockEnable,
                             USART_COM02_COM485_RCC_PERIPHCLK,
                             USART_COM02_COM485_RCC_CLKSOURCE,
-                            0) != HAL_OK)  
+                            USART_COM02_COM485_IS_USART16) != HAL_OK)  
 		{
         Error_Handler();
     }

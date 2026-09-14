@@ -256,7 +256,10 @@ static void IO485_04_ClkEnable(void)
 {
     IO485_04_GPIO_CLK_ENABLE();
 }
-
+static void IO485_05_ClkEnable(void)
+{
+    IO485_05_GPIO_CLK_ENABLE();
+}
 
 void IO485_GPIO_Config(void)
 {
@@ -266,16 +269,18 @@ void IO485_GPIO_Config(void)
         {IO485_02_GPIO_PORT, IO485_02_PIN, IO485_02_ClkEnable},
         {IO485_03_GPIO_PORT, IO485_03_PIN, IO485_03_ClkEnable},
         {IO485_04_GPIO_PORT, IO485_04_PIN, IO485_04_ClkEnable},
+				{IO485_05_GPIO_PORT, IO485_05_PIN, IO485_05_ClkEnable},
     };
     uint8_t cnt = sizeof(RECfgTable)/sizeof(RECfgTable[0]);
 
     IO_CommonGpioOutputBatchConfig(RECfgTable, cnt);
 		
 		
-		HAL_GPIO_WritePin(IO485_01_GPIO_PORT, RE01_PIN, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(IO485_02_GPIO_PORT, RE02_PIN, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(IO485_03_GPIO_PORT, RE03_PIN, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(IO485_04_GPIO_PORT, RE04_PIN, GPIO_PIN_SET);		
+		HAL_GPIO_WritePin(IO485_01_GPIO_PORT, IO485_01_PIN, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(IO485_02_GPIO_PORT, IO485_02_PIN, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(IO485_03_GPIO_PORT, IO485_03_PIN, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(IO485_04_GPIO_PORT, IO485_04_PIN, GPIO_PIN_RESET);		
+		HAL_GPIO_WritePin(IO485_05_GPIO_PORT, IO485_05_PIN, GPIO_PIN_RESET);
 }
 
 
@@ -294,15 +299,15 @@ void Test_Led_RunningWater(void)
 {
 	i++;
 	if(i%3==0){
-		HAL_GPIO_TogglePin(LED1_GPIO_PORT, LED1_PIN);
-		SYSTEM_INFO("-A-- - %d",i);
-	}else if(i%3==1){
-		HAL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);	
-		SYSTEM_INFO("-B-- - %d",i);
-	}else if(i%3==2){
-		HAL_GPIO_TogglePin(LED3_GPIO_PORT, LED3_PIN);
-		SYSTEM_INFO("-C-- - %d",i);
-	}
+		HAL_GPIO_TogglePin(IO485_01_GPIO_PORT, IO485_01_PIN);
+		SYSTEM_INFO("-A-- - %d",i);}
+//	}else if(i%3==1){
+//		HAL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);	
+//		SYSTEM_INFO("-B-- - %d",i);
+//	}else if(i%3==2){
+//		HAL_GPIO_TogglePin(LED3_GPIO_PORT, LED3_PIN);
+//		SYSTEM_INFO("-C-- - %d",i);
+//	}
 	
 
 		

@@ -10,7 +10,9 @@
 #define USE_BSP_COM_FEATURE                 1U
 
 
-#define EXCHINGE_UASRT_SHELL_WORKBOARD  0
+
+#define EXCHINGE_UASRT_SHELL_WORKBOARD_NEWLXKT  0
+#define EXCHINGE_UASRT_SHELL_WORKBOARD  1
 //串口波特率
 #define USART_SHELL_BAUDRATE                    115200
 
@@ -40,7 +42,7 @@
 #define USART_SHELL_RCC_CLKSOURCE     					RCC_USART16CLKSOURCE_D2PCLK2
 
 #else
-#if 0
+#if !EXCHINGE_UASRT_SHELL_WORKBOARD_NEWLXKT
 #define USART_SHELL                             UART4                  // 外设名称改为USART1
 #define USART_SHELL_CLK_ENABLE()                __UART4_CLK_ENABLE();  // USART1 外设时钟使能
 
