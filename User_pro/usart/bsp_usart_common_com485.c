@@ -649,7 +649,7 @@ void USART_COMMON_COM485_GpioInit(void)
                             COM485_COM03_GpioClockEnable,
                             USART_COM03_COM485_RCC_PERIPHCLK,
                             USART_COM03_COM485_RCC_CLKSOURCE,
-                            0) != HAL_OK)  
+                            USART_COM03_COM485_IS_USART16) != HAL_OK)  
 		{
         Error_Handler();
     }
@@ -666,7 +666,7 @@ void USART_COMMON_COM485_GpioInit(void)
                             COM485_COM04_GpioClockEnable,
                             USART_COM04_COM485_RCC_PERIPHCLK,
                             USART_COM04_COM485_RCC_CLKSOURCE,
-                            0) != HAL_OK)  
+                            USART_COM04_COM485_IS_USART16) != HAL_OK)  
 		{
         Error_Handler();
     }
@@ -683,7 +683,7 @@ void USART_COMMON_COM485_GpioInit(void)
                             COM485_COM05_GpioClockEnable,
                             USART_COM05_COM485_RCC_PERIPHCLK,
                             USART_COM05_COM485_RCC_CLKSOURCE,
-                            0) != HAL_OK)  
+                            USART_COM05_COM485_IS_USART16) != HAL_OK)  
 		{
         Error_Handler();
     }
@@ -700,7 +700,7 @@ void USART_COMMON_COM485_GpioInit(void)
                             COM485_COM06_GpioClockEnable,
                             USART_COM06_COM485_RCC_PERIPHCLK,
                             USART_COM06_COM485_RCC_CLKSOURCE,
-                            0) != HAL_OK)  
+                            USART_COM06_COM485_IS_USART16) != HAL_OK)  
 		{
         Error_Handler();
     }

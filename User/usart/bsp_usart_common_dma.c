@@ -97,7 +97,7 @@ extern __IO uint32_t NowUse_rtos;
 static void UartDmaTxPreStart_COMMON_COM01_485TxMode(void)
 {
     COMMON_COM01_RS485_ENTER_TX;
-//	SYSTEM_INFO("tx-");
+	SYSTEM_INFO("Tx-COM01");
 }
 /**
  * @brief DMA发送完成回调：485切换为接收模式
@@ -106,7 +106,7 @@ static void UartDmaTxPreStart_COMMON_COM01_485TxMode(void)
 static void UartDmaTxComplete_COMMON_COM01_485SwitchRx(void)
 {
 	COMMON_COM01_RS485_ENTER_RX;   //DE/RE拉低，进入接收模式
-//	SYSTEM_INFO("rx-");
+	SYSTEM_INFO("Rx-COM01");
 }
 
 
@@ -127,10 +127,12 @@ str_DMA_usart_send GV_usartdmaCOMMON_COM01_Send = {
 static void UartDmaTxPreStart_COMMON_COM02_485TxMode(void)
 {
     COMMON_COM02_RS485_ENTER_TX;
+		SYSTEM_INFO("Tx-COM02");
 }
 static void UartDmaTxComplete_COMMON_COM02_485SwitchRx(void)
 {
 	COMMON_COM02_RS485_ENTER_RX;   //DE/RE拉低，进入接收模式
+		SYSTEM_INFO("Rx-COM02");
 }
 
 str_DMA_usart_send GV_usartdmaCOMMON_COM02_Send = {
