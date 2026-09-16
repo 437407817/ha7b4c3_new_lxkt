@@ -85,12 +85,12 @@
 #define USART_COM01_COM485_RX_GPIO_PORT                GPIOB
 #define USART_COM01_COM485_RX_GPIO_CLK_ENABLE()        __HAL_RCC_GPIOB_CLK_ENABLE()
 #define USART_COM01_COM485_RX_PIN                      GPIO_PIN_5   // PB5 = UART5_RX
-#define USART_COM01_COM485_RX_AF                       GPIO_AF8_UART5
+#define USART_COM01_COM485_RX_AF                       GPIO_AF14_UART5
 
 #define USART_COM01_COM485_TX_GPIO_PORT                GPIOB
 #define USART_COM01_COM485_TX_GPIO_CLK_ENABLE()        __HAL_RCC_GPIOB_CLK_ENABLE()
 #define USART_COM01_COM485_TX_PIN                      GPIO_PIN_6   // PB6 = UART5_TX
-#define USART_COM01_COM485_TX_AF                       GPIO_AF8_UART5
+#define USART_COM01_COM485_TX_AF                       GPIO_AF14_UART5
 
 #define USART_COM01_COM485_IRQHandler                  UART5_IRQHandler
 #define USART_COM01_COM485_IRQ                 		    UART5_IRQn
