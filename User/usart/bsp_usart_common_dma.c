@@ -97,7 +97,7 @@ extern __IO uint32_t NowUse_rtos;
 static void UartDmaTxPreStart_COMMON_COM01_485TxMode(void)
 {
     COMMON_COM01_RS485_ENTER_TX;
-	SYSTEM_INFO("Tx-COM01");
+//	SYSTEM_INFO("Tx-COM01");
 }
 /**
  * @brief DMA发送完成回调：485切换为接收模式
@@ -106,7 +106,7 @@ static void UartDmaTxPreStart_COMMON_COM01_485TxMode(void)
 static void UartDmaTxComplete_COMMON_COM01_485SwitchRx(void)
 {
 	COMMON_COM01_RS485_ENTER_RX;   //DE/RE拉低，进入接收模式
-	SYSTEM_INFO("Rx-COM01");
+//	SYSTEM_INFO("Rx-COM01");
 }
 
 
@@ -127,12 +127,12 @@ str_DMA_usart_send GV_usartdmaCOMMON_COM01_Send = {
 static void UartDmaTxPreStart_COMMON_COM02_485TxMode(void)
 {
     COMMON_COM02_RS485_ENTER_TX;
-		SYSTEM_INFO("Tx-COM02");
+//		SYSTEM_INFO("Tx-COM02");
 }
 static void UartDmaTxComplete_COMMON_COM02_485SwitchRx(void)
 {
 	COMMON_COM02_RS485_ENTER_RX;   //DE/RE拉低，进入接收模式
-		SYSTEM_INFO("Rx-COM02");
+//		SYSTEM_INFO("Rx-COM02");
 }
 
 str_DMA_usart_send GV_usartdmaCOMMON_COM02_Send = {
@@ -190,7 +190,14 @@ str_DMA_usart_send GV_usartdmaCOMMON_COM04_Send = {
 					.pTxCpltCallback = UartDmaTxComplete_COMMON_COM04_485SwitchRx,
 };
 
-
+static void UartDmaTxPreStart_COMMON_COM05_485TxMode(void)
+{
+    COMMON_COM05_RS485_ENTER_TX;
+}
+static void UartDmaTxComplete_COMMON_COM05_485SwitchRx(void)
+{
+	COMMON_COM05_RS485_ENTER_RX;   //DE/RE拉低，进入接收模式
+}
 str_DMA_usart_send GV_usartdmaCOMMON_COM05_Send = {
     .send_data = {0},  // 数组初始化为全0（字符串结束符+无效数据清0）
     .uart_tx_justSaveOver = 0,  // 初始化为未保存完成
@@ -199,8 +206,9 @@ str_DMA_usart_send GV_usartdmaCOMMON_COM05_Send = {
     .daret = 0,                 // 按需初始化（根据实际用途设值）
     .complete_timeout = TX_WAITTING_TIMEOUT,   // 超时阈值3000ms（可按需调整）
     .current_time = 0,          // 初始时间设0（后续用HAL_GetTick()更新）
-    .last_tx_complete_time = 0  // 初始无上次触发时间
-					
+    .last_tx_complete_time = 0,  // 初始无上次触发时间
+								 .pTxPreStartCallback  = UartDmaTxPreStart_COMMON_COM05_485TxMode,
+					.pTxCpltCallback = UartDmaTxComplete_COMMON_COM05_485SwitchRx,	
 };
 
 

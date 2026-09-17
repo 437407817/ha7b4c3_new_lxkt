@@ -299,7 +299,7 @@ void Test_Led_RunningWater(void)
 {
 	i++;
 	if(i%3==0){
-		HAL_GPIO_TogglePin(IO485_01_GPIO_PORT, IO485_01_PIN);
+		HAL_GPIO_TogglePin(IO485_02_GPIO_PORT, IO485_02_PIN);
 		SYSTEM_INFO("-A-- - %d",i);}
 //	}else if(i%3==1){
 //		HAL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);	
