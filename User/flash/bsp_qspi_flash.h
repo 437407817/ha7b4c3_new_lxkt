@@ -6,7 +6,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 
-#define  SFLASH_DOUBLE_CHIP            1		//两片chips
+#define  SFLASH_DOUBLE_CHIP            0		//两片chips
 
 #define  sFLASH_ID                         0XEF4019     //W25Q256JVEM
 

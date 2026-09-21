@@ -4,7 +4,7 @@
 
 
 #include "./spi/bsp_spi_flash.h"
-#include "stm32fxxx.h"
+#include "stm32_FH_xxx.h"
 //#include "stdlib.h"	    
 #include "./sys/sysio.h"
 

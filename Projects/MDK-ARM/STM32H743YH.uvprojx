@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>STM32H743IITx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.3.1.1</PackID>
+          <PackID>Keil.STM32H7xx_DFP.3.1.0</PackID>
           <PackURL>https://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x24000000,0x00080000) IROM(0x08000000,0x00100000) IROM2(0x08100000,0x00100000) XRAM(0x30000000,0x00048000) XRAM2(0x38000000,0x00010000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -1846,6 +1846,11 @@
               <FilePath>..\..\User\spi\bsp_spi.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_spi_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\spi\bsp_spi_flash.c</FilePath>
+            </File>
+            <File>
               <FileName>bsp_qspi_a.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\spi\bsp_qspi_a.c</FilePath>
@@ -1864,6 +1869,11 @@
               <FileName>bsp_io_output.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\io\bsp_io_output.c</FilePath>
+            </File>
+            <File>
+              <FileName>DS1302.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User_pro\sensor\DS1302.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2121,9 +2131,19 @@
               <FilePath>..\..\User\test\bsp_lcd_test.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_test_DS1302.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User_pro\sensor\bsp_test_DS1302.c</FilePath>
+            </File>
+            <File>
               <FileName>bsp_qspi_flash_test.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\test\bsp_qspi_flash_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_spi_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\test\bsp_spi_test.c</FilePath>
             </File>
           </Files>
         </Group>

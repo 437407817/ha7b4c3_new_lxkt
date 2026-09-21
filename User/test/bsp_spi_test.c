@@ -44,7 +44,8 @@ void SPI_FLASH_Test(void)
 	DeviceID = SPI_FLASH_ReadDeviceID();
 	    hrng2.Instance = RNG;
     HAL_RNG_Init(&hrng2);
-	i=HAL_RNG_GetRandomNumber(&hrng2);
+//	i=HAL_RNG_GetRandomNumber(&hrng2);
+	i=1;
 	HAL_Delay( 200 );
 	
 	/* ªÒ»° SPI Flash ID */

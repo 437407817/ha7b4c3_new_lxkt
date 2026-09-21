@@ -15,7 +15,7 @@
 
 #if !EXCHINGE_UASRT_SHELL_485
 /************************ USART1 配置（替换原USART6） ************************/
-#define USART_COM485                             USART2
+#define USART_COM485                             USART6
 #define USART_COM485_CLK_ENABLE()                __USART2_CLK_ENABLE();
 			  
 #define USART_COM485_RX_GPIO_PORT                GPIOD
@@ -28,8 +28,8 @@
 #define USART_COM485_TX_PIN                      GPIO_PIN_5
 #define USART_COM485_TX_AF                       GPIO_AF7_USART2
 			  
-#define USART_COM485_IRQHandler                  USART1_IRQHandler
-#define USART_COM485_IRQ                 		    USART1_IRQn
+#define USART_COM485_IRQHandler                  USART6_IRQHandler
+#define USART_COM485_IRQ                 		    USART6_IRQn
 
 
 #else
