@@ -399,7 +399,7 @@
 
 #define USE_COM06_COM485_IT_1				1
 
-#define USE_COM06_COM485_FUN        1   
+#define USE_COM06_COM485_FUN        0   
 
 
 

@@ -79,8 +79,12 @@ SDRAM_DMA_Test();
 	#endif
 	
 #if TEST_QSPI_FLASH
-	Flash_Test();
+	QSPI_Flash_Test();
 #endif
+#if TEST_SPI_FLASH
+	SPI_FLASH_Test();
+#endif
+
 
 #if ((!USE_OS)&&USE_LVGL)
 lv_test();//使用裸机调用LVGL

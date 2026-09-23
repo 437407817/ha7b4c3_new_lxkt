@@ -7,119 +7,115 @@
 #include "./DataConvert/data_compare.h"
 
 
+#include "./spi/bsp_spi_flash.h"
 
+//#include "stm32f4xx_hal.h"
+//#include "./spi/bsp_spi_flash.h"
 
-/* USER CODE BEGIN 0 */
+#define TEST_BUFFER_SIZE    4096       // Test payload size (4KB)
+#define FLASH_TEST_ADDR     0x00000000 // Test start address
 
-/* USER CODE END 0 */
+uint8_t Tx_Buffer[TEST_BUFFER_SIZE];
+uint8_t Rx_Buffer[TEST_BUFFER_SIZE];
 
-
-/* I2C1 init function */
-RNG_HandleTypeDef hrng2;
-
-/* 获取缓冲区的长度 */
-#define TxBufferSize1   (countof(TxBuffer1) - 1)
-#define RxBufferSize1   (countof(TxBuffer1) - 1)
-#define countof(a)      (sizeof(a) / sizeof(*(a)))
-#define  BufferSize (countof(Tx_Buffer)-1)
-
-#define  FLASH_WriteAddress     0x00000
-#define  FLASH_ReadAddress      FLASH_WriteAddress
-#define  FLASH_SectorToErase    FLASH_WriteAddress
-
-   
-/* 发送缓冲区初始化 */
-uint8_t Tx_Buffer[] = "wrocome stm32 boardr\nhttp://fire-stm32.taobao.com";
-uint8_t Rx_Buffer[BufferSize];
-
-//读取的ID存储位置
-__IO uint32_t DeviceID = 0;
-__IO uint32_t FlashID = 0;
-
-uint8_t TransferStatus1;
-
-void SPI_FLASH_Test(void)
+/**
+  * @brief  SPI Flash Read/Write Test Program
+  * @retval 1: PASS, 0: FAIL
+  */
+uint8_t Flash_Test(void)
 {
-	uint8_t i=0;
-	DeviceID = SPI_FLASH_ReadDeviceID();
-	    hrng2.Instance = RNG;
-    HAL_RNG_Init(&hrng2);
-//	i=HAL_RNG_GetRandomNumber(&hrng2);
-	i=1;
-	HAL_Delay( 200 );
-	
-	/* 获取 SPI Flash ID */
-	FlashID = SPI_FLASH_ReadID();
-	
-	printf("\r\nFlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", FlashID, DeviceID);
-	
-	/* 检验 SPI Flash ID */
-	if (FlashID == sFLASH_ID) 
-	{	
-		printf("\r\nSPI FLASH W25Q256 !\r\n");
-		
-		/* 擦除将要写入的 SPI FLASH 扇区，FLASH写入前要先擦除 */
-		SPI_FLASH_SectorErase(FLASH_SectorToErase);	 	 
-		
-		/* 将发送缓冲区的数据写到flash中 */
-		SPI_FLASH_BufferWrite(Tx_Buffer, FLASH_WriteAddress, BufferSize);
-		printf("\r\nwrite data is \r\n%s", Tx_Buffer);
-		
-		/* 将刚刚写入的数据读出来放到接收缓冲区中 */
-		SPI_FLASH_BufferRead(Rx_Buffer, FLASH_ReadAddress, BufferSize);
-		printf("\r\n读出的数据为：\r\n%s", Rx_Buffer);
-				SYSTEM_DEBUG_ARRAY_MESSAGE(Rx_Buffer,BufferSize,"COMMON_BufferRead  FLASH_ReadAddress=%d",FLASH_ReadAddress);
-		/* 检查写入的数据与读出的数据是否相等 */
-		TransferStatus1 = Buffercmp(Tx_Buffer, Rx_Buffer, BufferSize);
-		
-		if( 0 == TransferStatus1 )
-		{    
-			
-			printf("\r\n16M串行flash(W25Q256) success \n\r");
-		}
-		else
-		{        
-			
-			printf("\r\n16M串行flash(W25Q256)failed n\r");
-		}
-	}// if (FlashID == sFLASH_ID)
-	else
-	{    
-		
-		printf("\r\ncan not find W25Q256 ID!\n\r");
-	}
-	
-//	SPI_Flash_PowerDown(); 
+    uint32_t i = 0;
+
+    SYSTEM_DEBUG("\r\n================ SPI Flash Test Routine ================\r\n");
+
+    /* 1. Print Flash Device Information */
+    SYSTEM_DEBUG("1. Detected Flash Device Information:\r\n");
+    SYSTEM_DEBUG("   - JEDEC ID    : 0x%06X\r\n", g_FlashDev.JedecID);
+    
+    if (g_FlashDev.Type == FLASH_TYPE_NOR)
+    {
+        SYSTEM_DEBUG("   - Flash Type  : SPI NOR Flash\r\n");
+    }
+    else if (g_FlashDev.Type == FLASH_TYPE_NAND)
+    {
+        SYSTEM_DEBUG("   - Flash Type  : SPI NAND Flash (W25N01GV)\r\n");
+    }
+    else
+    {
+        SYSTEM_DEBUG("   - Flash Type  : Unknown / Chip Not Found\r\n");
+        return 0;
+    }
+
+    SYSTEM_DEBUG("   - Capacity    : %lu MB (%lu Bytes)\r\n", g_FlashDev.TotalSize / (1024 * 1024), g_FlashDev.TotalSize);
+    SYSTEM_DEBUG("   - Erase Size  : %lu KB\r\n", g_FlashDev.SectorSize / 1024);
+    SYSTEM_DEBUG("   - Page Size   : %lu Bytes\r\n", g_FlashDev.PageSize);
+
+    /* 2. Prepare Tx Buffer Pattern */
+    for (i = 0; i < TEST_BUFFER_SIZE; i++)
+    {
+        Tx_Buffer[i] = (uint8_t)(i & 0xFF); // Fill cyclic pattern 0x00 ~ 0xFF
+        Rx_Buffer[i] = 0;                   // Clear Rx buffer
+    }
+
+    /* 3. Erase Target Area */
+    SYSTEM_DEBUG("\r\n2. Erasing target area (Addr: 0x%08X)...\r\n", FLASH_TEST_ADDR);
+    SPI_FLASH_SectorErase(FLASH_TEST_ADDR);
+    SYSTEM_DEBUG("   -> Erase Completed!\r\n");
+
+    /* 4. Write Test Data */
+    SYSTEM_DEBUG("\r\n3. Writing test pattern (%d Bytes)...\r\n", TEST_BUFFER_SIZE);
+    SPI_FLASH_BufferWrite(Tx_Buffer, FLASH_TEST_ADDR, TEST_BUFFER_SIZE);
+    SYSTEM_DEBUG("   -> Write Completed!\r\n");
+
+    /* 5. Read Test Data */
+    SYSTEM_DEBUG("\r\n4. Reading data back from Flash...\r\n");
+    SPI_FLASH_BufferRead(Rx_Buffer, FLASH_TEST_ADDR, TEST_BUFFER_SIZE);
+    SYSTEM_DEBUG("   -> Read Completed!\r\n");
+
+    /* 6. Verify Data Integrity */
+    SYSTEM_DEBUG("\r\n5. Verifying written data against read data...\r\n");
+    for (i = 0; i < TEST_BUFFER_SIZE; i++)
+    {
+        if (Tx_Buffer[i] != Rx_Buffer[i])
+        {
+            SYSTEM_DEBUG("ERROR: Mismatch at Addr 0x%08X! (Tx: 0x%02X, Rx: 0x%02X)\r\n",
+                         (FLASH_TEST_ADDR + i), Tx_Buffer[i], Rx_Buffer[i]);
+            return 0; // Test Failed
+        }
+    }
+
+    SYSTEM_DEBUG("SUCCESS: All %d Bytes verified successfully! Flash driver is fully operational.\r\n", TEST_BUFFER_SIZE);
+    SYSTEM_DEBUG("========================================================\r\n");
+    
+    return 1;
 }
 
+/**
+  * @brief  Main Application Entry Point
+  */
+void SPI_FLASH_Test(void)
+{
+//    HAL_Init();
 
+//    SYSTEM_DEBUG("\r\n***** Universal SPI Flash (NOR / NAND) Demo *****\r\n");
 
+//    /* Initialize SPI Flash with Auto-Detection & Protection Unlock */
+    SPI_FLASH_Init();
 
+    /* Execute Flash Read/Write Test */
+    if (Flash_Test() == 1)
+    {
+        SYSTEM_DEBUG("\r\n>>> Flash Test PASSED! Entering main program loop... <<<\r\n");
+    }
+    else
+    {
+        SYSTEM_DEBUG("\r\n!!! Flash Test FAILED! Please verify hardware connections or chip status. !!!\r\n");
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    while (1)
+    {
+    }
+}
 
 
 

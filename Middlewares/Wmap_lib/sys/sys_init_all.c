@@ -95,8 +95,8 @@
 #include "SEGGER_SYSVIEW_Int.h"
 #include "./usart/bsp_usart_common_com485.h"
 #include "./usart/bsp_usart_common_dma.h"
-
-
+#include "./spi/bsp_spi.h"
+#include "./spi/bsp_spi_flash.h"
 extern void WIFI_PDN_INIT(void);
 
 void ALL_Init_cfg(void){
@@ -170,8 +170,8 @@ mpu_init();
 //Disable_NAND_CS();
 //SDRAM_Init();SYSTEM_INFO("SDRAM_Init over------------- \n");
 //SDRAM_DMA_Init();
-//QSPI_FLASH_Init();
-
+BSP_QSPI_Init();
+SPI_FLASH_Init();
 
 #if (!USE_OS)&&USE_LVGL
 lv_init_all();

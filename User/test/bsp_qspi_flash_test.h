@@ -14,7 +14,7 @@
 
 
 
-void Flash_Test(void);
+void QSPI_Flash_Test(void);
 
 
 
