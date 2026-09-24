@@ -99,7 +99,7 @@
 #include "./spi/bsp_spi_flash.h"
 
 #include "./sensor/DS1302.h"
-
+#include "./io/bsp_io_input.h"
 
 extern void WIFI_PDN_INIT(void);
 
@@ -156,7 +156,7 @@ AppTaskScheduleInit();SYSTEM_INFO("TaskSchedule_Init over------------- \n");
 #endif	
 ////	
 OUT_Io_GPIO_Config();		SYSTEM_INFO("OUT_Io_GPIO_Init over------------- \n");
-//IN_Io_ALL_GPIO_Config();	SYSTEM_INFO("IN_Io_GPIO_Init over------------- \n");
+IN_Io_ALL_GPIO_Config();	SYSTEM_INFO("IN_Io_GPIO_Init over------------- \n");
 //	
 
 ////I2C_EE_Hard_Init();	SYSTEM_INFO("I2C_EE_Hard_Init over------------- \n");

@@ -92,7 +92,7 @@ void IO_EXTI_Key_Config(void)
 {
     const IO_EXTI_Config_t keyCfgTable[] =
     {
-        //key1：上升沿中断，不上拉不下拉，抢占0，子0
+        //IO1 PF13 EXTI15?10
         {
             .port           = IO1_INT_GPIO_PORT,
             .pin            = IO1_INT_GPIO_PIN,
@@ -100,10 +100,10 @@ void IO_EXTI_Key_Config(void)
             .itMode         = GPIO_MODE_IT_RISING,
             .pullMode       = GPIO_NOPULL,
             .irqN           = IO1_INT_EXTI_IRQ,
-            .prePriority    = 0,
+            .prePriority    = 2,
             .subPriority    = 0,
         },
-        //key2
+        //IO2 PF14 EXTI15?10
         {
             .port           = IO2_INT_GPIO_PORT,
             .pin            = IO2_INT_GPIO_PIN,
@@ -111,10 +111,10 @@ void IO_EXTI_Key_Config(void)
             .itMode         = GPIO_MODE_IT_RISING,
             .pullMode       = GPIO_NOPULL,
             .irqN           = IO2_INT_EXTI_IRQ,
-            .prePriority    = 0,
+            .prePriority    = 2,
             .subPriority    = 0,
         },
-				        //key1：上升沿中断，不上拉不下拉，抢占0，子0
+        //IO3 PF15 EXTI15?10
         {
             .port           = IO3_INT_GPIO_PORT,
             .pin            = IO3_INT_GPIO_PIN,
@@ -122,10 +122,10 @@ void IO_EXTI_Key_Config(void)
             .itMode         = GPIO_MODE_IT_RISING,
             .pullMode       = GPIO_NOPULL,
             .irqN           = IO3_INT_EXTI_IRQ,
-            .prePriority    = 0,
+            .prePriority    = 2,
             .subPriority    = 0,
         },
-        //key2
+        //IO4 PG0 EXTI0
         {
             .port           = IO4_INT_GPIO_PORT,
             .pin            = IO4_INT_GPIO_PIN,
@@ -133,11 +133,10 @@ void IO_EXTI_Key_Config(void)
             .itMode         = GPIO_MODE_IT_RISING,
             .pullMode       = GPIO_NOPULL,
             .irqN           = IO4_INT_EXTI_IRQ,
-            .prePriority    = 0,
+            .prePriority    = 2,
             .subPriority    = 0,
         },
     };
-
     uint8_t cnt = sizeof(keyCfgTable) / sizeof(keyCfgTable[0]);
     IO_EXTI_BatchConfig(keyCfgTable, cnt);
 }
@@ -216,10 +215,11 @@ IO_EXTI_Key_Config();
 //    }
 //}
 
-
+#if 0
 void IO1_IRQHandler(void)
 {
 	HAL_GPIO_EXTI_IRQHandler(IO1_INT_GPIO_PIN);
+	
   //确保是否产生了EXTI Line中断
 //	if(__HAL_GPIO_EXTI_GET_IT(KEY1_INT_GPIO_PIN) != RESET) 
 //	{
@@ -241,18 +241,18 @@ void IO2_IRQHandler(void)
 //		__HAL_GPIO_EXTI_CLEAR_IT(KEY1_INT_GPIO_PIN);     
 //	}  
 }
-void IO3_IRQHandler(void)
-{
-	HAL_GPIO_EXTI_IRQHandler(IO3_INT_GPIO_PIN);
-  //确保是否产生了EXTI Line中断
-//	if(__HAL_GPIO_EXTI_GET_IT(KEY1_INT_GPIO_PIN) != RESET) 
-//	{
-//		// LED1 取反		
-//		LED1_TOGGLE;
-//    //清除中断标志位
-//		__HAL_GPIO_EXTI_CLEAR_IT(KEY1_INT_GPIO_PIN);     
-//	}  
-}
+//void IO3_IRQHandler(void)
+//{
+//	HAL_GPIO_EXTI_IRQHandler(IO3_INT_GPIO_PIN);
+//  //确保是否产生了EXTI Line中断
+////	if(__HAL_GPIO_EXTI_GET_IT(KEY1_INT_GPIO_PIN) != RESET) 
+////	{
+////		// LED1 取反		
+////		LED1_TOGGLE;
+////    //清除中断标志位
+////		__HAL_GPIO_EXTI_CLEAR_IT(KEY1_INT_GPIO_PIN);     
+////	}  
+//}
 void IO4_IRQHandler(void)
 {
 	HAL_GPIO_EXTI_IRQHandler(IO4_INT_GPIO_PIN);
@@ -266,9 +266,35 @@ void IO4_IRQHandler(void)
 //	}  
 }
 
+#endif
 
-
-
+/**
+ * @brief GPIO外部中断回调，HAL库统一入口，中断上下文
+ * @note 禁止HAL_Delay、禁止SYSTEM_DEBUG/printf，只做寄存器/IO翻转等极短操作
+ */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    if(GPIO_Pin == IO1_INT_GPIO_PIN)
+    {
+        //IO1外部中断触发 →翻转LED1
+        HAL_GPIO_TogglePin(LED1_GPIO_PORT, LED1_PIN);
+    }
+    else if(GPIO_Pin == IO2_INT_GPIO_PIN)
+    {
+        //IO2外部中断触发 →翻转LED2
+        HAL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    }
+    else if(GPIO_Pin == IO3_INT_GPIO_PIN)
+    {
+        //IO3外部中断触发 →翻转LED3
+        HAL_GPIO_TogglePin(LED3_GPIO_PORT, LED3_PIN);
+    }
+    else if(GPIO_Pin == IO4_INT_GPIO_PIN)
+    {
+        //IO4外部中断触发 →翻转LED4
+        HAL_GPIO_TogglePin(LED4_GPIO_PORT, LED4_PIN);
+    }
+}
 
 
 

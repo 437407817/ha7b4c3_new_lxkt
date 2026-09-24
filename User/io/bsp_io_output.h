@@ -6,88 +6,88 @@
 //引脚定义
 /*******************************************************/
 //R 红色灯
-#define LED1_PIN                  GPIO_PIN_0                 
-#define LED1_GPIO_PORT            GPIOB                      
-#define LED1_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOB_CLK_ENABLE()
+#define LED1_PIN                  GPIO_PIN_1                 
+#define LED1_GPIO_PORT            GPIOA                      
+#define LED1_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOA_CLK_ENABLE()
 
 //G 绿色灯
-#define LED2_PIN                  GPIO_PIN_1                 
-#define LED2_GPIO_PORT            GPIOB                      
-#define LED2_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOB_CLK_ENABLE()
+#define LED2_PIN                  GPIO_PIN_2                 
+#define LED2_GPIO_PORT            GPIOA                      
+#define LED2_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOA_CLK_ENABLE()
 
 //B 蓝色灯
-#define LED3_PIN                  GPIO_PIN_3                 
-#define LED3_GPIO_PORT            GPIOA                       
-#define LED3_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOA_CLK_ENABLE()
+#define LED3_PIN                  GPIO_PIN_2                 
+#define LED3_GPIO_PORT            GPIOH                       
+#define LED3_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOH_CLK_ENABLE()
 
 //小指示灯
-#define LED4_PIN                  GPIO_PIN_11                 
-#define LED4_GPIO_PORT            GPIOD                       
-#define LED4_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOD_CLK_ENABLE()
+#define LED4_PIN                  GPIO_PIN_3                 
+#define LED4_GPIO_PORT            GPIOH                       
+#define LED4_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOH_CLK_ENABLE()
 /************************************************************/
 
 
 //R 红色灯
-#define LED01_BOARD_PIN                  GPIO_PIN_0                 
-#define LED01_BOARD_GPIO_PORT            GPIOB                      
-#define LED01_BOARD_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOB_CLK_ENABLE()
+#define LED01_BOARD_PIN                  GPIO_PIN_13                 
+#define LED01_BOARD_GPIO_PORT            GPIOG                      
+#define LED01_BOARD_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOG_CLK_ENABLE()
 
 //G 绿色灯
-#define LED02_BOARD_PIN                  GPIO_PIN_1                 
-#define LED02_BOARD_GPIO_PORT            GPIOB                      
-#define LED02_BOARD_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOB_CLK_ENABLE()
+#define LED02_BOARD_PIN                  GPIO_PIN_12                 
+#define LED02_BOARD_GPIO_PORT            GPIOG                      
+#define LED02_BOARD_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOG_CLK_ENABLE()
 
 //B 蓝色灯
-#define LED03_BOARD_PIN                  GPIO_PIN_3                 
-#define LED03_BOARD_GPIO_PORT            GPIOA                       
-#define LED03_BOARD_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOA_CLK_ENABLE()
+#define LED03_BOARD_PIN                  GPIO_PIN_11                 
+#define LED03_BOARD_GPIO_PORT            GPIOG                       
+#define LED03_BOARD_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOG_CLK_ENABLE()
 
 //小指示灯
-#define LED04_BOARD_PIN                  GPIO_PIN_11                 
-#define LED04_BOARD_GPIO_PORT            GPIOD                       
-#define LED04_BOARD_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOD_CLK_ENABLE()
+#define LED04_BOARD_PIN                  GPIO_PIN_10                 
+#define LED04_BOARD_GPIO_PORT            GPIOG                       
+#define LED04_BOARD_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOG_CLK_ENABLE()
 
 //小指示灯
-#define LED05_BOARD_PIN                  GPIO_PIN_11                 
-#define LED05_BOARD_GPIO_PORT            GPIOD                       
-#define LED05_BOARD_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOD_CLK_ENABLE()
+#define LED05_BOARD_PIN                  GPIO_PIN_9                 
+#define LED05_BOARD_GPIO_PORT            GPIOG                       
+#define LED05_BOARD_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOG_CLK_ENABLE()
 
 
 
 //代码里宏定义示例
-#define FAN01_PIN        						GPIO_PIN_4
-#define FAN01_GPIO_PORT  						GPIOA
-#define FAN01_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOD_CLK_ENABLE()
+#define FAN01_PIN        						GPIO_PIN_15
+#define FAN01_GPIO_PORT  						GPIOE
+#define FAN01_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOE_CLK_ENABLE()
 
-#define FAN02_PIN        						GPIO_PIN_4
-#define FAN02_GPIO_PORT  						GPIOA
-#define FAN02_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOD_CLK_ENABLE()
+#define FAN02_PIN        						GPIO_PIN_10
+#define FAN02_GPIO_PORT  						GPIOB
+#define FAN02_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOB_CLK_ENABLE()
 
-#define FAN03_PIN        						GPIO_PIN_4
-#define FAN03_GPIO_PORT  						GPIOA
-#define FAN03_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOD_CLK_ENABLE()
+#define FAN03_PIN        						GPIO_PIN_11
+#define FAN03_GPIO_PORT  						GPIOB
+#define FAN03_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOB_CLK_ENABLE()
 
-#define FAN04_PIN        						GPIO_PIN_4
-#define FAN04_GPIO_PORT  						GPIOA
-#define FAN04_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOD_CLK_ENABLE()
+#define FAN04_PIN        						GPIO_PIN_6
+#define FAN04_GPIO_PORT  						GPIOH
+#define FAN04_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOH_CLK_ENABLE()
 
 
 
-#define RE01_PIN        						GPIO_PIN_4
-#define RE01_GPIO_PORT  						GPIOA
-#define RE01_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOD_CLK_ENABLE()
+#define RE01_PIN        						GPIO_PIN_2
+#define RE01_GPIO_PORT  						GPIOI
+#define RE01_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOI_CLK_ENABLE()
 
-#define RE02_PIN        						GPIO_PIN_4
-#define RE02_GPIO_PORT  						GPIOA
+#define RE02_PIN        						GPIO_PIN_1
+#define RE02_GPIO_PORT  						GPIOI
 #define RE02_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOD_CLK_ENABLE()
 
-#define RE03_PIN        						GPIO_PIN_4
-#define RE03_GPIO_PORT  						GPIOA
-#define RE03_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOD_CLK_ENABLE()
+#define RE03_PIN        						GPIO_PIN_0
+#define RE03_GPIO_PORT  						GPIOI
+#define RE03_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOI_CLK_ENABLE()
 
-#define RE04_PIN        						GPIO_PIN_4
-#define RE04_GPIO_PORT  						GPIOA
-#define RE04_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOD_CLK_ENABLE()
+#define RE04_PIN        						GPIO_PIN_15
+#define RE04_GPIO_PORT  						GPIOH
+#define RE04_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOH_CLK_ENABLE()
 
 
 #define IO485_01_PIN        						GPIO_PIN_9
