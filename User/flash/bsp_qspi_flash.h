@@ -1,92 +1,100 @@
 #ifndef __BSP_QSPI_FLASH_H
 #define __BSP_QSPI_FLASH_H
-
-#include "stm32h7xx.h"
+#include "stm32h7xx_hal.h"
 #include <stdio.h>
 
-/* QSPI 接口引脚定义 (严格匹配原理图: CS->PG6, CLK->PF10, IO0->PF8, IO1->PF9, IO2->PF7, IO3->PF6) */
-#define QSPI_FLASH                   QUADSPI
-#define QSPI_FLASH_CLK_ENABLE()      __HAL_RCC_QSPI_CLK_ENABLE()
-#define QSPI_FLASH_CLK_DISABLE()     __HAL_RCC_QSPI_CLK_DISABLE()
+/*========硬件引脚配置 H743 QUADSPI BK1========*/
+#define QSPI_FLASH                         QUADSPI
+#define QSPI_FLASH_CLK_ENABLE()            __HAL_RCC_QSPI_CLK_ENABLE()
 
-#define QSPI_CS_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOG_CLK_ENABLE()
-#define QSPI_CLK_GPIO_CLK_ENABLE()   __HAL_RCC_GPIOF_CLK_ENABLE()
-#define QSPI_BK1_D0_GPIO_CLK_ENABLE() __HAL_RCC_GPIOF_CLK_ENABLE()
-#define QSPI_BK1_D1_GPIO_CLK_ENABLE() __HAL_RCC_GPIOF_CLK_ENABLE()
-#define QSPI_BK1_D2_GPIO_CLK_ENABLE() __HAL_RCC_GPIOF_CLK_ENABLE()
-#define QSPI_BK1_D3_GPIO_CLK_ENABLE() __HAL_RCC_GPIOF_CLK_ENABLE()
+/*========硬件引脚配置 H743 QUADSPI BK1【适配你当前原理图】========*/
+#define QSPI_FLASH                         QUADSPI
+#define QSPI_FLASH_CLK_ENABLE()            __HAL_RCC_QSPI_CLK_ENABLE()
 
-#define QSPI_FLASH_FORCE_RESET()     __HAL_RCC_QSPI_FORCE_RESET()
-#define QSPI_FLASH_RELEASE_RESET()   __HAL_RCC_QSPI_RELEASE_RESET()
+#define QSPI_FLASH_CLK_GPIO_PORT           GPIOF
+#define QSPI_FLASH_CLK_PIN                 GPIO_PIN_10
+#define QSPI_FLASH_CLK_GPIO_ENABLE()       __HAL_RCC_GPIOF_CLK_ENABLE()
+#define QSPI_FLASH_CLK_GPIO_AF             GPIO_AF9_QUADSPI
 
-#define QSPI_CS_PIN                  GPIO_PIN_6
-#define QSPI_CS_GPIO_PORT            GPIOG
-#define QSPI_CS_GPIO_AF              GPIO_AF10_QUADSPI  /* PG6 必须是 AF10 */
+#define QSPI_FLASH_BK1_IO0_PORT            GPIOF
+#define QSPI_FLASH_BK1_IO0_PIN             GPIO_PIN_8
+#define QSPI_FLASH_BK1_IO0_CLK_ENABLE()    __HAL_RCC_GPIOF_CLK_ENABLE()
+#define QSPI_FLASH_BK1_IO0_AF              GPIO_AF10_QUADSPI
 
-#define QSPI_CLK_PIN                 GPIO_PIN_10
-#define QSPI_CLK_GPIO_PORT           GPIOF
-#define QSPI_CLK_GPIO_AF             GPIO_AF9_QUADSPI   /* PF10 必须是 AF9 */
+#define QSPI_FLASH_BK1_IO1_PORT            GPIOF
+#define QSPI_FLASH_BK1_IO1_PIN             GPIO_PIN_9
+#define QSPI_FLASH_BK1_IO1_CLK_ENABLE()    __HAL_RCC_GPIOF_CLK_ENABLE()
+#define QSPI_FLASH_BK1_IO1_AF              GPIO_AF10_QUADSPI
 
-#define QSPI_BK1_D0_PIN              GPIO_PIN_8
-#define QSPI_BK1_D0_GPIO_PORT        GPIOF
-#define QSPI_BK1_D0_GPIO_AF          GPIO_AF9_QUADSPI
+#define QSPI_FLASH_BK1_IO2_PORT            GPIOF
+#define QSPI_FLASH_BK1_IO2_PIN             GPIO_PIN_7
+#define QSPI_FLASH_BK1_IO2_CLK_ENABLE()    __HAL_RCC_GPIOF_CLK_ENABLE()
+#define QSPI_FLASH_BK1_IO2_AF              GPIO_AF9_QUADSPI
 
-#define QSPI_BK1_D1_PIN              GPIO_PIN_9
-#define QSPI_BK1_D1_GPIO_PORT        GPIOF
-#define QSPI_BK1_D1_GPIO_AF          GPIO_AF9_QUADSPI
+#define QSPI_FLASH_BK1_IO3_PORT            GPIOF
+#define QSPI_FLASH_BK1_IO3_PIN             GPIO_PIN_6
+#define QSPI_FLASH_BK1_IO3_CLK_ENABLE()    __HAL_RCC_GPIOF_CLK_ENABLE()
+#define QSPI_FLASH_BK1_IO3_AF              GPIO_AF9_QUADSPI
 
-#define QSPI_BK1_D2_PIN              GPIO_PIN_7
-#define QSPI_BK1_D2_GPIO_PORT        GPIOF
-#define QSPI_BK1_D2_GPIO_AF          GPIO_AF9_QUADSPI
+#define QSPI_FLASH_CS_GPIO_PORT            GPIOG
+#define QSPI_FLASH_CS_PIN                  GPIO_PIN_6
+#define QSPI_FLASH_CS_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOG_CLK_ENABLE()
+#define QSPI_FLASH_CS_GPIO_AF              GPIO_AF10_QUADSPI
 
-#define QSPI_BK1_D3_PIN              GPIO_PIN_6
-#define QSPI_BK1_D3_GPIO_PORT        GPIOF
-#define QSPI_BK1_D3_GPIO_AF          GPIO_AF9_QUADSPI
+#define SFLASH_DOUBLE_CHIP                 0
 
-/* W25N01GV (1G-bit / 128MB) 结构定义 */
-#define QSPI_FLASH_SIZE              26            /* 2^27 Bytes = 128MB */
-#define QSPI_PAGE_SIZE               2048          /* 页大小 2KB */
-#define QSPI_BLOCK_SIZE              (128 * 1024)  /* 块大小 128KB */
+/*======== W25N01G W25N01GV 硬件参数========*/
+#define W25N01G_JEDEC_ID            0xEFAA21U
+#define W25N01G_PAGE_SIZE           2048U     /* 页大小 2KB */
+#define W25N01G_BLOCK_SIZE          (128U*1024U) /* 块128KB */
+#define W25N01G_TOTAL_SIZE          (128U*1024U*1024U) /*1Gbit=128MB*/
 
-/* W25N01GV 指令集 */
-#define RESET_CMD                    0xFF
-#define READ_ID_CMD                  0x9F
-#define WRITE_ENABLE_CMD             0x06
-#define WRITE_DISABLE_CMD            0x04
+/*======== W25N01G 指令集========*/
+#define W25N01G_RESET_CMD           0xFFU      /*软件复位*/
+#define W25N01G_JEDEC_ID_CMD        0x9FU      /*读JEDEC ID，后面需要Dummy1字节*/
+#define W25N01G_SET_FEATURE         0x1FU
+#define W25N01G_GET_FEATURE         0x0FU
+#define W25N01G_WRITE_ENABLE        0x06U
+#define W25N01G_WRITE_DISABLE       0x04U
+#define W25N01G_BLOCK_ERASE         0xD8U      /*块擦除*/
+#define W25N01G_PAGE_DATA_READ      0x13U      /*页读到内部缓存*/
+#define W25N01G_READ_FROM_BUFFER    0x03U      /*从缓存读数据 SPI 1‑line*/
+#define W25N01G_LOAD_PROG_DATA      0x02U      /*加载编程数据到缓存*/
+#define W25N01G_PROGRAM_EXECUTE     0x10U      /*执行编程，写入NAND页*/
 
-#define READ_STATUS_REG_CMD          0x0F          
-#define WRITE_STATUS_REG_CMD         0x1F          
+/*寄存器地址*/
+#define W25N01G_PROTECTION_REG_ADDR 0xA0U
+#define W25N01G_STATUS_REG_ADDR      0xC0U
+#define W25N01G_BUSY_MASK           0x01U
 
-#define STATUS_REG_PROTECTION        0xA0          
-#define STATUS_REG_CONFIGURATION     0xB0          
-#define STATUS_REG_STATUS            0xC0          
+typedef enum
+{
+    FLASH_DEV_UNKNOWN =0,
+    FLASH_DEV_W25N01G
+}FlashDevType_e;
 
-#define PAGE_DATA_READ_CMD           0x13          
-#define FAST_READ_QUAD_OUTPUT_CMD    0xEB          
+typedef struct
+{
+    FlashDevType_e devType;
+    uint32_t jedecId;
+    uint32_t pageSize;
+    uint32_t blockSize;
+    uint32_t totalSize;
+}QspiFlashDev_t;
 
-#define QUAD_IN_PAGE_PROG_CMD        0x32          
-#define PROGRAM_EXECUTE_CMD          0x10          
-
-#define BLOCK_ERASE_CMD              0xD8          
-
-/* 状态位定义 */
-#define W25N_STATUS_BUSY             0x01          
-#define W25N_STATUS_WEL              0x02          
-
-/* 错误码 */
-#define QSPI_OK                      0x00
-#define QSPI_ERROR                   0x01
-#define QSPI_BUSY                    0x02
-#define QSPI_TIMEOUT                 0x03
-
-/* 全局句柄 */
 extern QSPI_HandleTypeDef QSPIHandle;
+extern QspiFlashDev_t g_qspiFlashDev;
 
-/* 函数声明 */
-uint8_t BSP_QSPI_Init(void);
-uint8_t QSPI_FLASH_Reset(void);
-uint8_t QSPI_FLASH_ReadID(uint8_t *id_buf);
-uint8_t QSPI_FLASH_ReadStatusReg(uint8_t reg_addr, uint8_t *regvalue);
-uint8_t QSPI_FLASH_WriteStatusReg(uint8_t reg_addr, uint8_t regvalue);
+void QSPI_FLASH_Init(void);
+uint32_t QSPI_W25N01G_ReadJedecID(void);
+uint8_t QSPI_W25N01G_Reset(void);
+uint8_t QSPI_W25N01G_WriteEnable(void);
+uint8_t QSPI_W25N01G_WaitBusy(uint32_t timeout);
+uint8_t QSPI_W25N01G_UnlockProtect(void);
+uint8_t QSPI_W25N01G_BlockErase(uint32_t blockNum);
+uint8_t QSPI_W25N01G_PageReadToCache(uint32_t pageNum);
+uint8_t QSPI_W25N01G_ReadFromCache(uint8_t *pBuf,uint16_t colAddr,uint16_t len);
+uint8_t QSPI_W25N01G_LoadProgramData(uint8_t *pBuf,uint16_t colAddr,uint16_t len);
+uint8_t QSPI_W25N01G_ProgramExecute(uint32_t pageNum);
 
-#endif /* __BSP_QSPI_FLASH_H */
+#endif

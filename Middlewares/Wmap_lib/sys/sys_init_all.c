@@ -170,7 +170,7 @@ mpu_init();
 //Disable_NAND_CS();
 //SDRAM_Init();SYSTEM_INFO("SDRAM_Init over------------- \n");
 //SDRAM_DMA_Init();
-BSP_QSPI_Init();
+QSPI_FLASH_Init();
 SPI_FLASH_Init();
 
 #if (!USE_OS)&&USE_LVGL
