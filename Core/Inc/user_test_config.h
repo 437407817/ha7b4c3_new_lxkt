@@ -42,7 +42,7 @@
 
 #define TEST_DS1302	0
 
-
+#define TEST_other 0
 /* Exported types ------------------------------------------------------------*/
 
 

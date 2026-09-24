@@ -12,7 +12,7 @@
 
     // 假设这里有一个设置时间的函数调用
      uint8_t setTime[] = {0x23, 0x59, 0x59, 0x07, 0x01, 0x01, 0x23}; // 23:59:59, 07/01/2023
-     DS1302_SetTime(setTime);
+//     DS1302_SetTime(setTime);
 
 }
 
@@ -20,28 +20,22 @@
 
 void test_ds1302(void)
 {
+    static uint8_t i = 0;
+    if(i == 0)
+    {
+        settime();
+        i++;
+    }
 
-
-uint8_t i=0;
-	if(i==0){
-	settime();
-		i++;
-	}
+    uint8_t year, month, day, hour, minute, second;
     
+    // 调用实际的读取函数获取当前时间
+    DS1302_Readtime(&year, &month, &day, &hour, &minute, &second);
 
-
-
-        uint8_t timeArray[7];
-//        DS1302_ReadTime(timeArray);
-
-        // 解析时间数组并打印，这里简单示意
-        SYSTEM_DEBUG("Time: %02d:%02d:%02d Date: %02d/%02d/%02d\n",
-               timeArray[2], timeArray[1], timeArray[0], 
-               timeArray[4], timeArray[3], timeArray[5] + 2000); // 年份需要加上偏移量
-
-        // 延时
-        //delay_ms(1000); // 假设delay_ms是一个延时函数
-
+    // 打印解析后的时间
+    SYSTEM_DEBUG("Time: %02d:%02d:%02d Date: %02d/%02d/%02d\n",
+           hour, minute, second, 
+           year + 2000, month, day); // 注意年份和年月日的对应顺序
 }
 
 

@@ -1,130 +1,48 @@
 
 
-
-
-
-
-#include "./test/bsp_all_test.h"
-
-#include "./user_test_config.h"
-#include "./usart/bsp_usart.h"
-
-#include "./test/bsp_usart_test.h"
-#include "./user_test_config.h"
-#include "./test/bsp_iic_test.h"
-//#include "./test/bsp_segger_test.h"
-//#include "./test/bsp_spi_test.h"
-//#include "./test/bsp_sdram_test.h"
-//#include "./test/bsp_lcd_test.h"
-//#include "./test/bsp_usart_test.h"
-#include "./usart/bsp_usart_shell.h"
-#include "./usart/bsp_usart_dma.h"
-#include "./test/bsp_sdram_test.h"
-
-#include "./sdram/bsp_sdram_dma.h"
-#include "./test/bsp_lcd_test.h"
-#include "./test/bsp_qspi_flash_test.h"
-#include "./lvgl_port.h"
-#include "./TaskTest/Task_StressTest.h"
-
-#include "./sensor/bsp_test_DS1302.h"
 #include "./test/bsp_other_test.h"
+//#include "./usart/bsp_usart.h"
+#include "./user_test_config.h"
+#include "./DataConvert/data_random.h"
 
-//#include "usbd_init.h"
+#include "./sys/bsp_systime.h"   
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
 
+
 /* I2C1 init function */
-void TEST_ALL_Init(void)
-{
 
+
+#if (TEST_other==1)
+
+//#define  DATA_Size			256
+//#define  EEP_Firstpage      0x00
+//uint8_t I2c_Buf_Write[DATA_Size];
+//uint8_t I2c_Buf_Read[DATA_Size];
+
+
+uint8_t other_Test(void)
+{
+	uint16_t i;
+uint32_t random_buf =0;
+	HAL_StatusTypeDef ret;
 	
-	
-	
+ret = random_generate(&random_buf, 1);
+
+    if (ret == HAL_OK)
+    {
+        SYSTEM_DEBUG("\r\n ret = HAL_OK, random_generate data: %u (0x%X)\r\n", random_buf, random_buf);
+    }
+    else
+    {
+        SYSTEM_DEBUG("\r\n ret = %d (ERROR), generate failed!\r\n", ret);
+    }
 
 }
 
-void TEST_ALL_TEST(void)
-{
-printf("TEST_ALL_TEST\n");
-#if (TEST_SHELL_UART==1)
-	Test_USART_SHELL_while();
+
 #endif
-	#if TEST_RingBuffer_SAVEANDREAD
-	Test_Usart_QueueSaveFun();
-	#endif
-	
-#if TEST_DMA_RB_READ
-	TEST_USART_RX_DMA_ALL_while();
-#endif
-
-#if 0	
-#if TESTUsartDMASendSaveAndSend
-	TEST_Usart_SendFUN_ALL();//单独测试，最好多任务测试效果最佳
-#endif	
-#endif	
-
-
-#if (TEST_I2C==1)	
-	I2C_Test();
-#endif
-#if (TEST_SDRAM==1)
-SDRAM_Basic_Test();
-#endif
-
-#if TEST_SDRAM_DMA
-SDRAM_DMA_Test();
-#endif
-
-
-#if TEST_LCD	
-	LCD_main_Test();
-	#endif
-	
-#if TEST_QSPI_FLASH
-	QSPI_Flash_Test();
-#endif
-#if TEST_SPI_FLASH
-	SPI_FLASH_Test();
-#endif
-
-
-#if ((!USE_OS)&&USE_LVGL)
-lv_test();//使用裸机调用LVGL
-#endif
-//	Segger_Test();
-	
-//	SPI_FLASH_Test();
-//	SDRAM_Test();
-
-#ifdef TEST_LCD_MODULE_ENABLED	
-	
-#endif
-
-#if TEST_STRESS_CALCULATE
-	Test_All_StressTest();
-#endif
-
-#if TEST_DS1302
-	test_ds1302();
-#endif
-
-#if TEST_other
-	other_Test();
-#endif
-
-// USART_DMA_Test();
-//	BSP_usbd_test();
-	
-}
-
-
-
-
-
-
-
 
 
 

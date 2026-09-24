@@ -20,45 +20,84 @@
 // 全局RNG句柄（只需初始化一次）
 static RNG_HandleTypeDef hrng = {0};
 
+/**
+ * @brief  RNG 外设初始化（已补充 H7 专用的外设时钟源配置）
+ */
 void MX_RNG_Init(void)
 {
-  // 1. 配置RNG句柄的核心参数（Instance=外设地址，是唯一需要根据芯片调整的部分）
-  hrng.Instance = RNG;  // 注意：部分型号（如H7）可能是RNG1/RNG2，需改为RNG1
+    RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
+
+    // 1. 使能并选择 HSI48 作为 RNG 的时钟源（最稳妥的方案）
+    __HAL_RCC_HSI48_ENABLE();
+    while(!__HAL_RCC_GET_FLAG(RCC_FLAG_HSI48RDY));
+
+    PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RNG;
+    PeriphClkInitStruct.RngClockSelection = RCC_RNGCLKSOURCE_HSI48; 
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+    {
+        Error_Handler();
+    }
+
+    // 2. 配置RNG句柄核心参数
+    hrng.Instance = RNG;  
   
-  // 2. 使能RNG外设时钟（关键！时钟未使能会导致初始化失败）
-  __HAL_RCC_RNG_CLK_ENABLE();
+    // 3. 使能RNG外设总线时钟
+    __HAL_RCC_RNG_CLK_ENABLE();
 
-  // 3. 复位RNG外设（清除之前的异常状态，确保初始化干净）
-  __HAL_RNG_RESET_HANDLE_STATE(&hrng);
+    // 4. 复位RNG外设
+    __HAL_RNG_RESET_HANDLE_STATE(&hrng);
 
-  // 4. 初始化RNG外设（HAL库底层配置，无需修改）
-  if (HAL_RNG_Init(&hrng) != HAL_OK)
-  {
-    Error_Handler();  // 初始化失败时调用错误处理函数（用户工程需实现）
-  }
+    // 5. 初始化RNG外设
+    if (HAL_RNG_Init(&hrng) != HAL_OK)
+    {
+        Error_Handler();  
+    }
 }
 
 
-HAL_StatusTypeDef  random_generate(uint32_t *pBuffer, uint32_t uwBufferLenght)
+//HAL_StatusTypeDef  random_generate2(uint32_t *pBuffer, uint32_t uwBufferLenght)
+//{
+
+//	RNG_HandleTypeDef hand_random;
+//	/*使能RNG时钟*/
+//    __RNG_CLK_ENABLE();
+//	/*初始化RNG模块产生随机数*/
+//    hand_random.Instance = RNG;
+//    HAL_RNG_Init(&hand_random);
+
+//   for(uint32_t count=0;count<uwBufferLenght;count++)
+//    {
+//          HAL_StatusTypeDef status = HAL_RNG_GenerateRandomNumber(&hrng, &pBuffer[count]);
+//        if (status != HAL_OK)
+//        {
+//            return status; // 单个随机数生成失败，返回错误码
+//        }
+
+//    }    
+//		return HAL_OK; // 全部生成成功
+//}
+
+
+
+
+/**
+ * @brief  批量生成随机数
+ * @param  pBuffer: 存放随机数的缓冲区指针
+ * @param  uwBufferLength: 需要生成的随机数数量 (32位无符号数个数)
+ * @retval HAL_StatusTypeDef: 执行状态
+ */
+HAL_StatusTypeDef random_generate(uint32_t *pBuffer, uint32_t uwBufferLength)
 {
-
-	RNG_HandleTypeDef hand_random;
-	/*使能RNG时钟*/
-    __RNG_CLK_ENABLE();
-	/*初始化RNG模块产生随机数*/
-    hand_random.Instance = RNG;
-    HAL_RNG_Init(&hand_random);
-
-   for(uint32_t count=0;count<uwBufferLenght;count++)
+    // 直接使用全局初始化好的 hrng 循环生成随机数
+    for(uint32_t count = 0; count < uwBufferLength; count++)
     {
-          HAL_StatusTypeDef status = HAL_RNG_GenerateRandomNumber(&hrng, &pBuffer[count]);
+        HAL_StatusTypeDef status = HAL_RNG_GenerateRandomNumber(&hrng, &pBuffer[count]);
         if (status != HAL_OK)
         {
             return status; // 单个随机数生成失败，返回错误码
         }
-
     }    
-		return HAL_OK; // 全部生成成功
+    return HAL_OK; // 全部生成成功
 }
 
 

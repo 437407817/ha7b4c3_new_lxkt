@@ -2145,6 +2145,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\test\bsp_spi_test.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_other_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\test\bsp_other_test.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
