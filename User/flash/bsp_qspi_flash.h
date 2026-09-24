@@ -97,4 +97,35 @@ uint8_t QSPI_W25N01G_ReadFromCache(uint8_t *pBuf,uint16_t colAddr,uint16_t len);
 uint8_t QSPI_W25N01G_LoadProgramData(uint8_t *pBuf,uint16_t colAddr,uint16_t len);
 uint8_t QSPI_W25N01G_ProgramExecute(uint32_t pageNum);
 
+
+
+void W25N_GetAddrInfo(uint32_t offset, uint32_t *out_page, uint16_t *out_col, uint32_t *out_block);
+uint8_t W25N_Read(uint32_t offset, uint8_t *buf, uint32_t len);
+uint8_t W25N_Write(uint32_t offset, uint8_t *buf, uint32_t len);
+uint8_t W25N_BlockErase(uint32_t blockNo);
+uint8_t W25N_ModifyBlock(uint32_t blockNo, uint32_t blockOffsetIn, uint8_t *pData, uint32_t len, uint8_t *pBlockBuf);
+
+
+
+/* W25N01GV 坏块相关 */
+#define W25N01G_TOTAL_BLOCKS        1024U
+#define W25N01G_BLOCK_GOOD          0U
+#define W25N01G_BLOCK_BAD           1U
+
+/* 坏块表：1024块，每块1bit；用uint8_t数组，1字节标记8个块 */
+extern uint8_t g_bad_block_table[W25N01G_TOTAL_BLOCKS / 8U];
+
+uint8_t W25N_ScanBadBlockTable(void);
+uint8_t W25N_IsBadBlock(uint32_t blockNo);
+uint8_t W25N_MarkBadBlock(uint32_t blockNo);
+uint32_t W25N_GetNextGoodBlock(uint32_t startBlock);
+
+
+
+
+
+
+
+
+
 #endif
