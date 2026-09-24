@@ -33,16 +33,16 @@
 //#include "stm32f4xx.h"
 
 // DS1302引脚定义 H743?HAL
-#define DS1302_SCLK_GPIO_PORT    GPIOI
-#define DS1302_SCLK_GPIO_PIN     GPIO_PIN_7
-#define DS1302_SCLK_GPIO_CLK     __HAL_RCC_GPIOI_CLK_ENABLE()
+#define DS1302_SCLK_GPIO_PORT    GPIOE
+#define DS1302_SCLK_GPIO_PIN     GPIO_PIN_2
+#define DS1302_SCLK_GPIO_CLK     __HAL_RCC_GPIOE_CLK_ENABLE()
 
 #define DS1302_IO_GPIO_PORT      GPIOE
-#define DS1302_IO_GPIO_PIN       GPIO_PIN_2
+#define DS1302_IO_GPIO_PIN       GPIO_PIN_3
 #define DS1302_IO_GPIO_CLK       __HAL_RCC_GPIOE_CLK_ENABLE()
 
 #define DS1302_RST_GPIO_PORT     GPIOE
-#define DS1302_RST_GPIO_PIN      GPIO_PIN_3
+#define DS1302_RST_GPIO_PIN      GPIO_PIN_4
 #define DS1302_RST_GPIO_CLK      __HAL_RCC_GPIOE_CLK_ENABLE()
 
 // HAL库引脚操作宏
@@ -58,7 +58,7 @@
 #define DS1302_io_read     HAL_GPIO_ReadPin(DS1302_IO_GPIO_PORT, DS1302_IO_GPIO_PIN)
 
 
-#define DS1302_DELAY     delay_us_soft(1)
+#define DS1302_DELAY     delay_us(1)
 
 
 

@@ -123,6 +123,78 @@ uint8_t DS1302_Read(uint8_t add)
     return suf;
 }
 
+// 优化后的读寄存器函数
+uint8_t DS1302_Read2(uint8_t add)
+{
+    uint8_t suf = 0U;
+    uint8_t i = 0;
+    
+    DS1302_RST_L;
+    DS1302_DELAY;
+    DS1302_RST_H;          // RST拉高，开始通信
+    DS1302_DELAY;
+    
+    DS1302_WriteAddrOrData(add); // 写入读地址（含读命令 0x01）
+    
+    // 关键点 1：写完地址后，IO口变更为输入模式
+    DS1302_IN_GPIO_INIT();
+    DS1302_DELAY;          // 增加微小延时，等待输入电平稳定
+
+    for(i = 0; i < 8; i++)
+    {
+        suf >>= 1;         // DS1302是 LSB（低位先行），数据从右向左移
+        
+        // 关键点 2：在 SCLK 上升沿采样数据
+        DS1302_SCLK_H;
+        DS1302_DELAY;
+        
+        if(DS1302_io_read)
+        {
+            suf |= 0x80;   // 读到高电平，置 1
+        }
+        else
+        {
+            suf &= 0x7f;   // 读到低电平，清 0
+        }
+        
+        DS1302_SCLK_L;     // SCLK拉低，为下一个下降沿输出做准备
+        DS1302_DELAY;
+    }
+    
+    DS1302_RST_L;          // 结束通信
+    DS1302_DELAY;
+    return suf;
+}
+uint8_t DS1302_Read3(uint8_t add)
+{
+    uint8_t suf = 0U;
+    DS1302_RST_L;
+    DS1302_DELAY;
+    DS1302_SCLK_L;
+    DS1302_DELAY;
+    DS1302_RST_H;
+    DS1302_DELAY;
+
+    DS1302_WriteAddrOrData(add);   //发送读指令
+    DS1302_IN_GPIO_INIT();         //IO切换输入
+
+    for(uint8_t i=0;i<8;i++)
+    {
+        suf >>= 1;
+        if(DS1302_io_read)
+        {
+            suf |= 0x80;
+        }
+        DS1302_SCLK_H;
+        DS1302_DELAY;
+        DS1302_SCLK_L;
+        DS1302_DELAY;
+    }
+    DS1302_RST_L;
+    DS1302_DELAY;
+    return suf;
+}
+
 //设置时间，输入BCD数组 {sec,min,hour,day,month,year}
 void DS1302_SetTime(uint8_t *ad)
 {
@@ -186,11 +258,11 @@ void DS1302_Readtime(uint8_t *year, uint8_t *month, uint8_t *day, uint8_t *hour,
     value=mh*10+nl;
     *minute = value;
 
-    suf=DS1302_Read(DS1302_SEC_REG_ADDR|0x01);
-    mh=suf/16;
-    nl=suf%16;
-    value=mh*10+nl;
-    *second = value;
+suf = DS1302_Read(DS1302_SEC_REG_ADDR | 0x01);
+mh = (suf & 0xf0) >> 4;
+nl = suf & 0x0f;
+value = mh * 10 + nl;
+*second = value;
 }
 
 

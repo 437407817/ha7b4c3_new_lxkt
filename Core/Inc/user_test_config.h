@@ -36,11 +36,11 @@
 #define TEST_TOUCH_IIC	0
 
 
-#define TEST_QSPI_FLASH	1
+#define TEST_QSPI_FLASH	0
 #define TEST_SPI_FLASH	0
 #define TEST_STRESS_CALCULATE 0
 
-
+#define TEST_DS1302	0
 
 
 /* Exported types ------------------------------------------------------------*/

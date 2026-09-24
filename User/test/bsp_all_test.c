@@ -26,6 +26,10 @@
 #include "./test/bsp_qspi_flash_test.h"
 #include "./lvgl_port.h"
 #include "./TaskTest/Task_StressTest.h"
+
+#include "./sensor/bsp_test_DS1302.h"
+
+
 //#include "usbd_init.h"
 /* USER CODE BEGIN 0 */
 
@@ -101,6 +105,12 @@ lv_test();//使用裸机调用LVGL
 #if TEST_STRESS_CALCULATE
 	Test_All_StressTest();
 #endif
+
+#if TEST_DS1302
+	test_ds1302();
+#endif
+
+
 
 // USART_DMA_Test();
 //	BSP_usbd_test();

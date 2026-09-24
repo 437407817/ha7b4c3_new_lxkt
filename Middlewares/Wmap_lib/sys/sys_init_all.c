@@ -97,6 +97,10 @@
 #include "./usart/bsp_usart_common_dma.h"
 #include "./spi/bsp_spi.h"
 #include "./spi/bsp_spi_flash.h"
+
+#include "./sensor/DS1302.h"
+
+
 extern void WIFI_PDN_INIT(void);
 
 void ALL_Init_cfg(void){
@@ -172,7 +176,7 @@ mpu_init();
 //SDRAM_DMA_Init();
 QSPI_FLASH_Init();
 SPI_FLASH_Init();
-
+DS1302_GPIO_Init();
 #if (!USE_OS)&&USE_LVGL
 lv_init_all();
 #endif

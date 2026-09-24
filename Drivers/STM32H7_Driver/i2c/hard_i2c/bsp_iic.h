@@ -14,36 +14,21 @@
 
 
 
-/* 这个地址只要与STM32外挂的I2C器件地址不一样即可 */
-#define I2C_OWN_ADDRESS7      0X0A   
 
-#define I2Cx_a                             I2C1
-#define I2Cx_a_CLK_ENABLE()                __HAL_RCC_I2C1_CLK_ENABLE()
-#define I2Cx_a_SDA_GPIO_CLK_ENABLE()       __HAL_RCC_GPIOB_CLK_ENABLE()
-#define I2Cx_a_SCL_GPIO_CLK_ENABLE()       __HAL_RCC_GPIOB_CLK_ENABLE() 
-
-#define I2Cx_a_FORCE_RESET()               __HAL_RCC_I2C1_FORCE_RESET()
-#define I2Cx_a_RELEASE_RESET()             __HAL_RCC_I2C1_RELEASE_RESET()
-
-/* Definition for I2Cx_a Pins */
-#define I2Cx_a_SCL_PIN                    GPIO_PIN_6
-#define I2Cx_a_SCL_GPIO_PORT              GPIOB
-#define I2Cx_a_SCL_AF                     GPIO_AF4_I2C1
-#define I2Cx_a_SDA_PIN                    GPIO_PIN_7
-#define I2Cx_a_SDA_GPIO_PORT              GPIOB
-#define I2Cx_a_SDA_AF                     GPIO_AF4_I2C1
-
-//--------------
 
 /* AT24C01/02每页有8个字节 */
 //#define EEPROM_PAGESIZE           8
-#define EEPROM_PAGESIZE 	   8
+//#define EEPROM_PAGESIZE 	   8
 /* AT24C04/08A/16A每页有16个字节 */
 //#define EEPROM_PAGESIZE           16		
 //AT24C256 -64
-//#define EEPROM_PAGESIZE           64
-#define EEPROM_I2C_FORCE_RESET()      __HAL_RCC_I2C2_FORCE_RESET()
-#define EEPROM_I2C_RELEASE_RESET()    __HAL_RCC_I2C2_RELEASE_RESET()
+#define EEPROM_PAGESIZE           64
+//#define EEPROM_PAGESIZE           32	
+
+
+//I2C_MEMADD_SIZE_8BIT   或   I2C_MEMADD_SIZE_16BIT（T24C32/64A/256）
+#define IIC_REG_ADDR_SIZE				2
+
 /* I2C interrupt requests */
 #define EEPROM_I2C_EV_IRQn            I2C2_EV_IRQn
 #define EEPROM_I2C_ER_IRQn            I2C2_ER_IRQn
@@ -54,19 +39,22 @@
 #define I2C_OWN_ADDRESS7      0X0A   
 
 /*I2C接口*/
+/* ==================== I2C2 引脚与外设宏定义 (匹配 AT24C256 原理图) ==================== */
 #define EEPROM_I2C                          I2C2
 #define EEPROM_I2C_CLK_ENABLE()             __HAL_RCC_I2C2_CLK_ENABLE()
-//#define RCC_PERIPHCLK_I2Cx               	  RCC_PERIPHCLK_I2C4
 
-#define EEPROM_I2C_SCL_PIN                  GPIO_PIN_0                 
+#define EEPROM_I2C_SCL_PIN                  GPIO_PIN_1                 
 #define EEPROM_I2C_SCL_GPIO_PORT            GPIOF                       
-#define EEPROM_I2C_SCL_GPIO_CLK_ENABLE()    __GPIOF_CLK_ENABLE()
+#define EEPROM_I2C_SCL_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOF_CLK_ENABLE() // 注意这里必须是标准HAL宏
 #define EEPROM_I2C_SCL_AF                   GPIO_AF4_I2C2
 
-#define EEPROM_I2C_SDA_PIN                  GPIO_PIN_1                 
+#define EEPROM_I2C_SDA_PIN                  GPIO_PIN_0                 
 #define EEPROM_I2C_SDA_GPIO_PORT            GPIOF                       
-#define EEPROM_I2C_SDA_GPIO_CLK_ENABLE()    __GPIOF_CLK_ENABLE()
+#define EEPROM_I2C_SDA_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOF_CLK_ENABLE() // 注意这里必须是标准HAL宏
 #define EEPROM_I2C_SDA_AF                   GPIO_AF4_I2C2
+
+#define EEPROM_I2C_FORCE_RESET()            __HAL_RCC_I2C2_FORCE_RESET()
+#define EEPROM_I2C_RELEASE_RESET()          __HAL_RCC_I2C2_RELEASE_RESET()
 
 
 

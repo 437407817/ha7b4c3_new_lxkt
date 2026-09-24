@@ -29,14 +29,14 @@ uint8_t I2C_Test(void)
 	uint16_t i;
 uint32_t random_buf =0;
 	HAL_StatusTypeDef ret;
-	printf("\r\niic write data:\r\n");
+	SYSTEM_DEBUG("\r\niic write data:\r\n");
 ret = random_generate(&random_buf, 1);
 	for ( i=0; i<DATA_Size; i++ ) //填充缓冲
 	{   
 		I2c_Buf_Write[i] =i+random_buf;
-		printf("0x%02X ", I2c_Buf_Write[i]);
+		SYSTEM_DEBUG("0x%02X ", I2c_Buf_Write[i]);
 		if(i%16 == 15)    
-		printf("\r\n");    
+		SYSTEM_DEBUG("\r\n");    
 	}
 
 	//将I2c_Buf_Write中顺序递增的数据写入EERPOM中 
@@ -44,7 +44,7 @@ ret = random_generate(&random_buf, 1);
 	IIC_EE_currentDriver->IIC_BufferWrite( I2c_Buf_Write, EEP_Firstpage, DATA_Size);
 	
 delay_ms(500);
-	printf("\r\niic read data :\r\n");
+	SYSTEM_DEBUG("\r\niic read data :\r\n");
 	//将EEPROM读出数据顺序保持到I2c_Buf_Read中
 //	I2C_EE_BufferRead(I2c_Buf_Read, EEP_Firstpage, DATA_Size); 
 	IIC_EE_currentDriver->IIC_BufferRead(I2c_Buf_Read, EEP_Firstpage, DATA_Size); 
@@ -54,16 +54,16 @@ delay_ms(500);
 	{	
 		if(I2c_Buf_Read[i] != I2c_Buf_Write[i])
 		{
-			printf("0x%02X ", I2c_Buf_Read[i]);
-			printf("data is not right ");
+			SYSTEM_DEBUG("0x%02X ", I2c_Buf_Read[i]);
+			SYSTEM_DEBUG("data is not right ");
 			return 0;
 		}
-		printf("0x%02X ", I2c_Buf_Read[i]);
+		SYSTEM_DEBUG("0x%02X ", I2c_Buf_Read[i]);
 		if(i%16 == 15)    
-		printf("\r\n");
+		SYSTEM_DEBUG("\r\n");
 
 	}
-	printf("I2C(AT24C02) SUCCESS\r\n");
+	SYSTEM_DEBUG("I2C(AT24C02) SUCCESS\r\n");
 	delay_ms(500);
 	return 1;
 }

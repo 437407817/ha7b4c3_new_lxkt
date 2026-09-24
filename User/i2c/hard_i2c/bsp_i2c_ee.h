@@ -38,11 +38,13 @@
 
 /* AT24C01/02每页有8个字节 */
 //#define EEPROM_PAGESIZE    8
-#define EEPROM_PAGESIZE 	   8
+//#define EEPROM_PAGESIZE 	   8
 /* AT24C04/08A/16A每页有16个字节 */
 //#define EEPROM_PAGESIZE           16			
 /* AT24C32/64A/256A每页有32个字节 */
-//#define EEPROM_PAGESIZE           32	
+
+
+
 
 
 /*等待超时时间*/
