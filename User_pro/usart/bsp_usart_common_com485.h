@@ -357,7 +357,7 @@
 
 #define USE_COM05_COM485_IT_1				1
 
-#define USE_COM05_COM485_FUN        1   
+#define USE_COM05_COM485_FUN        0   
 
 /************************ COM06 配置（替换原USART6） ************************/
 
@@ -367,12 +367,12 @@
 #define USART_COM06_COM485_CLK_ENABLE()                __USART1_CLK_ENABLE();
 			  
 #define USART_COM06_COM485_RX_GPIO_PORT                GPIOB
-#define USART_COM06_COM485_RX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+#define USART_COM06_COM485_RX_GPIO_CLK_ENABLE()        __GPIOB_CLK_ENABLE()
 #define USART_COM06_COM485_RX_PIN                      GPIO_PIN_15
 #define USART_COM06_COM485_RX_AF                       GPIO_AF4_USART1
 			  
 #define USART_COM06_COM485_TX_GPIO_PORT                GPIOB
-#define USART_COM06_COM485_TX_GPIO_CLK_ENABLE()        __GPIOD_CLK_ENABLE()
+#define USART_COM06_COM485_TX_GPIO_CLK_ENABLE()        __GPIOB_CLK_ENABLE()
 #define USART_COM06_COM485_TX_PIN                      GPIO_PIN_14
 #define USART_COM06_COM485_TX_AF                       GPIO_AF4_USART1
 			  
@@ -385,8 +385,8 @@
 
 #define USART_COM06_COM485_IS_USART16                   1
 
-#define USART_COM06_DMA_REQUEST_USART_TX							DMA_REQUEST_USART2_TX
-#define USART_COM06_DMA_REQUEST_USART_RX							DMA_REQUEST_USART2_RX
+#define USART_COM06_DMA_REQUEST_USART_TX							DMA_REQUEST_USART1_TX
+#define USART_COM06_DMA_REQUEST_USART_RX							DMA_REQUEST_USART1_RX
 
 #if USE_UART_COMMON_COM06_DMA_RX
 #define USART_COM06_IDLE_IT_STATUS										DISENABLE_IDLE_IT_STATUS	
@@ -399,7 +399,7 @@
 
 #define USE_COM06_COM485_IT_1				1
 
-#define USE_COM06_COM485_FUN        0   
+#define USE_COM06_COM485_FUN        1   
 
 
 

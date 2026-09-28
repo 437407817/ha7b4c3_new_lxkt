@@ -18,7 +18,7 @@
 #include "./io/bsp_io_input.h"
 #include "./io/bsp_io_output.h"  
 
-
+#include "./sys/sysio.h"
 
 
 
@@ -97,7 +97,7 @@ void IO_EXTI_Key_Config(void)
             .port           = IO1_INT_GPIO_PORT,
             .pin            = IO1_INT_GPIO_PIN,
             .clkEnFunc      = IO1_ClkEnable,
-            .itMode         = GPIO_MODE_IT_RISING,
+            .itMode         = GPIO_MODE_IT_FALLING,
             .pullMode       = GPIO_NOPULL,
             .irqN           = IO1_INT_EXTI_IRQ,
             .prePriority    = 2,
@@ -108,7 +108,7 @@ void IO_EXTI_Key_Config(void)
             .port           = IO2_INT_GPIO_PORT,
             .pin            = IO2_INT_GPIO_PIN,
             .clkEnFunc      = IO2_ClkEnable,
-            .itMode         = GPIO_MODE_IT_RISING,
+            .itMode         = GPIO_MODE_IT_FALLING,
             .pullMode       = GPIO_NOPULL,
             .irqN           = IO2_INT_EXTI_IRQ,
             .prePriority    = 2,
@@ -119,7 +119,7 @@ void IO_EXTI_Key_Config(void)
             .port           = IO3_INT_GPIO_PORT,
             .pin            = IO3_INT_GPIO_PIN,
             .clkEnFunc      = IO3_ClkEnable,
-            .itMode         = GPIO_MODE_IT_RISING,
+            .itMode         = GPIO_MODE_IT_FALLING,
             .pullMode       = GPIO_NOPULL,
             .irqN           = IO3_INT_EXTI_IRQ,
             .prePriority    = 2,
@@ -130,7 +130,7 @@ void IO_EXTI_Key_Config(void)
             .port           = IO4_INT_GPIO_PORT,
             .pin            = IO4_INT_GPIO_PIN,
             .clkEnFunc      = IO4_ClkEnable,
-            .itMode         = GPIO_MODE_IT_RISING,
+            .itMode         = GPIO_MODE_IT_FALLING,
             .pullMode       = GPIO_NOPULL,
             .irqN           = IO4_INT_EXTI_IRQ,
             .prePriority    = 2,
@@ -269,29 +269,44 @@ void IO4_IRQHandler(void)
 #endif
 
 /**
- * @brief GPIO外部中断回调，HAL库统一入口，中断上下文
- * @note 禁止HAL_Delay、禁止SYSTEM_DEBUG/printf，只做寄存器/IO翻转等极短操作
- */
+  * @brief EXTI Line0 中断服务函数 (对应 IO4 / PG0)
+  */
+void EXTI0_IRQHandler(void)
+{
+    // 调用 HAL 库通用的 EXTI 处理函数（内部会自动清除挂起标志位并调用 HAL_GPIO_EXTI_Callback）
+    HAL_GPIO_EXTI_IRQHandler(IO4_INT_GPIO_PIN);
+}
+
+/**
+  * @brief EXTI Line[15:10] 中断服务函数 (对应 IO1/PF13, IO2/PF14, IO3/PF15)
+  */
+void EXTI15_10_IRQHandler(void)
+{
+    // Pin 13, 14, 15 共用此中断入口，依次清除并处理可能触发的中断线
+    HAL_GPIO_EXTI_IRQHandler(IO1_INT_GPIO_PIN);
+    HAL_GPIO_EXTI_IRQHandler(IO2_INT_GPIO_PIN);
+    HAL_GPIO_EXTI_IRQHandler(IO3_INT_GPIO_PIN);
+}
+
+/**
+  * @brief GPIO外部中断回调函数
+  */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
     if(GPIO_Pin == IO1_INT_GPIO_PIN)
     {
-        //IO1外部中断触发 →翻转LED1
         HAL_GPIO_TogglePin(LED1_GPIO_PORT, LED1_PIN);
     }
     else if(GPIO_Pin == IO2_INT_GPIO_PIN)
     {
-        //IO2外部中断触发 →翻转LED2
         HAL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
     }
     else if(GPIO_Pin == IO3_INT_GPIO_PIN)
     {
-        //IO3外部中断触发 →翻转LED3
         HAL_GPIO_TogglePin(LED3_GPIO_PORT, LED3_PIN);
     }
     else if(GPIO_Pin == IO4_INT_GPIO_PIN)
     {
-        //IO4外部中断触发 →翻转LED4
         HAL_GPIO_TogglePin(LED4_GPIO_PORT, LED4_PIN);
     }
 }
