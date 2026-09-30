@@ -583,7 +583,17 @@ extern U485ComUsartSend_Callback_t COM06_485_cbCfg;
 #endif
 	
 	
-	
+extern UART_HandleTypeDef huart_COM01_COM485_Handle;
+
+extern UART_HandleTypeDef huart_COM02_COM485_Handle;
+
+extern UART_HandleTypeDef huart_COM03_COM485_Handle;
+
+extern UART_HandleTypeDef huart_COM04_COM485_Handle;
+
+extern UART_HandleTypeDef huart_COM05_COM485_Handle;
+
+extern UART_HandleTypeDef huart_COM06_COM485_Handle;
 	
 	//----------------函数声明----------------
 void UART_COMMON_Instance_SetSendCallback(UartComInstance *pInst, const U485ComUsartSend_Callback_t *pSrcCb);

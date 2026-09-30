@@ -32,6 +32,42 @@ STR_SEND_SETTING_DATA_t GV_send_setting_return_data;
 uint8_t update_lvgl_flag;
 
 uint8_t update_lvgl_02_flag;
+
+
+
+
+
+
+str_ScreenSetRunState GV_ScreenSetRunBoardState;
+//str_ScreenSetRunState OldGV_ScreenSetRunBoardState;
+str_ScreenSettingDataState GV_ScreenSettingDataState;
+str_ScreenSettingDataState OldGV_ScreenSettingDataState;
+
+
+str_EEpromSettingState TMP_EEpromSettingState;
+
+str_EEprom_SYS_SettingDataState TMP_EEprom_SYS_SettingState;
+
+str_Screen_SYS_SHOW_SettingDataState Screen_SYS_SHOW_SettingDataState;
+
+str_Screen_SYS_SettingDataState Screen_SYS_SettingDataState;
+str_SD_data GV_SD_data;
+
+ScreenCommu_Item_t  GV_ScreenCommu;
+str_HardwareState GV_HardwareState; 
+str_BatterySetCalibration GV_BatterySetCalibration;
+str_BatterySetCalibration BigD_GV_BatterySetCalibration;
+
+str_ComuBoardState GV_ComuBoardState;
+str_GetSlaveUpdloadState BigD_GV_getSlaveUpdloadState[BOARD_COUNT];
+str_CommSendToSlaveBoardState GV_CommSendToSlaveBoardState;
+str_CommSendToSlaveBoardState BigD_GV_CommSlaveBoardState;
+
+
+
+
+
+
 ////GV_HardwareState.HW_NeedWorkingState=0;
 //uint8_t checkNeedStateNotEquRealState(void){
 

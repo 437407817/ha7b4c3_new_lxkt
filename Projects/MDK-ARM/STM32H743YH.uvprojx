@@ -1554,6 +1554,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\stm32h7xx_it.c</FilePath>
             </File>
+            <File>
+              <FileName>GV_enum.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User_pro\global\GV_enum.c</FilePath>
+            </File>
+            <File>
+              <FileName>GV_variable.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User_pro\global\GV_variable.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -6714,6 +6724,51 @@
               <FileName>usart_485_sendMethod.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User_pro\middle_business\usart_485_sendMethod.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>screen</GroupName>
+          <Files>
+            <File>
+              <FileName>ScreenDataDis.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User_pro\screen\ScreenDataDis.c</FilePath>
+            </File>
+            <File>
+              <FileName>ScreenDS1302.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User_pro\screen\ScreenDS1302.c</FilePath>
+            </File>
+            <File>
+              <FileName>ScreenSendFun.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User_pro\screen\ScreenSendFun.c</FilePath>
+            </File>
+            <File>
+              <FileName>DW_com_send.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User_pro\screen\DW_com_send.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>project_API</GroupName>
+          <Files>
+            <File>
+              <FileName>hardware_interface_api.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\User_pro\project_API\hardware_interface_api.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>service</GroupName>
+          <Files>
+            <File>
+              <FileName>Workled.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User_pro\service\Workled.c</FilePath>
             </File>
           </Files>
         </Group>
