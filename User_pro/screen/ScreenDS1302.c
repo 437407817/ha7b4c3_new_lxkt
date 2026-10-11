@@ -12,7 +12,7 @@
 //#include "./usart/rx_data_queue.h"
 
  #include "./sys/sysio.h"
-#include "./screen/Screen.h"
+#include "./global/GV_enum.h" 
 #include "./controller/StateFun.h"
 #include "./service/EepromFun.h"
 

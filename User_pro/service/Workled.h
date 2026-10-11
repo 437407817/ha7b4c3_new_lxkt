@@ -2,14 +2,14 @@
 #define	__WORKLED_H
 
 
-#include "stm32fxxx.h"
+#include "stm32_FH_xxx.h"
 #include "./i2c/hard_i2c/bsp_i2c_ee.h"
 #include "./i2c/soft_i2c/bsp_soft_i2c_ee.h"
-#include "./GV_variable.h"
+#include "./global/GV_variable.h" 
 
 
-  #include "./system_config.h"
-#include "./defines.h"
+//  #include "./system_config.h"
+//#include "./defines.h"
 
 uint8_t turnOnLight(uint8_t lightNumber) ;
 

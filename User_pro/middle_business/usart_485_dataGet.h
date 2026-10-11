@@ -15,11 +15,11 @@
 
 
 //void screendataswitch(uint16_t addr,uint8_t num,uint8_t** p_data);
-void screendataswitch(uint16_t addr,uint8_t** p_data,uint8_t num);
+//void screendataswitch(uint16_t addr,uint8_t** p_data,uint8_t num);
 
-void pull_data_from_485(void);
+//void pull_data_from_485(void);
 
-void s485dataswitch(uint8_t** p_data,uint8_t num,uint8_t command_num);
+//void s485dataswitch(uint8_t** p_data,uint8_t num,uint8_t command_num);
 
 
 

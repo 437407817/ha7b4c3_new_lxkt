@@ -16,7 +16,7 @@
 #define PACKET_DATA_LEN_MAX    120                 //最大包长度
 #endif
 
-#define MAX_BUF_SIZE           (PACKET_DATA_LEN_MAX * 8)										//
+#define MAX_BUF_SIZE           (PACKET_DATA_LEN_MAX * 2)										//
 
 
 //void s485_convert_queue(uint8_t **outalldata,uint8_t** OutData,uint8_t* Datanum,uint8_t* Command_num);

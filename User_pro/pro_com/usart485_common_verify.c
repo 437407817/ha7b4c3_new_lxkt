@@ -259,7 +259,7 @@ void Usart485CommonComTask(UartComInstance *pInst,
     QueueType_t *pRcvQueue = pInst->pRcvQueue;
     uint32_t qcp = 0U;
 
-#if 0
+#if 1
     while ((QueueCount(pRcvQueue) >= PACKET_DATA_LEN_MIN) && (QueuePop(pRcvQueue, &readBuf[0]) == QUEUE_OK))
     {
         if (readBuf[0] != FRAME_REC_HEAD_0)
@@ -316,6 +316,11 @@ void Usart485CommonComTask(UartComInstance *pInst,
     }
 #endif
 }
+
+
+
+
+
 
 
 //void Usart485CommonComTask(UartComInstance *pInst)
@@ -526,14 +531,16 @@ static void COM05_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 }
 	#endif
 	#if USE_COM06_COM485_FUN
+	#include "./screen/ScreenDataDis.h"
 static void COM06_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 {
-	#if 0
+	#if 1
     if(frameBuf == NULL || frameLen < 3U)
     {
         return;
     }
-
+		uint8_t *pSubBuf = &frameBuf[3];   // 一级指针，指向frameBuf第3号偏移
+screendataswitch(frameLen-3,&pSubBuf);
     // frameBuf[0] = FRAME_REC_HEAD_0
     // frameBuf[1] = FRAME_REC_HEAD_1
     // frameBuf[2] = 数据域长度

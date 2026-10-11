@@ -593,9 +593,9 @@ void ScreenSendVolDataToScreen(void);
 
 void Screen_SetParrleChargeIconState(void);
 
-void screendataswitch(uint16_t addr,uint8_t num,uint8_t** p_data);
+void screendataswitch(uint8_t num,uint8_t** p_data);
 
-//void screendataswitch(uint16_t addr,uint8_t num,uint8_t* p_data);
+
 
 void ScreenSendALLVolToDis(void);
 

@@ -12,22 +12,23 @@
 //#include "./usart/rx_data_queue.h"
 
  #include "./sys/sysio.h"
-#include "./screen/Screen.h"
+#include "./screen/DW_com_send.h"
+
 #include "./controller/StateFun.h"
 #include "./service/EepromFun.h"
 
 #include "./screen/ScreenSendFun.h"
 #include "./controller/DisStateFun.h"
 #include "./service/EepromFun.h"
-#include "./usart/p_data_queue.h"
+#include "./buffer/p_data_queue.h"
 
-#include "./service/DisposeDataFun.h"
-#include "./controller/TaskFun.h"
-#include "./controller/TaskSingleWork.h"
-#include "./usart/bsp_usart_sd.h"
+//#include "./service/DisposeDataFun.h"
+//#include "./controller/TaskFun.h"
+//#include "./controller/TaskSingleWork.h"
+//#include "./usart/bsp_usart_sd.h"
 #include "./screen/ScreenDS1302.h"
 
-#include "./crypt/bsp_encode.h"
+//#include "./crypt/bsp_encode.h"
 
 
 
@@ -50,7 +51,7 @@ extern str_CommSendToSlaveBoardState GV_CommSendToSlaveBoardState;
 extern str_HardwareState GV_HardwareState; 
 
 
-extern QUEUE_DATA_BUFF GV_qdf_1;
+//extern QUEUE_DATA_BUFF GV_qdf_1;
 extern uint16_t Array_WorkType_NowMessage[4];
 extern uint16_t Array_WorkType_NowMessage_English[ETE_Size];
 
@@ -58,9 +59,10 @@ extern uint16_t Array_WorkType_NowMessage_English[ETE_Size];
 
 
 
-void screendataswitch(uint16_t addr,uint8_t num,uint8_t** p_data){
-SYSTEM_DEBUG_ARRAY_MESSAGE(*p_data,num,"   screen_ADDR =%x ",addr);
+void screendataswitch(uint8_t num,uint8_t** p_data){
+//SYSTEM_DEBUG_ARRAY_MESSAGE(*p_data,num,"   screen_ADDR =%x ",addr);
 	//SYSTEM_DEBUG("Battery_SET_SumlimitValue p_data = %p",(uint8_t*)*p_data);
+		uint16_t	addr=((uint16_t)*(*p_data+0)<<8)|p_data[0][1];
 	
 switch(addr){
 
@@ -234,137 +236,6 @@ for(uint16_t i=0;i<4;i++){
 	
    frame=NULL;
 }
-
-/**
-  * @brief  从串口数据中取出数据
-  * @param  frame：整个数据指针 length：整个数据指针长度 Data处理后截取的数据 addr数据中第一个地址 Datanum数据中有多少字节
-  * @retval 无
-  */
-void SCREEN_copy_data_from_queue(QUEUE_DATA_BUFF *qdf,uint8_t **frame,uint16_t* length,uint8_t** Data,uint8_t* Datanum,uint16_t* addr){
-	
-	Q_QUEUE_DATA_TYPE *rx_data;	
-	/*从缓冲区读取数据，进行处理，*/
-	rx_data = p_cbRead(&(qdf)->q_rx_queue); 
-
-	if(rx_data != NULL)//缓冲队列非空
-	{		
-		*length=rx_data->q_len;
-
-		*frame = (uint8_t *)malloc(rx_data->q_len);
-		
-    memcpy(*frame,rx_data->q_head,rx_data->q_len);
-		//*(*frame+rx_data->q_len) = '\0';
-
-		
-	
-		//SYSTEM_DEBUG_ARRAY((uint8_t*)*frame,rx_data->q_len);
-//		if((frame[0][0]!=0x5A)||(frame[0][1]!=0xA5)||(frame[0][3]!=0x83)){
-//			*Datanum=0;
-//			SYSTEM_ERROR("screen data is not 5A A5 83 \n");
-//			p_cbReadFinish(&(qdf)->q_rx_queue);
-//	return;
-//		}
-//				if(frame[0][2]!=(rx_data->q_len)-3){
-//					*Datanum=0;
-//			SYSTEM_ERROR("screen data num is not right\n");
-//			p_cbReadFinish(&(qdf)->q_rx_queue);
-//	return;
-//		}
-				
-					if(DW_SCREEN_ReadfromQ_dataFromatVerify(frame,*length)==1){
-		
-			*Datanum=0;
-			
-			SYSTEM_DEBUG_ARRAY_MESSAGE(*frame,*length,"get wrong data is ");
-			//SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t *)frame,*length,"wrong data is ");//wrong
-			p_cbReadFinish(&(qdf)->q_rx_queue);
-		return;
-		}
-		
-		
-		
-		
-		
-		
-		//SYSTEM_DEBUG("11 frame[4]: %02x frame[5]: %02X  ",(uint8_t)*(*frame+4),(uint8_t)*(*frame+5));//正确
-		//SYSTEM_DEBUG("22 frame[4]: %02x frame[5]: %02x  ",(uint8_t)frame[0][4],(uint8_t)frame[0][5]);//正确
-		*addr=((uint16_t)*(*frame+4)<<8)|frame[0][5];
-		//SYSTEM_DEBUG(" *addr: %04x   ",*addr);
-		
-	#if (DW_CRC16==1)	
-	*Datanum =*length-9;
-	#else	
-	*Datanum =*length-7;
-	#endif	
-
-		//SYSTEM_DEBUG_ARRAY((uint8_t*)*frame,rx_data->q_len);
-		*Data=(uint8_t *)malloc(*Datanum );
-				if(Data == NULL) {
-				SYSTEM_ERROR("memory malloc wrong\n");
-					p_cbReadFinish(&(qdf)->q_rx_queue);
-		return;
-	}
-		// SYSTEM_DEBUG("frame ....address：%p ",*frame+7);
-
-		memcpy(*Data,*frame+7,*Datanum );
-
-	
-	
-	//SYSTEM_DEBUG(" D_addr: 0x%x__D_length: %d",*addr,*length);
-		//SYSTEM_DEBUG_ARRAY((uint8_t*)*Data,*length-9);
-	
-	
-//		SYSTEM_DEBUG("received data：%s  ,length: %d",*frame,rx_data->q_len);
-//		SYSTEM_DEBUG_ARRAY((uint8_t*)*frame,rx_data->q_len);
-
-		//使用完数据必须调用cbReadFinish更新读指针
-		p_cbReadFinish(&(qdf)->q_rx_queue);
-	}
-}
-
-
-
-
-void pull_data_from_screen(void)
-{
-	
-uint8_t *frame = NULL;
-uint8_t* f_data=NULL;	
-uint16_t s_leng=0;//必须为0
-uint16_t s_addr=0;
-uint8_t s_num = 0;
-//copy_data_from_queue(&frame,&leng);
-	//SCREEN_DataSolveDV_cmd(&s_addr,&f_data,leng,frame);
-	
-	
-			SCREEN_copy_data_from_queue(&GV_qdf_1,&frame,&s_leng,&f_data,&s_num,&s_addr);
-	if(s_num!=0){
-		SYSTEM_DEBUG("received data: %s  ,length: %d",frame,s_leng);
-		//SYSTEM_DEBUG("received data：s_addr %x  ,length: %d",s_addr,s_num);
-			 
-		SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t*)frame,s_leng,"screen data : s_addr %x  ,length: %d",s_addr,s_num);
-		
-		
-		screendataswitch(s_addr,s_num,&f_data);
-
-
-
-	}	
-		free(frame);
-	free(f_data);
-	f_data= NULL;
-	frame = NULL;
-	s_leng=0;
-
-}
-
-
-
-
-
-
-//MaintainState_Serial(void)
-
 
 
 
