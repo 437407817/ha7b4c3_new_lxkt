@@ -112,14 +112,15 @@ switch(GV_ScreenSetRunBoardState.Set_ChargeStateSelect[changeboard_id]){
 
 
 
+#include "./screen/ScreenSendFun.h"
 
+#include <string.h>
+//#include "./usart/bsp_485_usart.h"  
 
-#include "./usart/bsp_485_usart.h"  
-
-#include "./controller/TaskFun.h"
-#include "./controller/TaskSingleWork.h"
-#include "./communication/SD_485DataFun.h"
-#include "./communication/Comu485Dis.h"
+//#include "./controller/TaskFun.h"
+//#include "./controller/TaskSingleWork.h"
+//#include "./communication/SD_485DataFun.h"
+//#include "./communication/Comu485Dis.h"
 void MaintainStateRun_Start(uint8_t launchboardnum){
 	//
 //GV_SYSState.Run_HourMintuesSeconds=0;//清除计时时间，重新开始计时
@@ -209,17 +210,17 @@ void MaintainStateRun_Start(uint8_t launchboardnum){
 
 	SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t *)GV_ScreenSetRunBoardState.Set_NowSingleRunState,16,"Set_NowSingleRunState ==");
 	
-SendCommu485data();
+//SendCommu485data();
 
 	
 	//SuspendTaskHandler(Handle_CheckStop_CommuOverTimeFalg);  
 			if(GV_ScreenSetRunBoardState.Set_NowRunState!=EM_RunState_Run){
 						GV_ScreenSetRunBoardState.Set_NowRunState=EM_RunState_Run;
 //SetTaskHandlerTimeRload
-				SetTaskHandlerTimeRloadAndChangeState(&Handle_SendVolDataToScreenAndAskSlave,ASK_SLAVE_WORK_DUTY_TIME,1);
-				ResumeTaskHandler(Handle_CheckStop_ALLBoard_FinishWork);
+//				SetTaskHandlerTimeRloadAndChangeState(&Handle_SendVolDataToScreenAndAskSlave,ASK_SLAVE_WORK_DUTY_TIME,1);
+//				ResumeTaskHandler(Handle_CheckStop_ALLBoard_FinishWork);
 //				SetTaskHandlerTimeRloadAndChangeState(&Handle_CheckStop_ALLBoard_FinishWork,4000,1);
-       TurnFan_ON;
+//       TurnFan_ON;
 					SYSTEM_DEBUG("\n **********TurnFan_ON ");
 			}
 }
@@ -239,7 +240,7 @@ void MaintainStateRun_SingleBoard_Stop(uint8_t launchboardnum,uint8_t ifsend){
 	}
 
 		if(ifsend==1){
-	SendCommu485data();
+//	SendCommu485data();
 	}
 
 
@@ -286,7 +287,7 @@ GV_ComuBoardState.commu_finishwork_Old_FLAG=0;
 GV_ComuBoardState.commu_needfinishwork_FLAG=0;
 	
 			if(ifsend==1){
-	SendCommu485data();
+//	SendCommu485data();
 	}
 	
 SYSTEM_INFO("\n **********ALLboardStop**********\n");
@@ -315,7 +316,7 @@ void MaintainState_lostPowerResume(void){
 	for(uint16_t i=0;i<GV_HardwareState.hard_board_count;i++){
 		
 //	TurnOnLed_ByMode_fun(i);
-		turnOnLight(i);
+//		turnOnLight(i);
 	//GV_HardwareState.HW_NowRealWorkingState[i]=GV_HardwareState.HW_NeedWorkingState[i];
 	GV_CommSendToSlaveBoardState.S_Run[i]=EM_HW_LOSEPOWER_RESUME;
 
@@ -343,13 +344,13 @@ void MaintainState_lostPowerResume(void){
 //	comu_Sendslave_Rundata();
 //		delay_ms(200);
 //	}
-	SendCommu485data();
+//	SendCommu485data();
 	SYSTEM_DEBUG("\n **********here ");
 	//SD_BeginSave_Fun();
 	
 	//SuspendTaskHandler(Handle_CheckStop_CommuOverTimeFalg);  
-SetTaskHandlerTimeRloadAndChangeState(&Handle_SendVolDataToScreenAndAskSlave,ASK_SLAVE_WORK_DUTY_TIME,1);
-	ResumeTaskHandler(Handle_CheckStop_ALLBoard_FinishWork);
+//SetTaskHandlerTimeRloadAndChangeState(&Handle_SendVolDataToScreenAndAskSlave,ASK_SLAVE_WORK_DUTY_TIME,1);
+//	ResumeTaskHandler(Handle_CheckStop_ALLBoard_FinishWork);
 	
 }
 
@@ -390,9 +391,9 @@ if(GV_ComuBoardState.commu_ErrorBoardNo!=0){
 		&&(GV_ComuBoardState.commu_F_ErrorBoardNo_EnterInFLAG[GV_ComuBoardState.commu_ErrorBoardNo-1]==0)){
 	if(GV_ScreenSetRunBoardState.Set_NowSingleRunState[GV_ComuBoardState.commu_ErrorBoardNo-1]!=EM_RunState_Stop){
 	
-	StopBoardFunByBoardId(GV_ComuBoardState.commu_ErrorBoardNo-1,EM_NotSend);
+//	StopBoardFunByBoardId(GV_ComuBoardState.commu_ErrorBoardNo-1,EM_NotSend);
 //	TurnWrong_led_ON;
-		GetWrongLed_STATEAndled_ON;
+//		GetWrongLed_STATEAndled_ON;
 		GV_ComuBoardState.commu_F_ErrorBoardNo_EnterInFLAG[GV_ComuBoardState.commu_ErrorBoardNo-1]=1;
 	}
 	}
@@ -415,7 +416,7 @@ if(GV_ComuBoardState.commu_ErrorBoardNo!=0){
 	
 //}else if((GV_ComuBoardState.commu_ErrorBoardNo==0)&&(GV_ComuBoardState.commu_overtime_FLAG!=1)){
 	}else if((GV_ComuBoardState.commu_ErrorBoardNo==0)&&(GV_ComuBoardState.commu_overtime_FLAG!=1)){
-TurnWrong_led_OFF;
+//TurnWrong_led_OFF;
 	clearAllErrorBoardNoFlag();
 }
 

@@ -702,6 +702,14 @@ char        sd_work_state[BOARD_COUNT][9];
 
 
 
+#define MAXBatteryNum  24
+
+
+
+
+void initGV_variable(void);
+uint8_t checkNeedStateNotEquRealState(void);
+void Setboadnumfun(void);
 
 
 

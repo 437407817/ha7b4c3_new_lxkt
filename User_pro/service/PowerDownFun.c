@@ -10,7 +10,8 @@
 #include "./global/GV_enum.h" 
 #include "./sys/sysio.h"
 #include "./service/EepromFun.h"
-#include "./screen/Screen.h"
+//#include "./screen/Screen.h"
+#include "./screen/DW_com_send.h"
 #include "./screen/ScreenDataDis.h"
 #include "./controller/DisStateFun.h"
 #include "./power/bsp_power.h"
@@ -72,7 +73,7 @@ if(GV_PowerDownState.powerdown_first_enter==0){
 	   GV_ScreenCommu.ScreenData =Array_Page_PowerDown;
 
 		GV_ScreenCommu.ScreenDataSize=2;
-		SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//切换页面
+//		SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//切换页面
 	
 	
 	}
@@ -140,7 +141,7 @@ void ResumeLaunchPowerDownFun(void){
 	
 		memcpy(&GV_ScreenSetRunBoardState.Set_ChargeStateSelect,&GV_ScreenSetRunBoardState.Set_ChargeStateSelect_resume,16);
 	
-	SCREEN_write_cmd(EM_Icon_Mode_Select_1,GV_ScreenSetRunBoardState.Set_ChargeStateSelect,8);//改图标
+//	SCREEN_write_cmd(EM_Icon_Mode_Select_1,GV_ScreenSetRunBoardState.Set_ChargeStateSelect,8);//改图标
 
 			MaintainStateRun_Start(16);
     LedOpen_All_ByBoardidFun();

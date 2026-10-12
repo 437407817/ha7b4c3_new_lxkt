@@ -336,9 +336,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_HAL_DRIVER,STM32H743xx,__DCACHE_PRESENT=1,</Define>
+              <Define>MBEDTLS_CONFIG_FILE=&lt;mbedtls_config_sha_x.h&gt;,USE_HAL_DRIVER,STM32H743xx,__DCACHE_PRESENT=1,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Drivers\CMSIS\Include;..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include;..\..\Drivers\STM32H7xx_HAL_Driver\Inc;..\..\Middlewares\Third_Party\SeggerRTT;..\..\User;..\..\Core\Inc;..\..\Drivers\STM32H7_Driver;..\..\Middlewares\Wmap_lib;..\..\Middlewares\Third_Party\FreeRTOS\Source\include;..\..\Middlewares\Third_Party\FreeRTOS\Source;..\..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_;..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F;..\..\Middlewares\Third_Party\letter-shell\src;..\..\Middlewares\Third_Party\letter-shell\extensions\log;..\..\Middlewares\Third_Party\letter-shell\demo\stm32-freertos;..\..\Middlewares\Third_Party\easylogger\inc;..\..\Middlewares\Third_Party\LVGL\GUI;..\..\Middlewares\Third_Party\LVGL\GUI\lvgl;..\..\Middlewares\Third_Party\LVGL\GUI\lvgl\src;..\..\Middlewares\Third_Party\LVGL\GUI\lvgl\examples\porting;..\..\Middlewares\Third_Party\LVGL\GUI_APP\demos;..\..\Middlewares\Third_Party\LVGL\GUI_APP\demos\stress;..\..\Middlewares\Third_Party\LVGL\lv_wmap_app;..\..\Middlewares\Third_Party_user\freertosutil;..\..\Middlewares\Third_Party\sfud\inc;..\..\Middlewares\Third_Party\LVGL\GUI_APP\ui;..\..\User_pro;..\..\Middlewares\Third_Party\SystemView\Config;..\..\Middlewares\Third_Party\SystemView\SEGGER;..\..\Middlewares\Third_Party\SystemView\SYSVIEW;..\..\Middlewares\Third_Party\SeggerRTT\Config;..\..\Middlewares\Third_Party\SystemView\Sample\FreeRTOSV10</IncludePath>
+              <IncludePath>..\..\Drivers\CMSIS\Include;..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include;..\..\Drivers\STM32H7xx_HAL_Driver\Inc;..\..\Middlewares\Third_Party\SeggerRTT;..\..\User;..\..\Core\Inc;..\..\Drivers\STM32H7_Driver;..\..\Middlewares\Wmap_lib;..\..\Middlewares\Third_Party\FreeRTOS\Source\include;..\..\Middlewares\Third_Party\FreeRTOS\Source;..\..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_;..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F;..\..\Middlewares\Third_Party\letter-shell\src;..\..\Middlewares\Third_Party\letter-shell\extensions\log;..\..\Middlewares\Third_Party\letter-shell\demo\stm32-freertos;..\..\Middlewares\Third_Party\easylogger\inc;..\..\Middlewares\Third_Party\LVGL\GUI;..\..\Middlewares\Third_Party\LVGL\GUI\lvgl;..\..\Middlewares\Third_Party\LVGL\GUI\lvgl\src;..\..\Middlewares\Third_Party\LVGL\GUI\lvgl\examples\porting;..\..\Middlewares\Third_Party\LVGL\GUI_APP\demos;..\..\Middlewares\Third_Party\LVGL\GUI_APP\demos\stress;..\..\Middlewares\Third_Party\LVGL\lv_wmap_app;..\..\Middlewares\Third_Party_user\freertosutil;..\..\Middlewares\Third_Party\sfud\inc;..\..\Middlewares\Third_Party\LVGL\GUI_APP\ui;..\..\User_pro;..\..\Middlewares\Third_Party\SystemView\Config;..\..\Middlewares\Third_Party\SystemView\SEGGER;..\..\Middlewares\Third_Party\SystemView\SYSVIEW;..\..\Middlewares\Third_Party\SeggerRTT\Config;..\..\Middlewares\Third_Party\SystemView\Sample\FreeRTOSV10;..\..\Middlewares\Third_Party\mbedtls-3.6\include;..\..\Middlewares\Third_Party\mbedtls-3.6\configs;..\..\Middlewares\Third_Party\mbedtls-3.6\library</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1513,11 +1513,113 @@
               <FileName>user_TestTask.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Middlewares\Third_Party\FreeRTOS\Source\task\user_TestTask.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>0</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <uGnu>2</uGnu>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
             </File>
             <File>
               <FileName>rtos_ProBtnTask.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Middlewares\Third_Party\FreeRTOS\Source\task\rtos_ProBtnTask.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>0</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <uGnu>2</uGnu>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
             </File>
             <File>
               <FileName>rtos_comTask.c</FileName>
@@ -1885,6 +1987,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\User_pro\sensor\DS1302.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_power.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\power\bsp_power.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2074,6 +2181,11 @@
               <FileName>data_set.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Middlewares\Wmap_lib\DataConvert\data_set.c</FilePath>
+            </File>
+            <File>
+              <FileName>cvt_time.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Wmap_lib\DataConvert\cvt_time.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -6668,12 +6780,128 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>mbedtls-3.6</GroupName>
+          <Files>
+            <File>
+              <FileName>mbedtls_config_sha_x.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\mbedtls-3.6\configs\mbedtls_config_sha_x.h</FilePath>
+            </File>
+            <File>
+              <FileName>aes.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\mbedtls-3.6\library\aes.c</FilePath>
+            </File>
+            <File>
+              <FileName>chacha20.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\mbedtls-3.6\library\chacha20.c</FilePath>
+            </File>
+            <File>
+              <FileName>chachapoly.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\mbedtls-3.6\library\chachapoly.c</FilePath>
+            </File>
+            <File>
+              <FileName>cipher.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\mbedtls-3.6\library\cipher.c</FilePath>
+            </File>
+            <File>
+              <FileName>cipher_wrap.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\mbedtls-3.6\library\cipher_wrap.c</FilePath>
+            </File>
+            <File>
+              <FileName>constant_time.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\mbedtls-3.6\library\constant_time.c</FilePath>
+            </File>
+            <File>
+              <FileName>gcm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\mbedtls-3.6\library\gcm.c</FilePath>
+            </File>
+            <File>
+              <FileName>platform.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\mbedtls-3.6\library\platform.c</FilePath>
+            </File>
+            <File>
+              <FileName>platform_util.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\mbedtls-3.6\library\platform_util.c</FilePath>
+            </File>
+            <File>
+              <FileName>poly1305.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\mbedtls-3.6\library\poly1305.c</FilePath>
+            </File>
+            <File>
+              <FileName>threading.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\mbedtls-3.6\library\threading.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>pro/commu</GroupName>
           <Files>
             <File>
               <FileName>bsp_usart_com485.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User_pro\usart\bsp_usart_com485.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>0</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <uGnu>2</uGnu>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
             </File>
             <File>
               <FileName>bsp_usart_common_com485.c</FileName>
@@ -6689,6 +6917,57 @@
               <FileName>usart_485_232_send.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User_pro\pro_com\usart_485_232_send.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>0</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <uGnu>2</uGnu>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
             </File>
             <File>
               <FileName>usart485verify.c</FileName>
@@ -6765,16 +7044,169 @@
               <FileName>usart_485_dataGet.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User_pro\middle_business\usart_485_dataGet.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>0</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <uGnu>2</uGnu>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
             </File>
             <File>
               <FileName>usart_485_dataMethod.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User_pro\middle_business\usart_485_dataMethod.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>0</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <uGnu>2</uGnu>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
             </File>
             <File>
               <FileName>usart_485_sendMethod.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User_pro\middle_business\usart_485_sendMethod.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>0</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <uGnu>2</uGnu>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
             </File>
           </Files>
         </Group>
@@ -6856,6 +7288,41 @@
               <FileType>1</FileType>
               <FilePath>..\..\User_pro\service\PowerDownFun.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_usart_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User_pro\service\bsp_usart_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>StartMechineFun.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User_pro\service\StartMechineFun.c</FilePath>
+            </File>
+            <File>
+              <FileName>StopMechineFun.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User_pro\service\StopMechineFun.c</FilePath>
+            </File>
+            <File>
+              <FileName>SD_485DataFun.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User_pro\communication\SD_485DataFun.c</FilePath>
+            </File>
+            <File>
+              <FileName>ActiveMechineFun.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User_pro\service\ActiveMechineFun.c</FilePath>
+            </File>
+            <File>
+              <FileName>CapacityFun.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User_pro\service\CapacityFun.c</FilePath>
+            </File>
+            <File>
+              <FileName>DisposeDataFun.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User_pro\service\DisposeDataFun.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -6870,6 +7337,31 @@
               <FileName>DisStateFun.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User_pro\controller\DisStateFun.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>crypt</GroupName>
+          <Files>
+            <File>
+              <FileName>bsp_encode.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\crypt\bsp_encode.c</FilePath>
+            </File>
+            <File>
+              <FileName>chipID_dis.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\crypt\chipID_dis.c</FilePath>
+            </File>
+            <File>
+              <FileName>crypt_aes.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\crypt\crypt_aes.c</FilePath>
+            </File>
+            <File>
+              <FileName>crypt_aes_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\crypt\crypt_aes_test.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -80,7 +80,7 @@ g_btn_task_sem = xSemaphoreCreateBinary();
 //            // 停止运行
 //        }
 			
-			run_stop_mechine(GV_send_run_state_data.Machine_RUN);
+//			run_stop_mechine(GV_send_run_state_data.Machine_RUN);
 			
     }
 }
@@ -111,7 +111,7 @@ g_setting_data_queue = xQueueCreate(5, sizeof(STR_SEND_SETTING_DATA_t));
                         GV_send_setting_data.VoltageDifference ,GV_send_setting_data.AlarmHighVoltage
                         );
 							
-                shell_settingfun(GV_send_setting_data.IsAutoRun,GV_send_setting_data.StopVoltage,GV_send_setting_data.VoltageDifference,GV_send_setting_data.AlarmHighVoltage);
+//                shell_settingfun(GV_send_setting_data.IsAutoRun,GV_send_setting_data.StopVoltage,GV_send_setting_data.VoltageDifference,GV_send_setting_data.AlarmHighVoltage);
                 // 根据收到的数据修改 STM32 的硬件运行参数...
             }
         }else{

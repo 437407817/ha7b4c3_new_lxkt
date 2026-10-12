@@ -8,20 +8,21 @@
 
 //#include "./screen/ScreenDS1302.h"
 //#include "./converter/data_convert.h"
-//#include <stdlib.h>
-
+#include <stdlib.h>
+#include "./service/PowerDownFun.h"
  #include "./sys/sysio.h"
 #include "./global/GV_enum.h" 
 #include "./controller/DisStateFun.h"
 //#include "./screen/ScreenDataDis.h"
-
+#include "./DataConvert/data_convert.h"
 //#include "./service/EepromFun.h"
 //#include "./controller/DisStateFun.h"
 //#include "./communication/Comu485Dis.h"
 //#include "./service/DisposeDataFun.h"
 //#include "./controller/TaskFun.h"
 //#include "./controller/TaskSingleWork.h"
-
+#include "./service/EepromFun.h"
+#include "./crypt/bsp_encode.h"
 //#include "./usart/bsp_usart_sd.h"
 //#include "./communication/SD_485Dis.h"
 //#include "./usart/bsp_485_usart.h" 
@@ -31,7 +32,8 @@
 //#include "./communication/SD_485DataFun.h"
 //#include "./crypt/chipID_dis.h"
 //#include "./crypt/bsp_encode.h"
-//#include "./power/bsp_power.h"
+#include "./power/bsp_power.h"
+#include "./service/DisposeDataFun.h"
 
 //#include "./service/StopMechineFun.h"
 //#include "./service/ActiveMechineFun.h"
@@ -383,7 +385,7 @@ void Jump_to_now_page(void){
 			}
 
 		GV_ScreenCommu.ScreenDataSize=2;
-		SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê1
+		DW_SCREEN_write_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize,0);//«–ªª“≥√Ê1
 
 SYSTEM_INFO("\n =====OX%x==0X%X\n",GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData[1]);
 }
@@ -505,7 +507,7 @@ if((*p_data==0x00)&&(*(p_data+1)==0x04)){//»›¡ø“≥
 
 GV_ScreenSetRunBoardState.Set_NowShowPageRegionNum=4;
 
-ResumeTaskHandler(&Handle_SendCapacityDataToScreen);
+//ResumeTaskHandler(&Handle_SendCapacityDataToScreen);
 	
 
 
@@ -562,12 +564,12 @@ GV_ScreenSetRunBoardState.Set_NowShowPageRegionNum=6;
 //uint16_t  EEP_AllUpperAlarmParallelVol;	//≤¢≥‰±®æØ…œœﬁµÁ—π mV
 //uint16_t 	EEP_AllLowerLimitParallelVol;//≤¢∑≈Ωÿ÷πµÁ—π mV
 //uint16_t  EEP_AllLowerAlarmParallelVol;	//≤¢∑≈±®æØ…œœﬁµÁ—π mV	
-
+#include <string.h>
 void PageSettingSave(uint8_t num,uint8_t** p_data){
 
 SYSTEM_INFO("PageSettingSave******");
 Delay(100);
-VpChange16HL((uint16_t*)*p_data,num);
+EndianSwap_VpChange16HL((uint16_t*)*p_data,num);
 SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t*)*p_data,num,"PageSettingSave ***************");
 
 Delay(100);
@@ -590,7 +592,7 @@ for(uint8_t i=0;i<8;i++){
 	   GV_ScreenCommu.ScreenData =Array_Page_SettingWrong;
 
 	GV_ScreenCommu.ScreenDataSize=2;
-SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê1
+DW_SCREEN_write_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize,0);//«–ªª“≥√Ê1
 			Delay(1500);
 			if(GV_ScreenSetRunBoardState.Set_NowShowLanguage==0){
 			
@@ -603,7 +605,7 @@ SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCo
 	   
 
 		
-		SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê1
+		DW_SCREEN_write_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize,0);//«–ªª“≥√Ê1
 		
 		
 		
@@ -752,7 +754,7 @@ GV_CommSendToSlaveBoardState.Effective=0x0f;
 
 SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t *)GV_ScreenSetRunBoardState.Set_ChargeStateSelect,8,"----=====");
 
-	SCREEN_write_cmd(EM_Icon_Mode_Select_1,GV_ScreenSetRunBoardState.Set_ChargeStateSelect,8);
+	DW_SCREEN_write_cmd_print(EM_Icon_Mode_Select_1,GV_ScreenSetRunBoardState.Set_ChargeStateSelect,8,0);
 
 
 //			for(uint16_t i=0;i<8;i++)
@@ -769,7 +771,7 @@ SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t *)GV_ScreenSetRunBoardState.Set_ChargeStateS
 
 
 //	DisposeSaveSettingData();
-	CopySettingDataToSlaveBuff(EM_HW_LOSEPOWER_PARA);
+//	CopySettingDataToSlaveBuff(EM_HW_LOSEPOWER_PARA);
 	
 	///======================
 	
@@ -784,12 +786,12 @@ SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t *)GV_ScreenSetRunBoardState.Set_ChargeStateS
 //	comu_Sendslave_Rundata();
 //		delay_ms(200);
 //	}
-SendCommu485data();
+//SendCommu485data();
 	SYSTEM_DEBUG("\n **********here ");
 	//extern str_EEpromSettingState TMP_EEpromSettingState;
 	
-	StartWork_ClearBuffDataInit();
-	clearScreenDataVol();
+//	StartWork_ClearBuffDataInit();
+//	clearScreenDataVol();
 	 //memcpy(&GV_EEprom,*p_data,num);
 //Delay(100);
 //SYSTEM_DEBUG("Battery_SET_SumlimitValue = %d",(uint16_t)GV_EEprom.Battery_SET_SumlimitValue);
@@ -834,7 +836,7 @@ SYSTEM_DEBUG("\n GV_ScreenSetRunBoardState.Set_NowShowLanguage=%d \n",GV_ScreenS
 	   GV_ScreenCommu.ScreenData =Array_Page_SaveFailure;
 
 		GV_ScreenCommu.ScreenDataSize=2;
-		SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê13
+		DW_SCREEN_write_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize,0);//«–ªª“≥√Ê13
 		 delay_ms(1000);
 		 
 		 					if(GV_ScreenSetRunBoardState.Set_NowShowLanguage==0){
@@ -845,7 +847,7 @@ SYSTEM_DEBUG("\n GV_ScreenSetRunBoardState.Set_NowShowLanguage=%d \n",GV_ScreenS
 			GV_ScreenCommu.ScreenData =Array_Page_Main_English;
 			}
 		
-		SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê12
+		DW_SCREEN_write_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize,0);//«–ªª“≥√Ê12
 //		 GV_ScreenCommu.ScreenData =Array_Page_Main;
 //		 SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê1
 	  return;
@@ -872,7 +874,7 @@ SYSTEM_INFO("\n *********PageCapPageReturn *********\n");
 
 if((*p_data==0x00)&&(*(p_data+1)==0x00)){
 
-SuspendTaskHandler(&Handle_SendCapacityDataToScreen);
+//SuspendTaskHandler(&Handle_SendCapacityDataToScreen);
 
 }
 
@@ -898,29 +900,29 @@ SYSTEM_INFO("\n *****machine is running ,setting is not permit\n");
 	   GV_ScreenCommu.ScreenData =Array_Page_RunningCanntSave;
 
 		GV_ScreenCommu.ScreenDataSize=2;
-		SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê15
+		DW_SCREEN_write_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize,0);//«–ªª“≥√Ê15
 	SYSTEM_INFO("\n machine is running ,setting is not permit\n");
 	
 return;
 }
 	
 
-				if(ActiveMechineFailure()==1){
-			return;
-			
-			}
+//				if(ActiveMechineFailure()==1){
+//			return;
+//			
+//			}
 
 	
 			  GV_ScreenCommu.ScreenAddr = EM_PAGE_ADDRESS;
 	   GV_ScreenCommu.ScreenData =Array_Page_Uploading;
 
 		GV_ScreenCommu.ScreenDataSize=2;
-		SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê13£®±£¥Ê÷–£©
+		DW_SCREEN_write_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize,0);//«–ªª“≥√Ê13£®±£¥Ê÷–£©
 	
 		 GV_ScreenCommu.ScreenAddr = EM_SYS_SET_YEAR;///12345
 	  
 		GV_ScreenCommu.ScreenDataSize=EEPROM_SYS_SettingSaveDataCount/2+6;//12345
-		SCREEN_read_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenDataSize);//
+		DW_SCREEN_read_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenDataSize,0);//
 
 
 	//ScreenParameter_SettingReturnCopyMomery(&GV_BatterySetTargetReturn,&GV_EEprom);
@@ -936,7 +938,7 @@ return;
 
 }else if((*p_data==0x00)&&(*(p_data+1)==0x00)){
 
-SuspendTaskHandler(&Handle_SendSDTimeDataToScreen);
+//SuspendTaskHandler(&Handle_SendSDTimeDataToScreen);
 
 SYSTEM_DEBUG("\n SuspendTaskHandler *********** \n");
 
@@ -1030,12 +1032,12 @@ if((*p_data==0x00)&&(*(p_data+1)==0xF1)){//µ„ª˜±£¥Ê…œ¥´∞¥≈•£¨œ»¥”∆¡ƒªƒ≥µÿ÷∑ø™ º∂
 	   GV_ScreenCommu.ScreenData =Array_Page_Uploading;
 
 		GV_ScreenCommu.ScreenDataSize=2;
-		SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê13£®±£¥Ê÷–£©
+		DW_SCREEN_write_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize,0);//«–ªª“≥√Ê13£®±£¥Ê÷–£©
 	
 		 GV_ScreenCommu.ScreenAddr = EM_SaveSettingFrom;///12345
 	  
 		GV_ScreenCommu.ScreenDataSize=EEPROM_SettingSaveDataCount/2;//12345
-		SCREEN_read_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenDataSize);//
+		DW_SCREEN_read_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenDataSize,0);//
 SYSTEM_DEBUG("\n PageSettingConfirm *********** 0x%x   %d\n",GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenDataSize);
 
 	//ScreenParameter_SettingReturnCopyMomery(&GV_BatterySetTargetReturn,&GV_EEprom);
@@ -1071,7 +1073,7 @@ SYSTEM_DEBUG("\n PageSettingConfirm *********** 0x%x   %d\n",GV_ScreenCommu.Scre
 memset_uint16_Small(GV_ScreenSettingDataState.Set_Bat_SingleBattRun, (uint16_t)0x4FFF, 8);	
 	//memcpy(&GV_ScreenSettingDataState.Set_BoardCount,&TMP_EEpromSettingState.EEP_BoardCount,EEPROM_SettingSaveDataCount);
 	
-	SCREEN_write_cmd_print(EM_SingleBattRun01,GV_ScreenSettingDataState.Set_Bat_SingleBattRun,EEPROM_SettingSaveDataCount/2,0);
+	DW_SCREEN_write_cmd_print(EM_SingleBattRun01,GV_ScreenSettingDataState.Set_Bat_SingleBattRun,EEPROM_SettingSaveDataCount/2,0);
 
 
 	
@@ -1127,17 +1129,17 @@ if(*p_data==0x00){
 	   GV_ScreenCommu.ScreenData =Array_Page_Uploading;
 
 		GV_ScreenCommu.ScreenDataSize=2;
-		SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê13
+		DW_SCREEN_write_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize,0);//«–ªª“≥√Ê13
 	GV_ScreenAllCalibration.Rectify_pagenum=(*(p_data+1));
 		 GV_ScreenCommu.ScreenAddr = EM_rectifyShowChargeCurrent01_01+GV_ScreenAllCalibration.Rectify_pagenum*EM_RECTIFY_JUMP;
 	  
 		GV_ScreenCommu.ScreenDataSize=52;
-		SCREEN_read_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenDataSize);//
+		DW_SCREEN_read_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenDataSize,0);//
 	  delay_ms(200);//ø’œ–÷–∂œ ±º‰
 		 GV_ScreenCommu.ScreenAddr = EM_rectifyShowChargeCurrent01_01+52+GV_ScreenAllCalibration.Rectify_pagenum*EM_RECTIFY_JUMP;
 	  
 		GV_ScreenCommu.ScreenDataSize=66-52;
-		SCREEN_read_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenDataSize);//
+		DW_SCREEN_read_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenDataSize,0);//
 
 	//ScreenParameter_SettingReturnCopyMomery(&GV_BatterySetTargetReturn,&GV_EEprom);
 	
@@ -1160,7 +1162,7 @@ void VolRectifyHeadSave(uint8_t num,uint8_t** p_data)
 
 
 
-VpChange16HL((uint16_t*)*p_data,num);
+EndianSwap_VpChange16HL((uint16_t*)*p_data,num);
 SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t*)*p_data,num,"VolRectifyHeadSave ***************");
 
  //memcpy(&GV_EEprom,*p_data,num);
@@ -1214,7 +1216,7 @@ void VolRectifyTailSave(uint8_t num,uint8_t** p_data)
 
 
 
-VpChange16HL((uint16_t*)*p_data,num);
+EndianSwap_VpChange16HL((uint16_t*)*p_data,num);
 SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t*)*p_data,num,"VolRectifyTailSave ***************");
 
  //memcpy(&GV_EEprom,*p_data,num);
@@ -1230,7 +1232,7 @@ SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t*)*p_data,num,"VolRectifyTailSave ***********
 	   GV_ScreenCommu.ScreenData =Array_Page_SaveFailure;
 
 		GV_ScreenCommu.ScreenDataSize=2;
-		SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê13
+		DW_SCREEN_write_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize,0);//«–ªª“≥√Ê13
 
 	  return;
 
@@ -1251,7 +1253,7 @@ SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t*)*p_data,num,"VolRectifyTailSave ***********
 	//SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t *)BigD_GV_BatterySetCalibration.BX_SetCCurrent,24,"*****cde  bb **");
 	
 	
-	comu_SendslaveRectifydata();
+//	comu_SendslaveRectifydata();
 	GV_ScreenAllCalibration.Rectify_data_integrality=0;
 //Delay(100);
 //SYSTEM_DEBUG("Battery_SET_SumlimitValue = %d",(uint16_t)GV_EEprom.Battery_SET_SumlimitValue);
@@ -1265,7 +1267,7 @@ SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t*)*p_data,num,"VolRectifyTailSave ***********
 	   GV_ScreenCommu.ScreenData =Array_Page_SaveSucceed;
 
 		GV_ScreenCommu.ScreenDataSize=2;
-		SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê12
+		DW_SCREEN_write_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize,0);//«–ªª“≥√Ê12
 //		 delay_ms(1000);
 //		SYSTEM_DEBUG("success ******* 3789");
 				 delay_ms(1000);
@@ -1278,7 +1280,7 @@ SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t*)*p_data,num,"VolRectifyTailSave ***********
 			GV_ScreenCommu.ScreenData =Array_Page_Main_English;
 			}
 //			SYSTEM_DEBUG("success ******* 178*9");
-		 SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê1
+		 DW_SCREEN_write_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize,0);//«–ªª“≥√Ê1
 			
 //			SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);
 //			SYSTEM_DEBUG("success ******* 7-89");
@@ -1322,12 +1324,12 @@ if((*p_data==0x00)&&(*(p_data+1)==0xF1)){//µ„ª˜±£¥Ê…œ¥´∞¥≈•£¨œ»¥”∆¡ƒªƒ≥µÿ÷∑ø™ º∂
 	   GV_ScreenCommu.ScreenData =Array_Page_Uploading;
 
 		GV_ScreenCommu.ScreenDataSize=2;
-		SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê13£®±£¥Ê÷–£©
+		DW_SCREEN_write_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize,0);//«–ªª“≥√Ê13£®±£¥Ê÷–£©
 	
 		 GV_ScreenCommu.ScreenAddr = EM_SEQUENCE_ENTERNEW_NUMBER;///12345
 	  
 		GV_ScreenCommu.ScreenDataSize=16;//12345
-		SCREEN_read_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenDataSize);//
+		DW_SCREEN_read_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenDataSize,0);//
 SYSTEM_DEBUG("\n MechineActiveConfirm *********** 0x%x   %d\n",GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenDataSize);
 
 
@@ -1363,7 +1365,7 @@ checkis=checkIsRightChipData( num, p_data);
 	}
 	
 
-		SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê13
+		DW_SCREEN_write_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize,0);//«–ªª“≥√Ê13
 		 delay_ms(2000);
 		 
 		 					if(GV_ScreenSetRunBoardState.Set_NowShowLanguage==0){
@@ -1374,7 +1376,7 @@ checkis=checkIsRightChipData( num, p_data);
 			GV_ScreenCommu.ScreenData =Array_Page_Main_English;
 			}
 		
-		SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê12
+		DW_SCREEN_write_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize,0);//«–ªª“≥√Ê12
 
 }
 
@@ -1389,7 +1391,7 @@ void ScreenJumpToMainPage(void){
 GV_ScreenCommu.ScreenAddr = EM_PAGE_ADDRESS;
 		GV_ScreenCommu.ScreenDataSize=2;
 		 GV_ScreenCommu.ScreenData =Array_Page_Language;
-		 SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê7
+		 DW_SCREEN_write_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize,0);//«–ªª“≥√Ê7
 SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t *)GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize*2,"*****JUMP TO****pagemain *******");
 }
 
@@ -1400,7 +1402,7 @@ void ScreenJumpToAimPage(uint16_t*  ScreenData){
 GV_ScreenCommu.ScreenAddr = EM_PAGE_ADDRESS;
 		GV_ScreenCommu.ScreenDataSize=2;
 		 GV_ScreenCommu.ScreenData =ScreenData;
-		 SCREEN_write_cmd(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize);//«–ªª“≥√Ê7
+		 DW_SCREEN_write_cmd_print(GV_ScreenCommu.ScreenAddr,GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize,0);//«–ªª“≥√Ê7
 SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t *)GV_ScreenCommu.ScreenData,GV_ScreenCommu.ScreenDataSize*2,"*****JUMP TO****pagemain *******");
 	
 	

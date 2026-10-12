@@ -4,18 +4,19 @@
 #include "./communication/SD_485DataFun.h"
 
 #include "./sys/bsp_systime.h"  
-#include "./defines.h"
-#include "./GV_variable.h"
-#include "./usart/bsp_usart_sd.h"
+#include "./global/GV_enum.h"
+
+#include "./global/GV_variable.h" 
+#include "./service/bsp_usart_sd.h"
 #include "./sys/sysio.h"
 #include "./service/EepromFun.h"
 
 #include "./communication/SD_485Dis.h"
-#include "./converter/cvt_time.h"
-#include "./controller/TaskSingleWork.h"
-#include "./controller/TaskFun.h"
-#include "./sys/bsp_random.h" 
-#include "./usart/bsp_usart_sd.h"
+#include "./DataConvert/cvt_time.h"
+//#include "./controller/TaskSingleWork.h"
+//#include "./controller/TaskFun.h"
+//#include "./sys/bsp_random.h" 
+#include "./service/bsp_usart_sd.h"
 extern str_ScreenSetRunState GV_ScreenSetRunBoardState;
 extern str_HardwareState GV_HardwareState; 
 extern str_ScreenSettingDataState GV_ScreenSettingDataState;
@@ -73,10 +74,10 @@ void SD_BeginSave_Fun(void){
 //	GV_SD_485_time_ITEM.sd_begin_timestamp=CalculateTimestamp(GV_SD_485_time_ITEM.sd_year,GV_SD_485_time_ITEM.sd_month,GV_SD_485_time_ITEM.sd_day,GV_SD_485_time_ITEM.sd_hour,GV_SD_485_time_ITEM.sd_minute,GV_SD_485_time_ITEM.sd_second);
 	sd_usart_cmd_SetTitle_bystr("´æ´¢Êý¾Ý");
   delay_ms(10);
-	pull_data_from_SD_485();
+//	pull_data_from_SD_485();
 	sd_usart_cmd_SetItem();
 	delay_ms(10);
-	pull_data_from_SD_485();
+//	pull_data_from_SD_485();
 SYSTEM_DEBUG("SD Save_Fun OK/n");
 GV_SD_data.SD_launch_flag=1;
 //uint32_t 	TMP_seconds;
@@ -159,7 +160,8 @@ for(uint16_t ii=0;ii<BOARD_COUNT;ii++){
 }
 	//void sd_usart_cmd_SetData(char* runtime,char* workmode,uint8_t batgroup,uint16_t* workdata,uint8_t showmode)
 	//GV_ComuBoardState
-_485_B_RX_EN();delay_ms(80);
+//_485_B_RX_EN();
+delay_ms(80);
 sd_usart_cmd_ReadData();delay_ms(80);	sd_usart_cmd_ReadData();delay_ms(80);	sd_usart_cmd_ReadData();delay_ms(80);	sd_usart_cmd_ReadData();delay_ms(80);	
 
 	sd_usart_cmd_SetData(formatDateTimeToString(0,0,0),"",0,NULL,0XFF);

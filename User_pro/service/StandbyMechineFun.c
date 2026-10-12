@@ -10,10 +10,10 @@
 
 #include "./global/GV_enum.h" 
 #include "./screen/DW_com_send.h"
-#include "./defines.h"
+//#include "./defines.h"
 
 //#include "./screen/ScreenDS1302.h"
-#include "./converter/data_convert.h"
+#include "./DataConvert/data_convert.h"
 #include <stdlib.h>
 
  #include "./sys/sysio.h"
@@ -35,13 +35,13 @@ for (uint16_t i = 0; i < BOARD_COUNT_CHANGE; i++) {
 			
 			tmpdata=1;
 //	GV_ScreenSetRunBoardState.Set_NowRunState=EM_RunState_Run;
-			SCREEN_write_cmd(EM_Icon_RunState_SwitchAll,&tmpdata,1);
+			DW_SCREEN_write_cmd_print(EM_Icon_RunState_SwitchAll,&tmpdata,1,0);
         return 1;
     }
 }
 tmpdata=0;
 //	GV_ScreenSetRunBoardState.Set_NowRunState=EM_RunState_Stop;
-			SCREEN_write_cmd(EM_Icon_RunState_SwitchAll,&tmpdata,1);
+			DW_SCREEN_write_cmd_print(EM_Icon_RunState_SwitchAll,&tmpdata,1,0);
 			return 0;
 		
 

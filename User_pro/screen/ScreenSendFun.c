@@ -16,7 +16,7 @@
 #include "./screen/ScreenDataDis.h"
 //#include "./controller/DisStateFun.h"
 //#include "./defines.h"
-
+#include "./global/GV_enum.h" 
 extern ScreenCommu_Item_t  GV_ScreenCommu;
 extern str_HardwareState GV_HardwareState; 
 extern str_BatterySetCalibration GV_BatterySetCalibration;
@@ -286,7 +286,7 @@ void StartWork_ClearBuffDataInit(void){
 	memcpy(&GV_ComuBoardState.commu_MachineStateMessage,&Array_WorkType_NowMessage,4*2);
 	memcpy(&GV_ComuBoardState.commu_MachineStateMessage_English,&Array_WorkType_NowMessage_English,ETE_Size*2);
 
-SCREEN_write_cmd(EM_ALL_ErrorBoardNo,&GV_ComuBoardState.commu_ErrorBoardNo,13);//×Ü°å¹ÊÕÏ
+DW_SCREEN_write_cmd_print(EM_ALL_ErrorBoardNo,&GV_ComuBoardState.commu_ErrorBoardNo,13,0);//×Ü°å¹ÊÕÏ
 //SCREEN_write_cmd(EM_ALL_ErrorType_English,&GV_ComuBoardState.commu_ErrorBoardNo,10);	
 	
 		for(uint8_t i=0;i<BOARD_COUNT;i++){
@@ -372,13 +372,13 @@ memcpy(&Array_WorkType_NowMessage_English,&Array_ErrorType_MachineBreakdown_Engl
 //if(GetWrongLed_STATE!=1){
 //TurnWrong_led_ON;
 //}			
-			GetWrongLed_STATEAndled_ON;
+//			GetWrongLed_STATEAndled_ON;
 //			GV_ComuBoardState.commu_ErrorBoardNo = boid;
 		
 		}else{
 		if(GV_ComuBoardState.commu_overtime_FLAG==0){
 //			GV_ComuBoardState.commu_ErrorBoardNo = 0;
-		TurnWrong_led_OFF;
+//		TurnWrong_led_OFF;
 
 		}
 		

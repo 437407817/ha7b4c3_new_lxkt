@@ -1,6 +1,6 @@
 #ifndef __P_DATA_QUEUE_H_
 #define __P_DATA_QUEUE_H_
-
+#include "stm32_FH_xxx.h"
 #include "stm32_FH_xxx_hal.h"
 #include "./sys/sysio.h"
 #include <string.h>

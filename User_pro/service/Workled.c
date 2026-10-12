@@ -8,7 +8,7 @@
 
 #include "./io/bsp_io_output.h" 
 
-
+#include "./project_API/hardware_interface_api.h"   
 
 
 #include <stdint.h>
@@ -116,20 +116,20 @@ void updateHardwareLightState(uint8_t lightNumber, uint8_t state) {
     // 实际硬件控制代码，例如：
      if (state) {
 			 switch(lightNumber) {
-				 case 0:Turnled_ON(1);break;// 点亮指定灯
-			 	case 1:Turnled_ON(2);break; // 点亮指定灯
+				 case 0:Turnled_ON(01);break;// 点亮指定灯
+			 	case 1:Turnled_ON(02);break; // 点亮指定灯
 			 
-			 	case 2:Turnled_ON(3); break;// 点亮指定灯
+			 	case 2:Turnled_ON(03); break;// 点亮指定灯
 				 default:break;
 			 
 			 } 
          
      } else {
          			 switch(lightNumber) {
-				 case 0:Turnled_OFF(1);break;// 点亮指定灯
-			 	case 1:Turnled_OFF(2);break; // 点亮指定灯
+				 case 0:Turnled_OFF(01);break;// 点亮指定灯
+			 	case 1:Turnled_OFF(02);break; // 点亮指定灯
 			 
-			 	case 2:Turnled_OFF(3); break;// 点亮指定灯
+			 	case 2:Turnled_OFF(03); break;// 点亮指定灯
 				 default:break;
 			 
 			 }  // 熄灭指定灯
@@ -187,7 +187,7 @@ uint8_t getAllLightsState(void) {
 
 void SYSTEM_getAllLightsStateCountersfun(void) {
 
-	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(0,lightCounters,3,"LED STATE pin=  %d - %d - %d --\n",GetLed_STATE(1),GetLed_STATE(2),GetLed_STATE(3));
+	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(0,lightCounters,3,"LED STATE pin=  %d - %d - %d --\n",GetLed_STATE(01),GetLed_STATE(02),GetLed_STATE(03));
 	getAllLightsState();
     return ;
 }

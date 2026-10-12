@@ -19,15 +19,15 @@
 #include "./screen/ScreenSendFun.h"
 #include "./controller/DisStateFun.h"
 #include "./service/EepromFun.h"
-#include "./usart/p_data_queue.h"
+//#include "./usart/p_data_queue.h"
 
-#include "./service/DisposeDataFun.h"
-#include "./controller/TaskFun.h"
-#include "./controller/TaskSingleWork.h"
-#include "./usart/bsp_usart_sd.h"
+//#include "./service/DisposeDataFun.h"
+//#include "./controller/TaskFun.h"
+//#include "./controller/TaskSingleWork.h"
+//#include "./usart/bsp_usart_sd.h"
 
 #include "./sensor/DS1302.h"
-
+#include <string.h>
 extern str_Screen_SYS_SettingDataState Screen_SYS_SettingDataState;
 extern str_Screen_SYS_SettingDataState TEMP_Screen_SYS_SettingDataState;
 extern str_Screen_SYS_SHOW_SettingDataState Screen_SYS_SHOW_SettingDataState;
@@ -56,7 +56,7 @@ void PageSysTimeSettingSave(uint8_t num,uint8_t** p_data){
 
 
 
-VpChange16HL((uint16_t*)*p_data,num);
+EndianSwap_VpChange16HL((uint16_t*)*p_data,num);
 //SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t*)*p_data,num,"PageSysTimeSettingSave ***************");
 
 //Delay(10);
@@ -89,7 +89,7 @@ memcpy(&Screen_DS_SettingDataState.src_DS_year,(*p_data)+0,num);
 	
 	//memcpy(&I2c_Buf_Write,&TMP_EEprom_SYS_SettingState.EEP_sd_save_hour,EEPROM_SYS_SettingSaveDataCount);
 	SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t*)&TMP_EEprom_SYS_SettingState.EEP_DS_save_hour,EEPROM_SYS_SettingSaveDataCount,"KKKKKK ==***************");
-	
+	#if 0
 //	_485_B_RX_EN();
 //sd_usart_cmd_ReadData();delay_ms(70);	
 _485_B_RX_EN();delay_ms(80);
@@ -158,7 +158,7 @@ sd_usart_cmd_ReadData();delay_ms(100);	sd_usart_cmd_ReadData();delay_ms(100);	sd
 	return ;
 
 	 
-	 
+	 #endif
 }
 
 
@@ -197,7 +197,7 @@ void ScreenSYS_SettingParaSend(void){
 
 			
 		memcpy(&Screen_DS_SettingDataState.src_DS_year,&DS_time_ITEM.DS_year,12);
-		SCREEN_write_cmd(EM_SYS_SET_YEAR,&Screen_DS_SettingDataState.src_DS_year,18/2);
+		DW_SCREEN_write_cmd_print(EM_SYS_SET_YEAR,&Screen_DS_SettingDataState.src_DS_year,18/2,0);
 		
 	void* frame=&Screen_SYS_SettingDataState.sys_sd_year;
 	
@@ -225,7 +225,7 @@ void DS1302_getTime_Fun(void){
 	
 	
 		memcpy(&Screen_SYS_SHOW_SettingDataState.sys_NOW_year,&DS_time_ITEM.DS_year,12);
-		SCREEN_write_cmd(EM_SYS_SHOW_YEAR,&Screen_SYS_SHOW_SettingDataState.sys_NOW_year,12/2);
+		DW_SCREEN_write_cmd_print(EM_SYS_SHOW_YEAR,&Screen_SYS_SHOW_SettingDataState.sys_NOW_year,12/2,0);
 
 }
 

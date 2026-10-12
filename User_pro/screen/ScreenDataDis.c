@@ -151,7 +151,7 @@ void ScreenSendVolDataToScreen(void){
 //	Calculate_StartRunTime(&starttime2);
 	//SYSTEM_DEBUG("ScreenSendVolDataToScreen---- \n");
 CopyVolDataToScreenStruct();
-calculateVolDataFun();
+//calculateVolDataFun();
 	//GV_HardwareState.batterystate[ics].SumParallel_vol_Value
 //	Runwhile_CheckStop();	
 	CheckErrorStop();
@@ -170,7 +170,7 @@ for(uint8_t ici=0;ici<GV_HardwareState.hard_board_count;ici++){
 //	GV_ComuBoardState.screenBatVolComuState[ici].SC_Minvol,		GV_ComuBoardState.screenBatVolComuState[ici].SC_MaxDiffvol);
 
 
-	SCREEN_write_cmd(EM_VOL_01_01+EM_VOL_JUMP*ici,GV_ComuBoardState.screenBatVolComuState[ici].SC_Vol,sizeof(str_ScreenBatVolComuState)/2);
+	DW_SCREEN_write_cmd_print(EM_VOL_01_01+EM_VOL_JUMP*ici,GV_ComuBoardState.screenBatVolComuState[ici].SC_Vol,sizeof(str_ScreenBatVolComuState)/2,1);
 //		SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t*)GV_ComuBoardState.screenBatVolComuState[ici].SC_Vol,sizeof(str_ScreenBatVolComuState)," ***-*--*-  Usart_SendArray data =%d",ici);
 //	}
 
@@ -188,7 +188,7 @@ memcpy(&GV_ComuBoardState.commu_MachineStateMessage_English,&Array_WorkType_NowM
 //SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t*)GV_ComuBoardState.commu_MachineStateMessage,4*2," commu_MachineStateMessage-------");
 //SYSTEM_DEBUG_ARRAY_MESSAGE((uint8_t*)GV_ComuBoardState.commu_MachineStateMessage_English,ETE_Size*2," commu_MachineStateMessage_English-------");
 //SCREEN_write_cmd(EM_ALL_ErrorBoardNo,&GV_ComuBoardState.commu_ErrorBatteryNo,10);//×Ü°å¹ÊÕÏ
-SCREEN_write_cmd(EM_ALL_ErrorBoardNo,&GV_ComuBoardState.commu_ErrorBoardNo,13);//×Ü°å¹ÊÕÏ
+DW_SCREEN_write_cmd_print(EM_ALL_ErrorBoardNo,&GV_ComuBoardState.commu_ErrorBoardNo,13,0);//×Ü°å¹ÊÕÏ
 //SYSTEM_INFO("ScreenSendVolDataToScreen 5  %d \n",Calculate_diffRunTime(&starttime2,&overtime2));
 }
 
@@ -227,7 +227,7 @@ for(uint16_t i=0;i<4;i++){
 }
 	
 	//Setboadnumfun();//ÉèÖÃ°åÊýÁ¿
-	SCREEN_write_cmd(EM_SaveSettingFrom,GV_ScreenSettingDataState.Set_Bat_SingleBattRun,EEPROM_SettingSaveDataCount/2);
+	DW_SCREEN_write_cmd_print(EM_SaveSettingFrom,GV_ScreenSettingDataState.Set_Bat_SingleBattRun,EEPROM_SettingSaveDataCount/2,0);
 	
 	void* frame=&GV_ScreenSettingDataState.Set_Bat_SingleBattRun;
 	

@@ -50,7 +50,7 @@ void run_machine(void){
 	
 memmove(&GV_send_run_state_bigdata,&GV_send_run_state_data,2);
 EndianSwap_VpChange16HL((uint16_t *)&GV_send_run_state_bigdata.Machine_RUN,2);
-com_DW_write_cmd_print((uint16_t)EM_SEND_RUNSTOP_ADDRESS,(uint16_t *)&GV_send_run_state_bigdata,sizeof(GV_send_run_state_bigdata)/2,1);
+//com_DW_write_cmd_print((uint16_t)EM_SEND_RUNSTOP_ADDRESS,(uint16_t *)&GV_send_run_state_bigdata,sizeof(GV_send_run_state_bigdata)/2,1);
 	
 
 }
@@ -63,7 +63,7 @@ void stop_machine(void){
 	
 memmove(&GV_send_run_state_bigdata,&GV_send_run_state_data,2);
 EndianSwap_VpChange16HL((uint16_t *)&GV_send_run_state_bigdata.Machine_RUN,2);
-com_DW_write_cmd_print((uint16_t)EM_SEND_RUNSTOP_ADDRESS,(uint16_t *)&GV_send_run_state_bigdata,sizeof(GV_send_run_state_bigdata)/2,1);
+//com_DW_write_cmd_print((uint16_t)EM_SEND_RUNSTOP_ADDRESS,(uint16_t *)&GV_send_run_state_bigdata,sizeof(GV_send_run_state_bigdata)/2,1);
 	
 	
 }
@@ -74,7 +74,7 @@ void run_stop_mechine(uint8_t run){
 	
 memmove(&GV_send_run_state_bigdata,&GV_send_run_state_data,2);
 EndianSwap_VpChange16HL((uint16_t *)&GV_send_run_state_bigdata.Machine_RUN,2);
-com_DW_write_cmd_print((uint16_t)EM_SEND_RUNSTOP_ADDRESS,(uint16_t *)&GV_send_run_state_bigdata,sizeof(GV_send_run_state_bigdata)/2,1);
+//com_DW_write_cmd_print((uint16_t)EM_SEND_RUNSTOP_ADDRESS,(uint16_t *)&GV_send_run_state_bigdata,sizeof(GV_send_run_state_bigdata)/2,1);
 	
 v_printf("run stop = %d",run);
 
@@ -114,7 +114,7 @@ v_printf("shell_settingfun input int: %d, %x, %x, \r\n", iar ,sv,sd);
 	memmove(&GV_send_setting_bigdata,&GV_send_setting_data,sizeof(GV_send_setting_data));
 EndianSwap_VpChange16HL((uint16_t *)&GV_send_setting_bigdata.IsAutoRun,3);
 
-com_DW_write_cmd_print((uint16_t)EM_SEND_SETTING_ADDRESS,(uint16_t *)&GV_send_setting_bigdata,sizeof(GV_send_setting_bigdata)/2,1);
+//com_DW_write_cmd_print((uint16_t)EM_SEND_SETTING_ADDRESS,(uint16_t *)&GV_send_setting_bigdata,sizeof(GV_send_setting_bigdata)/2,1);
 	
 	
 	

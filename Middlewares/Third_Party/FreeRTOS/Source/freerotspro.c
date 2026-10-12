@@ -65,7 +65,7 @@
 //#define  QUEUE_LEN    4   /* 队列的长度，最大可包含多少个消息 */
 //#define  QUEUE_SIZE   4   /* 队列中每个消息大小（字节） */
 
-
+#if USE_FREERTOS
 /**************************** 任务句柄 ********************************/
 /* 
  * 任务句柄是一个指针，用于指向一个任务，当任务创建好之后，它就具有了一个任务句柄
@@ -234,20 +234,20 @@ vPrintStack_TaskCreationResult("shell", xReturn, 256);
                 (TaskHandle_t*  )&tmp_handle);
 vPrintStack_TaskCreationResult("SEGGERTask", xReturn, 256);				 
 #endif			 
-			xTaskCreate(btn_data_task,"btn_data_task",128,(void *)0,15,&tmp_handle);				
-			vPrintStack_TaskCreationResult("btn_data_task", xReturn, 128);					
-								
-			xTaskCreate(btn_setting_data_task,"btn_setting_data_task",128,(void *)0,15,&tmp_handle);				
-			vPrintStack_TaskCreationResult("btn_setting_data_task", xReturn, 128);							
-								
-			xTaskCreate(com_send_task,"com_send_task",128,(void *)0,10,&tmp_handle);				
-			vPrintStack_TaskCreationResult("com_send_task", xReturn, 128);										
-								
-//			xTaskCreate(busi_process_task_entry,"busi_pro_task",128,(void *)0,7,&tmp_handle);				
-//			vPrintStack_TaskCreationResult("busi_pro_task", xReturn, 128);
+//			xTaskCreate(btn_data_task,"btn_data_task",128,(void *)0,15,&tmp_handle);				
+//			vPrintStack_TaskCreationResult("btn_data_task", xReturn, 128);					
+//								
+//			xTaskCreate(btn_setting_data_task,"btn_setting_data_task",128,(void *)0,15,&tmp_handle);				
+//			vPrintStack_TaskCreationResult("btn_setting_data_task", xReturn, 128);							
+//								
+//			xTaskCreate(com_send_task,"com_send_task",128,(void *)0,10,&tmp_handle);				
+//			vPrintStack_TaskCreationResult("com_send_task", xReturn, 128);										
+//								
+////			xTaskCreate(busi_process_task_entry,"busi_pro_task",128,(void *)0,7,&tmp_handle);				
+////			vPrintStack_TaskCreationResult("busi_pro_task", xReturn, 128);
 
-			xTaskCreate(T_pull_data,"pull_data",1024,(void *)0,tskIDLE_PRIORITY+5,&tmp_handle);				
-			vPrintStack_TaskCreationResult("pull_data", xReturn, 1024);					
+//			xTaskCreate(T_pull_data,"pull_data",1024,(void *)0,tskIDLE_PRIORITY+5,&tmp_handle);				
+//			vPrintStack_TaskCreationResult("pull_data", xReturn, 1024);					
 								
 								
 easylogger_init();								
@@ -306,7 +306,7 @@ void StartNeedDeleteTask(void *pvParameters)
 
 #include "./pro_com/usart485verify.h"
 
-extern uint8_t update_lvgl_flag;
+//extern uint8_t update_lvgl_flag;
  void T_pull_data(void* parameter)
 {	
 
@@ -315,8 +315,8 @@ extern uint8_t update_lvgl_flag;
   {
 		
 		SYSTEM_INFO("T_pull_data  \r\n");
-Usart485ComTask();
-		update_lvgl_flag=1;
+//Usart485ComTask();
+//		update_lvgl_flag=1;
 //		SYSTEM_INFO("T_pull_data 485  \r\n");
     vTaskDelay(pdMS_TO_TICKS(800));   /* 延时1000个ms */
   }
@@ -325,12 +325,13 @@ Usart485ComTask();
 
 
 
+
+#endif
+
 void vApplicationTickHook(void)
 {
      
 }
-
-
 
 //pull_data_from_485
 
@@ -443,6 +444,5 @@ void vApplicationTickHook(void)
 //    vTaskDelay(20);/* 延时20个tick */
 //  }
 //}
-
 
 /********************************END OF FILE****************************/

@@ -3,7 +3,7 @@
 #include "./sys/bsp_systime.h"   
 
 
-//#include "./GV_variable.h"
+#include "./global/GV_variable.h" 
 
 //#include "./io/OUT_io/bsp_gpio_out.h" 
 
