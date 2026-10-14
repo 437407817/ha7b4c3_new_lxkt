@@ -259,7 +259,7 @@ void Usart485CommonComTask(UartComInstance *pInst,
     QueueType_t *pRcvQueue = pInst->pRcvQueue;
     uint32_t qcp = 0U;
 
-#if 1
+#if 0
     while ((QueueCount(pRcvQueue) >= PACKET_DATA_LEN_MIN) && (QueuePop(pRcvQueue, &readBuf[0]) == QUEUE_OK))
     {
         if (readBuf[0] != FRAME_REC_HEAD_0)
@@ -309,10 +309,11 @@ void Usart485CommonComTask(UartComInstance *pInst,
         }
     }
 #else
-    while ((QueueCount(pRcvQueue) > 0U) && (QueuePop(pRcvQueue, &readBuf[0]) == QUEUE_OK))
+    while ((QueueCount(pRcvQueue) >= 1U) && (QueuePop(pRcvQueue, &readBuf[0]) == QUEUE_OK))
     {
-        SYSTEM_INFO("RAW_RX:0x%02X\n", readBuf[0]);
-			pInst->pSlaveProcCb(readBuf, extReadBufMaxLen);
+        SYSTEM_INFO("0x%02X ", readBuf[0]);
+//			continue;
+//			pInst->pSlaveProcCb(readBuf, extReadBufMaxLen);
     }
 #endif
 }

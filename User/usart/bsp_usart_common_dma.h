@@ -55,8 +55,8 @@ extern "C" {
 //#define MAX_RING_BUFF_SIZE MAX_BUF_R_SIZE*8
 ////#define MAX_RING_BUFF_SIZE    MAX_BUF_SIZE
 
-#define MAX_BUF_COM01_R_SIZE 					5  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
-#define MAX_RING_BUFF_COM01_SIZE 			MAX_BUF_COM01_R_SIZE*10
+#define MAX_BUF_COM01_R_SIZE 					20  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
+#define MAX_RING_BUFF_COM01_SIZE 			MAX_BUF_COM01_R_SIZE*3
 
 
 #define DMA_COM01_USARTx 														USART_COM01_COM485
@@ -90,8 +90,8 @@ extern "C" {
 
 
 
-#define MAX_BUF_COM02_R_SIZE 					5  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
-#define MAX_RING_BUFF_COM02_SIZE 			MAX_BUF_COM02_R_SIZE*10
+#define MAX_BUF_COM02_R_SIZE 					20  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
+#define MAX_RING_BUFF_COM02_SIZE 			MAX_BUF_COM02_R_SIZE*3
 
 
 #define DMA_COM02_USARTx 														USART_COM02_COM485
@@ -121,8 +121,8 @@ extern "C" {
 //*********************************
 
 
-#define MAX_BUF_COM03_R_SIZE 					5  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
-#define MAX_RING_BUFF_COM03_SIZE 			MAX_BUF_COM03_R_SIZE*10
+#define MAX_BUF_COM03_R_SIZE 					20  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
+#define MAX_RING_BUFF_COM03_SIZE 			MAX_BUF_COM03_R_SIZE*3
 
 
 typedef struct
@@ -162,8 +162,8 @@ typedef struct
 
 
 
-#define MAX_BUF_COM04_R_SIZE 					5  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
-#define MAX_RING_BUFF_COM04_SIZE 			MAX_BUF_COM04_R_SIZE*10
+#define MAX_BUF_COM04_R_SIZE 					20  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
+#define MAX_RING_BUFF_COM04_SIZE 			MAX_BUF_COM04_R_SIZE*3
 
 
 
@@ -195,8 +195,8 @@ typedef struct
 
 
 
-#define MAX_BUF_COM05_R_SIZE 					5  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
-#define MAX_RING_BUFF_COM05_SIZE 			MAX_BUF_COM05_R_SIZE*10
+#define MAX_BUF_COM05_R_SIZE 					30  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
+#define MAX_RING_BUFF_COM05_SIZE 			MAX_BUF_COM05_R_SIZE*3
 
 
 
@@ -227,8 +227,8 @@ typedef struct
 
 
 
-#define MAX_BUF_COM06_R_SIZE 					5  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
-#define MAX_RING_BUFF_COM06_SIZE 			MAX_BUF_COM06_R_SIZE*10
+#define MAX_BUF_COM06_R_SIZE 					12  //如果用SCB_CleanInvalidateDCache_by_Addr，需要MAX_BUF_R_SIZE比接收数据最大值大1
+#define MAX_RING_BUFF_COM06_SIZE 			MAX_BUF_COM06_R_SIZE*3
 
 
 

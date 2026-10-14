@@ -1248,7 +1248,7 @@ void UART_COMMON_DmaRxCpltProcess(UART_HandleTypeDef *huart,
  */
 void UART_COMMON_DmaIdleProcess(UART_HandleTypeDef *huart,
                          DMA_HandleTypeDef *hdma_rx,
-                         STR_RCV_DMA_que_data *pRcvData)
+                         STR_RCV_DMA_que_data *pRcvData, uint16_t dmaBufSize)
 {
     if(huart == NULL || hdma_rx == NULL || pRcvData == NULL)
     {
@@ -1260,18 +1260,18 @@ void UART_COMMON_DmaIdleProcess(UART_HandleTypeDef *huart,
         __HAL_UART_CLEAR_IDLEFLAG(huart);
         HAL_UART_DMAStop(huart);
 
-        SCB_InvalidateDCache_by_Addr((uint32_t *)pRcvData->g_rcvDataBuf, MAX_BUF_R_SIZE);
+        SCB_InvalidateDCache_by_Addr((uint32_t *)pRcvData->g_rcvDataBuf, dmaBufSize);
 
-        pRcvData->received_data_len = MAX_BUF_R_SIZE - __HAL_DMA_GET_COUNTER(hdma_rx);
+        pRcvData->received_data_len = dmaBufSize - __HAL_DMA_GET_COUNTER(hdma_rx);
 
-        SCB_InvalidateDCache_by_Addr((uint32_t *)pRcvData->g_rcvDataBuf, MAX_BUF_R_SIZE);
+        SCB_InvalidateDCache_by_Addr((uint32_t *)pRcvData->g_rcvDataBuf, dmaBufSize);
 
         if (pRcvData->received_data_len > 0)
         {
             QueuePushArray(&pRcvData->g_uartRingBuf, pRcvData->g_rcvDataBuf, pRcvData->received_data_len);
         }
 
-        HAL_UART_Receive_DMA(huart, pRcvData->g_rcvDataBuf, MAX_BUF_R_SIZE);
+        HAL_UART_Receive_DMA(huart, pRcvData->g_rcvDataBuf, dmaBufSize);
     }
 }
 
@@ -1280,7 +1280,7 @@ void UART_COMMON_DmaIdleProcess(UART_HandleTypeDef *huart,
 #if (USE_UART_COMMON_COM01_DMA_RX&&USE_COM01_COM485_FUN)
 void USARTx_DMA_COM01_IRQHandler(void)
 {
-    UART_COMMON_DmaIdleProcess(COM01_com485Inst.huart_handle, &hdma_usartx_COM01_rx, &RcvDmaQue_COM01_Data);
+    UART_COMMON_DmaIdleProcess(COM01_com485Inst.huart_handle, &hdma_usartx_COM01_rx, &RcvDmaQue_COM01_Data,MAX_BUF_COM01_R_SIZE);
     HAL_UART_IRQHandler(COM01_com485Inst.huart_handle);
 }
 #endif
@@ -1288,7 +1288,7 @@ void USARTx_DMA_COM01_IRQHandler(void)
 #if (USE_UART_COMMON_COM02_DMA_RX&&USE_COM02_COM485_FUN)
 void USARTx_DMA_COM02_IRQHandler(void)
 {
-    UART_COMMON_DmaIdleProcess(COM02_com485Inst.huart_handle, &hdma_usartx_COM02_rx, &RcvDmaQue_COM02_Data);
+    UART_COMMON_DmaIdleProcess(COM02_com485Inst.huart_handle, &hdma_usartx_COM02_rx, &RcvDmaQue_COM02_Data,MAX_BUF_COM02_R_SIZE);
     HAL_UART_IRQHandler(COM02_com485Inst.huart_handle);
 //	SYSTEM_INFO("PPPP");
 }
@@ -1297,7 +1297,7 @@ void USARTx_DMA_COM02_IRQHandler(void)
 #if (USE_UART_COMMON_COM03_DMA_RX&&USE_COM03_COM485_FUN)
 void USARTx_DMA_COM03_IRQHandler(void)
 {
-    UART_COMMON_DmaIdleProcess(COM03_com485Inst.huart_handle, &hdma_usartx_COM03_rx, &RcvDmaQue_COM03_Data);
+    UART_COMMON_DmaIdleProcess(COM03_com485Inst.huart_handle, &hdma_usartx_COM03_rx, &RcvDmaQue_COM03_Data,MAX_BUF_COM03_R_SIZE);
     HAL_UART_IRQHandler(COM03_com485Inst.huart_handle);
 }
 #endif
@@ -1305,7 +1305,7 @@ void USARTx_DMA_COM03_IRQHandler(void)
 #if (USE_UART_COMMON_COM04_DMA_RX&&USE_COM04_COM485_FUN)
 void USARTx_DMA_COM04_IRQHandler(void)
 {
-    UART_COMMON_DmaIdleProcess(COM04_com485Inst.huart_handle, &hdma_usartx_COM04_rx, &RcvDmaQue_COM04_Data);
+    UART_COMMON_DmaIdleProcess(COM04_com485Inst.huart_handle, &hdma_usartx_COM04_rx, &RcvDmaQue_COM04_Data,MAX_BUF_COM04_R_SIZE);
     HAL_UART_IRQHandler(COM04_com485Inst.huart_handle);
 }
 #endif
@@ -1313,7 +1313,7 @@ void USARTx_DMA_COM04_IRQHandler(void)
 #if (USE_UART_COMMON_COM05_DMA_RX&&USE_COM05_COM485_FUN)
 void USARTx_DMA_COM05_IRQHandler(void)
 {
-    UART_COMMON_DmaIdleProcess(COM05_com485Inst.huart_handle, &hdma_usartx_COM05_rx, &RcvDmaQue_COM05_Data);
+    UART_COMMON_DmaIdleProcess(COM05_com485Inst.huart_handle, &hdma_usartx_COM05_rx, &RcvDmaQue_COM05_Data,MAX_BUF_COM05_R_SIZE);
     HAL_UART_IRQHandler(COM05_com485Inst.huart_handle);
 }
 #endif
@@ -1321,7 +1321,7 @@ void USARTx_DMA_COM05_IRQHandler(void)
 #if (USE_UART_COMMON_COM06_DMA_RX&&USE_COM06_COM485_FUN)
 void USARTx_DMA_COM06_IRQHandler(void)
 {
-    UART_COMMON_DmaIdleProcess(COM06_com485Inst.huart_handle, &hdma_usartx_COM06_rx, &RcvDmaQue_COM06_Data);
+    UART_COMMON_DmaIdleProcess(COM06_com485Inst.huart_handle, &hdma_usartx_COM06_rx, &RcvDmaQue_COM06_Data,MAX_BUF_COM06_R_SIZE);
     HAL_UART_IRQHandler(COM06_com485Inst.huart_handle);
 }
 #endif
