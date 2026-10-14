@@ -77,6 +77,34 @@ if (huart == &huart_DMA_Handle) {
 	HAL_USARTx_DMA_ErrorCallback();
   }
 #endif
+	uint8_t error_code=0;
+	  uint32_t err = huart->ErrorCode;
+  if(err & HAL_UART_ERROR_PE)  // 0x01 奇偶校验错误
+  {
+		error_code=0x01;
+  }
+  if(err & HAL_UART_ERROR_NE)  // 0x02 噪声错误，线上有干扰
+  {
+		error_code=0x02;
+  }
+  if(err & HAL_UART_ERROR_FE)  // 0x04 帧错误，停止位异常，最常见：波特率不匹配
+  {
+		error_code=0x04;
+  }
+  if(err & HAL_UART_ERROR_ORE) // 0x08 溢出错误！新数据来了，上一个字节还没读走【最高发】
+  {
+		error_code=0x08;
+  }
+  if(err & HAL_UART_ERROR_DMA) // 0x10 DMA传输错误（DMA接收时才会出现）
+  {
+		error_code=0x10;
+  }
+  if(err & HAL_UART_ERROR_RTO) // 0x20 接收超时
+  {
+		error_code=0x20;
+  }
+//	    uint32_t error_code = HAL_UART_GetError(huart);  // 获取错误码
+    SYSTEM_DEBUG("--UART Error: 0x%02x\n", error_code);  // 打印错误（需重定向printf）
 	SYSTEM_INFO("\r\n----HAL_UART_ErrorCallback---\r\n");
 	#if USE_LETTER_SHELL&&USE_OS
 	if(huart == &huart_shell_Handle){

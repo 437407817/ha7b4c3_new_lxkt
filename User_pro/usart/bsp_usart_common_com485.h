@@ -357,7 +357,7 @@
 
 #define USE_COM05_COM485_IT_1				1
 
-#define USE_COM05_COM485_FUN        0   
+#define USE_COM05_COM485_FUN        1   
 
 /************************ COM06 配置（替换原USART6） ************************/
 

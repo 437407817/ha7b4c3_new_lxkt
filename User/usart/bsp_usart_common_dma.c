@@ -1099,7 +1099,7 @@ void Usart_COMMON_DMA_SendFUN_ALL(void){
 	UART_COMMON_Instance_SendArray_DMA(&COM05_com485Inst,(uint8_t *)"test5", 5U);
 	#endif
 	#if USE_COM06_COM485_FUN	
-	UART_COMMON_Instance_SendArray_DMA(&COM06_com485Inst,(uint8_t *)"test6", 5U);
+//	UART_COMMON_Instance_SendArray_DMA(&COM06_com485Inst,(uint8_t *)"test6", 5U);
 	#endif
 //	HAL_UART_Transmit_DMA(COM01_com485Inst.huart_handle,(uint8_t *)"test3", 5U);
 //	COM01_485_cbCfg.U485ComSendAllFunc(&COM01_com485Inst,NULL, 0U);

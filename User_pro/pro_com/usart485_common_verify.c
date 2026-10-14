@@ -534,7 +534,7 @@ static void COM05_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 	#include "./screen/ScreenDataDis.h"
 static void COM06_frame_process(uint8_t *frameBuf, uint16_t frameLen)
 {
-	#if 1
+	#if 0
     if(frameBuf == NULL || frameLen < 3U)
     {
         return;
@@ -545,12 +545,12 @@ screendataswitch(frameLen-3,&pSubBuf);
     // frameBuf[1] = FRAME_REC_HEAD_1
     // frameBuf[2] = 数据域长度
     // frameBuf[3] = FUNC_DATA_IDX 功能码
-
+SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"COM06_dw-data=\r\n");
     // ⚠️重要：frameBuf是临时工作缓冲区，下次Usart485CommonComTask执行会被覆盖
     // 如果需要保存这帧数据，必须memcpy拷贝出来，不要直接保存frameBuf指针
 
     /* 示例业务逻辑 */
-    SYSTEM_INFO("recv frame len:%d func:%02X\n", frameLen, frameBuf[3]);
+//    SYSTEM_INFO("recv frame len:%d func:%02X\n", frameLen, frameBuf[3]);
 	#else
 	SYSTEM_INFO("-%c\n",  frameBuf[0]);
 	SYSTEM_DEBUG_ARRAY_MESSAGE_HorA(1,frameBuf,frameLen,"COM06_frame_process=\r\n");
